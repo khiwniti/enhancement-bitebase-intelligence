@@ -175,7 +175,20 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
         {
           id: '1',
           name: 'Pizza Palace',
-          cuisine_type: 'Italian',
+          location: {
+            latitude: 40.7580,
+            longitude: -73.9855,
+            address: '123 Main St',
+            city: 'New York',
+            country: 'USA'
+          },
+          category: 'restaurant',
+          cuisine_types: ['Italian'],
+          is_active: true,
+          total_reviews: 245,
+          data_quality_score: 0.95,
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z',
           rating: 4.5,
           distance: 0.2,
           latitude: 40.7580,
@@ -184,7 +197,20 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
         {
           id: '2',
           name: 'Burger Barn',
-          cuisine_type: 'American',
+          location: {
+            latitude: 40.7595,
+            longitude: -73.9845,
+            address: '456 Oak Ave',
+            city: 'New York',
+            country: 'USA'
+          },
+          category: 'restaurant',
+          cuisine_types: ['American'],
+          is_active: true,
+          total_reviews: 189,
+          data_quality_score: 0.92,
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z',
           rating: 4.2,
           distance: 0.3,
           latitude: 40.7595,
@@ -193,7 +219,20 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
         {
           id: '3',
           name: 'Sushi Spot',
-          cuisine_type: 'Japanese',
+          location: {
+            latitude: 40.7575,
+            longitude: -73.9860,
+            address: '789 Pine St',
+            city: 'New York',
+            country: 'USA'
+          },
+          category: 'restaurant',
+          cuisine_types: ['Japanese'],
+          is_active: true,
+          total_reviews: 312,
+          data_quality_score: 0.97,
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z',
           rating: 4.7,
           distance: 0.4,
           latitude: 40.7575,
@@ -202,7 +241,20 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
         {
           id: '4',
           name: 'Taco Time',
-          cuisine_type: 'Mexican',
+          location: {
+            latitude: 40.7600,
+            longitude: -73.9840,
+            address: '321 Elm Dr',
+            city: 'New York',
+            country: 'USA'
+          },
+          category: 'restaurant',
+          cuisine_types: ['Mexican'],
+          is_active: true,
+          total_reviews: 156,
+          data_quality_score: 0.88,
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z',
           rating: 4.1,
           distance: 0.5,
           latitude: 40.7600,
@@ -211,7 +263,20 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
         {
           id: '5',
           name: 'Coffee Corner',
-          cuisine_type: 'Cafe',
+          location: {
+            latitude: 40.7585,
+            longitude: -73.9850,
+            address: '654 Maple Ln',
+            city: 'New York',
+            country: 'USA'
+          },
+          category: 'restaurant',
+          cuisine_types: ['Cafe'],
+          is_active: true,
+          total_reviews: 98,
+          data_quality_score: 0.90,
+          created_at: '2024-01-01T00:00:00Z',
+          updated_at: '2024-01-01T00:00:00Z',
           rating: 4.3,
           distance: 0.1,
           latitude: 40.7585,
@@ -232,22 +297,109 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
     try {
       // Mock analysis response - replace with actual API call
       const mockAnalysis: LocationAnalysisResponse = {
-        location,
+        location: { ...location, radius_km: location.radius_km || 1.0 },
         marketScore: 8.5,
         competitorCount: 12,
         populationDensity: 15000,
         averageIncome: 75000,
-        footTraffic: 'high',
-        marketSize: 'large',
-        recommendations: [
-          'High foot traffic area with strong market potential',
-          'Consider premium pricing strategy',
-          'Focus on lunch and dinner crowds'
-        ],
-        riskFactors: [
-          'High competition density',
-          'Premium rent costs'
-        ]
+        analysis: {
+          location_score: {
+            overall_score: 8.5,
+            demographic_score: 8.0,
+            competition_score: 7.5,
+            accessibility_score: 8.5,
+            market_potential_score: 8.8,
+            confidence_level: 'high' as const
+          },
+          competition_analysis: {
+            total_competitors: 12,
+            direct_competitors: 8,
+            competition_density: 7.5,
+            market_saturation: 'medium' as const,
+            average_competitor_rating: 4.2
+          },
+          demographic_analysis: {
+            population_density: 15000,
+            estimated_population: 45000,
+            median_income: 75000,
+            age_distribution: {
+              '18-24': 15,
+              '25-34': 25,
+              '35-44': 20,
+              '45-54': 20,
+              '55-64': 15,
+              '65+': 5
+            },
+            income_distribution: {
+              'low': 20,
+              'middle': 50,
+              'high': 30
+            },
+            household_composition: {
+              single: 30,
+              couple: 35,
+              family_with_children: 35,
+              other: 0
+            },
+            education_level: {
+              high_school: 25,
+              college: 45,
+              graduate: 30
+            }
+          },
+          accessibility_analysis: {
+            overall_accessibility_score: 8.5,
+            transport_modes: {
+              walking: {
+                walkability_score: 8.0,
+                pedestrian_infrastructure: 'good',
+                safety_score: 8.5,
+                nearby_amenities: 15
+              },
+              transit: {
+                public_transport_score: 9.0,
+                nearest_station_distance_m: 300,
+                service_frequency: 'high',
+                route_connectivity: 8.5
+              },
+              driving: {
+                parking_availability: 'good',
+                traffic_congestion: 'moderate',
+                road_accessibility: 7.5,
+                highway_access: 'good'
+              }
+            },
+            accessibility_grade: 'A-'
+          },
+          market_analysis: {
+            estimated_market_size: 2500000,
+            purchasing_power: 8.2,
+            market_diversity: 7.8,
+            cuisine_opportunities: ['Italian', 'Asian Fusion', 'Healthy Options']
+          },
+          insights: [
+            'High foot traffic area with strong market potential',
+            'Demographics favor premium dining options',
+            'Strong public transport accessibility'
+          ],
+          recommendations: [
+            'Consider premium pricing strategy',
+            'Focus on lunch and dinner crowds',
+            'Leverage public transport accessibility'
+          ],
+          risk_assessment: {
+            risk_level: 'medium' as const,
+            risk_factors: ['High competition', 'Premium rent costs'],
+            mitigation_strategies: ['Differentiation', 'Strong marketing']
+          },
+          analysis_metadata: {
+            analysis_date: new Date().toISOString(),
+            radius_km: 1.0,
+            target_cuisine_types: ['Italian', 'American'],
+            target_category: 'restaurant'
+          }
+        },
+        timestamp: new Date().toISOString()
       }
       
       setAnalysisResults(prev => [mockAnalysis, ...prev.slice(0, 9)]) // Keep last 10 analyses
@@ -414,7 +566,7 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
                 </div>
                 <div>
                   <p className="text-sm text-white font-medium">{restaurant.name}</p>
-                  <p className="text-xs text-gray-400">{restaurant.cuisine_type || 'Restaurant'}</p>
+                  <p className="text-xs text-gray-400">{restaurant.cuisine_types?.[0] || 'Restaurant'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -484,9 +636,9 @@ export function ImprovedUnifiedDashboard({ className = '' }: ImprovedUnifiedDash
         return (
           <div className="space-y-6">
             <EnhancedInteractiveMap
+              center={[selectedLocation.latitude, selectedLocation.longitude]}
               selectedLocation={selectedLocation}
               onLocationSelect={setSelectedLocation}
-              onLocationAnalyze={handleLocationAnalysis}
               analysisResults={analysisResults}
               restaurants={nearbyRestaurants}
             />

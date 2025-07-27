@@ -236,7 +236,8 @@ export function DataExportImport({ className = '' }: DataExportImportProps) {
       'last_30_days': 0.4,
       'last_90_days': 0.8,
       'last_year': 1.0,
-      'all_time': 1.2
+      'all_time': 1.2,
+      'custom': 1.0
     }
     
     return Math.round(size * (multipliers[exportOptions.dateRange] || 1) * 100) / 100

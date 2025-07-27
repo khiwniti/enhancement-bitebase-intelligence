@@ -13,6 +13,7 @@ export interface LocationCoordinates {
   latitude: number
   longitude: number
   name?: string
+  radius_km?: number
 }
 
 // Restaurant Types
@@ -33,6 +34,10 @@ export interface Restaurant {
   total_reviews: number
   estimated_revenue?: number
   employee_count?: number
+  rating?: number
+  distance?: number
+  latitude?: number
+  longitude?: number
   data_source?: string
   data_quality_score: number
   created_at: string
@@ -173,6 +178,10 @@ export interface LocationAnalysisResponse {
   }
   analysis: LocationAnalysis
   timestamp: string
+  marketScore?: number
+  competitorCount?: number
+  populationDensity?: number
+  averageIncome?: number
 }
 
 export interface LocationScoreResponse {

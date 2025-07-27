@@ -117,7 +117,7 @@ export function UnifiedDashboard({ className = '' }: UnifiedDashboardProps) {
         radius_km: 2,
         limit: 50
       })
-      setNearbyRestaurants(response.restaurants || [])
+      setNearbyRestaurants((response as any).restaurants || [])
     } catch (error) {
       console.error('Failed to load nearby restaurants:', error)
     }

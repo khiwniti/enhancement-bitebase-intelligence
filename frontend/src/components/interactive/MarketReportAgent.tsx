@@ -82,7 +82,7 @@ export function MarketReportAgent({
         longitude: location.longitude,
         radius_km: 2,
         cuisine_types: query ? extractCuisineFromQuery(query) : undefined
-      })
+      }) as LocationAnalysisResponse
 
       setAgentStatus('generating')
       await new Promise(resolve => setTimeout(resolve, 1500))

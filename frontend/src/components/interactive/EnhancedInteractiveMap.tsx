@@ -99,7 +99,7 @@ export function EnhancedInteractiveMap({
         radius_km: analysisRadius
       })
 
-      setClickAnalysis(analysis)
+      setClickAnalysis(analysis as LocationAnalysisResponse)
       onLocationSelect?.(clickedLocation)
       onMapClick?.(clickedLocation)
     } catch (error) {
@@ -286,7 +286,7 @@ export function EnhancedInteractiveMap({
             center={center}
             zoom={zoom}
             className="h-full w-full"
-            whenCreated={setMapInstance}
+            whenReady={() => {}}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
