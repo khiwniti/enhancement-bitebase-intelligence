@@ -1,0 +1,151 @@
+[project]
+name = "BiteBase Intelligence 2.0"
+description = "Interactive Analytics Platform for Restaurant Intelligence"
+version = "2.0.0"
+type = "full-stack"
+
+[structure]
+backend_dir = "backend"
+frontend_dir = "frontend"
+backend_framework = "FastAPI"
+frontend_framework = "Next.js"
+database = "PostgreSQL"
+primary_language = "TypeScript/Python"
+
+[modes]
+# Architect Mode - For high-level design and planning
+[modes.architect]
+model = "claude-sonnet-4"
+temperature = 0.3
+max_tokens = 4000
+context_window = 200000
+instructions = """
+Focus on system architecture, data flow design, and integration patterns.
+Consider scalability, performance, and maintainability.
+Use existing patterns from the codebase.
+"""
+
+# Code Mode - For implementation and code generation
+[modes.code]
+model = "claude-sonnet-4"
+temperature = 0.1
+max_tokens = 8000
+context_window = 200000
+instructions = """
+Generate clean, type-safe code following existing patterns.
+Use TypeScript for frontend, Python for backend.
+Follow FastAPI and Next.js best practices.
+Implement proper error handling and validation.
+"""
+
+# Debug Mode - For troubleshooting and fixes
+[modes.debug]
+model = "claude-sonnet-4"
+temperature = 0.2
+max_tokens = 6000
+context_window = 200000
+instructions = """
+Analyze errors systematically.
+Check logs, types, and data flow.
+Provide step-by-step debugging approach.
+Fix issues while maintaining code quality.
+"""
+
+# Ask Mode - For exploration and planning
+[modes.ask]
+model = "claude-sonnet-4"
+temperature = 0.4
+max_tokens = 3000
+context_window = 200000
+instructions = """
+Provide detailed explanations and suggestions.
+Consider multiple approaches and trade-offs.
+Reference existing codebase patterns.
+"""
+
+[context]
+# Important files for context
+key_files = [
+    "backend/app/main.py",
+    "backend/app/api/v1/api.py",
+    "frontend/src/app/layout.tsx",
+    "frontend/src/app/page.tsx",
+    "README.md"
+]
+
+# Directories to include in context
+include_dirs = [
+    "backend/app/models",
+    "backend/app/schemas", 
+    "backend/app/services",
+    "frontend/src/components",
+    "frontend/src/app"
+]
+
+# File patterns to exclude
+exclude_patterns = [
+    "node_modules/**",
+    "**/__pycache__/**",
+    "*.pyc",
+    ".next/**",
+    "dist/**",
+    "build/**",
+    "*.log"
+]
+
+[rules]
+# Code style preferences
+code_style = "clean_architecture"
+type_safety = "strict"
+error_handling = "comprehensive"
+testing = "required"
+
+# Architecture patterns
+patterns = [
+    "repository_pattern",
+    "service_layer",
+    "dependency_injection",
+    "async_await"
+]
+
+# Specific to this project
+domain_focus = [
+    "restaurant_analytics",
+    "business_intelligence", 
+    "data_visualization",
+    "natural_language_processing"
+]
+
+[integrations]
+# Database
+database_orm = "SQLAlchemy"
+migration_tool = "Alembic"
+
+# Frontend
+ui_framework = "React"
+state_management = "React_hooks"
+styling = "Tailwind_CSS"
+charts = "Recharts/D3"
+
+# AI/ML
+nlp_service = "custom"
+insights_engine = "custom"
+visualization_engine = "custom"
+
+[quality]
+# Code quality requirements
+max_complexity = 10
+min_test_coverage = 80
+type_check = true
+lint_check = true
+
+# Documentation requirements
+require_docstrings = true
+require_type_hints = true
+require_component_props = true
+
+[deployment]
+backend_platform = "cloud"
+frontend_platform = "vercel"
+database_host = "cloud"
+environment_configs = ["development", "staging", "production"]

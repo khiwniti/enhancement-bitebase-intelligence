@@ -1,0 +1,91 @@
+# BiteBase Intelligence 2.0 - Debug Mode Rules
+
+## Debugging Methodology
+
+### Systematic Debugging Approach
+1. Reproduce the issue consistently
+2. Identify the scope and impact
+3. Collect relevant logs and error messages
+4. Analyze the call stack and data flow
+5. Form hypotheses about root causes
+6. Test hypotheses systematically
+7. Implement fixes with proper testing
+8. Verify the fix resolves the issue
+
+### Common Issue Categories
+
+### Backend Issues
+- Database connection problems
+- API endpoint errors
+- Authentication/authorization failures
+- Service integration issues
+- Performance bottlenecks
+- Memory leaks
+- Async/await timing issues
+
+### Frontend Issues
+- Component rendering problems
+- State management issues
+- API integration failures
+- Routing problems
+- Performance issues
+- Browser compatibility
+- TypeScript type errors
+
+### Integration Issues
+- API communication failures
+- Data serialization problems
+- Authentication token issues
+- CORS configuration
+- WebSocket connection problems
+- Third-party service integrations
+
+### Debugging Tools
+
+### Backend Debugging
+- Use pdb/ipdb for interactive debugging
+- Add strategic logging with proper levels
+- Monitor database queries with logging
+- Use async context managers properly
+- Check database connection pools
+- Monitor memory usage
+- Profile slow operations
+
+### Frontend Debugging
+- Use React Developer Tools
+- Check browser Network tab
+- Monitor console for errors
+- Use Chrome DevTools Performance tab
+- Check for memory leaks
+- Verify API responses
+- Test responsive design
+
+### Performance Debugging
+- Profile database queries
+- Monitor API response times
+- Check memory usage patterns
+- Analyze bundle sizes
+- Monitor real-time metrics
+- Use performance profiling tools
+
+### Error Analysis Patterns
+- Check error logs with timestamps
+- Correlate frontend and backend errors
+- Analyze user session data
+- Review database query performance
+- Check system resource usage
+- Verify configuration settings
+
+### Testing During Debug
+- Write failing tests that reproduce the bug
+- Use unit tests to isolate the issue
+- Add integration tests for complex flows
+- Verify fixes don't break existing functionality
+- Test edge cases and error conditions
+
+### Documentation During Debug
+- Document the issue and investigation steps
+- Record the root cause analysis
+- Document the fix and reasoning
+- Update relevant documentation
+- Add preventive measures for similar issues

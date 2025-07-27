@@ -16,7 +16,6 @@ import {
   Globe,
   ArrowRight,
   CheckCircle,
-  Star,
   Brain,
   Search,
   Activity

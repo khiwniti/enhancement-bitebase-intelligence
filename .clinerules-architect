@@ -1,0 +1,46 @@
+# BiteBase Intelligence 2.0 - Architect Mode Rules
+
+## System Architecture Guidelines
+
+### Core Principles
+- Microservices architecture with clear separation of concerns
+- Event-driven communication between services
+- Scalable data processing pipelines
+- Real-time analytics capabilities
+
+### Data Flow Architecture
+- API Gateway → Service Layer → Repository Layer → Database
+- Event streaming for real-time insights
+- Caching layers for performance optimization
+- Background job processing for heavy computations
+
+### Technology Stack Alignment
+- Backend: FastAPI with async/await patterns
+- Frontend: Next.js with App Router
+- Database: PostgreSQL with optimized queries
+- Real-time: WebSocket connections
+- Analytics: Custom insights engine
+
+### Integration Patterns
+- RESTful APIs with OpenAPI documentation
+- Event sourcing for audit trails
+- CQRS pattern for read/write optimization
+- Circuit breaker pattern for resilience
+
+### Security Architecture
+- JWT-based authentication
+- Role-based access control (RBAC)
+- API rate limiting
+- Data encryption at rest and in transit
+
+### Performance Considerations
+- Database indexing strategies
+- Query optimization
+- CDN for static assets
+- Horizontal scaling capabilities
+
+### Monitoring & Observability
+- Structured logging
+- Metrics collection
+- Distributed tracing
+- Health check endpoints

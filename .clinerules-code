@@ -1,0 +1,67 @@
+# BiteBase Intelligence 2.0 - Code Mode Rules
+
+## Code Standards
+
+### Python/FastAPI Backend
+- Use async/await for all database operations
+- Implement proper dependency injection with FastAPI dependencies
+- Follow Pydantic models for request/response validation
+- Use SQLAlchemy ORM with async sessions
+- Implement comprehensive error handling with custom exceptions
+- Add type hints for all function parameters and return values
+- Use pytest for testing with async test functions
+
+### TypeScript/React Frontend
+- Use TypeScript strict mode
+- Implement proper prop types for all components
+- Use React hooks for state management
+- Follow Next.js App Router patterns
+- Implement proper error boundaries
+- Use Tailwind CSS for styling
+- Add JSDoc comments for complex functions
+
+### Database Operations
+- Use migrations for schema changes
+- Implement proper indexing for query performance
+- Use connection pooling
+- Add query optimization
+- Implement soft deletes where appropriate
+
+### API Design
+- Follow RESTful conventions
+- Use proper HTTP status codes
+- Implement request/response validation
+- Add comprehensive API documentation
+- Use pagination for list endpoints
+- Implement filtering and sorting
+
+### Testing Requirements
+- Unit tests for all service functions
+- Integration tests for API endpoints
+- Component tests for React components
+- E2E tests for critical user flows
+- Mock external dependencies
+- Achieve minimum 80% code coverage
+
+### Code Organization
+- Follow clean architecture principles
+- Separate business logic from framework code
+- Use repository pattern for data access
+- Implement service layer for business logic
+- Keep controllers thin
+- Use dependency injection
+
+### Error Handling
+- Use custom exception classes
+- Implement global error handlers
+- Log errors with proper context
+- Return user-friendly error messages
+- Handle edge cases gracefully
+
+### Performance Optimization
+- Use async/await properly
+- Implement caching where appropriate
+- Optimize database queries
+- Use lazy loading for large datasets
+- Implement proper pagination
+- Monitor performance metrics

@@ -52,7 +52,7 @@ export const apiClient = {
       return handleResponse(response)
     },
 
-    create: async (data: any) => {
+    create: async (data: Record<string, unknown>) => {
       const response = await fetch(`${API_BASE_URL}/api/v1/restaurants/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -61,7 +61,7 @@ export const apiClient = {
       return handleResponse(response)
     },
 
-    update: async (id: string, data: any) => {
+    update: async (id: string, data: Record<string, unknown>) => {
       const response = await fetch(`${API_BASE_URL}/api/v1/restaurants/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

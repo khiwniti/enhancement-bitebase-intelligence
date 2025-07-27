@@ -1,0 +1,73 @@
+# BiteBase Intelligence 2.0 - Custom Roo Modes
+
+## Default Modes
+
+### architect
+High-level system design and architecture planning
+Focus on scalability, performance, and maintainability
+Consider integration patterns and data flow
+
+### code  
+Implementation and code generation
+Follow project coding standards and patterns
+Ensure type safety and proper error handling
+
+### debug
+Systematic troubleshooting and issue resolution
+Analyze logs, errors, and performance issues
+Provide step-by-step debugging approach
+
+### ask
+Exploration, planning, and general assistance
+Provide detailed explanations and alternatives
+Reference existing codebase patterns
+
+## Custom Modes
+
+### analytics
+Specialized mode for business intelligence features
+Focus on data analysis, insights generation, and visualization
+Understand restaurant industry metrics and KPIs
+Implement advanced analytics algorithms
+
+### nlp
+Natural language processing and query interface
+Design conversational AI experiences
+Implement intent recognition and entity extraction
+Handle natural language to SQL conversion
+
+### dashboard
+Interactive dashboard development
+Focus on data visualization and user experience
+Implement real-time updates and interactive components
+Optimize for performance and responsiveness
+
+### connector
+Data connector and integration development
+Handle various data source connections
+Implement data transformation and validation
+Ensure reliable data ingestion pipelines
+
+### deployment
+DevOps and deployment configurations
+Handle cloud infrastructure setup
+Implement CI/CD pipelines
+Configure monitoring and logging
+
+### security
+Security implementation and review
+Focus on authentication, authorization, and data protection
+Implement security best practices
+Review code for vulnerabilities
+
+### performance
+Performance optimization and monitoring
+Analyze bottlenecks and optimization opportunities
+Implement caching strategies
+Monitor and improve system performance
+
+### testing
+Comprehensive testing strategy
+Write unit, integration, and E2E tests
+Implement test automation
+Ensure quality assurance processes

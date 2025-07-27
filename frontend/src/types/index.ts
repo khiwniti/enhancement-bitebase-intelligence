@@ -231,7 +231,7 @@ export interface MapViewState {
     id: string
     position: [number, number]
     type: 'restaurant' | 'analysis' | 'comparison'
-    data: any
+    data: Record<string, unknown>
   }>
 }
 
