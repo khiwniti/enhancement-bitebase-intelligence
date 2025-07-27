@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { UnifiedDashboard } from '@/components/interactive/UnifiedDashboard'
+import { ImprovedUnifiedDashboard } from '@/components/dashboard/ImprovedUnifiedDashboard'
 
 export default function DashboardPage() {
-  return <UnifiedDashboard />
+  return <ImprovedUnifiedDashboard />
 }
