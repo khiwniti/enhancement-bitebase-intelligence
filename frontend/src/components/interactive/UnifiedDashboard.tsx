@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -10,6 +11,14 @@ import { MarketResearchPanel } from '@/components/location/MarketResearchPanel'
 import { LocationCoordinates, LocationAnalysisResponse, Restaurant } from '@/types'
 import { apiClient } from '@/lib/api-client'
 import { formatNumber, formatCurrency } from '@/lib/utils'
+import { 
+  DashboardCard, 
+  AnimatedButton, 
+  FloatingFoodIcons,
+  dashboardWidgetVariants,
+  staggerContainer,
+  deliveryVariants 
+} from '@/components/animations'
 import { 
   LayoutDashboard,
   Brain,
@@ -222,90 +231,250 @@ export function UnifiedDashboard({ className = '' }: UnifiedDashboardProps) {
 
       case 'metrics':
         return (
-          <div key={widget.id} className={baseClasses}>
-            <Card className="card-dark h-full">
-              <CardHeader>
+          <motion.div 
+            key={widget.id} 
+            className={baseClasses}
+            variants={dashboardWidgetVariants}
+            initial="hidden"
+            animate="visible"
+            custom={widget.position.x + widget.position.y}
+          >
+            <DashboardCard className="card-dark h-full relative overflow-hidden">
+              <motion.div
+                className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-bitebase-primary/20 to-food-orange/20 rounded-full"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 360]
+                }}
+                transition={{
+                  duration: 15,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+              <CardHeader className="relative z-10">
                 <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5" />
-                  Performance Metrics
-                  <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                    <Activity className="h-3 w-3 mr-1" />
-                    Live
-                  </Badge>
+                  <motion.div
+                    animate={{ 
+                      rotateY: [0, 360],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <BarChart3 className="h-5 w-5 text-bitebase-primary" />
+                  </motion.div>
+                  📊 Performance Metrics
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <Badge variant="outline" className="bg-bitebase-primary/10 text-bitebase-primary border-bitebase-primary/20">
+                      <motion.div
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <Activity className="h-3 w-3 mr-1" />
+                      </motion.div>
+                      Live 📡
+                    </Badge>
+                  </motion.div>
                 </CardTitle>
                 <CardDescription>
                   Real-time business intelligence metrics
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-3 bg-primary/10 rounded-lg">
-                    <div className="text-2xl font-bold text-primary">
+              <CardContent className="space-y-4 relative z-10">
+                <motion.div 
+                  className="grid grid-cols-2 gap-4"
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <motion.div 
+                    className="text-center p-3 bg-bitebase-primary/10 rounded-lg border border-bitebase-primary/20"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 0.1 } }
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                  >
+                    <motion.div 
+                      className="text-2xl font-bold text-bitebase-primary"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
                       {analysisResults.length > 0 ? analysisResults[0].analysis.location_score.overall_score.toFixed(1) : '8.5'}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Current Location Score</div>
-                  </div>
-                  <div className="text-center p-3 bg-blue-500/10 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-400">
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Location Score ⭐</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-3 bg-blue-500/10 rounded-lg border border-blue-500/20"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 0.2 } }
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                  >
+                    <motion.div 
+                      className="text-2xl font-bold text-blue-400"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                    >
                       {nearbyRestaurants.length}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Nearby Restaurants</div>
-                  </div>
-                  <div className="text-center p-3 bg-green-500/10 rounded-lg">
-                    <div className="text-2xl font-bold text-green-400">
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Restaurants 🍽️</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-3 bg-green-500/10 rounded-lg border border-green-500/20"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 0.3 } }
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                  >
+                    <motion.div 
+                      className="text-2xl font-bold text-green-400"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: 1.0 }}
+                    >
                       {analysisResults.length > 0 ? 
                         formatCurrency(analysisResults[0].analysis.market_analysis.estimated_market_size) : 
                         '$2.5M'
                       }
-                    </div>
-                    <div className="text-xs text-muted-foreground">Market Size</div>
-                  </div>
-                  <div className="text-center p-3 bg-orange-500/10 rounded-lg">
-                    <div className="text-2xl font-bold text-orange-400">
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Market Size 💰</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-3 bg-orange-500/10 rounded-lg border border-orange-500/20"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 0.4 } }
+                    }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                  >
+                    <motion.div 
+                      className="text-2xl font-bold text-orange-400"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+                    >
                       {analysisResults.length > 0 ? 
                         analysisResults[0].analysis.competition_analysis.total_competitors : 
                         '12'
                       }
-                    </div>
-                    <div className="text-xs text-muted-foreground">Competitors</div>
-                  </div>
-                </div>
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Competitors 🏆</div>
+                  </motion.div>
+                </motion.div>
 
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium">Market Trends</h4>
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Restaurant Density</span>
+                <motion.div 
+                  className="space-y-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <h4 className="text-sm font-medium flex items-center gap-2">
+                    📈 Market Trends
+                  </h4>
+                  <motion.div 
+                    className="space-y-2"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <motion.div 
+                      className="flex justify-between items-center p-2 rounded-lg bg-gradient-to-r from-bitebase-primary/5 to-transparent"
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0, transition: { delay: 0.9 } }
+                      }}
+                      whileHover={{ scale: 1.02, x: 5 }}
+                    >
+                      <span className="text-sm text-muted-foreground">🏪 Restaurant Density</span>
                       <div className="flex items-center gap-2">
                         <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
-                          <div className="h-full bg-primary w-3/4"></div>
+                          <motion.div 
+                            className="h-full bg-bitebase-primary rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: "75%" }}
+                            transition={{ delay: 1.0, duration: 1 }}
+                          />
                         </div>
-                        <span className="text-sm font-medium">75%</span>
+                        <motion.span 
+                          className="text-sm font-medium text-bitebase-primary"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1.5 }}
+                        >
+                          75%
+                        </motion.span>
                       </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Market Saturation</span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex justify-between items-center p-2 rounded-lg bg-gradient-to-r from-orange-500/5 to-transparent"
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0, transition: { delay: 1.0 } }
+                      }}
+                      whileHover={{ scale: 1.02, x: 5 }}
+                    >
+                      <span className="text-sm text-muted-foreground">📊 Market Saturation</span>
                       <div className="flex items-center gap-2">
                         <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
-                          <div className="h-full bg-orange-400 w-1/2"></div>
+                          <motion.div 
+                            className="h-full bg-orange-400 rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: "50%" }}
+                            transition={{ delay: 1.1, duration: 1 }}
+                          />
                         </div>
-                        <span className="text-sm font-medium">50%</span>
+                        <motion.span 
+                          className="text-sm font-medium text-orange-400"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1.6 }}
+                        >
+                          50%
+                        </motion.span>
                       </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Growth Potential</span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex justify-between items-center p-2 rounded-lg bg-gradient-to-r from-green-500/5 to-transparent"
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0, transition: { delay: 1.1 } }
+                      }}
+                      whileHover={{ scale: 1.02, x: 5 }}
+                    >
+                      <span className="text-sm text-muted-foreground">🚀 Growth Potential</span>
                       <div className="flex items-center gap-2">
                         <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
-                          <div className="h-full bg-green-400 w-4/5"></div>
+                          <motion.div 
+                            className="h-full bg-green-400 rounded-full"
+                            initial={{ width: 0 }}
+                            animate={{ width: "80%" }}
+                            transition={{ delay: 1.2, duration: 1 }}
+                          />
                         </div>
-                        <span className="text-sm font-medium">80%</span>
+                        <motion.span 
+                          className="text-sm font-medium text-green-400"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1.7 }}
+                        >
+                          80%
+                        </motion.span>
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
               </CardContent>
-            </Card>
-          </div>
+            </DashboardCard>
+          </motion.div>
         )
 
       default:
@@ -314,166 +483,398 @@ export function UnifiedDashboard({ className = '' }: UnifiedDashboardProps) {
   }
 
   return (
-    <div className={`min-h-screen bg-background ${className}`}>
+    <motion.div 
+      className={`min-h-screen bg-background relative ${className}`}
+      variants={staggerContainer}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Floating Food Icons Background */}
+      <FloatingFoodIcons className="opacity-10" />
+      
       {/* Dashboard Header */}
-      <div className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <motion.div 
+        className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <motion.div 
+              className="flex items-center space-x-4"
+              variants={{
+                hidden: { opacity: 0, x: -20 },
+                visible: { opacity: 1, x: 0 }
+              }}
+            >
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                <motion.div 
+                  className="w-8 h-8 bg-delivery-hero rounded-lg flex items-center justify-center"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <LayoutDashboard className="h-5 w-5 text-white" />
-                </div>
+                </motion.div>
                 <div>
-                  <h1 className="text-xl font-bold gradient-text">BiteBase Intelligence 2.0</h1>
-                  <p className="text-xs text-muted-foreground">Interactive Analytics Dashboard</p>
+                  <motion.h1 
+                    className="text-xl font-bold bg-gradient-to-r from-bitebase-primary to-food-orange bg-clip-text text-transparent"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    🍽️ BiteBase Intelligence 2.0
+                  </motion.h1>
+                  <motion.p 
+                    className="text-xs text-muted-foreground"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    Restaurant Intelligence Platform
+                  </motion.p>
                 </div>
               </div>
               
-              <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                <Activity className="h-3 w-3 mr-1" />
-                {isRealTimeEnabled ? 'Live Data' : 'Static Data'}
-              </Badge>
-            </div>
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
+              >
+                <Badge variant="outline" className="bg-bitebase-primary/10 text-bitebase-primary border-bitebase-primary/20">
+                  <motion.div
+                    animate={{ rotate: isRealTimeEnabled ? 360 : 0 }}
+                    transition={{ duration: 2, repeat: isRealTimeEnabled ? Infinity : 0, ease: 'linear' }}
+                  >
+                    <Activity className="h-3 w-3 mr-1" />
+                  </motion.div>
+                  {isRealTimeEnabled ? 'Live Data 📡' : 'Static Data'}
+                </Badge>
+              </motion.div>
+            </motion.div>
             
-            <div className="flex items-center space-x-4">
-              <div className="text-xs text-muted-foreground">
+            <motion.div 
+              className="flex items-center space-x-4"
+              variants={{
+                hidden: { opacity: 0, x: 20 },
+                visible: { opacity: 1, x: 0 }
+              }}
+            >
+              <motion.div 
+                className="text-xs text-muted-foreground"
+                animate={{ opacity: [1, 0.7, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
                 Last updated: {lastUpdate.toLocaleTimeString()}
-              </div>
+              </motion.div>
               
               <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
+                <AnimatedButton
+                  variant="secondary"
                   size="sm"
                   onClick={refreshDashboard}
+                  leftIcon={<RefreshCw className="h-4 w-4" />}
                 >
-                  <RefreshCw className="h-4 w-4 mr-2" />
                   Refresh
-                </Button>
+                </AnimatedButton>
                 
-                <Button
-                  variant="outline"
+                <AnimatedButton
+                  variant="secondary"
                   size="sm"
                   onClick={exportDashboard}
+                  leftIcon={<Download className="h-4 w-4" />}
                 >
-                  <Download className="h-4 w-4 mr-2" />
                   Export
-                </Button>
+                </AnimatedButton>
                 
-                <Button
-                  variant="outline"
+                <AnimatedButton
+                  variant="secondary"
                   size="sm"
+                  leftIcon={<Share className="h-4 w-4" />}
                 >
-                  <Share className="h-4 w-4 mr-2" />
                   Share
-                </Button>
+                </AnimatedButton>
                 
-                <Button
-                  variant="outline"
+                <AnimatedButton
+                  variant="ghost"
                   size="sm"
                 >
                   <Settings className="h-4 w-4" />
-                </Button>
+                </AnimatedButton>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Dashboard Controls */}
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between mb-6">
+      <motion.div 
+        className="container mx-auto px-6 py-4"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div 
+          className="flex items-center justify-between mb-6"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+          }}
+        >
           <div className="flex items-center gap-4">
-            <h2 className="text-lg font-semibold">Dashboard Widgets</h2>
-            <div className="flex items-center gap-2">
-              {dashboardWidgets.map((widget) => (
-                <Button
+            <motion.h2 
+              className="text-lg font-semibold bg-gradient-to-r from-bitebase-primary to-food-orange bg-clip-text text-transparent"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              🎛️ Dashboard Controls
+            </motion.h2>
+            <motion.div 
+              className="flex items-center gap-2"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {dashboardWidgets.map((widget, index) => (
+                <motion.div
                   key={widget.id}
-                  variant={widget.visible ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => toggleWidget(widget.id)}
-                  className="text-xs"
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8 },
+                    visible: { 
+                      opacity: 1, 
+                      scale: 1,
+                      transition: { delay: index * 0.1 + 0.3 }
+                    }
+                  }}
                 >
-                  {widget.visible ? <Eye className="h-3 w-3 mr-1" /> : <EyeOff className="h-3 w-3 mr-1" />}
-                  {widget.title}
-                </Button>
+                  <AnimatedButton
+                    variant={widget.visible ? 'primary' : 'secondary'}
+                    size="sm"
+                    onClick={() => toggleWidget(widget.id)}
+                    leftIcon={widget.visible ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
+                    animationType="scale"
+                    className="text-xs"
+                  >
+                    {widget.title}
+                  </AnimatedButton>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Button
-              variant={dashboardLayout === 'grid' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setDashboardLayout('grid')}
+          <motion.div 
+            className="flex items-center gap-2"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, x: 20 },
+                visible: { opacity: 1, x: 0, transition: { delay: 0.4 } }
+              }}
             >
-              <LayoutDashboard className="h-4 w-4 mr-2" />
-              Grid
-            </Button>
-            <Button
-              variant={dashboardLayout === 'tabs' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setDashboardLayout('tabs')}
+              <AnimatedButton
+                variant={dashboardLayout === 'grid' ? 'primary' : 'secondary'}
+                size="sm"
+                onClick={() => setDashboardLayout('grid')}
+                leftIcon={<LayoutDashboard className="h-4 w-4" />}
+                animationType="bounce"
+              >
+                Grid
+              </AnimatedButton>
+            </motion.div>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, x: 20 },
+                visible: { opacity: 1, x: 0, transition: { delay: 0.5 } }
+              }}
             >
-              <Target className="h-4 w-4 mr-2" />
-              Tabs
-            </Button>
-            <Button
-              variant={dashboardLayout === 'sidebar' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setDashboardLayout('sidebar')}
+              <AnimatedButton
+                variant={dashboardLayout === 'tabs' ? 'primary' : 'secondary'}
+                size="sm"
+                onClick={() => setDashboardLayout('tabs')}
+                leftIcon={<Target className="h-4 w-4" />}
+                animationType="bounce"
+              >
+                Tabs
+              </AnimatedButton>
+            </motion.div>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, x: 20 },
+                visible: { opacity: 1, x: 0, transition: { delay: 0.6 } }
+              }}
             >
-              <Globe className="h-4 w-4 mr-2" />
-              Sidebar
-            </Button>
-          </div>
-        </div>
+              <AnimatedButton
+                variant={dashboardLayout === 'sidebar' ? 'primary' : 'secondary'}
+                size="sm"
+                onClick={() => setDashboardLayout('sidebar')}
+                leftIcon={<Globe className="h-4 w-4" />}
+                animationType="bounce"
+              >
+                Sidebar
+              </AnimatedButton>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
         {/* Current Location Display */}
-        <Card className="card-dark mb-6">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-primary" />
-                <div>
-                  <h3 className="font-semibold text-foreground">{selectedLocation.name}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {selectedLocation.latitude.toFixed(4)}, {selectedLocation.longitude.toFixed(4)}
-                  </p>
-                </div>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.7 } }
+          }}
+        >
+          <DashboardCard className="card-dark mb-6 relative overflow-hidden">
+            <motion.div
+              className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-bitebase-primary/10 to-transparent rounded-full -translate-y-16 translate-x-16"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            <CardContent className="p-4 relative z-10">
+              <div className="flex items-center justify-between">
+                <motion.div 
+                  className="flex items-center gap-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 10, -10, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <MapPin className="h-5 w-5 text-bitebase-primary" />
+                  </motion.div>
+                  <div>
+                    <motion.h3 
+                      className="font-semibold text-foreground flex items-center gap-2"
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.9 }}
+                    >
+                      📍 {selectedLocation.name}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-sm text-muted-foreground"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.0 }}
+                    >
+                      {selectedLocation.latitude.toFixed(4)}, {selectedLocation.longitude.toFixed(4)}
+                    </motion.p>
+                  </div>
+                </motion.div>
+                <motion.div 
+                  className="flex items-center gap-4"
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <motion.div 
+                    className="text-center p-3 bg-bitebase-primary/10 rounded-lg"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 1.1 } }
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div 
+                      className="text-lg font-bold text-bitebase-primary"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      {analysisResults.length > 0 ? analysisResults[0].analysis.location_score.overall_score.toFixed(1) : '--'}
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Score ⭐</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-3 bg-blue-500/10 rounded-lg"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 1.2 } }
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div 
+                      className="text-lg font-bold text-blue-400"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                    >
+                      {nearbyRestaurants.length}
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Restaurants 🍽️</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-3 bg-green-500/10 rounded-lg"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1, transition: { delay: 1.3 } }
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div 
+                      className="text-lg font-bold text-green-400"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1.0 }}
+                    >
+                      {analysisResults.length > 0 ? 
+                        analysisResults[0].analysis.competition_analysis.market_saturation.toUpperCase() : 
+                        'MEDIUM'
+                      }
+                    </motion.div>
+                    <div className="text-xs text-muted-foreground">Competition 🏆</div>
+                  </motion.div>
+                </motion.div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-primary">
-                    {analysisResults.length > 0 ? analysisResults[0].analysis.location_score.overall_score.toFixed(1) : '--'}
-                  </div>
-                  <div className="text-xs text-muted-foreground">Score</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-blue-400">
-                    {nearbyRestaurants.length}
-                  </div>
-                  <div className="text-xs text-muted-foreground">Restaurants</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-green-400">
-                    {analysisResults.length > 0 ? 
-                      analysisResults[0].analysis.competition_analysis.market_saturation.toUpperCase() : 
-                      'MEDIUM'
-                    }
-                  </div>
-                  <div className="text-xs text-muted-foreground">Competition</div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </DashboardCard>
+        </motion.div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-3 gap-6 auto-rows-min">
-          {dashboardWidgets.map(renderWidget)}
-        </div>
-      </div>
-    </div>
+        <motion.div 
+          className="grid grid-cols-3 gap-6 auto-rows-min"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          {dashboardWidgets.map((widget, index) => (
+            <motion.div
+              key={widget.id}
+              variants={{
+                hidden: { opacity: 0, scale: 0.9, y: 20 },
+                visible: { 
+                  opacity: 1, 
+                  scale: 1, 
+                  y: 0,
+                  transition: { 
+                    delay: index * 0.1 + 1.5,
+                    duration: 0.5,
+                    ease: 'easeOut'
+                  }
+                }
+              }}
+            >
+              {renderWidget(widget)}
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+    </motion.div>
   )
 }

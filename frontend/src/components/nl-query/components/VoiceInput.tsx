@@ -1,13 +1,16 @@
 /**
- * BiteBase Intelligence Voice Input Component
+ * BiteBase Intelligence Voice Input Component 2.0
+ * Enhanced with food delivery theme and advanced voice animations
  * Handles speech-to-text input for natural language queries
  */
 
 'use client'
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Mic, MicOff, Volume2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Mic, MicOff, Volume2, Headphones } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { AnimatedButton } from '@/components/animations'
 import type { VoiceInputProps } from '../types/nlQueryTypes'
 
 export const VoiceInput: React.FC<VoiceInputProps> = ({
@@ -187,52 +190,197 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
   }
 
   return (
-    <div className="relative">
-      <Button
+    <motion.div 
+      className="relative"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      <AnimatedButton
         type="button"
-        variant={isListening ? "default" : "outline"}
-        size="sm"
+        variant={isListening ? "delivery" : "secondary"}
+        size="lg"
         onClick={toggleListening}
-        className={`flex items-center space-x-1 ${
+        animationType="bounce"
+        className={`flex items-center space-x-2 relative overflow-hidden ${
           isListening 
-            ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
-            : 'hover:bg-gray-100'
+            ? 'bg-gradient-to-r from-food-red to-red-600 text-white shadow-lg' 
+            : 'bg-gradient-to-r from-bitebase-primary/10 to-food-orange/10 border-bitebase-primary/30 hover:border-bitebase-primary'
         }`}
-        title={isListening ? 'Stop voice input' : 'Start voice input'}
+        title={isListening ? '🛑 Stop voice input' : '🎤 Start voice input'}
       >
-        {isListening ? (
-          <MicOff className="h-4 w-4" />
-        ) : (
-          <Mic className="h-4 w-4" />
+        <motion.div
+          animate={isListening ? {
+            scale: [1, 1.2, 1],
+            rotate: [0, 5, -5, 0]
+          } : {}}
+          transition={{
+            duration: 0.8,
+            repeat: isListening ? Infinity : 0,
+            ease: "easeInOut"
+          }}
+        >
+          {isListening ? (
+            <MicOff className="h-4 w-4" />
+          ) : (
+            <Mic className="h-4 w-4" />
+          )}
+        </motion.div>
+        
+        {/* Ripple effect when listening */}
+        {isListening && (
+          <motion.div
+            className="absolute inset-0 bg-white/20 rounded-lg"
+            animate={{
+              scale: [1, 1.5],
+              opacity: [0.5, 0]
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+          />
         )}
-      </Button>
+      </AnimatedButton>
 
-      {/* Listening indicator */}
-      {isListening && (
-        <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-black text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
-            <div className="flex items-center space-x-2">
-              <Volume2 className="h-3 w-3 animate-pulse" />
-              <span>Listening...</span>
-            </div>
-            {transcript && (
-              <div className="mt-1 text-gray-300 max-w-48 truncate">
-                &quot;{transcript}&quot;
+      {/* Enhanced Listening indicator */}
+      <AnimatePresence>
+        {isListening && (
+          <motion.div 
+            className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-50"
+            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="bg-gradient-to-r from-bitebase-primary to-food-orange text-white px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-xl border border-white/20"
+              animate={{
+                boxShadow: [
+                  '0 10px 25px rgba(116, 195, 101, 0.3)',
+                  '0 15px 35px rgba(255, 107, 53, 0.4)',
+                  '0 10px 25px rgba(116, 195, 101, 0.3)'
+                ]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <div className="flex items-center space-x-3">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.3, 1],
+                    rotate: [0, 10, -10, 0]
+                  }}
+                  transition={{ 
+                    duration: 1.5, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Volume2 className="h-4 w-4" />
+                </motion.div>
+                <span className="flex items-center gap-2">
+                  🎤 Listening for food intelligence...
+                </span>
+                <motion.div
+                  animate={{ opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                  className="flex space-x-1"
+                >
+                  <div className="w-1 h-1 bg-white rounded-full"></div>
+                  <div className="w-1 h-1 bg-white rounded-full"></div>
+                  <div className="w-1 h-1 bg-white rounded-full"></div>
+                </motion.div>
               </div>
-            )}
-          </div>
-        </div>
-      )}
+              
+              <AnimatePresence>
+                {transcript && (
+                  <motion.div 
+                    className="mt-2 text-white/90 max-w-64 text-center"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <motion.span
+                      animate={{ scale: [1, 1.02, 1] }}
+                      transition={{ duration: 0.5, repeat: Infinity }}
+                      className="italic"
+                    >
+                      💬 &quot;{transcript}&quot;
+                    </motion.span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Error indicator */}
-      {error && (
-        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-red-500 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap max-w-64">
-            {error}
-          </div>
+      {/* Enhanced Error indicator */}
+      <AnimatePresence>
+        {error && (
+          <motion.div 
+            className="absolute -top-20 left-1/2 transform -translate-x-1/2 z-50"
+            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-xl text-sm max-w-72 shadow-xl border border-red-400/20"
+              animate={{
+                x: [0, -2, 2, 0],
+              }}
+              transition={{
+                duration: 0.5,
+                repeat: 2
+              }}
+            >
+              <div className="flex items-center space-x-2">
+                <motion.span
+                  animate={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5, repeat: 2 }}
+                  className="text-lg"
+                >
+                  ⚠️
+                </motion.span>
+                <span className="font-medium">Voice Input Error</span>
+              </div>
+              <div className="mt-1 text-red-100 text-xs">
+                {error}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Voice waves animation when listening */}
+      {isListening && (
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute inset-0 border-2 border-bitebase-primary/30 rounded-lg"
+              animate={{
+                scale: [1, 1.5 + i * 0.3],
+                opacity: [0.6, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.3,
+                ease: "easeOut"
+              }}
+            />
+          ))}
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
 

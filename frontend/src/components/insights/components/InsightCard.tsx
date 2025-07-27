@@ -1,9 +1,11 @@
 /**
- * BiteBase Intelligence Insight Card Component
+ * BiteBase Intelligence Insight Card Component 2.0
+ * Enhanced with food delivery theme and advanced animations
  * Displays individual insights with actions and feedback
  */
 
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -21,8 +23,16 @@ import {
   DollarSign,
   Calendar,
   MapPin,
-  Settings
+  Settings,
+  ChefHat,
+  Utensils,
+  Pizza,
+  Truck
 } from 'lucide-react'
+import {
+  AnimatedButton,
+  AnimatedCard
+} from '@/components/animations'
 import type { 
   InsightCardProps, 
   InsightResponse, 
@@ -80,7 +90,7 @@ const InsightCard: React.FC<InsightCardProps> = ({
     }
   }
 
-  // Get insight type icon
+  // Get insight type icon with food theme
   const getTypeIcon = (type: InsightTypeEnum) => {
     switch (type) {
       case 'revenue_anomaly':
@@ -88,15 +98,35 @@ const InsightCard: React.FC<InsightCardProps> = ({
       case 'customer_pattern_change':
         return Users
       case 'menu_performance':
-        return BarChart3
+        return ChefHat
       case 'seasonal_trend':
         return Calendar
       case 'location_comparison':
-        return MapPin
+        return Truck
       case 'operational_insight':
-        return Settings
+        return Utensils
       default:
-        return BarChart3
+        return Pizza
+    }
+  }
+
+  // Get food-themed emoji for insight type
+  const getTypeEmoji = (type: InsightTypeEnum) => {
+    switch (type) {
+      case 'revenue_anomaly':
+        return '💰'
+      case 'customer_pattern_change':
+        return '👥'
+      case 'menu_performance':
+        return '🍽️'
+      case 'seasonal_trend':
+        return '📅'
+      case 'location_comparison':
+        return '🚚'
+      case 'operational_insight':
+        return '⚙️'
+      default:
+        return '🍕'
     }
   }
 
@@ -148,76 +178,239 @@ const InsightCard: React.FC<InsightCardProps> = ({
   }
 
   return (
-    <Card className={`transition-all duration-200 hover:shadow-md ${compact ? 'p-2' : 'p-4'}`}>
-      <CardHeader className={`${compact ? 'pb-2' : 'pb-4'}`}>
-        <div className="flex items-start justify-between">
-          <div className="flex items-start space-x-3 flex-1">
-            <div className={`p-2 rounded-lg ${severityConfig.color}`}>
-              <SeverityIcon className={`h-4 w-4 ${severityConfig.iconColor}`} />
-            </div>
-            
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center space-x-2 mb-1">
-                <TypeIcon className="h-4 w-4 text-gray-500" />
-                <CardTitle className={`${compact ? 'text-sm' : 'text-base'} font-semibold truncate`}>
-                  {insight.title}
-                </CardTitle>
-              </div>
-              
-              <div className="flex items-center space-x-2 mb-2">
-                <Badge className={severityConfig.color}>
-                  {insight.severity.toUpperCase()}
-                </Badge>
-                <Badge className={statusConfig.color}>
-                  {statusConfig.label}
-                </Badge>
-                <span className="text-xs text-gray-500">
-                  {formatDate(insight.detected_at)}
-                </span>
-              </div>
-              
-              {!compact && (
-                <p className="text-sm text-gray-600 line-clamp-2">
-                  {insight.description}
-                </p>
-              )}
-            </div>
-          </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ y: -2, scale: 1.01 }}
+      className="relative"
+    >
+      <AnimatedCard 
+        variant="insight"
+        className={`relative overflow-hidden border-2 transition-all duration-300 hover:shadow-xl ${
+          compact ? 'p-2' : 'p-0'
+        } ${
+          insight.severity === 'critical' ? 'border-food-red/30 bg-gradient-to-br from-food-red/5 to-red-50' :
+          insight.severity === 'high' ? 'border-food-orange/30 bg-gradient-to-br from-food-orange/5 to-orange-50' :
+          insight.severity === 'medium' ? 'border-food-yellow/30 bg-gradient-to-br from-food-yellow/5 to-yellow-50' :
+          'border-bitebase-primary/30 bg-gradient-to-br from-bitebase-primary/5 to-blue-50'
+        }`}
+      >
+        {/* Animated background pattern */}
+        <motion.div
+          className="absolute top-0 right-0 w-24 h-24 opacity-10"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+          <div className={`w-full h-full rounded-full ${
+            insight.severity === 'critical' ? 'bg-food-red' :
+            insight.severity === 'high' ? 'bg-food-orange' :
+            insight.severity === 'medium' ? 'bg-food-yellow' :
+            'bg-bitebase-primary'
+          }`} />
+        </motion.div>
 
-          <div className="flex items-center space-x-2 ml-4">
-            {insight.views_count > 0 && (
-              <div className="flex items-center space-x-1 text-xs text-gray-500">
-                <Eye className="h-3 w-3" />
-                <span>{insight.views_count}</span>
+        <CardHeader className={`${compact ? 'pb-2' : 'pb-4'} relative z-10`}>
+          <div className="flex items-start justify-between">
+            <div className="flex items-start space-x-4 flex-1">
+              {/* Enhanced severity indicator */}
+              <motion.div 
+                className={`p-3 rounded-xl shadow-md ${severityConfig.color} relative`}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <motion.div
+                  animate={{ 
+                    scale: insight.severity === 'critical' ? [1, 1.2, 1] : [1],
+                    rotate: insight.severity === 'critical' ? [0, -10, 10, 0] : [0]
+                  }}
+                  transition={{ 
+                    duration: 1, 
+                    repeat: insight.severity === 'critical' ? Infinity : 0 
+                  }}
+                >
+                  <SeverityIcon className={`h-5 w-5 ${severityConfig.iconColor}`} />
+                </motion.div>
+                {insight.severity === 'critical' && (
+                  <motion.div
+                    className="absolute -top-1 -right-1 w-3 h-3 bg-food-red rounded-full"
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  />
+                )}
+              </motion.div>
+              
+              <div className="flex-1 min-w-0">
+                {/* Enhanced title with food emoji */}
+                <motion.div 
+                  className="flex items-center space-x-2 mb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <motion.span
+                    animate={{ 
+                      rotate: [0, 10, -10, 0],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="text-lg"
+                  >
+                    {getTypeEmoji(insight.insight_type)}
+                  </motion.span>
+                  <TypeIcon className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className={`${compact ? 'text-sm' : 'text-base'} font-bold truncate bg-gradient-to-r ${
+                    insight.severity === 'critical' ? 'from-food-red to-red-600' :
+                    insight.severity === 'high' ? 'from-food-orange to-orange-600' :
+                    insight.severity === 'medium' ? 'from-food-yellow to-yellow-600' :
+                    'from-bitebase-primary to-blue-600'
+                  } bg-clip-text text-transparent`}>
+                    {insight.title}
+                  </CardTitle>
+                </motion.div>
+                
+                {/* Enhanced badges */}
+                <motion.div 
+                  className="flex items-center space-x-2 mb-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Badge className={`${severityConfig.color} shadow-sm font-bold`}>
+                      {insight.severity === 'critical' ? '🔥' : 
+                       insight.severity === 'high' ? '⚠️' : 
+                       insight.severity === 'medium' ? '📊' : '💡'} {insight.severity.toUpperCase()}
+                    </Badge>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Badge className={`${statusConfig.color} shadow-sm`}>
+                      {insight.status === 'active' ? '⚡' :
+                       insight.status === 'acknowledged' ? '👀' :
+                       insight.status === 'resolved' ? '✅' : '🚫'} {statusConfig.label}
+                    </Badge>
+                  </motion.div>
+                  <motion.span 
+                    className="text-xs text-muted-foreground flex items-center gap-1"
+                    animate={{ opacity: [1, 0.7, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    🕒 {formatDate(insight.detected_at)}
+                  </motion.span>
+                </motion.div>
+                
+                {!compact && (
+                  <motion.p 
+                    className="text-sm text-muted-foreground line-clamp-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    {insight.description}
+                  </motion.p>
+                )}
               </div>
-            )}
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleView}
-              className="h-8 w-8 p-0"
+            </div>
+
+            {/* Enhanced action area */}
+            <motion.div 
+              className="flex items-center space-x-2 ml-4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
             >
-              <Eye className="h-4 w-4" />
-            </Button>
+              {insight.views_count > 0 && (
+                <motion.div 
+                  className="flex items-center space-x-1 text-xs text-muted-foreground bg-white/50 px-2 py-1 rounded-full"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Eye className="h-3 w-3" />
+                  <span className="font-medium">{insight.views_count}</span>
+                </motion.div>
+              )}
+              
+              <AnimatedButton
+                variant="ghost"
+                size="sm"
+                onClick={handleView}
+                animationType="scale"
+                className="h-10 w-10 p-0 bg-white/70 hover:bg-white/90 shadow-sm"
+                title={isExpanded ? "Collapse details" : "View details"}
+              >
+                <motion.div
+                  animate={{ rotate: isExpanded ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Eye className="h-4 w-4" />
+                </motion.div>
+              </AnimatedButton>
+            </div>
           </div>
-        </div>
 
         {!compact && (
-          <div className="flex items-center space-x-4 text-xs text-gray-500 mt-2">
-            <div className="flex items-center space-x-1">
-              <span>Confidence:</span>
-              <span className="font-medium">{formatScore(insight.confidence_score)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <span>Impact:</span>
-              <span className="font-medium">{formatScore(insight.impact_score)}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <span>Urgency:</span>
-              <span className="font-medium">{formatScore(insight.urgency_score)}</span>
-            </div>
-          </div>
+          <motion.div 
+            className="flex items-center space-x-6 text-xs mt-3 px-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <motion.div 
+              className="flex items-center space-x-2 bg-white/50 px-3 py-2 rounded-lg"
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <span className="text-muted-foreground">🎯 Confidence:</span>
+              <motion.span 
+                className="font-bold text-bitebase-primary"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                {formatScore(insight.confidence_score)}
+              </motion.span>
+            </motion.div>
+            <motion.div 
+              className="flex items-center space-x-2 bg-white/50 px-3 py-2 rounded-lg"
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <span className="text-muted-foreground">💥 Impact:</span>
+              <motion.span 
+                className="font-bold text-food-orange"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+              >
+                {formatScore(insight.impact_score)}
+              </motion.span>
+            </motion.div>
+            <motion.div 
+              className="flex items-center space-x-2 bg-white/50 px-3 py-2 rounded-lg"
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <span className="text-muted-foreground">⚡ Urgency:</span>
+              <motion.span 
+                className="font-bold text-food-red"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+              >
+                {formatScore(insight.urgency_score)}
+              </motion.span>
+            </motion.div>
+          </motion.div>
         )}
       </CardHeader>
 
@@ -320,92 +513,226 @@ const InsightCard: React.FC<InsightCardProps> = ({
         </CardContent>
       )}
 
-      {/* Actions */}
-      {showActions && insight.status === 'active' && (
-        <div className="px-4 pb-4">
-          <div className="flex items-center space-x-2 pt-2 border-t">
-            {onAcknowledge && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleAction(() => onAcknowledge(insight.id))}
-                disabled={isLoading}
-                className="flex items-center space-x-1"
-              >
-                <CheckCircle className="h-3 w-3" />
-                <span>Acknowledge</span>
-              </Button>
-            )}
-            
-            {onResolve && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleAction(() => onResolve(insight.id))}
-                disabled={isLoading}
-                className="flex items-center space-x-1"
-              >
-                <CheckCircle className="h-3 w-3" />
-                <span>Resolve</span>
-              </Button>
-            )}
-            
-            {onDismiss && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleAction(() => onDismiss(insight.id))}
-                disabled={isLoading}
-                className="flex items-center space-x-1"
-              >
-                <XCircle className="h-3 w-3" />
-                <span>Dismiss</span>
-              </Button>
-            )}
-            
-            {onFeedback && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onFeedback(insight.id, {
-                  insight_id: insight.id,
-                  user_id: 'current-user', // This would come from auth context
-                  rating: 5,
-                  feedback_text: ''
-                })}
-                disabled={isLoading}
-                className="flex items-center space-x-1"
-              >
-                <MessageSquare className="h-3 w-3" />
-                <span>Feedback</span>
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Enhanced Actions */}
+      <AnimatePresence>
+        {showActions && insight.status === 'active' && (
+          <motion.div 
+            className="px-6 pb-6 relative z-10"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="flex items-center justify-center space-x-3 pt-4 border-t border-bitebase-primary/20"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { 
+                  opacity: 1,
+                  transition: { 
+                    staggerChildren: 0.1,
+                    delayChildren: 0.2
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="visible"
+            >
+              {onAcknowledge && (
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8, y: 10 },
+                    visible: { opacity: 1, scale: 1, y: 0 }
+                  }}
+                >
+                  <AnimatedButton
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => handleAction(() => onAcknowledge(insight.id))}
+                    disabled={isLoading}
+                    animationType="bounce"
+                    leftIcon={<CheckCircle className="h-3 w-3" />}
+                    className="bg-gradient-to-r from-food-yellow/20 to-yellow-100 border-food-yellow/40 text-food-yellow hover:bg-food-yellow/30"
+                  >
+                    👀 Acknowledge
+                  </AnimatedButton>
+                </motion.div>
+              )}
+              
+              {onResolve && (
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8, y: 10 },
+                    visible: { opacity: 1, scale: 1, y: 0 }
+                  }}
+                >
+                  <AnimatedButton
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => handleAction(() => onResolve(insight.id))}
+                    disabled={isLoading}
+                    animationType="delivery"
+                    leftIcon={<CheckCircle className="h-3 w-3" />}
+                    className="bg-gradient-to-r from-food-green/20 to-green-100 border-food-green/40 text-food-green hover:bg-food-green/30"
+                  >
+                    ✅ Resolve
+                  </AnimatedButton>
+                </motion.div>
+              )}
+              
+              {onDismiss && (
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8, y: 10 },
+                    visible: { opacity: 1, scale: 1, y: 0 }
+                  }}
+                >
+                  <AnimatedButton
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => handleAction(() => onDismiss(insight.id))}
+                    disabled={isLoading}
+                    animationType="scale"
+                    leftIcon={<XCircle className="h-3 w-3" />}
+                    className="bg-gradient-to-r from-gray-100 to-gray-200 border-gray-300 text-gray-600 hover:bg-gray-200"
+                  >
+                    🚫 Dismiss
+                  </AnimatedButton>
+                </motion.div>
+              )}
+              
+              {onFeedback && (
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8, y: 10 },
+                    visible: { opacity: 1, scale: 1, y: 0 }
+                  }}
+                >
+                  <AnimatedButton
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => onFeedback(insight.id, {
+                      insight_id: insight.id,
+                      user_id: 'current-user',
+                      rating: 5,
+                      feedback_text: ''
+                    })}
+                    disabled={isLoading}
+                    animationType="bounce"
+                    leftIcon={<MessageSquare className="h-3 w-3" />}
+                    className="bg-gradient-to-r from-bitebase-primary/20 to-blue-100 border-bitebase-primary/40 text-bitebase-primary hover:bg-bitebase-primary/30"
+                  >
+                    💬 Feedback
+                  </AnimatedButton>
+                </motion.div>
+              )}
+            </motion.div>
 
-      {/* Status indicators for non-active insights */}
-      {insight.status !== 'active' && (
-        <div className="px-4 pb-4">
-          <div className="flex items-center justify-between pt-2 border-t text-xs text-gray-500">
-            <div className="flex items-center space-x-4">
-              {insight.acknowledged_at && (
-                <div className="flex items-center space-x-1">
-                  <Clock className="h-3 w-3" />
-                  <span>Acknowledged {formatDate(insight.acknowledged_at)}</span>
-                </div>
+            {/* Action status indicator */}
+            {isLoading && (
+              <motion.div
+                className="flex items-center justify-center mt-3 text-sm text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="mr-2"
+                >
+                  🔄
+                </motion.div>
+                Processing action...
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Enhanced Status indicators for non-active insights */}
+      <AnimatePresence>
+        {insight.status !== 'active' && (
+          <motion.div 
+            className="px-6 pb-6 relative z-10"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div 
+              className="flex items-center justify-between pt-4 border-t border-muted/30 text-xs"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <motion.div 
+                className="flex items-center space-x-6"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { 
+                    opacity: 1,
+                    transition: { 
+                      staggerChildren: 0.1
+                    }
+                  }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                {insight.acknowledged_at && (
+                  <motion.div 
+                    className="flex items-center space-x-2 bg-food-yellow/20 px-3 py-2 rounded-lg"
+                    variants={{
+                      hidden: { opacity: 0, x: -10 },
+                      visible: { opacity: 1, x: 0 }
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <Clock className="h-3 w-3 text-food-yellow" />
+                    <span className="text-food-yellow font-medium">
+                      👀 Acknowledged {formatDate(insight.acknowledged_at)}
+                    </span>
+                  </motion.div>
+                )}
+                {insight.resolved_at && (
+                  <motion.div 
+                    className="flex items-center space-x-2 bg-food-green/20 px-3 py-2 rounded-lg"
+                    variants={{
+                      hidden: { opacity: 0, x: -10 },
+                      visible: { opacity: 1, x: 0 }
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <CheckCircle className="h-3 w-3 text-food-green" />
+                    <span className="text-food-green font-medium">
+                      ✅ Resolved {formatDate(insight.resolved_at)}
+                    </span>
+                  </motion.div>
+                )}
+              </motion.div>
+
+              {/* Success celebration for resolved insights */}
+              {insight.status === 'resolved' && (
+                <motion.div
+                  className="text-2xl"
+                  animate={{
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  🎉
+                </motion.div>
               )}
-              {insight.resolved_at && (
-                <div className="flex items-center space-x-1">
-                  <CheckCircle className="h-3 w-3" />
-                  <span>Resolved {formatDate(insight.resolved_at)}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </Card>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      </AnimatedCard>
+    </motion.div>
   )
 }
 

@@ -1,12 +1,38 @@
 "use client"
 
+/**
+ * BiteBase Intelligence Real-time Collaboration Component 2.0
+ * Enhanced with food delivery theme and advanced animations
+ * Provides real-time presence tracking, cursors, and comments for collaborative editing
+ */
+
 import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useRealtimeCollaboration } from './hooks/useRealtimeCollaboration'
 import { PresenceIndicators } from './PresenceIndicators'
 import { CollaborationCursors } from './CollaborationCursors'
 import { CommentSystem } from './CommentSystem'
 import { VersionHistory } from './VersionHistory'
 import { cn } from '@/lib/utils'
+import {
+  AnimatedButton,
+  AnimatedCard,
+  FloatingFoodIcons,
+  staggerContainer,
+  dashboardWidgetVariants
+} from '@/components/animations'
+import { 
+  Users, 
+  MessageCircle, 
+  History, 
+  Sync, 
+  Wifi, 
+  WifiOff,
+  ChefHat,
+  Utensils,
+  Pizza,
+  Truck
+} from 'lucide-react'
 
 interface RealtimeCollaborationProps {
   dashboardId: string
@@ -185,7 +211,7 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
   }, [addComment, userId, username])
 
   return (
-    <div 
+    <motion.div 
       ref={containerRef}
       className={cn(
         "relative w-full h-full",
@@ -193,77 +219,198 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
         className
       )}
       data-collaboration-enabled={isCollaborationEnabled}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Connection Status */}
-      <div className="absolute top-4 right-4 z-50">
-        <div className={cn(
-          "flex items-center gap-2 px-3 py-2 rounded-lg shadow-lg text-sm",
-          isConnected 
-            ? "bg-green-100 text-green-800 border border-green-200" 
-            : "bg-red-100 text-red-800 border border-red-200"
-        )}>
-          <div className={cn(
-            "w-2 h-2 rounded-full",
-            isConnected ? "bg-green-500" : "bg-red-500"
-          )} />
-          {isConnected ? 'Connected' : 'Disconnected'}
-          {connectionError && (
-            <span className="text-xs opacity-75">({connectionError})</span>
+      {/* Floating food background for collaboration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <FloatingFoodIcons className="opacity-3" />
+      </div>
+
+      {/* Enhanced Connection Status */}
+      <motion.div 
+        className="absolute top-4 right-4 z-50"
+        initial={{ opacity: 0, scale: 0.8, y: -20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <AnimatedCard
+          variant="collaboration"
+          className={cn(
+            "flex items-center gap-3 px-4 py-3 shadow-xl text-sm font-medium border-2",
+            isConnected 
+              ? "bg-gradient-to-r from-food-green/10 to-green-100 text-food-green border-food-green/30" 
+              : "bg-gradient-to-r from-food-red/10 to-red-100 text-food-red border-food-red/30"
           )}
-        </div>
-      </div>
-
-      {/* Collaboration Controls */}
-      <div className="absolute top-4 left-4 z-50">
-        <div className="flex items-center gap-2">
-          {/* Toggle Collaboration */}
-          <button
-            onClick={() => setIsCollaborationEnabled(!isCollaborationEnabled)}
-            className={cn(
-              "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              isCollaborationEnabled
-                ? "bg-blue-600 text-white hover:bg-blue-700"
-                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+        >
+          <motion.div
+            animate={{ 
+              scale: isConnected ? [1, 1.2, 1] : [1],
+              rotate: isConnected ? [0, 360] : [0]
+            }}
+            transition={{ 
+              duration: isConnected ? 2 : 0,
+              repeat: isConnected ? Infinity : 0,
+              ease: "easeInOut"
+            }}
+          >
+            {isConnected ? (
+              <Wifi className="h-4 w-4" />
+            ) : (
+              <WifiOff className="h-4 w-4" />
             )}
-          >
-            {isCollaborationEnabled ? 'Collaboration On' : 'Collaboration Off'}
-          </button>
+          </motion.div>
+          
+          <div className="flex items-center gap-2">
+            <motion.div 
+              className={cn(
+                "w-3 h-3 rounded-full shadow-sm",
+                isConnected ? "bg-food-green" : "bg-food-red"
+              )}
+              animate={{ 
+                scale: [1, 1.3, 1],
+                opacity: [1, 0.7, 1]
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            
+            <span className="flex items-center gap-1">
+              {isConnected ? '🍽️ Kitchen Connected' : '🚫 Kitchen Offline'}
+            </span>
+          </div>
+          
+          {connectionError && (
+            <motion.span 
+              className="text-xs opacity-75 ml-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              ({connectionError})
+            </motion.span>
+          )}
+        </AnimatedCard>
+      </motion.div>
 
-          {/* Comments Toggle */}
-          <button
-            onClick={() => setShowComments(!showComments)}
-            className={cn(
-              "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              showComments
-                ? "bg-yellow-600 text-white hover:bg-yellow-700"
-                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-            )}
-          >
-            Comments ({comments.length})
-          </button>
+      {/* Enhanced Collaboration Controls */}
+      <motion.div 
+        className="absolute top-4 left-4 z-50"
+        initial={{ opacity: 0, scale: 0.8, y: -20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <motion.div 
+          className="flex items-center gap-3"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Enhanced Toggle Collaboration */}
+          <motion.div variants={dashboardWidgetVariants}>
+            <AnimatedButton
+              onClick={() => setIsCollaborationEnabled(!isCollaborationEnabled)}
+              variant={isCollaborationEnabled ? "delivery" : "secondary"}
+              size="sm"
+              animationType="bounce"
+              leftIcon={<Users className="h-4 w-4" />}
+              className={cn(
+                "font-medium shadow-lg",
+                isCollaborationEnabled
+                  ? "bg-gradient-to-r from-bitebase-primary to-food-orange text-white"
+                  : "bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 hover:bg-gray-300"
+              )}
+            >
+              {isCollaborationEnabled ? '👥 Kitchen Crew ON' : '🚫 Solo Chef'}
+            </AnimatedButton>
+          </motion.div>
 
-          {/* Version History Toggle */}
-          <button
-            onClick={() => setShowVersionHistory(!showVersionHistory)}
-            className={cn(
-              "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-              showVersionHistory
-                ? "bg-purple-600 text-white hover:bg-purple-700"
-                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-            )}
-          >
-            History
-          </button>
+          {/* Enhanced Comments Toggle */}
+          <motion.div variants={dashboardWidgetVariants}>
+            <AnimatedButton
+              onClick={() => setShowComments(!showComments)}
+              variant={showComments ? "secondary" : "ghost"}
+              size="sm"
+              animationType="food"
+              leftIcon={<MessageCircle className="h-4 w-4" />}
+              className={cn(
+                "font-medium shadow-lg relative",
+                showComments
+                  ? "bg-gradient-to-r from-food-yellow/20 to-yellow-100 text-food-yellow border-food-yellow/40"
+                  : "bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 hover:bg-gray-300"
+              )}
+            >
+              💬 Recipe Notes
+              {comments.length > 0 && (
+                <motion.span 
+                  className="absolute -top-2 -right-2 bg-food-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                >
+                  {comments.length}
+                </motion.span>
+              )}
+            </AnimatedButton>
+          </motion.div>
 
-          {/* Sync State */}
-          <button
-            onClick={syncState}
-            className="px-3 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-          >
-            Sync
-          </button>
-        </div>
-      </div>
+          {/* Enhanced Version History Toggle */}
+          <motion.div variants={dashboardWidgetVariants}>
+            <AnimatedButton
+              onClick={() => setShowVersionHistory(!showVersionHistory)}
+              variant={showVersionHistory ? "secondary" : "ghost"}
+              size="sm"
+              animationType="scale"
+              leftIcon={<History className="h-4 w-4" />}
+              className={cn(
+                "font-medium shadow-lg",
+                showVersionHistory
+                  ? "bg-gradient-to-r from-purple-100 to-purple-200 text-purple-700 border-purple-300"
+                  : "bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 hover:bg-gray-300"
+              )}
+            >
+              📚 Recipe History
+            </AnimatedButton>
+          </motion.div>
+
+          {/* Enhanced Sync State */}
+          <motion.div variants={dashboardWidgetVariants}>
+            <AnimatedButton
+              onClick={syncState}
+              variant="ghost"
+              size="sm"
+              animationType="delivery"
+              leftIcon={<Sync className="h-4 w-4" />}
+              className="font-medium shadow-lg bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 hover:bg-gray-300"
+            >
+              🔄 Sync Kitchen
+            </AnimatedButton>
+          </motion.div>
+
+          {/* Participant count indicator */}
+          {participants.length > 1 && (
+            <motion.div 
+              className="flex items-center gap-2 bg-bitebase-primary/10 px-3 py-2 rounded-lg border border-bitebase-primary/30"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ChefHat className="h-4 w-4 text-bitebase-primary" />
+              </motion.div>
+              <span className="text-sm font-medium text-bitebase-primary">
+                {participants.filter(p => p.status !== 'offline').length} 👨‍🍳 Chefs
+              </span>
+            </motion.div>
+          )}
+        </motion.div>
+      </motion.div>
 
       {/* Presence Indicators */}
       {isConnected && isCollaborationEnabled && (
@@ -328,26 +475,110 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
         />
       )}
 
-      {/* Current Operation Indicator */}
-      {currentOperation && (
-        <div className="absolute bottom-4 right-4 z-40">
-          <div className="bg-blue-100 text-blue-800 px-3 py-2 rounded-lg shadow-lg text-sm">
-            Processing: {currentOperation.type}
-          </div>
-        </div>
-      )}
+      {/* Enhanced Current Operation Indicator */}
+      <AnimatePresence>
+        {currentOperation && (
+          <motion.div 
+            className="absolute bottom-4 right-4 z-40"
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <AnimatedCard 
+              variant="operation"
+              className="bg-gradient-to-r from-bitebase-primary/10 to-blue-100 text-bitebase-primary px-4 py-3 shadow-xl border border-bitebase-primary/30"
+            >
+              <div className="flex items-center gap-3">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                >
+                  <Pizza className="h-4 w-4" />
+                </motion.div>
+                <div className="flex items-center gap-1">
+                  <span className="font-medium">🍳 Kitchen Processing:</span>
+                  <motion.span 
+                    className="capitalize"
+                    animate={{ opacity: [1, 0.7, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  >
+                    {currentOperation.type}
+                  </motion.span>
+                </div>
+              </div>
+            </AnimatedCard>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Collaboration Status Toast */}
-      {!isConnected && (
-        <div className="absolute bottom-4 center-4 z-50">
-          <div className="bg-yellow-100 text-yellow-800 px-4 py-3 rounded-lg shadow-lg border border-yellow-200">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-yellow-600 border-t-transparent rounded-full animate-spin" />
-              <span>Reconnecting to collaboration session...</span>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Enhanced Collaboration Status Toast */}
+      <AnimatePresence>
+        {!isConnected && (
+          <motion.div 
+            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50"
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <AnimatedCard 
+              variant="status"
+              className="bg-gradient-to-r from-food-yellow/10 to-yellow-100 text-food-yellow px-6 py-4 shadow-xl border border-food-yellow/30"
+            >
+              <div className="flex items-center gap-3">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                >
+                  <Truck className="h-5 w-5" />
+                </motion.div>
+                <div className="flex items-center gap-2">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  >
+                    🔄
+                  </motion.div>
+                  <span className="font-medium">Reconnecting to kitchen crew...</span>
+                </div>
+                <motion.div
+                  animate={{ opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="flex space-x-1"
+                >
+                  <div className="w-1 h-1 bg-food-yellow rounded-full"></div>
+                  <div className="w-1 h-1 bg-food-yellow rounded-full"></div>
+                  <div className="w-1 h-1 bg-food-yellow rounded-full"></div>
+                </motion.div>
+              </div>
+            </AnimatedCard>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating kitchen decorations */}
+      <motion.div 
+        className="fixed bottom-6 right-20 pointer-events-none"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        <motion.div
+          animate={{
+            y: [0, -15, 0],
+            rotate: [0, 5, -5, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="text-2xl"
+        >
+          👨‍🍳
+        </motion.div>
+      </motion.div>
     </div>
   )
 }
