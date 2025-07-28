@@ -5,11 +5,18 @@ Main API router combining all endpoints
 
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import restaurants, locations, menu, analytics, search, enhanced_dashboards, nl_query, insights, connectors, collaboration, performance, security
+from app.api.v1.endpoints import restaurants, locations, menu, analytics, search, enhanced_dashboards, nl_query, insights, connectors, collaboration, performance, security, ai, payments, admin
+from app.api.auth import router as auth_router
 
 api_router = APIRouter()
 
+# Include authentication router (not versioned as it's common across versions)
+api_router.include_router(auth_router, prefix="/auth", tags=["authentication"])
+
 # Include all endpoint routers
+api_router.include_router(ai.router, prefix="/ai", tags=["ai-analytics"])
+api_router.include_router(payments.router, prefix="/payments", tags=["payments"])
+api_router.include_router(admin.router, prefix="/admin", tags=["admin"])
 api_router.include_router(restaurants.router, prefix="/restaurants", tags=["restaurants"])
 api_router.include_router(locations.router, prefix="/locations", tags=["locations"])
 api_router.include_router(menu.router, prefix="/menu", tags=["menu"])

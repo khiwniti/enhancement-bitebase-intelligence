@@ -11,8 +11,9 @@ import {
 import { cn } from '@/lib/utils'
 
 interface AnimatedCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'menu' | 'restaurant' | 'dashboard' | 'plate'
+  variant?: 'default' | 'menu' | 'restaurant' | 'dashboard' | 'plate' | 'feature'
   index?: number
+  delay?: number
   isHoverable?: boolean
   customVariants?: any
   motionProps?: MotionProps
@@ -257,6 +258,38 @@ export function FoodGrid({ items, onItemClick, className }: FoodGridProps) {
           </div>
         </AnimatedCard>
       ))}
+    </motion.div>
+  )
+}
+
+// Simplified AnimatedCard for landing page
+export function SimpleAnimatedCard({ 
+  children, 
+  delay = 0, 
+  className = '',
+  ...props 
+}: {
+  children: React.ReactNode
+  delay?: number
+  className?: string
+} & React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay }}
+      whileHover={{ 
+        scale: 1.02, 
+        y: -4,
+        transition: { duration: 0.2 }
+      }}
+      className={cn(
+        'bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300',
+        className
+      )}
+      {...props}
+    >
+      {children}
     </motion.div>
   )
 }

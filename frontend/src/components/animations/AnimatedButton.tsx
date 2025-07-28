@@ -17,11 +17,11 @@ interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
 }
 
 const buttonVariants = {
-  primary: 'bg-bitebase-primary hover:bg-bitebase-primary-dark text-white',
-  secondary: 'bg-white hover:bg-gray-50 text-bitebase-primary border-2 border-bitebase-primary',
-  delivery: 'bg-gradient-to-r from-bitebase-primary via-food-orange to-food-yellow text-white',
-  food: 'bg-food-warm text-white',
-  ghost: 'bg-transparent hover:bg-bitebase-100 text-bitebase-700',
+  primary: 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40',
+  secondary: 'bg-white hover:bg-orange-50 text-orange-600 border-2 border-orange-500 hover:border-orange-600',
+  delivery: 'bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 text-white shadow-lg shadow-orange-500/30',
+  food: 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg shadow-green-500/25',
+  ghost: 'bg-transparent hover:bg-orange-100 text-orange-700 hover:text-orange-800',
 }
 
 const sizeVariants = {
