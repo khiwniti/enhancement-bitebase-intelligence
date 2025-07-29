@@ -1,262 +1,339 @@
-'use client';
+"use client"
 
-import React, { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useLanguage } from '../../contexts/LanguageContext';
-import { Button } from '../ui/button';
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Button } from "../ui/button"
 import {
+  BarChart2,
+  MapPin,
+  TrendingUp,
+  Users,
+  DollarSign,
+  Settings,
+  Search,
+  Bell,
+  User,
   Menu,
   X,
+  FileText,
   Home,
-  BarChart3,
-  Brain,
-  Settings,
+  LayoutDashboard,
+  ChevronRight,
   LogOut,
-  User,
-  Bell,
-  Search,
-  Languages,
-  ChevronDown
-} from 'lucide-react';
+  HelpCircle,
+  Sun,
+  Moon,
+  Brain,
+  Database,
+  PieChart,
+  Activity
+} from 'lucide-react'
+import BiteBaseLogo from '../BiteBaseLogo'
+import { NotificationCenter } from '../notifications/NotificationCenter'
+import { WebTour, useTour } from '../tour/WebTour'
+import { TourTrigger, WelcomeBanner } from '../tour/TourTrigger'
+import { UserMenu } from '../auth/UserMenu'
+import { LanguageSwitcher } from '../LanguageSwitcher'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils';
+
+// Type definitions for navigation
+interface NavigationItem {
+  name: string;
+  href: string;
+  icon: any;
+  description?: string;
+  badge?: string;
+}
+
+interface NavigationSection {
+  name: string;
+  items: NavigationItem[];
+}
+
+// Function to generate navigation structure with translations
+const getNavigationStructure = (t: (key: string) => string): NavigationSection[] => [
+  {
+    name: t('nav.dashboard'),
+    items: [
+      {
+        name: t('nav.dashboard'),
+        href: "/dashboard",
+        icon: LayoutDashboard,
+        description: "Main dashboard overview"
+      },
+    ]
+  },
+  {
+    name: "Intelligence",
+    items: [
+      {
+        name: t('nav.locationIntelligence'),
+        href: "/location-intelligence",
+        icon: MapPin,
+        description: "Interactive maps and location analysis"
+      },
+      {
+        name: t('nav.researchAgent'),
+        href: "/research-agent",
+        icon: Brain,
+        description: "AI-powered market research"
+      },
+      {
+        name: t('nav.analytics'),
+        href: "/analytics",
+        icon: BarChart2,
+        description: "Business analytics and insights"
+      },
+      {
+        name: "Integrated Analytics",
+        href: "/analytics/integrated",
+        icon: Activity,
+        description: "Comprehensive business intelligence across all systems"
+      },
+    ]
+  },
+  {
+    name: "Management",
+    items: [
+      {
+        name: "Restaurant Management",
+        href: "/restaurant-management",
+        icon: Users,
+        description: "Staff, inventory, tables, and operations"
+      },
+      {
+        name: "Campaign Management",
+        href: "/campaign-management",
+        icon: TrendingUp,
+        description: "Marketing campaigns and A/B testing"
+      },
+      {
+        name: "POS Integration",
+        href: "/pos-integration",
+        icon: DollarSign,
+        description: "Point of sale system integrations"
+      },
+    ]
+  },
+  {
+    name: "Data & Reports",
+    items: [
+      {
+        name: t('nav.dataSources'),
+        href: "/data-sources",
+        icon: Database,
+        description: "Manage data connections"
+      },
+      {
+        name: t('nav.reports'),
+        href: "/reports",
+        icon: FileText,
+        description: "Generate and manage reports"
+      },
+    ]
+  },
+  {
+    name: t('nav.settings'),
+    items: [
+      {
+        name: t('nav.settings'),
+        href: "/settings",
+        icon: Settings,
+        description: "Application settings"
+      },
+      {
+        name: t('nav.help'),
+        href: "/help",
+        icon: HelpCircle,
+        description: "Documentation and support"
+      },
+    ]
+  }
+];
 
 interface MainLayoutProps {
   children: React.ReactNode;
-  className?: string;
 }
 
-interface NavItem {
-  label: string;
-  href: string;
-  icon: React.ComponentType<any>;
-  active?: boolean;
-}
+export default function MainLayout({ children }: MainLayoutProps) {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const pathname = usePathname();
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children, className }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
-  const { language, setLanguage, t } = useLanguage();
+  // Language and tour systems
+  const { t } = useLanguage();
+  const { isTourOpen, isFirstTimeUser, startTour, closeTour, completeTour } = useTour();
 
-  const navigation: NavItem[] = [
-    {
-      label: t('common.dashboard'),
-      href: '/dashboard',
-      icon: Home,
-      active: true
-    },
-    {
-      label: t('common.analytics'),
-      href: '/analytics',
-      icon: BarChart3
-    },
-    {
-      label: t('common.insights'),
-      href: '/insights',
-      icon: Brain
-    },
-    {
-      label: t('common.settings'),
-      href: '/settings',
-      icon: Settings
-    }
-  ];
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error('Logout failed:', error);
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    // Apply dark mode class to document
+    if (!darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'th' : 'en');
+  // Check if current path matches navigation item
+  const isActiveRoute = (href: string) => {
+    if (href === '/dashboard') {
+      return pathname === '/dashboard' || pathname === '/';
+    }
+    return pathname.startsWith(href);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
+    <div className={`min-h-screen bg-background font-secondary`}>
       {/* Sidebar */}
-      <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
-        <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">B</span>
-            </div>
-            <span className="text-lg font-semibold text-gray-900">BiteBase</span>
-          </div>
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-card shadow-lg transform transition-transform duration-300 ease-in-out ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      } lg:translate-x-0 border-r border-border`}>
+
+        {/* Logo */}
+        <div className="flex items-center justify-between h-16 px-6 border-b border-border">
+          <BiteBaseLogo size="sm" variant="default" />
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden"
-            aria-label="Close sidebar"
+            className="lg:hidden text-foreground hover:bg-muted"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </Button>
         </div>
 
-        <nav className="flex-1 px-4 py-6 space-y-2">
-          {navigation.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200",
-                item.active
-                  ? "bg-blue-50 text-blue-700 border-r-2 border-blue-700"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-              )}
-            >
-              <item.icon className={cn(
-                "h-5 w-5 mr-3",
-                item.active ? "text-blue-700" : "text-gray-400"
-              )} />
-              {item.label}
-            </a>
+        {/* Navigation */}
+        <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto">
+          {getNavigationStructure(t).map((section) => (
+            <div key={section.name}>
+              <h3 className="px-3 text-xs font-primary font-semibold text-muted-foreground uppercase tracking-wider">
+                {section.name}
+              </h3>
+              <div className="mt-2 space-y-1">
+                {section.items.map((item) => {
+                  const isActive = isActiveRoute(item.href);
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      data-tour={
+                        item.href === '/dashboard' ? 'dashboard' :
+                        item.href === '/location-intelligence' ? 'map-analysis' :
+                        item.href === '/research-agent' ? 'ai-chat' :
+                        item.href === '/reports' ? 'reports' :
+                        undefined
+                      }
+                      className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors font-secondary ${
+                        isActive
+                          ? 'bg-bitebase-primary/10 text-bitebase-primary border-l-2 border-bitebase-primary'
+                          : 'text-foreground hover:bg-muted hover:text-foreground'
+                      }`}
+                    >
+                      <item.icon className={`mr-3 h-5 w-5 ${
+                        isActive ? 'text-bitebase-primary' : 'text-muted-foreground group-hover:text-foreground'
+                      }`} />
+                      {item.name}
+                      {item.badge && (
+                        <span className="ml-auto inline-block py-0.5 px-2 text-xs font-primary font-medium bg-bitebase-primary/10 text-bitebase-primary rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           ))}
         </nav>
 
-        {/* User info at bottom */}
-        {user && (
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                <User className="h-4 w-4 text-gray-600" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">
-                  {user.firstName} {user.lastName}
-                </p>
-                <p className="text-xs text-gray-500 truncate">{user.email}</p>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
-        {/* Top navigation */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              {/* Mobile menu button */}
+      <div className={`transition-all duration-300 ease-in-out ${
+        sidebarOpen ? 'lg:ml-64' : 'ml-0'
+      }`}>
+
+        {/* Top bar */}
+        <header className="bg-card shadow-sm border-b border-border">
+          <div className="flex items-center justify-between h-16 px-6">
+
+            {/* Left side */}
+            <div className="flex items-center">
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setSidebarOpen(true)}
-                className="lg:hidden"
-                aria-label="Open sidebar"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="mr-4 text-foreground hover:bg-muted"
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="h-4 w-4" />
               </Button>
 
-              {/* Search bar */}
-              <div className="flex-1 max-w-lg mx-4">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder={t('common.search')}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    aria-label={t('common.search')}
-                  />
-                </div>
+              {/* Search */}
+              <div className="relative hidden md:block">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="pl-10 pr-4 py-2 border border-border rounded-md bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-bitebase-primary focus:border-transparent font-secondary"
+                />
               </div>
+            </div>
 
-              {/* Right side actions */}
-              <div className="flex items-center space-x-3">
-                {/* Language toggle */}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={toggleLanguage}
-                  className="flex items-center space-x-1"
-                  aria-label={`Switch to ${language === 'en' ? 'Thai' : 'English'}`}
-                >
-                  <Languages className="h-4 w-4" />
-                  <span className="text-sm font-medium">
-                    {language.toUpperCase()}
-                  </span>
-                </Button>
+            {/* Right side */}
+            <div className="flex items-center space-x-4">
 
-                {/* Notifications */}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="relative"
-                  aria-label="Notifications"
-                >
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">
-                    3
-                  </span>
-                </Button>
+              {/* Dark mode toggle - Hidden for now since we're using light theme */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleDarkMode}
+                className="hidden text-foreground hover:bg-muted"
+              >
+                {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </Button>
 
-                {/* User menu */}
-                <div className="relative">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    className="flex items-center space-x-2"
-                    aria-label="User menu"
-                  >
-                    <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
-                      <User className="h-3 w-3 text-gray-600" />
-                    </div>
-                    <ChevronDown className="h-3 w-3" />
-                  </Button>
+              {/* Language switcher */}
+              <LanguageSwitcher />
 
-                  {userMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-                      <a
-                        href="/profile"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      >
-                        Profile
-                      </a>
-                      <a
-                        href="/settings"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      >
-                        {t('common.settings')}
-                      </a>
-                      <hr className="my-1" />
-                      <button
-                        onClick={handleLogout}
-                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                      >
-                        {t('common.logout')}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
+              {/* Tour trigger */}
+              <TourTrigger onStartTour={startTour} />
+
+              {/* Notifications */}
+              <NotificationCenter />
+
+              {/* User menu */}
+              <UserMenu />
             </div>
           </div>
         </header>
 
         {/* Page content */}
-        <main className={cn("p-4 sm:p-6 lg:p-8", className)}>
+        <main className="p-6 bg-background">
+          {/* Welcome banner for new users */}
+          <WelcomeBanner onStartTour={startTour} />
+
           {children}
         </main>
       </div>
+
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Tour component */}
+      <WebTour
+        isOpen={isTourOpen}
+        onClose={closeTour}
+        onComplete={completeTour}
+        isFirstTimeUser={isFirstTimeUser}
+      />
     </div>
   );
-};
-
-export default MainLayout;
+}

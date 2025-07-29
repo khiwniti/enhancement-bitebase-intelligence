@@ -71,7 +71,7 @@ class Insight(Base):
     # Data and context
     data_points = Column(JSON, nullable=False)  # Raw data that triggered the insight
     context = Column(JSON, nullable=True)  # Additional context information
-    metadata = Column(JSON, nullable=True)  # Algorithm-specific metadata
+    algorithm_metadata = Column(JSON, nullable=True)  # Algorithm-specific metadata
     
     # Natural language explanation
     explanation = Column(Text, nullable=False)  # AI-generated explanation

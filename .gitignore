@@ -129,3 +129,22 @@ venv.bak/
 *.temp
 .tmp/
 .temp/
+
+# Archive and backup files
+archive/
+backup/
+*.bak
+*.backup
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Docker
+.dockerignore
+
+# Misc development files
+*.orig
+.roo/

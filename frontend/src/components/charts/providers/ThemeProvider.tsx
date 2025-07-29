@@ -259,11 +259,11 @@ export function ThemeProvider({
     // Chart-specific variables
     Object.entries(theme.charts).forEach(([key, value]) => {
       if (typeof value === 'object') {
-        Object.entries(value).forEach(([subKey, subValue]) => {
-          variables[`--chart-${key}-${subKey}`] = subValue
+        Object.entries(value as any).forEach(([subKey, subValue]) => {
+          variables[`--chart-${key}-${subKey}`] = String(subValue)
         })
       } else {
-        variables[`--chart-${key}`] = value
+        variables[`--chart-${key}`] = String(value)
       }
     })
     

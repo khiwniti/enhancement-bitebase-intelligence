@@ -78,8 +78,9 @@ export function MarketResearchPanel({
         category: searchParams.category || undefined
       })
 
-      setAnalysisResults(analysisResponse)
-      onAnalysisComplete?.(analysisResponse)
+      const typedResponse = analysisResponse as LocationAnalysisResponse
+      setAnalysisResults(typedResponse)
+      onAnalysisComplete?.(typedResponse)
 
       // Get nearby restaurants
       const restaurantsResponse = await apiClient.restaurants.nearby({
@@ -89,7 +90,7 @@ export function MarketResearchPanel({
         limit: 50
       })
 
-      setNearbyRestaurants(restaurantsResponse.restaurants || [])
+      setNearbyRestaurants((restaurantsResponse as any)?.restaurants || [])
     } catch (error) {
       console.error('Analysis failed:', error)
     } finally {

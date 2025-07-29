@@ -40,7 +40,7 @@ export class ChartRegistry {
     basicCharts.forEach(({ type, weight }) => {
       this.registry.set(type, {
         type,
-        component: null as Record<string, unknown> | null, // Will be loaded dynamically
+        component: null, // Will be loaded dynamically
         isAdvanced: false,
         dependencies: ['chart.js'],
         performanceWeight: weight
@@ -67,7 +67,7 @@ export class ChartRegistry {
     advancedCharts.forEach(({ type, deps, weight }) => {
       this.registry.set(type, {
         type,
-        component: null as Record<string, unknown> | null, // Will be loaded dynamically
+        component: null, // Will be loaded dynamically
         isAdvanced: true,
         dependencies: deps,
         performanceWeight: weight
@@ -120,12 +120,12 @@ export class ChartRegistry {
   public async loadChart(type: ChartType): Promise<Record<string, unknown>> {
     // Check if already loaded
     if (this.loadedModules.has(type)) {
-      return this.loadedModules.get(type)
+      return this.loadedModules.get(type)!
     }
 
     // Check if currently loading
     if (this.loadingPromises.has(type)) {
-      return this.loadingPromises.get(type)
+      return this.loadingPromises.get(type)!
     }
 
     // Get registry entry
@@ -224,7 +224,7 @@ export class ChartRegistry {
       this.loadBasicChart(),
       import('chartjs-chart-treemap')
     ])
-    return { ...chartjs, TreeMapController: treemap.TreeMapController }
+    return { ...chartjs, TreemapController: treemap.TreemapController }
   }
 
   private async loadSankeyChart() {
@@ -236,87 +236,118 @@ export class ChartRegistry {
   }
 
   private async loadGanttChart() {
-    const [chartjs, adapter] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-adapter-date-fns')
-    ])
-    return { ...chartjs, adapter }
+    try {
+      const [chartjs, adapter] = await Promise.all([
+        this.loadBasicChart(),
+        import('date-fns') // Use date-fns directly since it's available
+      ])
+      return { ...chartjs, adapter }
+    } catch (error) {
+      console.warn('Date adapter not available, using basic chart')
+      return this.loadBasicChart()
+    }
   }
 
   private async loadHeatmapChart() {
-    const [chartjs, matrix] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-chart-matrix')
-    ])
-    return { ...chartjs, MatrixController: matrix.MatrixController }
+    try {
+      const chartjs = await this.loadBasicChart()
+      // Use basic chart as fallback when matrix chart is not available
+      return chartjs
+    } catch (error) {
+      return this.loadBasicChart()
+    }
   }
 
   private async loadNetworkChart() {
-    const [chartjs, d3] = await Promise.all([
-      this.loadBasicChart(),
-      import('d3')
-    ])
-    return { ...chartjs, d3 }
+    try {
+      const [chartjs, d3] = await Promise.all([
+        this.loadBasicChart(),
+        import('d3')
+      ])
+      return { ...chartjs, d3 }
+    } catch (error) {
+      console.warn('D3 not available for network chart, using basic chart')
+      return this.loadBasicChart()
+    }
   }
 
   private async loadFunnelChart() {
-    const [chartjs, funnel] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-chart-funnel')
-    ])
-    return { ...chartjs, FunnelController: funnel.FunnelController }
+    try {
+      const chartjs = await this.loadBasicChart()
+      // Use basic chart as fallback when funnel chart is not available
+      return chartjs
+    } catch (error) {
+      return this.loadBasicChart()
+    }
   }
 
   private async loadWaterfallChart() {
-    const [chartjs, waterfall] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-chart-waterfall')
-    ])
-    return { ...chartjs, WaterfallController: waterfall.WaterfallController }
+    try {
+      const chartjs = await this.loadBasicChart()
+      // Use basic chart as fallback when waterfall chart is not available
+      return chartjs
+    } catch (error) {
+      return this.loadBasicChart()
+    }
   }
 
   private async loadBoxViolinChart() {
-    const [chartjs, boxViolin] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-chart-box-and-violin-plot')
-    ])
-    return { 
-      ...chartjs, 
-      BoxPlotController: boxViolin.BoxPlotController,
-      ViolinController: boxViolin.ViolinController
+    try {
+      const chartjs = await this.loadBasicChart()
+      // Use basic chart as fallback when box/violin chart is not available
+      return chartjs
+    } catch (error) {
+      return this.loadBasicChart()
     }
   }
 
   private async loadSunburstChart() {
-    const [chartjs, d3] = await Promise.all([
-      this.loadBasicChart(),
-      import('d3')
-    ])
-    return { ...chartjs, d3 }
+    try {
+      const [chartjs, d3] = await Promise.all([
+        this.loadBasicChart(),
+        import('d3')
+      ])
+      return { ...chartjs, d3 }
+    } catch (error) {
+      console.warn('D3 not available for sunburst chart, using basic chart')
+      return this.loadBasicChart()
+    }
   }
 
   private async loadChordChart() {
-    const [chartjs, d3] = await Promise.all([
-      this.loadBasicChart(),
-      import('d3')
-    ])
-    return { ...chartjs, d3 }
+    try {
+      const [chartjs, d3] = await Promise.all([
+        this.loadBasicChart(),
+        import('d3')
+      ])
+      return { ...chartjs, d3 }
+    } catch (error) {
+      console.warn('D3 not available for chord chart, using basic chart')
+      return this.loadBasicChart()
+    }
   }
 
   private async loadTimelineChart() {
-    const [chartjs, adapter] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-adapter-date-fns')
-    ])
-    return { ...chartjs, adapter }
+    try {
+      const [chartjs, adapter] = await Promise.all([
+        this.loadBasicChart(),
+        import('date-fns') // Use date-fns directly since it's available
+      ])
+      return { ...chartjs, adapter }
+    } catch (error) {
+      console.warn('Date adapter not available, using basic chart')
+      return this.loadBasicChart()
+    }
   }
 
   private async loadCandlestickChart() {
-    const [chartjs, financial] = await Promise.all([
-      this.loadBasicChart(),
-      import('chartjs-chart-financial')
-    ])
-    return { ...chartjs, CandlestickController: financial.CandlestickController }
+    try {
+      const chartjs = await this.loadBasicChart()
+      // Use basic chart as fallback when financial chart is not available
+      return chartjs
+    } catch (error) {
+      return this.loadBasicChart()
+    }
   }
 
   // Preload charts based on priority

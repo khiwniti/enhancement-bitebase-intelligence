@@ -14,7 +14,7 @@ interface UserPresence {
   user_id: string
   username: string
   avatar_url?: string
-  status: string
+  status: 'online' | 'away' | 'offline' | 'editing'
   cursor_position?: CursorPosition
   current_action?: string
   active_element?: string
@@ -177,7 +177,10 @@ export const useRealtimeCollaboration = ({
       case 'session_joined':
         setSessionState(message.data.session)
         if (message.data.presence?.other_participants) {
-          setParticipants(message.data.presence.other_participants)
+          setParticipants(message.data.presence.other_participants.map((p: any) => ({
+            ...p,
+            status: (['online', 'away', 'offline', 'editing'].includes(p.status) ? p.status : 'online') as 'online' | 'away' | 'offline' | 'editing'
+          })))
         }
         if (message.data.dashboard_state && onStateChanged) {
           onStateChanged(message.data.dashboard_state)
@@ -190,16 +193,26 @@ export const useRealtimeCollaboration = ({
           if (existing) {
             return prev.map(p => 
               p.user_id === message.data.user_id 
-                ? { ...p, ...message.data.presence }
+                ? { 
+                    ...p, 
+                    ...message.data.presence,
+                    status: (['online', 'away', 'offline', 'editing'].includes(message.data.presence.status) ? message.data.presence.status : 'online') as 'online' | 'away' | 'offline' | 'editing'
+                  }
                 : p
             )
           }
-          return [...prev, message.data.presence]
+          return [...prev, {
+            ...message.data.presence,
+            status: (['online', 'away', 'offline', 'editing'].includes(message.data.presence.status) ? message.data.presence.status : 'online') as 'online' | 'away' | 'offline' | 'editing'
+          }]
         })
         break
 
       case 'user_left':
-        setParticipants(message.data.remaining_participants || [])
+        setParticipants((message.data.remaining_participants || []).map((p: any) => ({
+          ...p,
+          status: (['online', 'away', 'offline', 'editing'].includes(p.status) ? p.status : 'online') as 'online' | 'away' | 'offline' | 'editing'
+        })))
         break
 
       case 'operation_applied':
@@ -264,8 +277,8 @@ export const useRealtimeCollaboration = ({
         break
 
       case 'error':
-        console.error('Collaboration error:', message.message)
-        setConnectionError(message.message)
+        console.error('Collaboration error:', message.data)
+        setConnectionError(message.data?.message || 'Unknown error occurred')
         break
 
       default:

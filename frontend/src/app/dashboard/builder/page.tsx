@@ -5,6 +5,7 @@
 
 import React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { EnhancedDashboardBuilder } from '@/components/dashboard'
 
 // Create a query client for TanStack Query
@@ -48,7 +49,7 @@ export default function DashboardBuilderPage() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="h-screen bg-background">
+      <DashboardLayout>
         <EnhancedDashboardBuilder
           dashboardId="default-dashboard"
           onDashboardChange={handleDashboardChange}
@@ -56,7 +57,7 @@ export default function DashboardBuilderPage() {
           onShare={handleShare}
           className="h-full"
         />
-      </div>
+      </DashboardLayout>
     </QueryClientProvider>
   )
 }

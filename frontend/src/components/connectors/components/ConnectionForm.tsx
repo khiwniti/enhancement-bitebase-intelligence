@@ -222,7 +222,11 @@ export function ConnectionForm({
       }
     }
     
-    return configs[field] || { label: field.replace('_', ' ') }
+    return configs[field] || {
+      label: field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()),
+      placeholder: `Enter ${field.replace('_', ' ')}`,
+      required: template.requiredFields.includes(field)
+    }
   }
 
   // Determine which fields to show based on template
@@ -285,7 +289,12 @@ export function ConnectionForm({
                 '' : formData[field as keyof ConnectorFormData] as string | number | undefined}
               onChange={(value) => handleFieldChange(field as keyof ConnectorFormData, value)}
               error={fieldError}
-              {...config}
+              label={config.label || field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              type={config.type}
+              placeholder={config.placeholder}
+              required={config.required}
+              description={config.description}
+              icon={config.icon}
             />
           )
         })}

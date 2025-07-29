@@ -88,21 +88,22 @@ export function MarketReportAgent({
       await new Promise(resolve => setTimeout(resolve, 1500))
 
       // Step 3: Generate AI-powered insights and recommendations
+      const typedResponse = analysisResponse as LocationAnalysisResponse
       const report: MarketReport = {
         id: `report_${Date.now()}`,
         title: query || `Market Analysis for ${location.name}`,
         location,
         generatedAt: new Date(),
-        confidence: analysisResponse.analysis.location_score.confidence_level === 'high' ? 0.9 : 
-                   analysisResponse.analysis.location_score.confidence_level === 'medium' ? 0.7 : 0.5,
-        summary: generateAISummary(analysisResponse.analysis),
-        keyInsights: generateAIInsights(analysisResponse.analysis),
-        recommendations: analysisResponse.analysis.recommendations,
-        riskFactors: analysisResponse.analysis.risk_assessment.risk_factors,
-        marketScore: analysisResponse.analysis.location_score.overall_score,
-        competitionLevel: analysisResponse.analysis.competition_analysis.market_saturation as 'low' | 'medium' | 'high',
-        opportunityRating: calculateOpportunityRating(analysisResponse.analysis),
-        analysis: analysisResponse
+        confidence: typedResponse.analysis.location_score.confidence_level === 'high' ? 0.9 :
+                   typedResponse.analysis.location_score.confidence_level === 'medium' ? 0.7 : 0.5,
+        summary: generateAISummary(typedResponse.analysis),
+        keyInsights: generateAIInsights(typedResponse.analysis),
+        recommendations: typedResponse.analysis.recommendations,
+        riskFactors: typedResponse.analysis.risk_assessment.risk_factors,
+        marketScore: typedResponse.analysis.location_score.overall_score,
+        competitionLevel: typedResponse.analysis.competition_analysis.market_saturation as 'low' | 'medium' | 'high',
+        opportunityRating: calculateOpportunityRating(typedResponse.analysis),
+        analysis: typedResponse
       }
 
       setCurrentReport(report)

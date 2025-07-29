@@ -24,7 +24,7 @@ from app.services.collaboration.presence_tracker import (
     PresenceTracker
 )
 from app.schemas.dashboard import DashboardResponse
-from app.core.database import get_database
+from app.core.database import get_db
 
 router = APIRouter()
 

@@ -14,6 +14,7 @@ from contextlib import asynccontextmanager
 from app.core.config import settings
 from app.core.database import init_db
 from app.api.v1.api import api_router
+from app.middleware.api_monitoring import APIMonitoringMiddleware
 
 # Configure logging
 logging.basicConfig(
@@ -57,6 +58,14 @@ app.add_middleware(
 )
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+# Add API monitoring middleware
+app.add_middleware(
+    APIMonitoringMiddleware,
+    enable_rate_limiting=True,
+    enable_monitoring=True,
+    exclude_paths=["/health", "/metrics", "/docs", "/openapi.json", "/"]
+)
 
 # Include API routes
 app.include_router(api_router, prefix="/api/v1")

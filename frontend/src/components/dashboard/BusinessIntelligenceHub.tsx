@@ -34,31 +34,55 @@ const MetricCard: React.FC<MetricCardProps> = ({
   changeType = 'neutral', 
   icon: Icon, 
   description 
-}) => (
-  <Card className="transition-all duration-200 hover:shadow-md">
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
-      <Icon className="h-4 w-4 text-gray-400" aria-hidden="true" />
-    </CardHeader>
-    <CardContent>
-      <div className="text-2xl font-bold">{value}</div>
-      {change && (
-        <p className={cn(
-          "text-xs flex items-center mt-1",
-          changeType === 'positive' && "text-green-600",
-          changeType === 'negative' && "text-red-600",
-          changeType === 'neutral' && "text-gray-600"
-        )}>
-          {changeType === 'positive' && <TrendingUp className="h-3 w-3 mr-1" />}
-          {change}
-        </p>
-      )}
-      {description && (
-        <p className="text-xs text-gray-500 mt-1">{description}</p>
-      )}
-    </CardContent>
-  </Card>
-);
+}) => {
+  const cardId = `metric-${title.toLowerCase().replace(/\s+/g, '-')}`;
+  const changeAriaLabel = change ? `${change} compared to previous period` : undefined;
+  
+  return (
+    <Card className="transition-all duration-200 hover:shadow-md focus-within:ring-2 focus-within:ring-ring">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle 
+          className="text-sm font-medium text-gray-600"
+          id={`${cardId}-title`}
+        >
+          {title}
+        </CardTitle>
+        <Icon className="h-4 w-4 text-gray-400" aria-hidden="true" />
+      </CardHeader>
+      <CardContent>
+        <div 
+          className="text-2xl font-bold"
+          aria-labelledby={`${cardId}-title`}
+          role="text"
+        >
+          {value}
+        </div>
+        {change && (
+          <p 
+            className={cn(
+              "text-xs flex items-center mt-1",
+              changeType === 'positive' && "text-green-600",
+              changeType === 'negative' && "text-red-600",
+              changeType === 'neutral' && "text-gray-600"
+            )}
+            aria-label={changeAriaLabel}
+          >
+            {changeType === 'positive' && (
+              <TrendingUp 
+                className="h-3 w-3 mr-1" 
+                aria-hidden="true"
+              />
+            )}
+            <span>{change}</span>
+          </p>
+        )}
+        {description && (
+          <p className="text-xs text-gray-500 mt-1">{description}</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
 
 interface InsightCardProps {
   title: string;
@@ -69,11 +93,12 @@ interface InsightCardProps {
 
 const InsightCard: React.FC<InsightCardProps> = ({ title, description, category, priority }) => {
   const getCategoryIcon = () => {
+    const iconProps = { className: "h-4 w-4", 'aria-hidden': 'true' as const };
     switch (category) {
-      case 'opportunity': return <Target className="h-4 w-4" />;
-      case 'warning': return <Info className="h-4 w-4" />;
-      case 'positive': return <Star className="h-4 w-4" />;
-      default: return <Activity className="h-4 w-4" />;
+      case 'opportunity': return <Target {...iconProps} />;
+      case 'warning': return <Info {...iconProps} />;
+      case 'positive': return <Star {...iconProps} />;
+      default: return <Activity {...iconProps} />;
     }
   };
 
@@ -86,24 +111,53 @@ const InsightCard: React.FC<InsightCardProps> = ({ title, description, category,
     }
   };
 
+  const getCategoryLabel = () => {
+    switch (category) {
+      case 'opportunity': return 'Business opportunity';
+      case 'warning': return 'Warning alert';
+      case 'positive': return 'Positive insight';
+      default: return 'Information';
+    }
+  };
+
+  const cardId = `insight-${title.toLowerCase().replace(/\s+/g, '-')}`;
+
   return (
-    <Card className={cn("border-l-4", getCategoryColor())}>
+    <Card 
+      className={cn("border-l-4 focus-within:ring-2 focus-within:ring-ring", getCategoryColor())}
+      role="article"
+      aria-labelledby={`${cardId}-title`}
+      aria-describedby={`${cardId}-description`}
+    >
       <CardHeader className="pb-3">
         <div className="flex items-center space-x-2">
           {getCategoryIcon()}
-          <CardTitle className="text-sm font-medium">{title}</CardTitle>
-          <span className={cn(
-            "px-2 py-1 text-xs rounded-full",
-            priority === 'high' && "bg-red-100 text-red-800",
-            priority === 'medium' && "bg-yellow-100 text-yellow-800",
-            priority === 'low' && "bg-green-100 text-green-800"
-          )}>
+          <CardTitle 
+            id={`${cardId}-title`}
+            className="text-sm font-medium"
+          >
+            {title}
+          </CardTitle>
+          <span 
+            className={cn(
+              "px-2 py-1 text-xs rounded-full",
+              priority === 'high' && "bg-red-100 text-red-800",
+              priority === 'medium' && "bg-yellow-100 text-yellow-800",
+              priority === 'low' && "bg-green-100 text-green-800"
+            )}
+            aria-label={`${priority} priority ${getCategoryLabel()}`}
+          >
             {priority}
           </span>
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-gray-600">{description}</p>
+        <p 
+          id={`${cardId}-description`}
+          className="text-sm text-gray-600"
+        >
+          {description}
+        </p>
       </CardContent>
     </Card>
   );
@@ -198,14 +252,18 @@ export default function BusinessIntelligenceHub({
   return (
     <div className={cn("w-full space-y-6", className)}>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Business Intelligence</h1>
           <p className="text-gray-600 mt-1">
             Real-time insights and analytics for your restaurant
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div 
+          className="flex items-center space-x-2"
+          role="group"
+          aria-label="Time range filter"
+        >
           {timeRangeOptions.map((option) => (
             <Button
               key={option.value}
@@ -213,15 +271,17 @@ export default function BusinessIntelligenceHub({
               size="sm"
               onClick={() => setTimeRange(option.value as any)}
               className="min-w-0"
+              aria-pressed={timeRange === option.value}
+              aria-label={`Show data for ${option.label.toLowerCase()}`}
             >
               {option.label}
             </Button>
           ))}
         </div>
-      </div>
+      </header>
 
       {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs defaultValue={activeTab} className="w-full">
         <TabsList className="grid grid-cols-4 w-full max-w-md">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -232,31 +292,41 @@ export default function BusinessIntelligenceHub({
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">
           {/* Metrics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {metrics.map((metric, index) => (
-              <MetricCard key={index} {...metric} />
-            ))}
-          </div>
+          <section aria-labelledby="metrics-heading">
+            <h2 id="metrics-heading" className="sr-only">
+              Key Performance Metrics
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {metrics.map((metric, index) => (
+                <MetricCard key={`${metric.title}-${index}`} {...metric} />
+              ))}
+            </div>
+          </section>
 
           {/* Quick Insights */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Activity className="h-5 w-5" />
-                <span>Quick Insights</span>
-              </CardTitle>
-              <CardDescription>
-                AI-powered insights from your restaurant data
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {insights.slice(0, 4).map((insight, index) => (
-                  <InsightCard key={index} {...insight} />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <section aria-labelledby="insights-heading">
+            <Card>
+              <CardHeader>
+                <CardTitle 
+                  id="insights-heading"
+                  className="flex items-center space-x-2"
+                >
+                  <Activity className="h-5 w-5" aria-hidden="true" />
+                  <span>Quick Insights</span>
+                </CardTitle>
+                <CardDescription>
+                  AI-powered insights from your restaurant data
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {insights.slice(0, 4).map((insight, index) => (
+                    <InsightCard key={`${insight.title}-${index}`} {...insight} />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </section>
         </TabsContent>
 
         {/* Analytics Tab */}

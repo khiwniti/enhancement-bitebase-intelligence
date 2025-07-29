@@ -269,7 +269,7 @@ export function useChart({
 
   return {
     chartRef,
-    chartInstance,
+    chartInstance: chartInstance || null,
     isLoading,
     error,
     isReady,

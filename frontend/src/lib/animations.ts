@@ -32,8 +32,8 @@ export const foodEntranceVariants: Variants = {
     scale: 1,
     y: 0,
     transition: {
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
     },
   },
   exit: {
@@ -151,8 +151,8 @@ export const menuCardVariants: Variants = {
     rotateX: 0,
     transition: {
       delay: index * 0.1,
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
     },
   }),
   hover: {
@@ -178,8 +178,8 @@ export const restaurantCardVariants: Variants = {
     scale: 1,
     y: 0,
     transition: {
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
     },
   },
   hover: {
@@ -208,8 +208,8 @@ export const dashboardWidgetVariants: Variants = {
     y: 0,
     transition: {
       delay: index * 0.05,
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
     },
   }),
   exit: {
@@ -270,8 +270,8 @@ export const navVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
       staggerChildren: 0.1,
     },
   },
@@ -287,8 +287,8 @@ export const pageVariants: Variants = {
     opacity: 1,
     x: 0,
     transition: {
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
     },
   },
   out: {
@@ -376,8 +376,8 @@ export const staggerItem: Variants = {
     opacity: 1,
     y: 0,
     transition: {
+      ...EASING.spring,
       duration: ANIMATION_DURATION.normal,
-      ease: EASING.spring,
     },
   },
 }
@@ -411,8 +411,8 @@ export const createStaggeredList = (itemCount: number) => ({
       opacity: 1,
       y: 0,
       transition: {
+        ...EASING.spring,
         duration: ANIMATION_DURATION.normal,
-        ease: EASING.spring,
       },
     },
   },

@@ -353,8 +353,8 @@ const RealtimeInsightsDashboard: React.FC<RealtimeInsightsDashboardProps> = ({
             transition={{ duration: 0.3 }}
             className="relative z-10"
           >
-            <AnimatedCard 
-              variant="error"
+            <AnimatedCard
+              variant="default"
               className="border-red-200 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 overflow-hidden"
             >
               {/* Animated error background */}
@@ -424,8 +424,8 @@ const RealtimeInsightsDashboard: React.FC<RealtimeInsightsDashboardProps> = ({
           >
             {/* Total Insights Card */}
             <motion.div variants={dashboardWidgetVariants}>
-              <AnimatedCard 
-                variant="metric" 
+              <AnimatedCard
+                variant="dashboard"
                 className="bg-gradient-to-br from-bitebase-primary/5 to-bitebase-primary/10 border-bitebase-primary/20 hover:border-bitebase-primary/40"
               >
                 <CardContent className="p-4">
@@ -463,8 +463,8 @@ const RealtimeInsightsDashboard: React.FC<RealtimeInsightsDashboardProps> = ({
 
             {/* Active Insights Card */}
             <motion.div variants={dashboardWidgetVariants}>
-              <AnimatedCard 
-                variant="metric"
+              <AnimatedCard
+                variant="dashboard"
                 className="bg-gradient-to-br from-food-yellow/5 to-food-yellow/10 border-food-yellow/20 hover:border-food-yellow/40"
               >
                 <CardContent className="p-4">
@@ -501,8 +501,8 @@ const RealtimeInsightsDashboard: React.FC<RealtimeInsightsDashboardProps> = ({
 
             {/* Critical Insights Card */}
             <motion.div variants={dashboardWidgetVariants}>
-              <AnimatedCard 
-                variant="metric"
+              <AnimatedCard
+                variant="dashboard"
                 className="bg-gradient-to-br from-food-red/5 to-food-red/10 border-food-red/20 hover:border-food-red/40"
               >
                 <CardContent className="p-4">
@@ -542,8 +542,8 @@ const RealtimeInsightsDashboard: React.FC<RealtimeInsightsDashboardProps> = ({
 
             {/* Confidence Score Card */}
             <motion.div variants={dashboardWidgetVariants}>
-              <AnimatedCard 
-                variant="metric"
+              <AnimatedCard
+                variant="dashboard"
                 className="bg-gradient-to-br from-food-green/5 to-food-green/10 border-food-green/20 hover:border-food-green/40"
               >
                 <CardContent className="p-4">
@@ -884,8 +884,8 @@ const RealtimeInsightsDashboard: React.FC<RealtimeInsightsDashboardProps> = ({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <AnimatedCard 
-              variant="empty"
+            <AnimatedCard
+              variant="default"
               className="bg-gradient-to-br from-bitebase-primary/5 to-food-orange/5 border-2 border-dashed border-bitebase-primary/30"
             >
               <CardContent className="p-16 text-center">

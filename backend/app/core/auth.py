@@ -5,7 +5,7 @@ FastAPI implementation based on Express.js patterns from bitebase-backend-expres
 
 import os
 import bcrypt
-import jwt
+from jose import jwt
 from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 from fastapi import HTTPException, status

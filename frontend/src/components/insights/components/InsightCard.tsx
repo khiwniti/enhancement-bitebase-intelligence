@@ -186,7 +186,7 @@ const InsightCard: React.FC<InsightCardProps> = ({
       className="relative"
     >
       <AnimatedCard 
-        variant="insight"
+        variant="dashboard"
         className={`relative overflow-hidden border-2 transition-all duration-300 hover:shadow-xl ${
           compact ? 'p-2' : 'p-0'
         } ${
@@ -325,8 +325,10 @@ const InsightCard: React.FC<InsightCardProps> = ({
               </div>
             </div>
 
-            {/* Enhanced action area */}
-            <motion.div 
+            {!compact && (
+              <div>
+                {/* Enhanced action area */}
+                <motion.div
               className="flex items-center space-x-2 ml-4"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -358,7 +360,9 @@ const InsightCard: React.FC<InsightCardProps> = ({
                   <Eye className="h-4 w-4" />
                 </motion.div>
               </AnimatedButton>
-            </div>
+                </motion.div>
+              </div>
+            )}
           </div>
 
         {!compact && (

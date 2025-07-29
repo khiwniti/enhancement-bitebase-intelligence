@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-secondary",
   {
     variants: {
       variant: {
-        default: "bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700 border-2 border-blue-600 hover:border-blue-700",
-        destructive: "bg-red-600 text-white hover:bg-red-700 focus:bg-red-700 border-2 border-red-600 hover:border-red-700",
-        outline: "border-2 border-gray-400 bg-white text-gray-900 hover:bg-gray-50 focus:bg-gray-50 hover:border-gray-500",
-        secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:bg-gray-200 border-2 border-gray-100 hover:border-gray-200",
-        ghost: "text-gray-700 hover:bg-gray-100 focus:bg-gray-100 border-2 border-transparent hover:border-gray-200",
-        link: "text-blue-600 underline-offset-4 hover:underline focus:underline border-2 border-transparent focus:border-blue-600",
+        default: "bg-bitebase-primary text-white hover:bg-bitebase-primary-hover focus:bg-bitebase-primary-hover border-2 border-bitebase-primary hover:border-bitebase-primary-hover",
+        destructive: "bg-bitebase-accent text-white hover:bg-bitebase-accent-hover focus:bg-bitebase-accent-hover border-2 border-bitebase-accent hover:border-bitebase-accent-hover",
+        outline: "border-2 border-border bg-card text-foreground hover:bg-muted focus:bg-muted hover:border-bitebase-primary",
+        secondary: "bg-muted text-foreground hover:bg-muted/80 focus:bg-muted/80 border-2 border-muted hover:border-muted/80",
+        ghost: "text-foreground hover:bg-muted focus:bg-muted border-2 border-transparent hover:border-border",
+        link: "text-bitebase-primary underline-offset-4 hover:underline focus:underline border-2 border-transparent focus:border-bitebase-primary",
       },
       size: {
         default: "h-10 px-4 py-2 min-w-[44px]", // 44px minimum touch target

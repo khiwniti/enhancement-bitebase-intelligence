@@ -161,7 +161,7 @@ export const QueryResults: React.FC<QueryResultsProps> = ({
       <ConfidenceIndicator confidence={result.confidence} />
 
       {/* Main Content Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
+      <Tabs defaultValue={activeTab}>
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="chart">Chart</TabsTrigger>
           <TabsTrigger value="data">Data</TabsTrigger>
@@ -183,9 +183,10 @@ export const QueryResults: React.FC<QueryResultsProps> = ({
               </div>
               
               <ChartContainer
-                type={result.chart_config.type as string}
+                id={`query-chart-${result.query_id}`}
+                type={result.chart_config.type as any}
                 data={result.chart_data}
-                options={result.chart_config.options}
+                options={result.chart_config.options as any}
                 className="h-96"
               />
               

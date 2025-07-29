@@ -12,7 +12,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Placeholder translations - these would be loaded from JSON files in a real implementation
+// Enhanced translations for BiteBase Intelligence
 const translations = {
   en: {
     common: {
@@ -32,7 +32,45 @@ const translations = {
       search: 'Search',
       filter: 'Filter',
       export: 'Export',
-      import: 'Import'
+      import: 'Import',
+      help: 'Help',
+      profile: 'Profile',
+      billing: 'Billing'
+    },
+    nav: {
+      dashboard: 'Dashboard',
+      locationIntelligence: 'Location Intelligence',
+      researchAgent: 'AI Research Agent',
+      analytics: 'Analytics',
+      dataSources: 'Data Sources',
+      reports: 'Reports',
+      settings: 'Settings',
+      help: 'Help'
+    },
+    tour: {
+      welcome: 'Welcome to BiteBase! 🍽️',
+      dashboard: 'Market Intelligence Dashboard',
+      mapAnalysis: 'Interactive Location Analysis',
+      aiAssistant: 'AI Market Assistant',
+      reports: 'Generate Detailed Reports',
+      restaurantSetup: 'Restaurant Setup Wizard',
+      skip: 'Skip',
+      next: 'Next',
+      previous: 'Previous',
+      start: 'Start',
+      close: 'Close',
+      dontShowAgain: "Don't show this tour again"
+    },
+    user: {
+      profile: 'Profile',
+      billing: 'Billing',
+      helpSupport: 'Help & Support',
+      signOut: 'Sign out',
+      signingOut: 'Signing out...'
+    },
+    language: {
+      english: 'English',
+      thai: 'ไทย'
     },
     auth: {
       signIn: 'Sign In',
@@ -72,7 +110,45 @@ const translations = {
       search: 'ค้นหา',
       filter: 'กรอง',
       export: 'ส่งออก',
-      import: 'นำเข้า'
+      import: 'นำเข้า',
+      help: 'ความช่วยเหลือ',
+      profile: 'โปรไฟล์',
+      billing: 'การเรียกเก็บเงิน'
+    },
+    nav: {
+      dashboard: 'แดชบอร์ด',
+      locationIntelligence: 'ข้อมูลเชิงพื้นที่',
+      researchAgent: 'เอไอวิจัยตลาด',
+      analytics: 'การวิเคราะห์',
+      dataSources: 'แหล่งข้อมูล',
+      reports: 'รายงาน',
+      settings: 'การตั้งค่า',
+      help: 'ความช่วยเหลือ'
+    },
+    tour: {
+      welcome: 'ยินดีต้อนรับสู่ BiteBase! 🍽️',
+      dashboard: 'แดชบอร์ดข้อมูลตลาด',
+      mapAnalysis: 'การวิเคราะห์พื้นที่แบบโต้ตอบ',
+      aiAssistant: 'ผู้ช่วยเอไอวิเคราะห์ตลาด',
+      reports: 'สร้างรายงานโดยละเอียด',
+      restaurantSetup: 'ตัวช่วยตั้งค่าร้านอาหาร',
+      skip: 'ข้าม',
+      next: 'ถัดไป',
+      previous: 'ก่อนหน้า',
+      start: 'เริ่ม',
+      close: 'ปิด',
+      dontShowAgain: 'ไม่ต้องแสดงทัวร์นี้อีก'
+    },
+    user: {
+      profile: 'โปรไฟล์',
+      billing: 'การเรียกเก็บเงิน',
+      helpSupport: 'ความช่วยเหลือและสนับสนุน',
+      signOut: 'ออกจากระบบ',
+      signingOut: 'กำลังออกจากระบบ...'
+    },
+    language: {
+      english: 'English',
+      thai: 'ไทย'
     },
     auth: {
       signIn: 'เข้าสู่ระบบ',

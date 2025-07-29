@@ -68,7 +68,7 @@ class InsightBase(BaseModel):
 
 class InsightCreate(InsightBase):
     """Schema for creating new insights"""
-    metadata: Optional[Dict[str, Any]] = Field(None, description="Algorithm-specific metadata")
+    algorithm_metadata: Optional[Dict[str, Any]] = Field(None, description="Algorithm-specific metadata")
 
 
 class InsightUpdate(BaseModel):

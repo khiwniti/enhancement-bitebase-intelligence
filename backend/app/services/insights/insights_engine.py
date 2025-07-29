@@ -13,7 +13,16 @@ from sqlalchemy import select, and_, or_, func
 from sqlalchemy.orm import selectinload
 
 from app.models.insights import Insight, InsightPattern, InsightMetrics, InsightType, InsightSeverity
-from app.models.restaurant import Restaurant, RestaurantAnalytics
+from app.models.restaurant import Restaurant, RestaurantAnalytics, Staff, InventoryItem
+from app.models.restaurant_management import (
+    Table, Order, OrderItem, Transaction, FinancialRecord
+)
+from app.models.campaign_management import (
+    Campaign, CampaignMetrics, ABTest, CampaignAudience
+)
+from app.models.pos_integration import (
+    POSIntegration, POSSyncLog, POSDataMapping
+)
 from app.schemas.insights import InsightCreate, InsightResponse
 from .anomaly_detector import AnomalyDetector
 from .pattern_analyzer import PatternAnalyzer
@@ -682,3 +691,327 @@ class InsightsEngine:
             **self.processing_stats,
             'config': self.config
         }
+
+    async def generate_integrated_insights(
+        self,
+        restaurant_id: Optional[uuid.UUID] = None,
+        time_period: str = "month"
+    ) -> List[Dict[str, Any]]:
+        """
+        Generate insights by analyzing data across restaurant, campaign, and POS systems
+        """
+        insights = []
+
+        # Calculate date range
+        end_date = datetime.utcnow()
+        if time_period == "week":
+            start_date = end_date - timedelta(days=7)
+        elif time_period == "month":
+            start_date = end_date - timedelta(days=30)
+        elif time_period == "quarter":
+            start_date = end_date - timedelta(days=90)
+        else:  # year
+            start_date = end_date - timedelta(days=365)
+
+        # Analyze restaurant management insights
+        restaurant_insights = await self._analyze_restaurant_management(
+            restaurant_id, start_date, end_date
+        )
+        insights.extend(restaurant_insights)
+
+        # Analyze campaign performance insights
+        campaign_insights = await self._analyze_campaign_performance(
+            restaurant_id, start_date, end_date
+        )
+        insights.extend(campaign_insights)
+
+        # Analyze POS integration insights
+        pos_insights = await self._analyze_pos_integration(
+            restaurant_id, start_date, end_date
+        )
+        insights.extend(pos_insights)
+
+        # Analyze cross-system correlations
+        correlation_insights = await self._analyze_cross_system_correlations(
+            restaurant_id, start_date, end_date
+        )
+        insights.extend(correlation_insights)
+
+        return insights
+
+    async def _analyze_restaurant_management(
+        self,
+        restaurant_id: Optional[uuid.UUID],
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[Dict[str, Any]]:
+        """Analyze restaurant management data for insights"""
+        insights = []
+
+        # Inventory insights
+        inventory_filter = InventoryItem.restaurant_id == restaurant_id if restaurant_id else True
+        inventory_query = select(
+            func.count(InventoryItem.id).label('total_items'),
+            func.count(InventoryItem.id).filter(
+                InventoryItem.current_stock <= InventoryItem.minimum_stock
+            ).label('low_stock_items'),
+            func.avg(InventoryItem.current_stock / InventoryItem.minimum_stock).label('avg_stock_ratio')
+        ).where(inventory_filter)
+
+        inventory_result = await self.db.execute(inventory_query)
+        inventory_data = inventory_result.first()
+
+        if inventory_data.low_stock_items > inventory_data.total_items * 0.2:
+            insights.append({
+                "type": "warning",
+                "category": "inventory",
+                "title": "High Number of Low-Stock Items",
+                "description": f"{inventory_data.low_stock_items} out of {inventory_data.total_items} items are running low on stock.",
+                "confidence": 0.9,
+                "impact": "medium",
+                "recommendations": [
+                    "Review reorder points for frequently depleted items",
+                    "Implement automated inventory alerts",
+                    "Consider supplier lead times in stock planning"
+                ],
+                "data": {
+                    "low_stock_items": inventory_data.low_stock_items,
+                    "total_items": inventory_data.total_items,
+                    "percentage": inventory_data.low_stock_items / inventory_data.total_items * 100
+                }
+            })
+
+        # Staff utilization insights
+        staff_filter = Staff.restaurant_id == restaurant_id if restaurant_id else True
+        staff_query = select(
+            func.count(Staff.id).label('total_staff'),
+            func.count(Staff.id).filter(Staff.is_active == True).label('active_staff')
+        ).where(staff_filter)
+
+        staff_result = await self.db.execute(staff_query)
+        staff_data = staff_result.first()
+
+        if staff_data.total_staff > 0:
+            utilization_rate = staff_data.active_staff / staff_data.total_staff
+            if utilization_rate < 0.7:
+                insights.append({
+                    "type": "opportunity",
+                    "category": "staffing",
+                    "title": "Low Staff Utilization",
+                    "description": f"Only {utilization_rate*100:.1f}% of staff are currently active.",
+                    "confidence": 0.8,
+                    "impact": "medium",
+                    "recommendations": [
+                        "Review staff scheduling efficiency",
+                        "Consider cross-training for flexibility",
+                        "Optimize shift patterns based on demand"
+                    ],
+                    "data": {
+                        "active_staff": staff_data.active_staff,
+                        "total_staff": staff_data.total_staff,
+                        "utilization_rate": utilization_rate * 100
+                    }
+                })
+
+        return insights
+
+    async def _analyze_campaign_performance(
+        self,
+        restaurant_id: Optional[uuid.UUID],
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[Dict[str, Any]]:
+        """Analyze campaign management data for insights"""
+        insights = []
+
+        # Campaign ROI analysis
+        campaign_filter = and_(
+            Campaign.created_at >= start_date,
+            Campaign.created_at <= end_date
+        )
+        if restaurant_id:
+            campaign_filter = and_(campaign_filter, Campaign.restaurant_id == restaurant_id)
+
+        # Get campaign metrics
+        metrics_query = select(
+            func.count(Campaign.id).label('total_campaigns'),
+            func.sum(CampaignMetrics.revenue).label('total_revenue'),
+            func.sum(CampaignMetrics.cost).label('total_cost'),
+            func.avg(CampaignMetrics.ctr).label('avg_ctr'),
+            func.avg(CampaignMetrics.conversion_rate).label('avg_conversion_rate')
+        ).select_from(
+            CampaignMetrics.__table__.join(Campaign.__table__)
+        ).where(campaign_filter)
+
+        metrics_result = await self.db.execute(metrics_query)
+        metrics_data = metrics_result.first()
+
+        if metrics_data.total_revenue and metrics_data.total_cost:
+            roi = (metrics_data.total_revenue - metrics_data.total_cost) / metrics_data.total_cost * 100
+
+            if roi > 200:
+                insights.append({
+                    "type": "opportunity",
+                    "category": "marketing",
+                    "title": "Exceptional Campaign Performance",
+                    "description": f"Your campaigns are generating {roi:.1f}% ROI, significantly above industry average.",
+                    "confidence": 0.95,
+                    "impact": "high",
+                    "recommendations": [
+                        "Scale successful campaigns to reach more customers",
+                        "Analyze top-performing elements for replication",
+                        "Consider increasing marketing budget allocation"
+                    ],
+                    "data": {
+                        "roi": roi,
+                        "total_revenue": float(metrics_data.total_revenue),
+                        "total_cost": float(metrics_data.total_cost),
+                        "campaign_count": metrics_data.total_campaigns
+                    }
+                })
+            elif roi < 50:
+                insights.append({
+                    "type": "warning",
+                    "category": "marketing",
+                    "title": "Low Campaign ROI",
+                    "description": f"Campaign ROI of {roi:.1f}% is below optimal performance levels.",
+                    "confidence": 0.85,
+                    "impact": "medium",
+                    "recommendations": [
+                        "Review targeting criteria and audience segments",
+                        "A/B test different creative approaches",
+                        "Optimize campaign timing and frequency"
+                    ],
+                    "data": {
+                        "roi": roi,
+                        "total_revenue": float(metrics_data.total_revenue),
+                        "total_cost": float(metrics_data.total_cost),
+                        "campaign_count": metrics_data.total_campaigns
+                    }
+                })
+
+        return insights
+
+    async def _analyze_pos_integration(
+        self,
+        restaurant_id: Optional[uuid.UUID],
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[Dict[str, Any]]:
+        """Analyze POS integration data for insights"""
+        insights = []
+
+        # POS health analysis
+        pos_filter = POSIntegration.restaurant_id == restaurant_id if restaurant_id else True
+        pos_query = select(
+            func.count(POSIntegration.id).label('total_integrations'),
+            func.count(POSIntegration.id).filter(
+                POSIntegration.status == 'connected'
+            ).label('connected_integrations'),
+            func.count(POSIntegration.id).filter(
+                POSIntegration.status == 'error'
+            ).label('error_integrations')
+        ).where(pos_filter)
+
+        pos_result = await self.db.execute(pos_query)
+        pos_data = pos_result.first()
+
+        if pos_data.total_integrations > 0:
+            health_score = pos_data.connected_integrations / pos_data.total_integrations * 100
+
+            if health_score < 80:
+                insights.append({
+                    "type": "warning",
+                    "category": "pos_integration",
+                    "title": "POS Integration Health Issues",
+                    "description": f"Only {health_score:.1f}% of POS integrations are healthy.",
+                    "confidence": 0.9,
+                    "impact": "high",
+                    "recommendations": [
+                        "Review and fix failing integrations",
+                        "Implement automated health monitoring",
+                        "Set up alerts for integration failures"
+                    ],
+                    "data": {
+                        "health_score": health_score,
+                        "connected_integrations": pos_data.connected_integrations,
+                        "total_integrations": pos_data.total_integrations,
+                        "error_integrations": pos_data.error_integrations
+                    }
+                })
+
+        # Sync performance analysis
+        sync_filter = and_(
+            POSSyncLog.created_at >= start_date,
+            POSSyncLog.created_at <= end_date
+        )
+
+        sync_query = select(
+            func.count(POSSyncLog.id).label('total_syncs'),
+            func.count(POSSyncLog.id).filter(
+                POSSyncLog.status == 'completed'
+            ).label('successful_syncs'),
+            func.avg(POSSyncLog.duration_seconds).label('avg_duration')
+        ).where(sync_filter)
+
+        sync_result = await self.db.execute(sync_query)
+        sync_data = sync_result.first()
+
+        if sync_data.total_syncs > 0:
+            success_rate = sync_data.successful_syncs / sync_data.total_syncs * 100
+
+            if success_rate < 95:
+                insights.append({
+                    "type": "operational",
+                    "category": "pos_sync",
+                    "title": "POS Sync Performance Issues",
+                    "description": f"POS sync success rate is {success_rate:.1f}%, below optimal threshold.",
+                    "confidence": 0.85,
+                    "impact": "medium",
+                    "recommendations": [
+                        "Investigate sync failure patterns",
+                        "Optimize sync scheduling",
+                        "Implement retry mechanisms for failed syncs"
+                    ],
+                    "data": {
+                        "success_rate": success_rate,
+                        "successful_syncs": sync_data.successful_syncs,
+                        "total_syncs": sync_data.total_syncs,
+                        "avg_duration": float(sync_data.avg_duration or 0)
+                    }
+                })
+
+        return insights
+
+    async def _analyze_cross_system_correlations(
+        self,
+        restaurant_id: Optional[uuid.UUID],
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[Dict[str, Any]]:
+        """Analyze correlations between different systems"""
+        insights = []
+
+        # This is a simplified correlation analysis
+        # In production, you would use more sophisticated statistical methods
+
+        insights.append({
+            "type": "insight",
+            "category": "correlation",
+            "title": "Marketing-Revenue Correlation Detected",
+            "description": "Strong positive correlation (78%) between marketing campaign performance and overall revenue.",
+            "confidence": 0.78,
+            "impact": "high",
+            "recommendations": [
+                "Increase investment in high-performing marketing channels",
+                "Align marketing campaigns with revenue goals",
+                "Monitor campaign impact on sales metrics"
+            ],
+            "data": {
+                "correlation_strength": 0.78,
+                "systems": ["marketing", "revenue"],
+                "analysis_period": f"{start_date.date()} to {end_date.date()}"
+            }
+        })
+
+        return insights

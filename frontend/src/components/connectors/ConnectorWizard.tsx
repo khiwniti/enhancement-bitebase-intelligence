@@ -30,6 +30,9 @@ import {
   type ConnectorTemplate
 } from './types/connectorTypes'
 import { useDataConnectors } from './hooks/useDataConnectors'
+import { ConnectorTypeSelector } from './components/ConnectorTypeSelector'
+import { ConnectionForm } from './components/ConnectionForm'
+import { TestConnection } from './components/TestConnection'
 
 interface ConnectorWizardProps {
   onComplete?: (connectorId: string) => void
@@ -201,6 +204,7 @@ export function ConnectorWizard({
     setSelectedTemplate(template)
     setFormData({
       ...template.defaultConfig,
+      port: template.defaultConfig.port ? String(template.defaultConfig.port) : '',
       name: '',
       description: '',
       host: '',
@@ -253,7 +257,7 @@ export function ConnectorWizard({
         database: formData.database,
         username: formData.username,
         password: formData.password,
-        auth_type: formData.auth_type || selectedTemplate.defaultConfig.auth_type,
+        auth_type: formData.auth_type || selectedTemplate.defaultConfig.auth_type || AuthenticationType.BASIC,
         api_key: formData.api_key,
         token: formData.token,
         pool_size: formData.pool_size || selectedTemplate.defaultConfig.pool_size || 5,
@@ -297,10 +301,9 @@ export function ConnectorWizard({
       case 2:
         return selectedTemplate && formData ? (
           <TestConnection
-            template={selectedTemplate}
+            selectedTemplate={selectedTemplate}
             formData={formData}
             onTestResult={handleTestResult}
-            testResult={testResult}
           />
         ) : null
       default:

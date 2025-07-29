@@ -21,7 +21,7 @@ class Dashboard(Base):
     description = Column(Text, nullable=True)
     
     # User ownership
-    user_id = Column(String(36), nullable=False, index=True)  # User who created the dashboard
+    user_id = Column(String(36), ForeignKey("users.id"), nullable=False, index=True)  # User who created the dashboard
     author = Column(String(255), nullable=False)  # Author name for display
     
     # Dashboard configuration
@@ -46,6 +46,7 @@ class Dashboard(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
+    owner = relationship("User", back_populates="dashboards")
     widgets = relationship("DashboardWidget", back_populates="dashboard", cascade="all, delete-orphan")
     shares = relationship("DashboardShare", back_populates="dashboard", cascade="all, delete-orphan")
 

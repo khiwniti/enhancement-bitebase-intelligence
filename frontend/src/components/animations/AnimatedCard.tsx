@@ -10,8 +10,8 @@ import {
 } from '@/lib/animations'
 import { cn } from '@/lib/utils'
 
-interface AnimatedCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'menu' | 'restaurant' | 'dashboard' | 'plate' | 'feature'
+interface AnimatedCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
+  variant?: 'default' | 'menu' | 'restaurant' | 'dashboard' | 'plate'
   index?: number
   delay?: number
   isHoverable?: boolean
@@ -272,7 +272,7 @@ export function SimpleAnimatedCard({
   children: React.ReactNode
   delay?: number
   className?: string
-} & React.HTMLAttributes<HTMLDivElement>) {
+} & Omit<React.HTMLAttributes<HTMLDivElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onDragStart' | 'onDragEnd' | 'onDrag'>) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

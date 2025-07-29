@@ -215,7 +215,7 @@ const UserAvatar: React.FC<{
           transition={{ duration: 0.2 }}
         >
           <AnimatedCard
-            variant="tooltip"
+            variant="default"
             className="bg-gradient-to-r from-gray-900 to-gray-800 text-white text-xs rounded-lg py-2 px-3 shadow-xl whitespace-nowrap border border-gray-700"
           >
             <motion.div 
@@ -303,7 +303,7 @@ const CollaboratorsList: React.FC<{
             whileHover={{ y: 0, opacity: 1 }}
           >
             <AnimatedCard
-              variant="tooltip"
+              variant="default"
               className="bg-gradient-to-r from-gray-900 to-gray-800 text-white text-xs rounded-lg py-3 px-4 shadow-xl whitespace-nowrap max-w-xs border border-gray-700"
             >
               <motion.div 
@@ -487,7 +487,7 @@ export const PresenceIndicators: React.FC<PresenceIndicatorsProps> = ({
             transition={{ duration: 0.3 }}
           >
             <AnimatedCard
-              variant="presence"
+              variant="default"
               className="flex items-center gap-3 bg-gradient-to-r from-white to-bitebase-primary/5 shadow-xl border-2 border-bitebase-primary/20 px-4 py-3"
             >
               <motion.div

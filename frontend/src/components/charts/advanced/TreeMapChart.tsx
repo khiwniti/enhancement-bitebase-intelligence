@@ -24,7 +24,7 @@ interface TreeMapChartProps extends Omit<BaseChartProps, 'type' | 'data'> {
   }
   colorScheme?: 'sequential' | 'categorical' | 'diverging'
   showLabels?: boolean
-  labelPosition?: 'center' | 'top' | 'bottom'
+  labelPosition?: 'center' | 'left' | 'right'
   groupSpacing?: number
   borderRadius?: number
 }
@@ -60,10 +60,10 @@ export const TreeMapChart = forwardRef<ChartRef, TreeMapChartProps>(({
           color: '#f8fafc',
           font: {
             size: 12,
-            weight: 'normal'
+            weight: 'normal' as const
           },
-          formatter: (ctx: Record<string, unknown>) => {
-            const data = ctx.parsed._data
+          formatter: (ctx: any) => {
+            const data = (ctx.parsed as any)?._data
             return showLabels ? `${data.label}\n${data.value?.toLocaleString() || ''}` : ''
           }
         }
@@ -89,11 +89,11 @@ export const TreeMapChart = forwardRef<ChartRef, TreeMapChartProps>(({
         displayColors: false,
         callbacks: {
           title: (context: Record<string, unknown>[]) => {
-            const data = context[0]?.parsed?._data
+            const data = (context[0]?.parsed as any)?._data
             return data?.label || ''
           },
           label: (context: Record<string, unknown>) => {
-            const data = context.parsed._data
+            const data = (context.parsed as any)?._data
             const value = data.value
             const percentage = data.percentage
             
@@ -119,10 +119,10 @@ export const TreeMapChart = forwardRef<ChartRef, TreeMapChartProps>(({
     },
     interaction: {
       intersect: true,
-      mode: 'point'
+      mode: 'point' as const
     },
     onHover: (event: Record<string, unknown>, elements: Record<string, unknown>[]) => {
-      const canvas = event.native?.target
+      const canvas = (event.native as any)?.target
       if (canvas) {
         canvas.style.cursor = elements.length > 0 ? 'pointer' : 'default'
       }
@@ -134,8 +134,8 @@ export const TreeMapChart = forwardRef<ChartRef, TreeMapChartProps>(({
     <BaseChart
       ref={ref}
       type="treemap"
-      data={treeMapData}
-      options={treeMapOptions}
+      data={treeMapData as any}
+      options={treeMapOptions as any}
       {...props}
     />
   )

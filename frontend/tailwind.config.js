@@ -8,25 +8,32 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['DB Helvetica', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        primary: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        secondary: ['DB Helvetica', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // BiteBase Brand Colors (Primary Identity)
+        // BiteBase Brand Colors (Corporate Identity 2024)
         bitebase: {
-          primary: '#74C365',      // Main BiteBase green
-          'primary-dark': '#5fa854',
+          primary: '#74C365',      // Mantis Green - primary brand color
+          'primary-hover': '#68B359',
           'primary-light': '#e8f5e5',
+          accent: '#E23D28',       // Chili Red - accent color
+          'accent-hover': '#D12E18',
+          'accent-light': '#f8e6e3',
+          secondary: '#F4C431',    // Saffron - secondary color
+          'secondary-light': '#fef7e0',
           50: '#f0f9ee',
           100: '#e8f5e5',
           200: '#c8e6c0',
           300: '#a8d79b',
           400: '#8ed080',
           500: '#74C365',
-          600: '#5fa854',
-          700: '#4a8d43',
-          800: '#357232',
-          900: '#205721',
+          600: '#68B359',
+          700: '#5fa854',
+          800: '#4a8d43',
+          900: '#357232',
         },
 
         // Food Delivery Theme Colors
@@ -55,40 +62,40 @@ module.exports = {
           mexican: '#F4C431',
         },
         
-        // Dark Theme Base Colors
-        background: '#020617',     // Almost black background
-        foreground: '#f8fafc',     // Light text
+        // Light Theme Base Colors (Corporate Identity 2024)
+        background: '#F8F9FA',     // Light gray background
+        foreground: '#2D2D2D',     // Dark text
         card: {
-          DEFAULT: '#0f172a',      // Dark navy cards
-          foreground: '#f8fafc',   // Light text on cards
+          DEFAULT: '#FFFFFF',      // White cards
+          foreground: '#2D2D2D',   // Dark text on cards
         },
         popover: {
-          DEFAULT: '#1e293b',      // Popover background
-          foreground: '#f8fafc',   // Popover text
+          DEFAULT: '#FFFFFF',      // White popover background
+          foreground: '#2D2D2D',   // Dark popover text
         },
         primary: {
-          DEFAULT: '#74C365',      // BiteBase green primary
-          foreground: '#ffffff',   // White text on green
+          DEFAULT: '#74C365',      // Mantis Green primary
+          foreground: '#FFFFFF',   // White text on green
         },
         secondary: {
-          DEFAULT: '#1e293b',      // Dark secondary
-          foreground: '#cbd5e1',   // Light gray text
+          DEFAULT: '#F8F9FA',      // Light secondary
+          foreground: '#2D2D2D',   // Dark text
         },
         muted: {
-          DEFAULT: '#334155',      // Muted background
-          foreground: '#94a3b8',   // Muted text
+          DEFAULT: '#F8F9FA',      // Light muted background
+          foreground: '#6C757D',   // Gray muted text
         },
         accent: {
-          DEFAULT: '#00ff88',      // Neon green accent
-          foreground: '#020617',   // Dark text on accent
+          DEFAULT: '#E23D28',      // Chili Red accent
+          foreground: '#FFFFFF',   // White text on accent
         },
         destructive: {
-          DEFAULT: '#ef4444',      // Red for destructive actions
-          foreground: '#ffffff',   // White text on red
+          DEFAULT: '#E74C3C',      // Red for destructive actions
+          foreground: '#FFFFFF',   // White text on red
         },
-        border: '#334155',         // Border color
-        input: '#1e293b',          // Input background
-        ring: '#22c55e',           // Focus ring color
+        border: '#E9ECEF',         // Light border color
+        input: '#FFFFFF',          // White input background
+        ring: '#74C365',           // Mantis Green focus ring
         
         // Status Colors for Dark Theme
         success: {
@@ -124,16 +131,16 @@ module.exports = {
           900: '#1e3a8a',
         },
         
-        // Chart Colors with Food Theme
+        // Chart Colors (Corporate Identity 2024)
         chart: {
-          1: '#74C365',  // BiteBase Green
-          2: '#FF6B35',  // Food Orange
-          3: '#E23D28',  // Food Red
-          4: '#F4C431',  // Food Yellow
-          5: '#8B4513',  // Food Brown
-          6: '#3b82f6',  // Blue
-          7: '#8b5cf6',  // Purple
-          8: '#FF69B4',  // Pink (desserts)
+          1: '#74C365',  // Mantis Green - primary data series
+          2: '#E23D28',  // Chili Red - secondary/contrast data
+          3: '#F4C431',  // Saffron - tertiary/accent data
+          4: '#2196F3',  // Info Blue - additional data series
+          5: '#6C757D',  // Neutral - neutral data and baselines
+          6: '#FF6B35',  // Legacy Orange (compatibility)
+          7: '#8B4513',  // Brown (food categories)
+          8: '#FF69B4',  // Pink (special categories)
         },
       },
       
@@ -230,11 +237,13 @@ module.exports = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'grid-pattern': 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
         'dot-pattern': 'radial-gradient(circle, rgba(255,255,255,.1) 1px, transparent 1px)',
-        'food-warm': 'linear-gradient(135deg, #FF6B35 0%, #E23D28 100%)',
-        'food-fresh': 'linear-gradient(135deg, #74C365 0%, #F4C431 100%)',
-        'food-premium': 'linear-gradient(135deg, #5fa854 0%, #8B4513 100%)',
-        'delivery-hero': 'linear-gradient(135deg, #74C365 0%, #FF6B35 50%, #F4C431 100%)',
-        'kitchen-vibes': 'linear-gradient(45deg, #8B4513 0%, #FF6B35 25%, #E23D28 50%, #F4C431 75%, #74C365 100%)',
+        'brand-primary': 'linear-gradient(135deg, #74C365 0%, #68B359 100%)',
+        'brand-accent': 'linear-gradient(135deg, #E23D28 0%, #D12E18 100%)',
+        'brand-warm': 'linear-gradient(135deg, #E23D28 0%, #F4C431 100%)',
+        'brand-fresh': 'linear-gradient(135deg, #74C365 0%, #F4C431 100%)',
+        'brand-hero': 'linear-gradient(135deg, #74C365 0%, #E23D28 50%, #F4C431 100%)',
+        'food-warm': 'linear-gradient(135deg, #FF6B35 0%, #E23D28 100%)', // Legacy compatibility
+        'food-fresh': 'linear-gradient(135deg, #74C365 0%, #F4C431 100%)', // Legacy compatibility
       },
       
       backdropBlur: {

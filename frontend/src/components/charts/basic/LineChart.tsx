@@ -30,7 +30,7 @@ export const LineChart = forwardRef<ChartRef, LineChartProps>(({
   // Prepare line chart specific data
   const lineData = {
     ...data,
-    datasets: data.datasets?.map((dataset: Record<string, unknown>) => ({
+    datasets: data.datasets?.map((dataset: any) => ({
       ...dataset,
       tension: smooth ? tension : 0,
       pointRadius: showPoints ? (dataset.pointRadius || 4) : 0,
@@ -72,8 +72,8 @@ export const LineChart = forwardRef<ChartRef, LineChartProps>(({
             return context[0]?.label || ''
           },
           label: (context: Record<string, unknown>) => {
-            const label = context.dataset.label || ''
-            const value = context.parsed.y
+            const label = (context.dataset as any)?.label || ''
+            const value = (context.parsed as any)?.y
             return `${label}: ${typeof value === 'number' ? value.toLocaleString() : value}`
           }
         }
@@ -125,7 +125,7 @@ export const LineChart = forwardRef<ChartRef, LineChartProps>(({
       ref={ref}
       type="line"
       data={lineData}
-      options={lineOptions}
+      options={lineOptions as any}
       {...props}
     />
   )

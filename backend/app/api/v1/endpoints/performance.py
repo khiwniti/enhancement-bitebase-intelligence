@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 
 from app.services.performance.caching_service import caching_service
 from app.services.performance.query_optimizer import query_optimizer
-from app.core.database import get_database
+from app.core.database import get_db
 
 router = APIRouter()
 

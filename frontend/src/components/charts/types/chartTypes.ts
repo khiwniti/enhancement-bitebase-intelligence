@@ -84,6 +84,7 @@ export interface BaseChartProps {
   onDataClick?: (event: any, elements: any[]) => void
   onHover?: (event: any, elements: any[]) => void
   onResize?: (chart: ChartJS, size: { width: number; height: number }) => void
+  children?: React.ReactNode
 }
 
 // Advanced Chart Data Structures
@@ -160,7 +161,7 @@ export interface TimelineData {
 // Chart Registry Types
 export interface ChartRegistryEntry {
   type: ChartType
-  component: React.ComponentType<any>
+  component: React.ComponentType<any> | null
   isAdvanced: boolean
   dependencies?: string[]
   performanceWeight: number

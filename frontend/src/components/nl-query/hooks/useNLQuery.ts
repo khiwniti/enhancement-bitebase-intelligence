@@ -116,7 +116,7 @@ export const useNLQuery = (): UseNLQueryReturn => {
         throw new Error(response.error)
       }
 
-      return response.data
+      return response.data as Record<string, unknown>
     } catch (err: unknown) {
       throw new Error((err as Error).message || 'Failed to validate query')
     }

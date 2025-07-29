@@ -23,7 +23,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
   const [transcript, setTranscript] = useState('')
   const [error, setError] = useState<string | null>(null)
   
-  const recognitionRef = useRef<SpeechRecognition | null>(null)
+  const recognitionRef = useRef<any>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Default configuration
@@ -37,7 +37,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
 
   // Check for speech recognition support
   useEffect(() => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
     setIsSupported(!!SpeechRecognition)
     
     if (SpeechRecognition) {
@@ -56,7 +56,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
     const recognition = recognitionRef.current
     if (!recognition) return
 
-    const handleResult = (event: SpeechRecognitionEvent) => {
+    const handleResult = (event: any) => {
       let finalTranscript = ''
       let interimTranscript = ''
 
@@ -81,7 +81,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
       }
     }
 
-    const handleError = (event: SpeechRecognitionErrorEvent) => {
+    const handleError = (event: any) => {
       console.error('Speech recognition error:', event.error)
       
       let errorMessage = 'Speech recognition failed'
@@ -127,7 +127,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
       recognition.removeEventListener('start', handleStart)
       recognition.removeEventListener('end', handleEnd)
     }
-  }, [onTranscript, stopListening])
+  }, [onTranscript])
 
   // Start listening
   const startListening = useCallback(() => {
@@ -139,7 +139,18 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
       
       // Set timeout to stop listening after 30 seconds
       timeoutRef.current = setTimeout(() => {
-        stopListening()
+        if (recognitionRef.current && isListening) {
+          recognitionRef.current.stop()
+        }
+
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+          timeoutRef.current = null
+        }
+
+        setIsListening(false)
+        onActiveChange(false)
+        setTranscript('')
       }, 30000)
     } catch (error) {
       console.error('Failed to start speech recognition:', error)
@@ -161,7 +172,7 @@ export const VoiceInput: React.FC<VoiceInputProps> = ({
     setIsListening(false)
     onActiveChange(false)
     setTranscript('')
-  }, [isListening, onActiveChange, stopListening])
+  }, [isListening, onActiveChange])
 
   // Toggle listening
   const toggleListening = useCallback(() => {

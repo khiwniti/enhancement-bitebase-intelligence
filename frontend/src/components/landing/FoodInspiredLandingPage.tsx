@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { 
   ChevronRight, 
@@ -225,14 +226,15 @@ export default function FoodInspiredLandingPage() {
                 ))}
               </div>
               
-              <AnimatedButton
-                variant="primary"
-                size="md"
-                href="/dashboard"
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
-              >
-                Get Started
-              </AnimatedButton>
+              <Link href="/dashboard">
+                <AnimatedButton
+                  variant="primary"
+                  size="md"
+                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                >
+                  Get Started
+                </AnimatedButton>
+              </Link>
             </div>
           </div>
         </div>
@@ -289,15 +291,16 @@ export default function FoodInspiredLandingPage() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <AnimatedButton
-              variant="primary"
-              size="lg"
-              href="/dashboard"
-              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 text-lg font-semibold shadow-lg shadow-orange-500/25"
-            >
-              Start Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </AnimatedButton>
+            <Link href="/dashboard">
+              <AnimatedButton
+                variant="primary"
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 text-lg font-semibold shadow-lg shadow-orange-500/25"
+              >
+                Start Free Trial
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </AnimatedButton>
+            </Link>
             
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -416,15 +419,16 @@ export default function FoodInspiredLandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <AnimatedButton
-              variant="primary"
-              size="lg"
-              href="/dashboard"
-              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 text-lg font-semibold shadow-lg shadow-orange-500/25"
-            >
-              <Sparkles className="mr-2 h-5 w-5" />
-              Get Started Free
-            </AnimatedButton>
+            <Link href="/dashboard">
+              <AnimatedButton
+                variant="primary"
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 text-lg font-semibold shadow-lg shadow-orange-500/25"
+              >
+                <Sparkles className="mr-2 h-5 w-5" />
+                Get Started Free
+              </AnimatedButton>
+            </Link>
           </motion.div>
         </div>
       </section>

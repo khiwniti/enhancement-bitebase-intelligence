@@ -26,11 +26,11 @@ import { QueryResults } from './components/QueryResults'
 import { QueryHistory } from './components/QueryHistory'
 import { ConfidenceIndicator } from './components/ConfidenceIndicator'
 import { VoiceInput } from './components/VoiceInput'
-import type { NLQueryRequest, NLQueryResponse } from './types/nlQueryTypes'
+import type { NLQueryRequest, NLQueryResponse, ChartConfig } from './types/nlQueryTypes'
 
 interface NaturalLanguageQueryInterfaceProps {
   onChartGenerated?: (chartData: Record<string, unknown>) => void
-  onAddToDashboard?: (chartConfig: Record<string, unknown>) => void
+  onAddToDashboard?: (chartConfig: ChartConfig) => void
   className?: string
 }
 
@@ -79,8 +79,8 @@ export const NaturalLanguageQueryInterface: React.FC<NaturalLanguageQueryInterfa
 
       const response = await processQuery(request)
       
-      if (response && onChartGenerated) {
-        onChartGenerated(response.chart_data)
+      if (response && response.chart_data && onChartGenerated) {
+        onChartGenerated(response.chart_data as unknown as Record<string, unknown>)
       }
       
       // Clear query on successful submission

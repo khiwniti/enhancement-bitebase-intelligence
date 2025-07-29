@@ -25,7 +25,7 @@ import {
   Users, 
   MessageCircle, 
   History, 
-  Sync, 
+  RefreshCw as Sync, 
   Wifi, 
   WifiOff,
   ChefHat,
@@ -53,11 +53,22 @@ interface CursorPosition {
   selection?: any
 }
 
+interface Comment {
+  id: string
+  elementId: string
+  text: string
+  position: { x: number; y: number }
+  userId: string
+  username: string
+  timestamp: string
+  resolved?: boolean
+}
+
 interface UserPresence {
   user_id: string
   username: string
   avatar_url?: string
-  status: string
+  status: 'online' | 'away' | 'offline' | 'editing'
   cursor_position?: CursorPosition
   current_action?: string
   active_element?: string
@@ -196,12 +207,12 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
   }, [isConnected, submitOperation, sessionState])
 
   // Handle adding comments
-  const handleAddComment = useCallback(async (elementId: string, text: string, position?: { x: number, y: number }) => {
+  const handleAddComment = useCallback(async (comment: Omit<Comment, 'id' | 'timestamp'>) => {
     try {
       await addComment({
-        elementId,
-        text,
-        position: position || { x: 0, y: 0 },
+        elementId: comment.elementId,
+        text: comment.text,
+        position: comment.position || { x: 0, y: 0 },
         userId,
         username
       })
@@ -236,7 +247,7 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
         transition={{ delay: 0.2 }}
       >
         <AnimatedCard
-          variant="collaboration"
+          variant="default"
           className={cn(
             "flex items-center gap-3 px-4 py-3 shadow-xl text-sm font-medium border-2",
             isConnected 
@@ -426,7 +437,7 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
         <CollaborationCursors
           participants={participants}
           currentUserId={userId}
-          containerRef={containerRef}
+          containerRef={containerRef as React.RefObject<HTMLElement>}
         />
       )}
 
@@ -486,7 +497,7 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
             transition={{ duration: 0.3 }}
           >
             <AnimatedCard 
-              variant="operation"
+              variant="default"
               className="bg-gradient-to-r from-bitebase-primary/10 to-blue-100 text-bitebase-primary px-4 py-3 shadow-xl border border-bitebase-primary/30"
             >
               <div className="flex items-center gap-3">
@@ -523,7 +534,7 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
             transition={{ duration: 0.3 }}
           >
             <AnimatedCard 
-              variant="status"
+              variant="default"
               className="bg-gradient-to-r from-food-yellow/10 to-yellow-100 text-food-yellow px-6 py-4 shadow-xl border border-food-yellow/30"
             >
               <div className="flex items-center gap-3">
@@ -579,7 +590,7 @@ export const RealtimeCollaboration: React.FC<RealtimeCollaborationProps> = ({
           👨‍🍳
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   )
 }
 

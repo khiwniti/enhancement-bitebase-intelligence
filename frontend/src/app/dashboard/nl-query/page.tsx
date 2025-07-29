@@ -42,7 +42,7 @@ export default function NaturalLanguageQueryPage() {
   }
 
   // Handle adding chart to dashboard
-  const handleAddToDashboard = (chartConfig: ChartConfig) => {
+  const handleAddToDashboard = (chartConfig: any) => {
     // Navigate to dashboard builder with chart config
     const chartData = generatedCharts.find(chart => chart.config.title === chartConfig.title)
     if (chartData) {
@@ -51,7 +51,7 @@ export default function NaturalLanguageQueryPage() {
         config: chartConfig,
         data: chartData.data
       }))
-      
+
       // Navigate to dashboard builder
       router.push('/dashboard/builder')
     }
@@ -132,7 +132,7 @@ export default function NaturalLanguageQueryPage() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handleAddToDashboard(chart.config)}
+                            onClick={() => handleAddToDashboard(chart.config as unknown as Record<string, unknown>)}
                             className="text-xs"
                           >
                             Add to Dashboard
@@ -152,7 +152,7 @@ export default function NaturalLanguageQueryPage() {
                         <ChartContainer
                           id={chart.id}
                           type={chart.config.type as any}
-                          data={chart.data}
+                          data={chart.data as any}
                           options={{
                             ...chart.config.options,
                             maintainAspectRatio: false,
@@ -162,7 +162,7 @@ export default function NaturalLanguageQueryPage() {
                                 display: false
                               }
                             }
-                          }}
+                          } as any}
                           className="h-full"
                         />
                       </div>

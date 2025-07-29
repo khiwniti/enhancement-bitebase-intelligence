@@ -5,7 +5,7 @@ import { motion, MotionProps } from 'framer-motion'
 import { deliveryVariants, gestureAnimations } from '@/lib/animations'
 import { cn } from '@/lib/utils'
 
-interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface AnimatedButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
   variant?: 'primary' | 'secondary' | 'delivery' | 'food' | 'ghost'
   size?: 'sm' | 'md' | 'lg' | 'xl'
   isLoading?: boolean

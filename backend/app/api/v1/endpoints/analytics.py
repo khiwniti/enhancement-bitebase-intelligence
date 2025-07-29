@@ -14,6 +14,7 @@ import uuid
 from app.core.database import get_db
 from app.models.restaurant import Restaurant, RestaurantAnalytics, MenuItem, RestaurantReview
 from app.services.analytics.analytics_service import AnalyticsService
+from app.services.analytics.integrated_analytics_service import IntegratedAnalyticsService
 
 router = APIRouter()
 
@@ -56,6 +57,37 @@ async def get_analytics_dashboard(
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Dashboard generation failed: {str(e)}")
+
+
+@router.get("/integrated-dashboard")
+async def get_integrated_analytics_dashboard(
+    restaurant_id: Optional[uuid.UUID] = Query(None, description="Specific restaurant ID"),
+    time_period: str = Query("month", pattern="^(week|month|quarter|year)$", description="Analysis time period"),
+    include_predictions: bool = Query(True, description="Include predictive analytics"),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Get integrated analytics dashboard combining restaurant, campaign, and POS data
+    """
+    try:
+        integrated_service = IntegratedAnalyticsService(db)
+
+        dashboard_data = await integrated_service.get_comprehensive_dashboard(
+            restaurant_id=restaurant_id,
+            time_period=time_period,
+            include_predictions=include_predictions
+        )
+
+        return {
+            "dashboard_type": "integrated",
+            "time_period": time_period,
+            "restaurant_id": str(restaurant_id) if restaurant_id else None,
+            "data": dashboard_data,
+            "generated_at": datetime.utcnow().isoformat()
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Integrated dashboard generation failed: {str(e)}")
 
 
 @router.get("/performance")
