@@ -27,7 +27,9 @@ import {
   Brain,
   Database,
   PieChart,
-  Activity
+  Activity,
+  ChefHat,
+  Megaphone
 } from 'lucide-react'
 import BiteBaseLogo from '../BiteBaseLogo'
 import { NotificationCenter } from '../notifications/NotificationCenter'
@@ -37,6 +39,7 @@ import { UserMenu } from '../auth/UserMenu'
 import { LanguageSwitcher } from '../LanguageSwitcher'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils';
+import PersistentAIWidget from '@/components/ai/PersistentAIWidget';
 
 // Type definitions for navigation
 interface NavigationItem {
@@ -55,31 +58,44 @@ interface NavigationSection {
 // Function to generate navigation structure with translations
 const getNavigationStructure = (t: (key: string) => string): NavigationSection[] => [
   {
-    name: t('nav.dashboard'),
+    name: "Workspace",
     items: [
       {
-        name: t('nav.dashboard'),
-        href: "/dashboard",
-        icon: LayoutDashboard,
-        description: "Main dashboard overview"
+        name: "Workspace Home",
+        href: "/workspace",
+        icon: Home,
+        description: "Your intelligent workspace portal"
       },
     ]
   },
   {
-    name: "Intelligence",
+    name: "Core Intelligence",
     items: [
       {
-        name: t('nav.locationIntelligence'),
-        href: "/location-intelligence",
-        icon: MapPin,
-        description: "Interactive maps and location analysis"
+        name: "AI Research Agent",
+        href: "/research-agent/enhanced",
+        icon: Brain,
+        description: "Natural language market research",
+        badge: "AI"
       },
       {
-        name: t('nav.researchAgent'),
-        href: "/research-agent",
-        icon: Brain,
-        description: "AI-powered market research"
+        name: "Location Studio",
+        href: "/location-intelligence/studio",
+        icon: MapPin,
+        description: "Interactive mapping and analysis"
       },
+      {
+        name: "Report Builder",
+        href: "/reports/builder",
+        icon: FileText,
+        description: "Drag & drop report creation",
+        badge: "New"
+      },
+    ]
+  },
+  {
+    name: "Business Intelligence",
+    items: [
       {
         name: t('nav.analytics'),
         href: "/analytics",
@@ -87,10 +103,56 @@ const getNavigationStructure = (t: (key: string) => string): NavigationSection[]
         description: "Business analytics and insights"
       },
       {
+        name: "Analytics Dashboard",
+        href: "/dashboard",
+        icon: LayoutDashboard,
+        description: "KPIs and performance metrics"
+      },
+      {
         name: "Integrated Analytics",
         href: "/analytics/integrated",
         icon: Activity,
         description: "Comprehensive business intelligence across all systems"
+      },
+    ]
+  },
+  {
+    name: "4P Framework",
+    items: [
+      {
+        name: "Product Intelligence",
+        href: "/product-intelligence",
+        icon: ChefHat,
+        description: "Menu engineering, food cost analysis, and profit optimization"
+      },
+      {
+        name: "Place Intelligence",
+        href: "/place-intelligence",
+        icon: MapPin,
+        description: "Customer density, site selection, and market analysis"
+      },
+      {
+        name: "Price Intelligence",
+        href: "/price-intelligence",
+        icon: DollarSign,
+        description: "Revenue forecasting, elasticity, and pricing strategy"
+      },
+      {
+        name: "Promotion Intelligence",
+        href: "/promotion-intelligence",
+        icon: Megaphone,
+        description: "Customer segmentation, loyalty analytics, and campaigns"
+      },
+    ]
+  },
+  {
+    name: "AI Intelligence",
+    items: [
+      {
+        name: "AI Business Insights",
+        href: "/ai-insights",
+        icon: Brain,
+        description: "Machine learning-powered recommendations and predictions"
       },
     ]
   },
@@ -179,8 +241,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   // Check if current path matches navigation item
   const isActiveRoute = (href: string) => {
+    if (href === '/workspace') {
+      return pathname === '/workspace' || pathname === '/';
+    }
     if (href === '/dashboard') {
-      return pathname === '/dashboard' || pathname === '/';
+      return pathname === '/dashboard';
     }
     return pathname.startsWith(href);
   };
@@ -220,10 +285,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
                       key={item.name}
                       href={item.href}
                       data-tour={
+                        item.href === '/workspace' ? 'workspace' :
+                        item.href === '/location-intelligence/studio' ? 'map-analysis' :
+                        item.href === '/research-agent/enhanced' ? 'ai-chat' :
+                        item.href === '/reports/builder' ? 'reports' :
                         item.href === '/dashboard' ? 'dashboard' :
-                        item.href === '/location-intelligence' ? 'map-analysis' :
-                        item.href === '/research-agent' ? 'ai-chat' :
-                        item.href === '/reports' ? 'reports' :
                         undefined
                       }
                       className={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors font-secondary ${
@@ -334,6 +400,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
         onComplete={completeTour}
         isFirstTimeUser={isFirstTimeUser}
       />
+
+      {/* Persistent AI Widget */}
+      <PersistentAIWidget />
     </div>
   );
 }

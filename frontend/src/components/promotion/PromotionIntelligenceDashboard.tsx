@@ -25,6 +25,7 @@ import {
   MessageSquare
 } from 'lucide-react'
 import { apiClient } from '@/lib/api-client'
+import { CustomerSegmentationDashboard } from './CustomerSegmentationDashboard'
 
 interface CustomerSegment {
   segment_name: string
@@ -437,20 +438,7 @@ export function PromotionIntelligenceDashboard() {
             </TabsContent>
 
             <TabsContent value="customer-segments">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Customer Segmentation Analysis</CardTitle>
-                  <CardDescription>
-                    Detailed customer segments with characteristics and recommendations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Detailed segmentation analysis coming soon</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <CustomerSegmentationDashboard restaurantId={selectedRestaurant} />
             </TabsContent>
 
             <TabsContent value="campaigns">

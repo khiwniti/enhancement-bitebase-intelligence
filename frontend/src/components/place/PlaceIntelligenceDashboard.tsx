@@ -23,6 +23,7 @@ import {
   Zap
 } from 'lucide-react'
 import { apiClient } from '@/lib/api-client'
+import { CustomerDensityMap } from './CustomerDensityMap'
 
 interface CustomerDensityData {
   total_customers: number
@@ -396,20 +397,7 @@ export function PlaceIntelligenceDashboard() {
             </TabsContent>
 
             <TabsContent value="customer-density">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Customer Density Analysis</CardTitle>
-                  <CardDescription>
-                    Detailed customer location and timing patterns
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Interactive customer density map coming soon</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <CustomerDensityMap restaurantId={selectedRestaurant} />
             </TabsContent>
 
             <TabsContent value="site-analysis">

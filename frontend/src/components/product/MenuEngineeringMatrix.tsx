@@ -20,9 +20,11 @@ import {
   Minus,
   Eye,
   Edit,
-  MoreHorizontal
+  MoreHorizontal,
+  Download
 } from 'lucide-react'
 import { apiClient } from '@/lib/api-client'
+import { exportService } from '@/services/export/ExportService'
 
 interface MenuItem {
   item_id: string
@@ -75,6 +77,14 @@ export function MenuEngineeringMatrix({ restaurantId }: MenuEngineeringProps) {
       console.error('Failed to load menu engineering data:', error)
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const exportMenuEngineering = async (format: 'pdf' | 'excel' | 'csv') => {
+    try {
+      await exportService.exportMenuEngineering(menuItems, restaurantId, format)
+    } catch (error) {
+      console.error('Export failed:', error)
     }
   }
 
@@ -222,6 +232,14 @@ export function MenuEngineeringMatrix({ restaurantId }: MenuEngineeringProps) {
               </CardDescription>
             </div>
             <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => exportMenuEngineering('pdf')}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
               <Button
                 variant="outline"
                 size="sm"

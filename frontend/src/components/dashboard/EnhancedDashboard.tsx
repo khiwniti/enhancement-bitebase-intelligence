@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
+import { EnhancedCard, LoadingSkeleton, EnhancedButton } from '@/components/ui/enhanced-interactions';
 import { 
   BarChart3, 
   Globe, 
@@ -36,6 +37,8 @@ import LocationIntelligenceTab from './tabs/LocationIntelligenceTab';
 import AnalyticsTab from './tabs/AnalyticsTab';
 import RestaurantExplorerTab from './tabs/RestaurantExplorerTab';
 import AIInsightsTab from './tabs/AIInsightsTab';
+import { RealtimeMetricsWidget } from '@/components/realtime/RealtimeMetricsWidget';
+import AIEnhancedDashboard from '@/components/ai/AIEnhancedDashboard';
 
 interface EnhancedDashboardProps {
   className?: string;
@@ -205,6 +208,13 @@ export default function EnhancedDashboard({ className }: EnhancedDashboardProps)
 
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">
+          {/* Real-time Metrics Widget */}
+          <RealtimeMetricsWidget
+            restaurantId="demo-restaurant-123"
+            showConnectionStatus={true}
+            className="mb-6"
+          />
+
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200">
@@ -429,9 +439,9 @@ export default function EnhancedDashboard({ className }: EnhancedDashboardProps)
           <RestaurantExplorerTab />
         </TabsContent>
 
-        {/* AI Insights Tab */}
+        {/* AI Insights Tab - Enhanced with CopilotKit */}
         <TabsContent value="ai-insights" className="space-y-6">
-          <AIInsightsTab />
+          <AIEnhancedDashboard />
         </TabsContent>
       </Tabs>
     </div>

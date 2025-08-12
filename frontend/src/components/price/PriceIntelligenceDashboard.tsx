@@ -24,6 +24,7 @@ import {
   PieChart
 } from 'lucide-react'
 import { apiClient } from '@/lib/api-client'
+import { RevenueForecastDashboard } from './RevenueForecastDashboard'
 
 interface RevenueForecastData {
   current_month_revenue: number
@@ -409,20 +410,7 @@ export function PriceIntelligenceDashboard() {
             </TabsContent>
 
             <TabsContent value="revenue-forecast">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Revenue Forecasting</CardTitle>
-                  <CardDescription>
-                    Detailed revenue predictions and trend analysis
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <LineChart className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Interactive revenue forecast charts coming soon</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <RevenueForecastDashboard restaurantId={selectedRestaurant} />
             </TabsContent>
 
             <TabsContent value="customer-spending">

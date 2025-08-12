@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { FoodCostAnalyzer } from './FoodCostAnalyzer'
+import { MenuEngineeringMatrix } from './MenuEngineeringMatrix'
 import {
   ChefHat,
   DollarSign,
@@ -357,39 +359,11 @@ export function ProductIntelligenceDashboard() {
             </TabsContent>
 
             <TabsContent value="menu-engineering">
-              {/* Menu Engineering detailed view will be implemented in a separate component */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Menu Engineering Analysis</CardTitle>
-                  <CardDescription>
-                    Detailed menu item classification and recommendations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <Activity className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Menu Engineering component will be implemented here</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <MenuEngineeringMatrix restaurantId={selectedRestaurant} />
             </TabsContent>
 
             <TabsContent value="cost-analysis">
-              {/* Cost Analysis detailed view */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Food Cost Analysis</CardTitle>
-                  <CardDescription>
-                    Detailed cost breakdown and optimization opportunities
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <Calculator className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Cost Analysis component will be implemented here</p>
-                  </div>
-                </CardContent>
-              </Card>
+              <FoodCostAnalyzer restaurantId={selectedRestaurant} />
             </TabsContent>
 
             <TabsContent value="pricing">

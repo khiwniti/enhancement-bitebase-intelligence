@@ -33,7 +33,7 @@ jest.mock('../collaboration/hooks/useRealtimeCollaboration', () => ({
         user_id: 'user1',
         username: 'John Doe',
         avatar_url: 'https://example.com/avatar1.jpg',
-        status: 'online',
+        status: 'online' as const,
         cursor_position: { x: 50, y: 25 },
         current_action: 'editing',
         active_element: 'widget1',
@@ -43,10 +43,10 @@ jest.mock('../collaboration/hooks/useRealtimeCollaboration', () => ({
         user_id: 'user2',
         username: 'Jane Smith',
         avatar_url: 'https://example.com/avatar2.jpg',
-        status: 'online',
+        status: 'online' as const,
         cursor_position: { x: 75, y: 50 },
         current_action: 'viewing',
-        active_element: null,
+        active_element: undefined,
         color: '#EF4444'
       }
     ],
@@ -187,7 +187,7 @@ describe('PresenceIndicators', () => {
       user_id: 'user1',
       username: 'John Doe',
       avatar_url: 'https://example.com/avatar1.jpg',
-      status: 'online',
+      status: 'online' as const,
       cursor_position: { x: 50, y: 25 },
       current_action: 'editing',
       active_element: 'widget1',
@@ -196,11 +196,11 @@ describe('PresenceIndicators', () => {
     {
       user_id: 'user2',
       username: 'Jane Smith',
-      avatar_url: null,
-      status: 'away',
+      avatar_url: undefined,
+      status: 'away' as const,
       cursor_position: { x: 75, y: 50 },
       current_action: 'viewing',
-      active_element: null,
+      active_element: undefined,
       color: '#EF4444'
     }
   ]
@@ -266,7 +266,7 @@ describe('CollaborationCursors', () => {
     {
       user_id: 'user1',
       username: 'John Doe',
-      status: 'online',
+      status: 'online' as const,
       cursor_position: { x: 50, y: 25, elementId: 'widget1' },
       current_action: 'editing',
       active_element: 'widget1',
@@ -301,7 +301,7 @@ describe('CollaborationCursors', () => {
     const offlineParticipants = [
       {
         ...mockParticipants[0],
-        status: 'offline'
+        status: 'offline' as const
       }
     ]
 
@@ -549,7 +549,7 @@ describe('Collaboration Integration', () => {
         user_id: 'user1',
         username: 'John Doe',
         avatar_url: 'https://example.com/avatar1.jpg',
-        status: 'online',
+        status: 'online' as const,
         cursor_position: { x: 50, y: 25 },
         current_action: 'editing',
         active_element: 'widget1',
@@ -593,10 +593,10 @@ describe('Collaboration Performance', () => {
     const manyParticipants = Array.from({ length: 50 }, (_, i) => ({
       user_id: `user${i}`,
       username: `User ${i}`,
-      status: 'online',
+      status: 'online' as const,
       cursor_position: { x: i * 10, y: i * 5 },
       current_action: 'viewing',
-      active_element: null,
+      active_element: undefined,
       color: '#3B82F6'
     }))
 

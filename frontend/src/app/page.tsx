@@ -971,7 +971,7 @@ export default function StunningLandingPage() {
                     className="relative z-10"
                   >
                     <Link
-                      href="/analytics"
+                      href="/workspace"
                       className="inline-flex items-center text-orange-500 font-bold hover:text-orange-600 text-lg group/link"
                     >
                       Learn more
@@ -1290,7 +1290,7 @@ export default function StunningLandingPage() {
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
-          <Link href="/dashboard">
+          <Link href="/workspace">
             <Button
               size="lg"
               className="relative bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full p-6 shadow-2xl border-0 group-hover:shadow-3xl transition-all duration-300"
@@ -1316,7 +1316,7 @@ export default function StunningLandingPage() {
             initial={{ opacity: 0, y: 10 }}
             whileHover={{ opacity: 1, y: 0 }}
           >
-            Go to Dashboard
+            Go to Workspace
             <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800" />
           </motion.div>
         </div>

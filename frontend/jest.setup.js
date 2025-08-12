@@ -79,7 +79,7 @@ HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
   transform: jest.fn(),
   rect: jest.fn(),
   clip: jest.fn(),
-}))
+}));
 
 // Mock fetch for API testing
 global.fetch = jest.fn(() =>
@@ -87,7 +87,7 @@ global.fetch = jest.fn(() =>
     ok: true,
     json: () => Promise.resolve({ status: 'success', data: {} }),
   })
-) as jest.Mock
+);
 
 // Mock performance API
 Object.defineProperty(window, 'performance', {
