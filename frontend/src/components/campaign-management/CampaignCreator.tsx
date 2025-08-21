@@ -106,7 +106,7 @@ export default function CampaignCreator() {
   };
 
   const handleSubmit = (action: 'save' | 'launch') => {
-    console.log('Campaign action:', action, formData);
+    
     // Here you would typically send the data to your API
   };
 

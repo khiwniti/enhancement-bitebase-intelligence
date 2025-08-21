@@ -38,7 +38,6 @@ export const QueryResults: React.FC<QueryResultsProps> = ({
     setIsExporting(true)
     try {
       // Implementation would depend on chart library
-      console.log(`Exporting chart as ${format}`)
       // Simulate export delay
       await new Promise(resolve => setTimeout(resolve, 1000))
     } catch (error) {

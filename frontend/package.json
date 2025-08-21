@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "next dev --turbopack -p 50513 -H 0.0.0.0",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "start": "next start -p 52580 -H 0.0.0.0",
     "staging": "NODE_ENV=staging next start -p 12001 -H 0.0.0.0",
     "lint": "next lint",
@@ -84,6 +85,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.5.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
@@ -103,27 +105,8 @@
     "typescript": "^5",
     "vercel": "^44.4.1"
   },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest.setup.js"
-    ],
-    "collectCoverageFrom": [
-      "src/components/**/*.{js,ts,jsx,tsx}",
-      "src/hooks/**/*.{js,ts,jsx,tsx}",
-      "src/lib/**/*.{js,ts,jsx,tsx}",
-      "!**/*.d.ts",
-      "!**/node_modules/**"
-    ],
-    "moduleNameMapping": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "testPathIgnorePatterns": [
-      "<rootDir>/.next/",
-      "<rootDir>/node_modules/"
-    ]
-  },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "packageManager": "yarn@4.9.3"
 }

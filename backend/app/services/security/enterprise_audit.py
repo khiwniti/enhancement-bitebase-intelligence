@@ -15,8 +15,39 @@ from enum import Enum
 from dataclasses import dataclass, field, asdict
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, or_, desc, func
-import geoip2.database
-import geoip2.errors
+try:
+    import geoip2.database
+    import geoip2.errors
+    GEOIP2_AVAILABLE = True
+except ImportError:
+    GEOIP2_AVAILABLE = False
+    # Create mock classes for missing geoip2 dependencies
+    class MockGeoIP2Database:
+        def __init__(self, *args, **kwargs):
+            pass
+        def city(self, ip):
+            class MockCity:
+                class MockCountry:
+                    name = "Unknown"
+                    iso_code = "XX"
+                class MockCity:
+                    name = "Unknown"
+                class MockLocation:
+                    latitude = 0.0
+                    longitude = 0.0
+                country = MockCountry()
+                city = MockCity()
+                location = MockLocation()
+            return MockCity()
+    
+    class MockGeoIP2Errors:
+        class AddressNotFoundError(Exception):
+            pass
+    
+    geoip2 = type('MockModule', (), {
+        'database': type('MockDatabase', (), {'Reader': MockGeoIP2Database}),
+        'errors': MockGeoIP2Errors()
+    })
 
 logger = logging.getLogger(__name__)
 

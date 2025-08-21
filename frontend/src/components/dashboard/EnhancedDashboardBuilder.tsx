@@ -333,7 +333,7 @@ export function EnhancedDashboardBuilder({
                     isEditing={!dashboardBuilder.isPreviewMode}
                     onLayoutChange={(layout, layouts) => {
                       // Handle layout changes
-                      console.log('Layout changed:', layout, layouts)
+                      
                     }}
                     onWidgetSelect={dashboardBuilder.selectWidget}
                     onWidgetRemove={dashboardBuilder.removeWidget}

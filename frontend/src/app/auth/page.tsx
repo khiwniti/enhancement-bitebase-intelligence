@@ -4,23 +4,30 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '@/contexts/AuthContext'
+import OnboardingWizard from '@/components/onboarding/OnboardingWizard'
+import { AuthLayout } from '@/components/common'
 import { 
-  Eye, 
-  EyeOff, 
+  FormField, 
+  PasswordInput,
+  FormActions 
+} from '@/components/common/FormComponents'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
+import { 
   Mail, 
-  Lock, 
   User, 
   Building, 
   Phone,
-  ArrowRight,
   ArrowLeft,
   CheckCircle,
   AlertCircle,
-  Loader2,
   Chrome
 } from 'lucide-react'
+import BiteBaseLogo from '@/components/BiteBaseLogo'
 
 type AuthMode = 'login' | 'register' | 'forgot-password'
+type AuthFlow = 'auth' | 'onboarding'
 
 interface FormData {
   email: string
@@ -33,12 +40,14 @@ interface FormData {
 }
 
 export default function AuthPage() {
+  const [flow, setFlow] = useState<AuthFlow>('auth')
   const [mode, setMode] = useState<AuthMode>('login')
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [isNewUser, setIsNewUser] = useState(false)
   
   const [formData, setFormData] = useState<FormData>({
     email: '',
@@ -56,9 +65,15 @@ export default function AuthPage() {
   // Redirect if already authenticated
   useEffect(() => {
     if (user) {
-      router.push('/dashboard')
+      // Check if user has completed onboarding
+      const hasCompletedOnboarding = localStorage.getItem('onboarding_completed')
+      if (!hasCompletedOnboarding && isNewUser) {
+        setFlow('onboarding')
+      } else {
+        router.push('/dashboard')
+      }
     }
-  }, [user, router])
+  }, [user, router, isNewUser])
 
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -116,7 +131,8 @@ export default function AuthPage() {
           phone: formData.phone,
           company: formData.company
         })
-        router.push('/dashboard')
+        setIsNewUser(true)
+        setFlow('onboarding')
       } else if (mode === 'forgot-password') {
         // Simulate forgot password
         setSuccess('Password reset instructions have been sent to your email')
@@ -135,12 +151,18 @@ export default function AuthPage() {
 
     try {
       await signInWithGoogle()
+      // Assume Google sign-in is for existing users
       router.push('/dashboard')
     } catch (err: any) {
       setError(err.message || 'Google sign-in failed')
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem('onboarding_completed', 'true')
+    router.push('/dashboard')
   }
 
   const getTitle = () => {
@@ -159,215 +181,173 @@ export default function AuthPage() {
     }
   }
 
+  // Show onboarding for new users
+  if (flow === 'onboarding') {
+    return <OnboardingWizard onComplete={handleOnboardingComplete} />
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4">
-            <span className="text-2xl font-bold text-white">B</span>
-          </div>
-          <h1 className="text-2xl font-bold text-slate-900">BiteBase Intelligence</h1>
-          <p className="text-slate-600 mt-1">AI-Powered Business Intelligence Platform</p>
+    <AuthLayout className="w-full max-w-md">
+      {/* Logo */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl mb-4">
+          <span className="text-2xl font-bold text-white">B</span>
+        </div>
+        <h1 className="text-2xl font-bold text-gray-900">BiteBase Intelligence</h1>
+        <p className="text-gray-600 mt-1">AI-Powered Business Intelligence Platform</p>
+      </div>
+
+      <Card className="p-8">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">{getTitle()}</h2>
+          <p className="text-gray-600 mt-1">{getSubtitle()}</p>
         </div>
 
-        {/* Auth Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-2xl p-8 shadow-xl"
-        >
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-slate-900">{getTitle()}</h2>
-            <p className="text-slate-600 mt-1">{getSubtitle()}</p>
-          </div>
+        {/* Error/Success Messages */}
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700"
+            >
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <span className="text-sm">{error}</span>
+            </motion.div>
+          )}
+          
+          {success && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-700"
+            >
+              <CheckCircle className="w-4 h-4 flex-shrink-0" />
+              <span className="text-sm">{success}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-          {/* Error/Success Messages */}
-          <AnimatePresence>
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700"
-              >
-                <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                <span className="text-sm">{error}</span>
-              </motion.div>
-            )}
-            
-            {success && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-700"
-              >
-                <CheckCircle className="w-4 h-4 flex-shrink-0" />
-                <span className="text-sm">{success}</span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Email */}
+          <FormField label="Email Address" required>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className="pl-10"
+                placeholder="Enter your email"
+                required
+              />
             </div>
+          </FormField>
 
-            {/* Register Fields */}
-            {mode === 'register' && (
-              <>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">First Name</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                      <input
-                        type="text"
-                        value={formData.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                        placeholder="First name"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">Last Name</label>
-                    <input
+          {/* Register Fields */}
+          {mode === 'register' && (
+            <>
+              <div className="grid grid-cols-2 gap-4">
+                <FormField label="First Name" required>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Input
                       type="text"
-                      value={formData.lastName}
-                      onChange={(e) => handleInputChange('lastName', e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Last name"
+                      value={formData.firstName}
+                      onChange={(e) => handleInputChange('firstName', e.target.value)}
+                      className="pl-10"
+                      placeholder="First name"
                       required
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Company (Optional)</label>
-                  <div className="relative">
-                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange('company', e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Your company"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Phone (Optional)</label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Your phone number"
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-
-            {/* Password */}
-            {mode !== 'forgot-password' && (
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={formData.password}
-                    onChange={(e) => handleInputChange('password', e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your password"
+                </FormField>
+                
+                <FormField label="Last Name" required>
+                  <Input
+                    type="text"
+                    value={formData.lastName}
+                    onChange={(e) => handleInputChange('lastName', e.target.value)}
+                    placeholder="Last name"
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
+                </FormField>
               </div>
-            )}
 
-            {/* Confirm Password */}
-            {mode === 'register' && (
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Confirm Password</label>
+              <FormField label="Company" help="Optional">
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                  <input
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    value={formData.confirmPassword}
-                    onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Confirm your password"
-                    required
+                  <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => handleInputChange('company', e.target.value)}
+                    className="pl-10"
+                    placeholder="Your company"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
-                  >
-                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
                 </div>
-              </div>
-            )}
+              </FormField>
 
-            {/* Forgot Password Link */}
-            {mode === 'login' && (
-              <div className="text-right">
-                <button
-                  type="button"
-                  onClick={() => setMode('forgot-password')}
-                  className="text-sm text-blue-600 hover:text-blue-700 transition-colors"
-                >
-                  Forgot your password?
-                </button>
-              </div>
-            )}
+              <FormField label="Phone" help="Optional">
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    className="pl-10"
+                    placeholder="Your phone number"
+                  />
+                </div>
+              </FormField>
+            </>
+          )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                <>
-                  {mode === 'login' ? 'Sign In' : mode === 'register' ? 'Create Account' : 'Send Reset Link'}
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </form>
+          {/* Password */}
+          {mode !== 'forgot-password' && (
+            <FormField label="Password" required>
+              <PasswordInput
+                value={formData.password}
+                onChange={(value) => handleInputChange('password', value)}
+                placeholder="Enter your password"
+                required
+              />
+            </FormField>
+          )}
+
+          {/* Confirm Password */}
+          {mode === 'register' && (
+            <FormField label="Confirm Password" required>
+              <PasswordInput
+                value={formData.confirmPassword}
+                onChange={(value) => handleInputChange('confirmPassword', value)}
+                placeholder="Confirm your password"
+                required
+              />
+            </FormField>
+          )}
+
+          {/* Forgot Password Link */}
+          {mode === 'login' && (
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={() => setMode('forgot-password')}
+                className="text-sm text-orange-600 hover:text-orange-700 transition-colors"
+              >
+                Forgot your password?
+              </button>
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <FormActions
+            onSave={undefined}
+            saveLabel={mode === 'login' ? 'Sign In' : mode === 'register' ? 'Create Account' : 'Send Reset Link'}
+            loading={loading}
+            className="pt-4"
+          />
+        </form>
 
           {/* Google Sign In */}
           {mode !== 'forgot-password' && (
@@ -428,8 +408,7 @@ export default function AuthPage() {
               </button>
             )}
           </div>
-        </motion.div>
-      </div>
-    </div>
+        </Card>
+    </AuthLayout>
   )
 }

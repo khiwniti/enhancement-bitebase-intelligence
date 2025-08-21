@@ -352,17 +352,11 @@ export function useTour() {
     const isNewUser = isFirstTimeUser()
 
     // Debug logging
-    console.log('Tour state check:', {
-      shouldShow,
-      isNewUser
-    })
-
-    setIsFirstTimeUserState(isNewUser)
 
     if (shouldShow) {
       // Delay tour start to let page load
       const timer = setTimeout(() => {
-        console.log('Auto-starting tour for new user')
+        
         setIsTourOpen(true)
       }, 2000)
 
@@ -371,17 +365,17 @@ export function useTour() {
   }, [])
 
   const startTour = () => {
-    console.log('Starting tour manually')
+    
     setIsTourOpen(true)
   }
 
   const closeTour = () => {
-    console.log('Closing tour')
+    
     setIsTourOpen(false)
   }
 
   const completeTour = () => {
-    console.log('Completing tour')
+    
     localStorage.setItem('bitebase-tour-completed', 'true')
     setIsTourOpen(false)
   }
@@ -390,7 +384,7 @@ export function useTour() {
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isTourOpen) {
-        console.log('Tour closed via Escape key')
+        
         closeTour()
       }
     }

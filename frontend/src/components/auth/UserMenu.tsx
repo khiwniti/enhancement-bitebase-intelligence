@@ -31,10 +31,9 @@ export function UserMenu() {
   const [isLoading, setIsLoading] = useState(false);
 
   // Use mock user for now - in production this would use the auth context
-  // const { user, signOut } = useAuth();
   const user = mockUser;
   const signOut = async () => {
-    console.log("Mock sign out");
+    
   };
 
   if (!user) {

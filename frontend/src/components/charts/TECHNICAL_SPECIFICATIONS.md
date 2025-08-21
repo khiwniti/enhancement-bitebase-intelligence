@@ -267,7 +267,6 @@ interface ChartRealTimeConfig {
 - **Smooth Transitions**: Animated data updates
 - **Performance Scaling**: Adaptive update rates
 
-## Integration with UnifiedDashboard
 
 ### Widget Integration
 ```typescript

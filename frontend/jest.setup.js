@@ -87,7 +87,7 @@ global.fetch = jest.fn(() =>
     ok: true,
     json: () => Promise.resolve({ status: 'success', data: {} }),
   })
-) as jest.Mock
+)
 
 // Mock performance API
 Object.defineProperty(window, 'performance', {

@@ -1,5 +1,13 @@
-import EnterpriseSecurityDashboard from "@/components/security/EnterpriseSecurityDashboard";
+'use client'
+
+import React from 'react'
+import { DashboardLayout } from '@/components/layout/AppLayout'
+import EnterpriseSecurityDashboard from "@/components/security/EnterpriseSecurityDashboard"
 
 export default function SecurityPage() {
-  return <EnterpriseSecurityDashboard />;
+  return (
+    <DashboardLayout>
+      <EnterpriseSecurityDashboard />
+    </DashboardLayout>
+  )
 }

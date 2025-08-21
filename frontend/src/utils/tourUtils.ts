@@ -102,7 +102,6 @@ export const tourUtils = {
   disableTour: () => {
     localStorage.setItem('bitebase-tour-completed', 'true')
     localStorage.setItem('bitebase-tour-skipped', 'true')
-    console.log('Tour disabled - page will need to be refreshed')
   },
 
   /**
@@ -113,7 +112,6 @@ export const tourUtils = {
     localStorage.removeItem('bitebase-tour-skipped')
     localStorage.removeItem('bitebase-tour-dont-show-again')
     localStorage.setItem('bitebase-user-first-login', 'true')
-    console.log('Tour enabled - page will need to be refreshed')
   },
 
   /**
@@ -133,7 +131,6 @@ export const tourUtils = {
     Object.values(TOUR_STORAGE_KEYS).forEach(key => {
       localStorage.removeItem(key)
     })
-    console.log('All tour preferences reset')
   },
 
   /**
