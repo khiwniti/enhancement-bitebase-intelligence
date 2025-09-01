@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { DashboardLayout } from '@/components/layout/AppLayout'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'

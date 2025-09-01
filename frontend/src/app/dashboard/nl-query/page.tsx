@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { DashboardLayout } from '@/components/layout/AppLayout'
 import { NaturalLanguageQueryInterface } from '@/components/nl-query'
 import { ChartContainer } from '@/components/charts/core/ChartContainer'
 import type { ChartConfig } from '@/components/nl-query/types/nlQueryTypes'
@@ -63,7 +64,8 @@ export default function NaturalLanguageQueryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <DashboardLayout>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,7 +89,7 @@ export default function NaturalLanguageQueryPage() {
                 </p>
               </div>
             </div>
-            
+
             <Button
               onClick={() => router.push('/dashboard/builder')}
               className="flex items-center space-x-2"
@@ -116,7 +118,7 @@ export default function NaturalLanguageQueryPage() {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Generated Charts
               </h3>
-              
+
               {generatedCharts.length > 0 ? (
                 <div className="space-y-4">
                   {generatedCharts.map((chart) => (
@@ -147,7 +149,7 @@ export default function NaturalLanguageQueryPage() {
                           </Button>
                         </div>
                       </div>
-                      
+
                       <div className="h-32 mb-2">
                         <ChartContainer
                           id={chart.id}
@@ -166,7 +168,7 @@ export default function NaturalLanguageQueryPage() {
                           className="h-full"
                         />
                       </div>
-                      
+
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         Generated {chart.timestamp.toLocaleTimeString()}
                       </p>
@@ -213,6 +215,7 @@ export default function NaturalLanguageQueryPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </DashboardLayout>
   )
 }

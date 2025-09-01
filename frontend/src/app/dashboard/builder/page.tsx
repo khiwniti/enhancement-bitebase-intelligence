@@ -5,7 +5,7 @@
 
 import React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { DashboardLayout } from '@/components/layout/AppLayout'
 import { EnhancedDashboardBuilder } from '@/components/dashboard'
 
 // Create a query client for TanStack Query
@@ -37,7 +37,7 @@ export default function DashboardBuilderPage() {
   const handleShare = (result: { shareUrl?: string }) => {
     console.log('Dashboard shared:', result)
     // You can add sharing analytics here
-    
+
     // Show success message or copy link to clipboard
     if (result.shareUrl) {
       navigator.clipboard.writeText(result.shareUrl).then(() => {

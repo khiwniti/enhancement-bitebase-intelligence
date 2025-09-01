@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  BarChart3, 
-  TrendingUp, 
+import { DashboardLayout } from '@/components/layout/AppLayout';
+import {
+  BarChart3,
+  TrendingUp,
   Calendar,
   Building,
   ArrowLeft,
@@ -40,7 +41,8 @@ export default function IntegratedAnalyticsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <DashboardLayout>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,7 +64,7 @@ export default function IntegratedAnalyticsPage() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <Badge variant="outline" className="bg-[#74C365] text-white border-[#74C365]">
                 <BarChart3 className="h-3 w-3 mr-1" />
@@ -301,6 +303,7 @@ export default function IntegratedAnalyticsPage() {
           )}
         </div>
       </div>
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }

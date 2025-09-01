@@ -6,11 +6,12 @@
 'use client'
 
 import React from 'react'
+import { DashboardLayout } from '@/components/layout/AppLayout'
 import { RealtimeInsightsDashboard } from '@/components/insights'
 
 export default function InsightsDashboardPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <DashboardLayout>
       <RealtimeInsightsDashboard
         userId="current-user" // This would come from authentication context
         autoRefresh={true}
@@ -19,6 +20,6 @@ export default function InsightsDashboardPage() {
         showMetrics={true}
         compact={false}
       />
-    </div>
+    </DashboardLayout>
   )
 }

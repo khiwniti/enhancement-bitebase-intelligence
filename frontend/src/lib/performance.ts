@@ -47,7 +47,7 @@ export class PerformanceMonitor {
         console.log('LCP:', lastEntry.startTime)
       }
     })
-    
+
     try {
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] })
       this.observers.set('lcp', lcpObserver)
@@ -111,7 +111,7 @@ export class PerformanceMonitor {
 
 // React hook for component performance measurement
 export function usePerformanceTimer(componentName: string) {
-  const startTime = useRef<number>()
+  const startTime = useRef<number>(0)
   const monitor = PerformanceMonitor.getInstance()
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export function usePerformanceTimer(componentName: string) {
       const endMarkName = `${componentName}-end`
       monitor.mark(endMarkName)
       const duration = monitor.measure(`${componentName}-render`, markName, endMarkName)
-      
+
       // Log slow components (>100ms)
       if (duration > 100) {
         console.warn(`Slow component detected: ${componentName} took ${duration.toFixed(2)}ms`)
@@ -139,8 +139,8 @@ export function logBundleInfo(): void {
     const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming
     if (navigation) {
       console.group('Performance Metrics')
-      console.log('DOM Content Loaded:', navigation.domContentLoadedEventEnd - navigation.navigationStart)
-      console.log('Page Load Time:', navigation.loadEventEnd - navigation.navigationStart)
+      console.log('DOM Content Loaded:', navigation.domContentLoadedEventEnd - navigation.fetchStart)
+      console.log('Page Load Time:', navigation.loadEventEnd - navigation.fetchStart)
       console.log('DNS Lookup:', navigation.domainLookupEnd - navigation.domainLookupStart)
       console.log('TCP Connection:', navigation.connectEnd - navigation.connectStart)
       console.groupEnd()
@@ -150,11 +150,11 @@ export function logBundleInfo(): void {
     const resources = performance.getEntriesByType('resource')
     const jsResources = resources.filter(r => r.name.includes('.js'))
     const totalJSSize = jsResources.reduce((sum, r: any) => sum + (r.transferSize || 0), 0)
-    
+
     console.group('Bundle Info')
     console.log(`Total JS Resources: ${jsResources.length}`)
     console.log(`Total JS Transfer Size: ${(totalJSSize / 1024 / 1024).toFixed(2)} MB`)
-    console.log('Largest JS Files:', 
+    console.log('Largest JS Files:',
       jsResources
         .sort((a: any, b: any) => (b.transferSize || 0) - (a.transferSize || 0))
         .slice(0, 5)
@@ -183,7 +183,7 @@ export function monitorMemoryUsage(): void {
 export function initPerformanceMonitoring(): void {
   const monitor = PerformanceMonitor.getInstance()
   monitor.observeWebVitals()
-  
+
   // Log bundle info after page load
   if (typeof window !== 'undefined') {
     window.addEventListener('load', () => {

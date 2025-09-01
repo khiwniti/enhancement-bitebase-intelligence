@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import LandingNavbar from '@/components/navigation/LandingNavbar'
+import { Footer } from '@/components/layout/Footer'
 import {
   Sparkles,
   Rocket,
@@ -207,6 +209,9 @@ export default function StunningLandingPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      {/* Landing Navbar */}
+      <LandingNavbar />
+
       {/* Cursor Follower */}
       <CursorFollower />
 
@@ -229,7 +234,7 @@ export default function StunningLandingPage() {
       {/* Hero Section */}
       <motion.div
         style={{ y: y1, opacity, scale, rotateX: rotate }}
-        className="relative z-10 min-h-screen flex items-center justify-center px-6"
+        className="relative z-10 min-h-screen flex items-center justify-center px-6 pt-20 lg:pt-24"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 1 }}
@@ -697,7 +702,7 @@ export default function StunningLandingPage() {
       </motion.div>
 
       {/* Interactive Features Preview Section */}
-      <div className="relative z-10 py-32 bg-gradient-to-b from-black/20 to-transparent">
+      <div id="analytics" className="relative z-10 py-32 bg-gradient-to-b from-black/20 to-transparent">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -788,7 +793,7 @@ export default function StunningLandingPage() {
       </div>
 
       {/* Enhanced Features Section */}
-      <div className="relative z-10 py-32 bg-gradient-to-b from-white via-gray-50 to-white">
+      <div id="features" className="relative z-10 py-32 bg-gradient-to-b from-white via-gray-50 to-white">
         {/* Decorative Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -997,7 +1002,7 @@ export default function StunningLandingPage() {
       </div>
 
       {/* Testimonials Section */}
-      <div className="relative z-10 py-24 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <div id="about" className="relative z-10 py-24 bg-gradient-to-br from-gray-50 via-white to-gray-100">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1069,7 +1074,7 @@ export default function StunningLandingPage() {
       </div>
 
       {/* Enhanced Final CTA Section */}
-      <div className="relative z-10 py-32 bg-gradient-to-r from-orange-500 via-orange-600 to-red-500 overflow-hidden">
+      <div id="pricing" className="relative z-10 py-32 bg-gradient-to-r from-orange-500 via-orange-600 to-red-500 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {[...Array(5)].map((_, i) => (
@@ -1344,6 +1349,9 @@ export default function StunningLandingPage() {
           </motion.div>
         </Button>
       </motion.div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
