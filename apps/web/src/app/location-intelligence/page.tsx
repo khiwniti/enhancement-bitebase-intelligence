@@ -26,6 +26,9 @@ import {
 } from 'lucide-react'
 import { DashboardLayout } from '@/components/dashboard-layout'
 import Link from 'next/link'
+import { realDataService, type EnhancedRestaurantData } from '@/shared/lib/data/real-data-service'
+import { googleMapsService, type LocationData } from '@/shared/lib/maps/google-maps-service'
+import { geminiAI } from '@/shared/lib/ai/gemini-service'
 
 export default function LocationIntelligencePage() {
   const [selectedLocation, setSelectedLocation] = useState('bangkok-central')

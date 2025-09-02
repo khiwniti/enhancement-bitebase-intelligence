@@ -26,6 +26,8 @@ import {
   ArrowLeft
 } from 'lucide-react'
 import Link from 'next/link'
+import { geminiAI } from '@/shared/lib/ai/gemini-service'
+import { realDataService } from '@/shared/lib/data/real-data-service'
 
 interface Message {
   id: string
@@ -117,19 +119,74 @@ export default function AIAssistantPage() {
     setInputValue('')
     setIsTyping(true)
 
-    // Simulate AI response
-    setTimeout(() => {
+    // Get real AI response from Gemini
+    try {
+      const aiResponse = await geminiAI.generateResponse(messageContent, 'restaurant_assistant')
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: generateAIResponse(messageContent),
+        content: aiResponse.text,
         timestamp: new Date(),
-        insights: generateInsights(messageContent),
+        insights: await generateRealInsights(messageContent),
         suggestions: ['Tell me more', 'Show related data', 'What should I do next?']
       }
       setMessages(prev => [...prev, assistantMessage])
       setIsTyping(false)
-    }, 2000)
+    } catch (error) {
+      console.error('AI response error:', error)
+      const fallbackMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'assistant',
+        content: "I apologize, but I'm having trouble processing your request right now. Please try again in a moment.",
+        timestamp: new Date(),
+        insights: generateInsights(messageContent),
+        suggestions: ['Try again', 'Ask something else']
+      }
+      setMessages(prev => [...prev, fallbackMessage])
+      setIsTyping(false)
+    }
+  }
+
+  const generateRealInsights = async (prompt: string) => {
+    try {
+      // Get real restaurant data for insights
+      const restaurants = await realDataService.getEnhancedRestaurants('New York', 5)
+      const marketData = await realDataService.getMarketIntelligence('New York')
+
+      // Generate insights based on real data
+      const insights = []
+
+      if (restaurants.length > 0) {
+        const avgRating = restaurants.reduce((sum, r) => sum + r.rating, 0) / restaurants.length
+        insights.push({
+          type: 'metric' as const,
+          title: 'Market Average Rating',
+          value: avgRating.toFixed(1),
+          description: `Based on ${restaurants.length} local restaurants`
+        })
+      }
+
+      if (marketData.totalRestaurants > 0) {
+        insights.push({
+          type: 'trend' as const,
+          title: 'Market Competition',
+          value: marketData.totalRestaurants.toString(),
+          description: 'Total restaurants in area'
+        })
+      }
+
+      insights.push({
+        type: 'recommendation' as const,
+        title: 'AI Recommendation',
+        description: 'Focus on customer experience and digital presence for growth'
+      })
+
+      return insights
+    } catch (error) {
+      console.error('Error generating real insights:', error)
+      return generateInsights(prompt)
+    }
   }
 
   const generateAIResponse = (prompt: string): string => {
@@ -212,7 +269,7 @@ export default function AIAssistantPage() {
             </Badge>
             <Badge className="bg-blue-100 text-blue-700">
               <Bot className="h-3 w-3 mr-1" />
-              AI Model: GPT-4 Enhanced
+              AI Model: Google Gemini Pro
             </Badge>
             <Badge className="bg-purple-100 text-purple-700">
               <Sparkles className="h-3 w-3 mr-1" />
