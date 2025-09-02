@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import { Button } from '@/components/button'
+import { Badge } from '@/components/badge'
+import { Input } from '@/components/input'
 import {
   FileText,
   Download,
@@ -25,13 +25,28 @@ import {
   RefreshCw,
   Settings
 } from 'lucide-react'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { DashboardLayout } from '@/components/dashboard-layout'
 import Link from 'next/link'
+
+interface Report {
+  id: string
+  title: string
+  description: string
+  category: string
+  type: string
+  status: string
+  generatedAt: string
+  size: string
+  format: string
+  downloads: number
+  author: string
+  schedule: string
+}
 
 export default function ReportsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [dateRange, setDateRange] = useState('last-30-days')
-  const [reports, setReports] = useState([])
+  const [reports, setReports] = useState<Report[]>([])
   const [loading, setLoading] = useState(true)
 
   const reportCategories = [

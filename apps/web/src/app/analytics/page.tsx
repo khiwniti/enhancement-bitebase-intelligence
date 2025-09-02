@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { AnalyticsPage } from '@/components/analytics/AnalyticsPage'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { AnalyticsPage } from '@/features/analytics/components/AnalyticsPage'
+import { DashboardLayout } from '@/components/dashboard-layout'
 
 export default function Analytics() {
   return (

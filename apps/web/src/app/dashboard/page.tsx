@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { DashboardLayout } from '@/components/dashboard-layout'
 import { 
   BarChart3, 
   TrendingUp, 
@@ -27,10 +27,10 @@ import {
   Target,
   ChefHat
 } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import { Button } from '@/components/button'
+import { Badge } from '@/components/badge'
+import { Input } from '@/components/input'
 import Link from 'next/link'
 
 // Mock data for dashboard

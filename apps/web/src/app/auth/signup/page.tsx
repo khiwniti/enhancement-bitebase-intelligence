@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Brain, Mail, Lock, Eye, EyeOff, User, ArrowRight, CheckCircle } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/button'
+import { Input } from '@/components/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
 
 export default function SignupPage() {
   const router = useRouter()

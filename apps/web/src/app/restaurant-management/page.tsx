@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import { Button } from '@/components/button'
+import { Badge } from '@/components/badge'
+import { Input } from '@/components/input'
 import {
   Building,
   Users,
@@ -29,13 +29,38 @@ import {
   BarChart3,
   Utensils
 } from 'lucide-react'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { DashboardLayout } from '@/components/dashboard-layout'
 import Link from 'next/link'
+
+interface Restaurant {
+  id: string
+  name: string
+  location: string
+  status: string
+  manager: string
+  phone: string
+  email: string
+  revenue: string
+  orders: number
+  rating: number
+  staff: number
+  capacity: number
+  openHours: string
+  cuisine: string
+  established: string
+  performance: string
+  type: string
+  address: string
+  reviews: number
+  monthlyRevenue?: number
+  avgOrderValue?: string
+  lastUpdated?: string
+}
 
 export default function RestaurantManagementPage() {
   const [selectedRestaurant, setSelectedRestaurant] = useState('all')
   const [viewMode, setViewMode] = useState('grid')
-  const [restaurants, setRestaurants] = useState([])
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [loading, setLoading] = useState(true)
 
   // Fetch restaurants from backend

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, Brain } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/button'
 
 const navigation = [
   { name: 'Features', href: '#features' },

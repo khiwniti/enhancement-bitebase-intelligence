@@ -148,3 +148,29 @@ htmlcov/
 # Misc development files
 *.orig
 .roo/
+
+# Turbo
+.turbo/
+
+# Sentry
+.sentryclirc
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Storybook
+storybook-static/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Bundle analyzer
+.bundle-analyzer/
+
+# Local development
+.local/

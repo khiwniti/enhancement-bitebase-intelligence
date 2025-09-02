@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import { Button } from '@/components/button'
+import { Badge } from '@/components/badge'
+import { Input } from '@/components/input'
 import {
   Search,
   Brain,
@@ -26,13 +26,29 @@ import {
   RefreshCw,
   Eye
 } from 'lucide-react'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { DashboardLayout } from '@/components/dashboard-layout'
 import Link from 'next/link'
+
+interface ResearchProject {
+  id: string
+  title: string
+  description: string
+  category: string
+  status: string
+  progress: number
+  estimatedTime: string
+  priority: string
+  insights: number
+  lastUpdated: string
+  sources: number
+  startDate: string
+  agent: string
+}
 
 export default function ResearchAgentPage() {
   const [activeResearch, setActiveResearch] = useState('market-trends')
   const [searchQuery, setSearchQuery] = useState('')
-  const [researchProjects, setResearchProjects] = useState([])
+  const [researchProjects, setResearchProjects] = useState<ResearchProject[]>([])
   const [loading, setLoading] = useState(true)
 
   const researchCategories = [

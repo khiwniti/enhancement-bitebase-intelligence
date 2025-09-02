@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import { Button } from '@/components/button'
+import { Badge } from '@/components/badge'
 import {
   TrendingUp,
   Target,
@@ -25,7 +25,7 @@ import {
   CheckCircle
 } from 'lucide-react'
 import Link from 'next/link'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { DashboardLayout } from '@/components/dashboard-layout'
 
 export default function GrowthStudioPage() {
   const [activeExperiment, setActiveExperiment] = useState('pricing')

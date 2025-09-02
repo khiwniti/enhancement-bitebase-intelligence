@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { User, AuthState, LoginCredentials, SignupData } from '@/types'
+import { User, AuthState, LoginCredentials, SignupData } from '@/shared/types'
 import { authApi } from '@/lib/api-client'
 
 // Auth Context

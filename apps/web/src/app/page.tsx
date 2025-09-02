@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { LandingNavbar } from '@/components/layout/landing-navbar'
-import { Footer } from '@/components/layout/footer'
+import { Button } from '@/components/button'
+import { LandingNavbar } from '@/components/landing-navbar'
+import { Footer } from '@/components/footer'
 import {
   Sparkles,
   Rocket,

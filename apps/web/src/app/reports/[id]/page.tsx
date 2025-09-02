@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import { Button } from '@/components/button'
+import { Badge } from '@/components/badge'
 import {
   FileText,
   Download,
@@ -21,9 +21,32 @@ import {
   Target,
   Clock
 } from 'lucide-react'
-import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import { DashboardLayout } from '@/components/dashboard-layout'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+
+interface CustomerSegment {
+  segment: string
+  count: number
+  percentage: string
+}
+
+interface Preference {
+  cuisine: string
+  preference: string
+}
+
+interface QuarterlyGrowth {
+  quarter: string
+  revenue: string
+  profit: string
+}
+
+interface ExpenseBreakdown {
+  category: string
+  amount: string
+  percentage: string
+}
 
 interface ReportData {
   title: string
@@ -35,6 +58,10 @@ interface ReportData {
   size: string
   status: string
   data: {
+    customerSegments?: CustomerSegment[]
+    preferences?: Preference[]
+    quarterlyGrowth?: QuarterlyGrowth[]
+    expenseBreakdown?: ExpenseBreakdown[]
     [key: string]: any
   }
 }
@@ -341,35 +368,38 @@ export default function ReportViewPage() {
       </div>
 
       {/* Customer Segments */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Customer Segments</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {report.data.customerSegments.map((segment) => (
-              <div key={segment.segment} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div>
-                  <p className="font-medium">{segment.segment}</p>
-                  <p className="text-sm text-gray-500">{segment.count.toLocaleString()} customers</p>
+      {report.data.customerSegments && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Customer Segments</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {report.data.customerSegments.map((segment) => (
+                <div key={segment.segment} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div>
+                    <p className="font-medium">{segment.segment}</p>
+                    <p className="text-sm text-gray-500">{segment.count.toLocaleString()} customers</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-blue-600">{segment.percentage}</p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold text-blue-600">{segment.percentage}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Customer Preferences */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Cuisine Preferences</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {report.data.preferences.map((pref) => (
+      {report.data.preferences && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Cuisine Preferences</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {report.data.preferences.map((pref) => (
               <div key={pref.cuisine} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
                 <p className="font-medium">{pref.cuisine}</p>
                 <div className="flex items-center space-x-3">
@@ -382,10 +412,11 @@ export default function ReportViewPage() {
                   <span className="font-bold text-gray-900">{pref.preference}</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 
@@ -440,13 +471,14 @@ export default function ReportViewPage() {
       </div>
 
       {/* Quarterly Growth */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Quarterly Performance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {report.data.quarterlyGrowth.map((quarter) => (
+      {report.data.quarterlyGrowth && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Quarterly Performance</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {report.data.quarterlyGrowth.map((quarter) => (
               <div key={quarter.quarter} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
                   <p className="font-medium">{quarter.quarter}</p>
@@ -462,19 +494,21 @@ export default function ReportViewPage() {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Expense Breakdown */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Expense Breakdown</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {report.data.expenseBreakdown.map((expense) => (
+      {report.data.expenseBreakdown && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Expense Breakdown</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {report.data.expenseBreakdown.map((expense) => (
               <div key={expense.category} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
                 <p className="font-medium">{expense.category}</p>
                 <div className="flex items-center space-x-3">
@@ -488,10 +522,11 @@ export default function ReportViewPage() {
                   <span className="text-sm text-gray-500">({expense.percentage})</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 
