@@ -52,7 +52,7 @@
     {
       "source": "apps/functions",
       "codebase": "default",
-      "runtime": "nodejs22"
+      "runtime": "nodejs20"
     }
   ],
   "dataconnect": {
@@ -84,10 +84,7 @@
       "host": "127.0.0.1",
       "port": 9399
     },
-    "storage": {
-      "host": "127.0.0.1",
-      "port": 9199
-    },
+
     "hub": {
       "host": "127.0.0.1",
       "port": 4402
@@ -98,9 +95,7 @@
     },
     "singleProjectMode": true
   },
-  "storage": {
-    "rules": "tools/configs/storage.rules"
-  },
+
   "firestore": {
     "rules": "tools/configs/firestore.rules",
     "indexes": "tools/configs/firestore.indexes.json"

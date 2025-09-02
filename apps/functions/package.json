@@ -1,5 +1,6 @@
 {
   "name": "functions",
+  "version": "1.0.0",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
@@ -12,7 +13,7 @@
     "genkit:start": "genkit start -- tsx --watch src/genkit-sample.ts"
   },
   "engines": {
-    "node": "22"
+    "node": ">=20"
   },
   "main": "lib/index.js",
   "dependencies": {
@@ -24,6 +25,7 @@
     "genkit": "^1.18.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.9.0",
