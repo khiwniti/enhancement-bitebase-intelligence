@@ -46,19 +46,19 @@ install-firebase:
 
 install-functions:
 	@echo "$(BLUE)Installing Firebase functions dependencies...$(NC)"
-	@if [ -d "functions" ]; then \
-		cd functions && npm install; \
+	@if [ -d "apps/functions" ]; then \
+		cd apps/functions && npm install; \
 	else \
 		echo "$(YELLOW)Functions directory not found, skipping...$(NC)"; \
 	fi
 
-install-frontend:
-	@echo "$(BLUE)Installing frontend dependencies...$(NC)"
-	@chmod +x frontend/install.sh 2>/dev/null || true
-	@chmod +x frontend/run.sh 2>/dev/null || true
-	@cd frontend && npm install
+install-web:
+	@echo "$(BLUE)Installing web app dependencies...$(NC)"
+	@chmod +x apps/web/install.sh 2>/dev/null || true
+	@chmod +x apps/web/run.sh 2>/dev/null || true
+	@cd apps/web && npm install
 
-install: install-firebase install-functions install-frontend
+install: install-firebase install-functions install-web
 	@echo "$(GREEN)✓ All dependencies installed successfully!$(NC)"
 
 # Individual service targets
@@ -66,9 +66,9 @@ run-functions:
 	@echo "$(BLUE)Starting Firebase functions emulator...$(NC)"
 	firebase emulators:start --only functions
 
-run-frontend:
-	@echo "$(BLUE)Starting frontend server...$(NC)"
-	cd frontend && npm run dev
+run-web:
+	@echo "$(BLUE)Starting web app server...$(NC)"
+	cd apps/web && npm run dev
 
 # Development target - improved version
 run-dev:
@@ -83,13 +83,13 @@ run-dev:
 	@trap 'echo "$(BLUE)Shutting down services...$(NC)"; pkill -f "firebase emulators" 2>/dev/null || true; pkill -f "next dev" 2>/dev/null || true; echo "$(GREEN)✓ Services stopped$(NC)"; exit 0' INT; \
 	firebase emulators:start --config firebase.json & \
 	sleep 3 && \
-	(cd frontend && npm run dev) & \
+	(cd apps/web && npm run dev) & \
 	wait
 
 run-all:
 	@echo "$(BLUE)🚀 Starting BiteBase Intelligence Development Environment (All Services)$(NC)"
 	@echo ""
-	@echo "$(YELLOW)Frontend will be available at: http://localhost:5000$(NC)"
+	@echo "$(YELLOW)Web App will be available at: http://localhost:5000$(NC)"
 	@echo "$(YELLOW)Firebase Functions: http://localhost:5001$(NC)"
 	@echo "$(YELLOW)Firebase Emulator UI: http://localhost:4001$(NC)"
 	@echo ""
@@ -97,8 +97,8 @@ run-all:
 	@echo ""
 	@trap 'echo "$(BLUE)Shutting down services...$(NC)"; pkill -f "firebase emulators" 2>/dev/null || true; pkill -f "next dev" 2>/dev/null || true; echo "$(GREEN)✓ Services stopped$(NC)"; exit 0' INT; \
 	firebase emulators:start --config firebase.json & \
-	(cd backend && ./run.sh) & \
-	(cd frontend && npm run dev) & \
+	sleep 3 && \
+	(cd apps/web && npm run dev) & \
 	wait
 
 
@@ -151,9 +151,9 @@ status:
 		echo "$(RED)✗ Firebase emulators are not running$(NC)"; \
 	fi
 	@if pgrep -f "next dev" > /dev/null; then \
-		echo "$(GREEN)✓ Frontend is running$(NC)"; \
+		echo "$(GREEN)✓ Web app is running$(NC)"; \
 	else \
-		echo "$(RED)✗ Frontend is not running$(NC)"; \
+		echo "$(RED)✗ Web app is not running$(NC)"; \
 	fi
 	@echo ""
 	@echo "Active ports:"
@@ -161,6 +161,6 @@ status:
 
 clean:
 	@echo "$(BLUE)Cleaning build artifacts...$(NC)"
-	@cd frontend && rm -rf .next node_modules/.cache 2>/dev/null || true
-	@cd functions && rm -rf lib node_modules/.cache 2>/dev/null || true
+	@cd apps/web && rm -rf .next node_modules/.cache 2>/dev/null || true
+	@cd apps/functions && rm -rf lib node_modules/.cache 2>/dev/null || true
 	@echo "$(GREEN)✓ Clean completed$(NC)"
