@@ -39,7 +39,7 @@ help:
 install-firebase:
 	@echo "$(BLUE)Installing Firebase CLI...$(NC)"
 	@if ! command -v firebase &> /dev/null; then \
-		npm install -g firebase-tools; \
+		yarn global add firebase-tools; \
 	else \
 		echo "$(GREEN)✓ Firebase CLI already installed$(NC)"; \
 	fi
@@ -48,7 +48,7 @@ install-functions:
 	@echo "$(BLUE)Installing Firebase functions dependencies...$(NC)"
 	@if [ -d "apps/functions" ]; then \
 		echo "$(YELLOW)Installing in apps/functions...$(NC)"; \
-		cd apps/functions && npm install --no-workspaces; \
+		cd apps/functions && yarn install; \
 	else \
 		echo "$(YELLOW)Functions directory not found, skipping...$(NC)"; \
 	fi
@@ -58,7 +58,7 @@ install-web:
 	@chmod +x apps/web/install.sh 2>/dev/null || true
 	@chmod +x apps/web/run.sh 2>/dev/null || true
 	@echo "$(YELLOW)Installing in apps/web...$(NC)"
-	@cd apps/web && npm install --no-workspaces
+	@cd apps/web && yarn install
 
 install: install-firebase install-functions install-web
 	@echo "$(GREEN)✓ All dependencies installed successfully!$(NC)"
@@ -70,7 +70,7 @@ run-functions:
 
 run-web:
 	@echo "$(BLUE)Starting web app server...$(NC)"
-	cd apps/web && npm run dev
+	cd apps/web && yarn dev
 
 # Development target - improved version
 run-dev:
@@ -85,7 +85,7 @@ run-dev:
 	@trap 'echo "$(BLUE)Shutting down services...$(NC)"; pkill -f "firebase emulators" 2>/dev/null || true; pkill -f "next dev" 2>/dev/null || true; echo "$(GREEN)✓ Services stopped$(NC)"; exit 0' INT; \
 	firebase emulators:start --config firebase.json & \
 	sleep 3 && \
-	(cd apps/web && npm run dev) & \
+	(cd apps/web && yarn dev) & \
 	wait
 
 run-all:
@@ -100,7 +100,7 @@ run-all:
 	@trap 'echo "$(BLUE)Shutting down services...$(NC)"; pkill -f "firebase emulators" 2>/dev/null || true; pkill -f "next dev" 2>/dev/null || true; echo "$(GREEN)✓ Services stopped$(NC)"; exit 0' INT; \
 	firebase emulators:start --config firebase.json & \
 	sleep 3 && \
-	(cd apps/web && npm run dev) & \
+	(cd apps/web && yarn dev) & \
 	wait
 
 
