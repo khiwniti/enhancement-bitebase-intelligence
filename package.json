@@ -49,7 +49,6 @@
     "npm": ">=9.0.0"
   },
   "dependencies": {
-    "@dataconnect/generated": "link:services/database/dataconnect-generated"
   },
   "repository": {
     "type": "git",

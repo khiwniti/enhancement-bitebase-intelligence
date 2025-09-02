@@ -47,7 +47,8 @@ install-firebase:
 install-functions:
 	@echo "$(BLUE)Installing Firebase functions dependencies...$(NC)"
 	@if [ -d "apps/functions" ]; then \
-		cd apps/functions && npm install; \
+		echo "$(YELLOW)Installing in apps/functions...$(NC)"; \
+		cd apps/functions && npm install --no-workspaces; \
 	else \
 		echo "$(YELLOW)Functions directory not found, skipping...$(NC)"; \
 	fi
@@ -56,7 +57,8 @@ install-web:
 	@echo "$(BLUE)Installing web app dependencies...$(NC)"
 	@chmod +x apps/web/install.sh 2>/dev/null || true
 	@chmod +x apps/web/run.sh 2>/dev/null || true
-	@cd apps/web && npm install
+	@echo "$(YELLOW)Installing in apps/web...$(NC)"
+	@cd apps/web && npm install --no-workspaces
 
 install: install-firebase install-functions install-web
 	@echo "$(GREEN)✓ All dependencies installed successfully!$(NC)"
