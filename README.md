@@ -1,15 +1,15 @@
-# 🚀 BiteBase Intelligence 2.0 - Enhanced Interactive Analytics Platform
+# 🚀 BiteBase Intelligence 2.0 - AI-Powered Restaurant Analytics Platform
 
-> **Transforming Restaurant Intelligence with AI-Powered Interactive Analytics**
+> **Modern Monorepo Architecture with Feature-Based Organization**
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.4.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Firebase](https://img.shields.io/badge/Firebase-Functions-orange?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 
 ## 🎯 **Project Overview**
 
-BiteBase Intelligence 2.0 is a revolutionary enhancement to the existing BiteBase platform ([beta.bitebase.app](https://beta.bitebase.app)), transforming static restaurant intelligence into an interactive, AI-powered decision-making platform.
+BiteBase Intelligence 2.0 is a comprehensive restaurant analytics platform built with modern architecture principles. This monorepo contains a feature-based frontend, Firebase Functions backend, and shared packages for maximum maintainability and scalability.
 
 ### **🌟 Key Enhancements**
 
@@ -24,8 +24,9 @@ BiteBase Intelligence 2.0 is a revolutionary enhancement to the existing BiteBas
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18+
+- npm 9+
+- Firebase CLI
 - Git
 
 ### **Installation**
@@ -35,39 +36,62 @@ BiteBase Intelligence 2.0 is a revolutionary enhancement to the existing BiteBas
 git clone https://github.com/your-username/enhancement-bitebase-intelligence.git
 cd enhancement-bitebase-intelligence
 
-# Install frontend dependencies
-cd frontend
-npm install
+# Install all dependencies (uses workspaces)
+npm run install:all
 
-# Start development server
+# Start development environment
 npm run dev
 ```
 
 ### **Access the Platform**
-- **Local Development**: http://localhost:3000
-- **Production API**: Connected to https://api.bitebase.app
+- **Web App**: http://localhost:5000
+- **Firebase Functions**: http://localhost:5001
+- **Firebase Console**: http://localhost:4001
 
 ---
 
 ## 🏗️ **Architecture**
 
-### **Frontend Stack**
+### **Monorepo Structure**
 ```
-Next.js 15 (App Router)
-├── TypeScript (Strict mode)
-├── Tailwind CSS v4 (Dark theme)
-├── Radix UI (Accessible components)
-├── Leaflet (Interactive mapping)
-├── Chart.js (Data visualization)
-├── React Query (State management)
-└── Lucide React (Icon system)
+bitebase-intelligence/
+├── 📁 apps/                    # Applications
+│   ├── 📁 web/                 # Next.js frontend
+│   └── 📁 functions/           # Firebase Functions
+├── 📁 packages/                # Shared packages
+│   ├── 📁 shared-types/        # Common TypeScript definitions
+│   ├── 📁 shared-utils/        # Common utilities
+│   └── 📁 ui-components/       # Shared UI components
+├── 📁 services/                # External services
+│   └── 📁 database/            # Database schemas & migrations
+├── 📁 tools/                   # Development tools & scripts
+├── 📁 docs/                    # Documentation
+└── 📁 legacy/                  # Legacy code (deprecated)
 ```
 
-### **Backend Integration**
-- **Production API**: https://api.bitebase.app
-- **FastAPI Backend**: Python-based with SQLite/PostgreSQL support
-- **Real-time Updates**: WebSocket-ready architecture
-- **AI Services**: Integrated market analysis and insights
+### **Frontend Architecture (Feature-Based)**
+```
+apps/web/src/
+├── 📁 features/                # Feature-based organization
+│   ├── 📁 analytics/           # Analytics dashboard
+│   ├── 📁 dashboard/           # Main dashboard
+│   ├── 📁 location-intelligence/ # Location analysis
+│   ├── 📁 restaurant-management/ # Restaurant tools
+│   └── 📁 ai-assistant/        # AI chat interface
+├── 📁 shared/                  # Shared components & utilities
+│   ├── 📁 components/          # Reusable UI components
+│   ├── 📁 hooks/               # Custom hooks
+│   ├── 📁 lib/                 # Utilities & configurations
+│   └── 📁 types/               # TypeScript definitions
+└── 📁 app/                     # Next.js App Router pages
+```
+
+### **Backend Architecture (Firebase Functions)**
+- **Firebase Functions**: Node.js serverless functions
+- **Firebase Firestore**: NoSQL database for real-time data
+- **Firebase Data Connect**: PostgreSQL with GraphQL API
+- **Firebase Authentication**: User management and security
+- **Firebase Hosting**: Static hosting with CDN
 
 ---
 

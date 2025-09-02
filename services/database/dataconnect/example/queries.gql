@@ -1,0 +1,310 @@
+# BiteBase Intelligence Queries - Restaurant Intelligence Platform
+
+# Public queries for restaurant discovery
+query ListRestaurants($limit: Int, $offset: Int, $city: String, $cuisineType: String)
+  @auth(level: PUBLIC, insecureReason: "Anyone can browse restaurants.") {
+  restaurants(
+    limit: $limit
+    offset: $offset
+    where: {
+      _and: [
+        { city: { eq: $city } }
+        { cuisineType: { eq: $cuisineType } }
+        { isOpen: { eq: true } }
+      ]
+    }
+    orderBy: { rating: DESC }
+  ) {
+    id
+    name
+    cuisineType
+    priceRange
+    address
+    city
+    state
+    rating
+    reviewCount
+    imageUrls
+    isOpen
+    phoneNumber
+    website
+  }
+}
+
+# Search restaurants with filters
+query SearchRestaurants($query: String, $latitude: Float, $longitude: Float, $radius: Float)
+  @auth(level: PUBLIC, insecureReason: "Anyone can search restaurants.") {
+  restaurants(
+    where: {
+      _or: [
+        { name: { contains: $query } }
+        { cuisineType: { contains: $query } }
+        { description: { contains: $query } }
+      ]
+    }
+    orderBy: { rating: DESC }
+  ) {
+    id
+    name
+    description
+    cuisineType
+    priceRange
+    address
+    city
+    state
+    latitude
+    longitude
+    rating
+    reviewCount
+    imageUrls
+    phoneNumber
+    website
+    businessHours
+  }
+}
+
+# Get restaurant details with reviews
+query GetRestaurantById($id: UUID!)
+  @auth(level: PUBLIC, insecureReason: "Anyone can view restaurant details.") {
+  restaurant(id: $id) {
+    id
+    name
+    description
+    cuisineType
+    priceRange
+    address
+    city
+    state
+    zipCode
+    latitude
+    longitude
+    phoneNumber
+    website
+    email
+    rating
+    reviewCount
+    isOpen
+    businessHours
+    imageUrls
+    tags
+    createdAt
+    verifiedAt
+
+    # Get restaurant reviews
+    reviews: restaurantReviews_on_restaurant(orderBy: { createdAt: DESC }, limit: 20) {
+      id
+      rating
+      title
+      reviewText
+      visitDate
+      visitType
+      isVerified
+      helpfulCount
+      createdAt
+      imageUrls
+      user {
+        id
+        username
+        firstName
+        lastName
+      }
+    }
+
+    # Get analytics if available
+    analytics: restaurantAnalyticss_on_restaurant(
+      orderBy: { periodStart: DESC }
+      limit: 1
+    ) {
+      viewCount
+      clickCount
+      averageRating
+      searchPosition
+      marketShare
+    }
+  }
+}
+# User-specific queries (require authentication)
+query GetUserProfile @auth(level: USER) {
+  user(key: { id_expr: "auth.uid" }) {
+    id
+    email
+    username
+    firstName
+    lastName
+    role
+    status
+    profileImageUrl
+    phoneNumber
+    preferences
+    createdAt
+    lastLoginAt
+
+    # User's market reports
+    reports: marketReports_on_user(orderBy: { createdAt: DESC }, limit: 10) {
+      id
+      title
+      status
+      reportType
+      targetLocation
+      confidence
+      createdAt
+      completedAt
+      isPublic
+    }
+
+    # User's location analyses
+    analyses: locationAnalyses_on_user(orderBy: { analysisDate: DESC }, limit: 10) {
+      id
+      latitude
+      longitude
+      address
+      city
+      analysisType
+      opportunityScore
+      confidence
+      analysisDate
+    }
+
+    # User's reviews
+    reviews: restaurantReviews_on_user(orderBy: { createdAt: DESC }, limit: 20) {
+      id
+      rating
+      title
+      reviewText
+      visitDate
+      createdAt
+      restaurant {
+        id
+        name
+        cuisineType
+        city
+      }
+    }
+  }
+}
+
+# Get user's market reports
+query GetUserMarketReports($status: String, $limit: Int) @auth(level: USER) {
+  user(key: { id_expr: "auth.uid" }) {
+    reports: marketReports_on_user(
+      where: { status: { eq: $status } }
+      orderBy: { createdAt: DESC }
+      limit: $limit
+    ) {
+      id
+      title
+      query
+      status
+      reportType
+      targetLocation
+      analysisRadius
+      executiveSummary
+      confidence
+      dataQuality
+      processingTime
+      createdAt
+      completedAt
+      expiresAt
+      exportUrls
+      isPublic
+      shareToken
+    }
+  }
+}
+
+# Get market report details
+query GetMarketReportById($id: UUID!) @auth(level: USER) {
+  marketReport(id: $id) {
+    id
+    title
+    query
+    status
+    reportType
+    targetLocation
+    analysisRadius
+    coordinates
+    executiveSummary
+    marketAnalysis
+    competitorAnalysis
+    demographicAnalysis
+    recommendations
+    riskAssessment
+    confidence
+    dataQuality
+    processingTime
+    createdAt
+    completedAt
+    expiresAt
+    exportUrls
+    isPublic
+    shareToken
+    user {
+      id
+      username
+      firstName
+      lastName
+    }
+  }
+}
+
+# Get location analysis details
+query GetLocationAnalysisById($id: UUID!) @auth(level: USER) {
+  locationAnalysis(id: $id) {
+    id
+    latitude
+    longitude
+    address
+    city
+    state
+    zipCode
+    radius
+    analysisType
+    competitorCount
+    averageRating
+    averagePriceRange
+    dominantCuisines
+    marketSaturation
+    opportunityScore
+    populationDensity
+    medianIncome
+    ageDistribution
+    footTraffic
+    confidence
+    dataQuality
+    analysisDate
+    expiresAt
+    rawData
+    insights
+    recommendations
+    user {
+      id
+      username
+    }
+  }
+}
+
+# Get nearby restaurants for location analysis
+query GetNearbyRestaurants($latitude: Float!, $longitude: Float!, $radius: Float!)
+  @auth(level: PUBLIC, insecureReason: "Location analysis requires nearby restaurant data.") {
+  restaurants(
+    where: {
+      _and: [
+        { isOpen: { eq: true } }
+        # Note: In production, you'd use PostGIS functions for proper distance calculation
+      ]
+    }
+    orderBy: { rating: DESC }
+    limit: 100
+  ) {
+    id
+    name
+    cuisineType
+    priceRange
+    latitude
+    longitude
+    rating
+    reviewCount
+    address
+    city
+  }
+}

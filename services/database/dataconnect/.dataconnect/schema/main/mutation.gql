@@ -1,0 +1,796 @@
+extend type Mutation {
+  """
+  ✨ Insert a single `LocationAnalysis` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  locationAnalysis_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: LocationAnalysis_Data!
+  ): LocationAnalysis_KeyOutput! @fdc_generated(from: "LocationAnalysis", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `MarketReport` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  marketReport_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: MarketReport_Data!
+  ): MarketReport_KeyOutput! @fdc_generated(from: "MarketReport", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Restaurant` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  restaurant_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Restaurant_Data!
+  ): Restaurant_KeyOutput! @fdc_generated(from: "Restaurant", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `RestaurantAnalytics` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  restaurantAnalytics_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: RestaurantAnalytics_Data!
+  ): RestaurantAnalytics_KeyOutput! @fdc_generated(from: "RestaurantAnalytics", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `RestaurantReview` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  restaurantReview_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: RestaurantReview_Data!
+  ): RestaurantReview_KeyOutput! @fdc_generated(from: "RestaurantReview", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `User` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  user_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: User_Data!
+  ): User_KeyOutput! @fdc_generated(from: "User", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `UserSession` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  userSession_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: UserSession_Data!
+  ): UserSession_KeyOutput! @fdc_generated(from: "UserSession", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert `LocationAnalysis` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  locationAnalysis_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [LocationAnalysis_Data!]!
+  ): [LocationAnalysis_KeyOutput!]! @fdc_generated(from: "LocationAnalysis", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `MarketReport` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  marketReport_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [MarketReport_Data!]!
+  ): [MarketReport_KeyOutput!]! @fdc_generated(from: "MarketReport", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Restaurant` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  restaurant_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Restaurant_Data!]!
+  ): [Restaurant_KeyOutput!]! @fdc_generated(from: "Restaurant", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `RestaurantAnalytics` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  restaurantAnalytics_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [RestaurantAnalytics_Data!]!
+  ): [RestaurantAnalytics_KeyOutput!]! @fdc_generated(from: "RestaurantAnalytics", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `RestaurantReview` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  restaurantReview_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [RestaurantReview_Data!]!
+  ): [RestaurantReview_KeyOutput!]! @fdc_generated(from: "RestaurantReview", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `User` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  user_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [User_Data!]!
+  ): [User_KeyOutput!]! @fdc_generated(from: "User", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `UserSession` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  userSession_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [UserSession_Data!]!
+  ): [UserSession_KeyOutput!]! @fdc_generated(from: "UserSession", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert or update a single `LocationAnalysis` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `LocationAnalysis`.
+  """
+  locationAnalysis_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: LocationAnalysis_Data!
+  ): LocationAnalysis_KeyOutput! @fdc_generated(from: "LocationAnalysis", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `MarketReport` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `MarketReport`.
+  """
+  marketReport_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: MarketReport_Data!
+  ): MarketReport_KeyOutput! @fdc_generated(from: "MarketReport", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Restaurant` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Restaurant`.
+  """
+  restaurant_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Restaurant_Data!
+  ): Restaurant_KeyOutput! @fdc_generated(from: "Restaurant", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `RestaurantAnalytics` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `RestaurantAnalytics`.
+  """
+  restaurantAnalytics_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: RestaurantAnalytics_Data!
+  ): RestaurantAnalytics_KeyOutput! @fdc_generated(from: "RestaurantAnalytics", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `RestaurantReview` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `RestaurantReview`.
+  """
+  restaurantReview_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: RestaurantReview_Data!
+  ): RestaurantReview_KeyOutput! @fdc_generated(from: "RestaurantReview", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `User` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `User`.
+  """
+  user_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: User_Data!
+  ): User_KeyOutput! @fdc_generated(from: "User", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `UserSession` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `UserSession`.
+  """
+  userSession_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: UserSession_Data!
+  ): UserSession_KeyOutput! @fdc_generated(from: "UserSession", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update `LocationAnalysis` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `LocationAnalysis`.
+  """
+  locationAnalysis_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [LocationAnalysis_Data!]!
+  ): [LocationAnalysis_KeyOutput!]! @fdc_generated(from: "LocationAnalysis", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `MarketReport` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `MarketReport`.
+  """
+  marketReport_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [MarketReport_Data!]!
+  ): [MarketReport_KeyOutput!]! @fdc_generated(from: "MarketReport", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Restaurant` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Restaurant`.
+  """
+  restaurant_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Restaurant_Data!]!
+  ): [Restaurant_KeyOutput!]! @fdc_generated(from: "Restaurant", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `RestaurantAnalytics` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `RestaurantAnalytics`.
+  """
+  restaurantAnalytics_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [RestaurantAnalytics_Data!]!
+  ): [RestaurantAnalytics_KeyOutput!]! @fdc_generated(from: "RestaurantAnalytics", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `RestaurantReview` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `RestaurantReview`.
+  """
+  restaurantReview_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [RestaurantReview_Data!]!
+  ): [RestaurantReview_KeyOutput!]! @fdc_generated(from: "RestaurantReview", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `User` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `User`.
+  """
+  user_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [User_Data!]!
+  ): [User_KeyOutput!]! @fdc_generated(from: "User", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `UserSession` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `UserSession`.
+  """
+  userSession_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [UserSession_Data!]!
+  ): [UserSession_KeyOutput!]! @fdc_generated(from: "UserSession", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Update a single `LocationAnalysis` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `LocationAnalysis` or `null` if not found.
+  """
+  locationAnalysis_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: LocationAnalysis_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: LocationAnalysis_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: LocationAnalysis_Data!
+  ): LocationAnalysis_KeyOutput @fdc_generated(from: "LocationAnalysis", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `MarketReport` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `MarketReport` or `null` if not found.
+  """
+  marketReport_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: MarketReport_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: MarketReport_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: MarketReport_Data!
+  ): MarketReport_KeyOutput @fdc_generated(from: "MarketReport", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Restaurant` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Restaurant` or `null` if not found.
+  """
+  restaurant_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Restaurant_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Restaurant_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Restaurant_Data!
+  ): Restaurant_KeyOutput @fdc_generated(from: "Restaurant", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `RestaurantAnalytics` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `RestaurantAnalytics` or `null` if not found.
+  """
+  restaurantAnalytics_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: RestaurantAnalytics_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: RestaurantAnalytics_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: RestaurantAnalytics_Data!
+  ): RestaurantAnalytics_KeyOutput @fdc_generated(from: "RestaurantAnalytics", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `RestaurantReview` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `RestaurantReview` or `null` if not found.
+  """
+  restaurantReview_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: RestaurantReview_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: RestaurantReview_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: RestaurantReview_Data!
+  ): RestaurantReview_KeyOutput @fdc_generated(from: "RestaurantReview", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `User` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `User` or `null` if not found.
+  """
+  user_update(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: User_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: User_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: User_Data!
+  ): User_KeyOutput @fdc_generated(from: "User", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `UserSession` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `UserSession` or `null` if not found.
+  """
+  userSession_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: UserSession_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: UserSession_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: UserSession_Data!
+  ): UserSession_KeyOutput @fdc_generated(from: "UserSession", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update `LocationAnalysis` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  locationAnalysis_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: LocationAnalysis_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: LocationAnalysis_Data!
+  ): Int! @fdc_generated(from: "LocationAnalysis", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `MarketReport` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  marketReport_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: MarketReport_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: MarketReport_Data!
+  ): Int! @fdc_generated(from: "MarketReport", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Restaurant` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  restaurant_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Restaurant_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Restaurant_Data!
+  ): Int! @fdc_generated(from: "Restaurant", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `RestaurantAnalytics` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  restaurantAnalytics_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: RestaurantAnalytics_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: RestaurantAnalytics_Data!
+  ): Int! @fdc_generated(from: "RestaurantAnalytics", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `RestaurantReview` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  restaurantReview_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: RestaurantReview_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: RestaurantReview_Data!
+  ): Int! @fdc_generated(from: "RestaurantReview", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `User` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  user_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: User_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: User_Data!
+  ): Int! @fdc_generated(from: "User", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `UserSession` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  userSession_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: UserSession_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: UserSession_Data!
+  ): Int! @fdc_generated(from: "UserSession", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Delete a single `LocationAnalysis` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  locationAnalysis_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: LocationAnalysis_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: LocationAnalysis_FirstRow
+  ): LocationAnalysis_KeyOutput @fdc_generated(from: "LocationAnalysis", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `MarketReport` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  marketReport_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: MarketReport_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: MarketReport_FirstRow
+  ): MarketReport_KeyOutput @fdc_generated(from: "MarketReport", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Restaurant` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  restaurant_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Restaurant_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Restaurant_FirstRow
+  ): Restaurant_KeyOutput @fdc_generated(from: "Restaurant", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `RestaurantAnalytics` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  restaurantAnalytics_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: RestaurantAnalytics_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: RestaurantAnalytics_FirstRow
+  ): RestaurantAnalytics_KeyOutput @fdc_generated(from: "RestaurantAnalytics", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `RestaurantReview` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  restaurantReview_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: RestaurantReview_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: RestaurantReview_FirstRow
+  ): RestaurantReview_KeyOutput @fdc_generated(from: "RestaurantReview", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `User` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  user_delete(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: User_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: User_FirstRow
+  ): User_KeyOutput @fdc_generated(from: "User", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `UserSession` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  userSession_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: UserSession_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: UserSession_FirstRow
+  ): UserSession_KeyOutput @fdc_generated(from: "UserSession", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete `LocationAnalysis` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  locationAnalysis_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: LocationAnalysis_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `MarketReport` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  marketReport_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: MarketReport_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Restaurant` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  restaurant_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Restaurant_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `RestaurantAnalytics` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  restaurantAnalytics_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: RestaurantAnalytics_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `RestaurantReview` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  restaurantReview_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: RestaurantReview_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `User` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  user_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: User_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "User", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `UserSession` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  userSession_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: UserSession_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession", purpose: DELETE_MULTIPLE)
+}

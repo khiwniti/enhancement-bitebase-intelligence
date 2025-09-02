@@ -1,0 +1,378 @@
+extend type Query {
+  """
+  ✨ Look up a single `LocationAnalysis` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  locationAnalysis(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: LocationAnalysis_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: LocationAnalysis_FirstRow
+  ): LocationAnalysis @fdc_generated(from: "LocationAnalysis", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `MarketReport` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  marketReport(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: MarketReport_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: MarketReport_FirstRow
+  ): MarketReport @fdc_generated(from: "MarketReport", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Restaurant` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  restaurant(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Restaurant_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Restaurant_FirstRow
+  ): Restaurant @fdc_generated(from: "Restaurant", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `RestaurantAnalytics` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  restaurantAnalytics(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: RestaurantAnalytics_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: RestaurantAnalytics_FirstRow
+  ): RestaurantAnalytics @fdc_generated(from: "RestaurantAnalytics", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `RestaurantReview` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  restaurantReview(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: RestaurantReview_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: RestaurantReview_FirstRow
+  ): RestaurantReview @fdc_generated(from: "RestaurantReview", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `User` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  user(
+    """
+    The unique ID of the object.
+    """
+    id: String
+
+    """
+    ✨ `_expr` server value variant of `id` (The unique ID of the object.)
+    """
+    id_expr: String_Expr
+
+    """
+    The key used to identify the object.
+    """
+    key: User_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: User_FirstRow
+  ): User @fdc_generated(from: "User", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `UserSession` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  userSession(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: UserSession_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: UserSession_FirstRow
+  ): UserSession @fdc_generated(from: "UserSession", purpose: QUERY_SINGLE)
+  """
+  ✨ List `LocationAnalysis` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  locationAnalyses(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: LocationAnalysis_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [LocationAnalysis_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: LocationAnalysis_Having
+  ): [LocationAnalysis!]! @fdc_generated(from: "LocationAnalysis", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `MarketReport` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  marketReports(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: MarketReport_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [MarketReport_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: MarketReport_Having
+  ): [MarketReport!]! @fdc_generated(from: "MarketReport", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Restaurant` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  restaurants(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Restaurant_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Restaurant_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Restaurant_Having
+  ): [Restaurant!]! @fdc_generated(from: "Restaurant", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `RestaurantAnalytics` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  restaurantAnalyticss(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: RestaurantAnalytics_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [RestaurantAnalytics_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: RestaurantAnalytics_Having
+  ): [RestaurantAnalytics!]! @fdc_generated(from: "RestaurantAnalytics", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `RestaurantReview` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  restaurantReviews(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: RestaurantReview_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [RestaurantReview_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: RestaurantReview_Having
+  ): [RestaurantReview!]! @fdc_generated(from: "RestaurantReview", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `User` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  users(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: User_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [User_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: User_Having
+  ): [User!]! @fdc_generated(from: "User", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `UserSession` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  userSessions(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: UserSession_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [UserSession_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: UserSession_Having
+  ): [UserSession!]! @fdc_generated(from: "UserSession", purpose: QUERY_MULTIPLE)
+}

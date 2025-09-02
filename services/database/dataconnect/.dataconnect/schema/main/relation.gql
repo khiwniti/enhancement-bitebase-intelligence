@@ -1,0 +1,2867 @@
+extend type LocationAnalysis {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "LocationAnalysis", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table.
+  """
+  _count: Int! @fdc_generated(from: "LocationAnalysis", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `address` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  address_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.address", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `ageDistribution` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  ageDistribution_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.ageDistribution", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `analysisDate` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  analysisDate_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.analysisDate", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `analysisType` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  analysisType_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.analysisType", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `averagePriceRange` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  averagePriceRange_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.averagePriceRange", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `averageRating` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  averageRating_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.averageRating", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `city` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  city_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.city", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `competitorCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  competitorCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.competitorCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `confidence` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  confidence_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.confidence", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `dataQuality` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  dataQuality_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.dataQuality", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `dominantCuisines` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  dominantCuisines_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.dominantCuisines", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `expiresAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  expiresAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.expiresAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `footTraffic` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  footTraffic_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.footTraffic", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `insights` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  insights_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.insights", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `latitude` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  latitude_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.latitude", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `longitude` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  longitude_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.longitude", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `marketSaturation` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  marketSaturation_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.marketSaturation", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `medianIncome` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  medianIncome_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.medianIncome", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `opportunityScore` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  opportunityScore_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.opportunityScore", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `populationDensity` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  populationDensity_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.populationDensity", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `radius` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  radius_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.radius", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `rawData` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  rawData_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.rawData", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `recommendations` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  recommendations_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.recommendations", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `state` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  state_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.state", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `userId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  userId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.userId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `LocationAnalysis` table where the `zipCode` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  zipCode_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "LocationAnalysis.zipCode", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `averageRating` field in the `LocationAnalysis` table.
+  """
+  averageRating_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.averageRating", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `competitorCount` field in the `LocationAnalysis` table.
+  """
+  competitorCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "LocationAnalysis.competitorCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `confidence` field in the `LocationAnalysis` table.
+  """
+  confidence_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.confidence", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `latitude` field in the `LocationAnalysis` table.
+  """
+  latitude_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.latitude", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `longitude` field in the `LocationAnalysis` table.
+  """
+  longitude_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.longitude", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `marketSaturation` field in the `LocationAnalysis` table.
+  """
+  marketSaturation_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.marketSaturation", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `medianIncome` field in the `LocationAnalysis` table.
+  """
+  medianIncome_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.medianIncome", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `opportunityScore` field in the `LocationAnalysis` table.
+  """
+  opportunityScore_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.opportunityScore", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `populationDensity` field in the `LocationAnalysis` table.
+  """
+  populationDensity_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.populationDensity", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `radius` field in the `LocationAnalysis` table.
+  """
+  radius_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.radius", purpose: QUERY_SUM)
+  """
+  ✨ Average the `averageRating` field in the `LocationAnalysis` table.
+  """
+  averageRating_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.averageRating", purpose: QUERY_AVG)
+  """
+  ✨ Average the `competitorCount` field in the `LocationAnalysis` table.
+  """
+  competitorCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.competitorCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `confidence` field in the `LocationAnalysis` table.
+  """
+  confidence_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.confidence", purpose: QUERY_AVG)
+  """
+  ✨ Average the `latitude` field in the `LocationAnalysis` table.
+  """
+  latitude_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.latitude", purpose: QUERY_AVG)
+  """
+  ✨ Average the `longitude` field in the `LocationAnalysis` table.
+  """
+  longitude_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.longitude", purpose: QUERY_AVG)
+  """
+  ✨ Average the `marketSaturation` field in the `LocationAnalysis` table.
+  """
+  marketSaturation_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.marketSaturation", purpose: QUERY_AVG)
+  """
+  ✨ Average the `medianIncome` field in the `LocationAnalysis` table.
+  """
+  medianIncome_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.medianIncome", purpose: QUERY_AVG)
+  """
+  ✨ Average the `opportunityScore` field in the `LocationAnalysis` table.
+  """
+  opportunityScore_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.opportunityScore", purpose: QUERY_AVG)
+  """
+  ✨ Average the `populationDensity` field in the `LocationAnalysis` table.
+  """
+  populationDensity_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.populationDensity", purpose: QUERY_AVG)
+  """
+  ✨ Average the `radius` field in the `LocationAnalysis` table.
+  """
+  radius_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "LocationAnalysis.radius", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `analysisDate` field in the `LocationAnalysis` table.
+  """
+  analysisDate_min: Timestamp @fdc_generated(from: "LocationAnalysis.analysisDate", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `averageRating` field in the `LocationAnalysis` table.
+  """
+  averageRating_min: Float @fdc_generated(from: "LocationAnalysis.averageRating", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `competitorCount` field in the `LocationAnalysis` table.
+  """
+  competitorCount_min: Int @fdc_generated(from: "LocationAnalysis.competitorCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `confidence` field in the `LocationAnalysis` table.
+  """
+  confidence_min: Float @fdc_generated(from: "LocationAnalysis.confidence", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `expiresAt` field in the `LocationAnalysis` table.
+  """
+  expiresAt_min: Timestamp @fdc_generated(from: "LocationAnalysis.expiresAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `latitude` field in the `LocationAnalysis` table.
+  """
+  latitude_min: Float @fdc_generated(from: "LocationAnalysis.latitude", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `longitude` field in the `LocationAnalysis` table.
+  """
+  longitude_min: Float @fdc_generated(from: "LocationAnalysis.longitude", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `marketSaturation` field in the `LocationAnalysis` table.
+  """
+  marketSaturation_min: Float @fdc_generated(from: "LocationAnalysis.marketSaturation", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `medianIncome` field in the `LocationAnalysis` table.
+  """
+  medianIncome_min: Float @fdc_generated(from: "LocationAnalysis.medianIncome", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `opportunityScore` field in the `LocationAnalysis` table.
+  """
+  opportunityScore_min: Float @fdc_generated(from: "LocationAnalysis.opportunityScore", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `populationDensity` field in the `LocationAnalysis` table.
+  """
+  populationDensity_min: Float @fdc_generated(from: "LocationAnalysis.populationDensity", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `radius` field in the `LocationAnalysis` table.
+  """
+  radius_min: Float @fdc_generated(from: "LocationAnalysis.radius", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `analysisDate` field in the `LocationAnalysis` table.
+  """
+  analysisDate_max: Timestamp @fdc_generated(from: "LocationAnalysis.analysisDate", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `averageRating` field in the `LocationAnalysis` table.
+  """
+  averageRating_max: Float @fdc_generated(from: "LocationAnalysis.averageRating", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `competitorCount` field in the `LocationAnalysis` table.
+  """
+  competitorCount_max: Int @fdc_generated(from: "LocationAnalysis.competitorCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `confidence` field in the `LocationAnalysis` table.
+  """
+  confidence_max: Float @fdc_generated(from: "LocationAnalysis.confidence", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `expiresAt` field in the `LocationAnalysis` table.
+  """
+  expiresAt_max: Timestamp @fdc_generated(from: "LocationAnalysis.expiresAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `latitude` field in the `LocationAnalysis` table.
+  """
+  latitude_max: Float @fdc_generated(from: "LocationAnalysis.latitude", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `longitude` field in the `LocationAnalysis` table.
+  """
+  longitude_max: Float @fdc_generated(from: "LocationAnalysis.longitude", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `marketSaturation` field in the `LocationAnalysis` table.
+  """
+  marketSaturation_max: Float @fdc_generated(from: "LocationAnalysis.marketSaturation", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `medianIncome` field in the `LocationAnalysis` table.
+  """
+  medianIncome_max: Float @fdc_generated(from: "LocationAnalysis.medianIncome", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `opportunityScore` field in the `LocationAnalysis` table.
+  """
+  opportunityScore_max: Float @fdc_generated(from: "LocationAnalysis.opportunityScore", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `populationDensity` field in the `LocationAnalysis` table.
+  """
+  populationDensity_max: Float @fdc_generated(from: "LocationAnalysis.populationDensity", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `radius` field in the `LocationAnalysis` table.
+  """
+  radius_max: Float @fdc_generated(from: "LocationAnalysis.radius", purpose: QUERY_MAX)
+}
+extend type MarketReport {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "MarketReport", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `MarketReport` table.
+  """
+  _count: Int! @fdc_generated(from: "MarketReport", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `analysisRadius` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  analysisRadius_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.analysisRadius", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `competitorAnalysis` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  competitorAnalysis_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.competitorAnalysis", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `completedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  completedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.completedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `confidence` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  confidence_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.confidence", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `coordinates` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  coordinates_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.coordinates", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `createdAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.createdAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `dataQuality` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  dataQuality_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.dataQuality", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `demographicAnalysis` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  demographicAnalysis_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.demographicAnalysis", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `executiveSummary` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  executiveSummary_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.executiveSummary", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `expiresAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  expiresAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.expiresAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `exportUrls` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  exportUrls_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.exportUrls", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `isPublic` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  isPublic_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.isPublic", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `marketAnalysis` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  marketAnalysis_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.marketAnalysis", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `processingTime` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  processingTime_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.processingTime", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `query` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  query_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.query", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `recommendations` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  recommendations_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.recommendations", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `reportType` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  reportType_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.reportType", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `riskAssessment` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  riskAssessment_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.riskAssessment", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `shareToken` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  shareToken_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.shareToken", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `status` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  status_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.status", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `targetLocation` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  targetLocation_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.targetLocation", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `title` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  title_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.title", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `MarketReport` table where the `userId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  userId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "MarketReport.userId", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `analysisRadius` field in the `MarketReport` table.
+  """
+  analysisRadius_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "MarketReport.analysisRadius", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `confidence` field in the `MarketReport` table.
+  """
+  confidence_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "MarketReport.confidence", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `processingTime` field in the `MarketReport` table.
+  """
+  processingTime_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "MarketReport.processingTime", purpose: QUERY_SUM)
+  """
+  ✨ Average the `analysisRadius` field in the `MarketReport` table.
+  """
+  analysisRadius_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "MarketReport.analysisRadius", purpose: QUERY_AVG)
+  """
+  ✨ Average the `confidence` field in the `MarketReport` table.
+  """
+  confidence_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "MarketReport.confidence", purpose: QUERY_AVG)
+  """
+  ✨ Average the `processingTime` field in the `MarketReport` table.
+  """
+  processingTime_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "MarketReport.processingTime", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `analysisRadius` field in the `MarketReport` table.
+  """
+  analysisRadius_min: Float @fdc_generated(from: "MarketReport.analysisRadius", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `completedAt` field in the `MarketReport` table.
+  """
+  completedAt_min: Timestamp @fdc_generated(from: "MarketReport.completedAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `confidence` field in the `MarketReport` table.
+  """
+  confidence_min: Float @fdc_generated(from: "MarketReport.confidence", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `createdAt` field in the `MarketReport` table.
+  """
+  createdAt_min: Timestamp @fdc_generated(from: "MarketReport.createdAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `expiresAt` field in the `MarketReport` table.
+  """
+  expiresAt_min: Timestamp @fdc_generated(from: "MarketReport.expiresAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `processingTime` field in the `MarketReport` table.
+  """
+  processingTime_min: Float @fdc_generated(from: "MarketReport.processingTime", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `analysisRadius` field in the `MarketReport` table.
+  """
+  analysisRadius_max: Float @fdc_generated(from: "MarketReport.analysisRadius", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `completedAt` field in the `MarketReport` table.
+  """
+  completedAt_max: Timestamp @fdc_generated(from: "MarketReport.completedAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `confidence` field in the `MarketReport` table.
+  """
+  confidence_max: Float @fdc_generated(from: "MarketReport.confidence", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `createdAt` field in the `MarketReport` table.
+  """
+  createdAt_max: Timestamp @fdc_generated(from: "MarketReport.createdAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `expiresAt` field in the `MarketReport` table.
+  """
+  expiresAt_max: Timestamp @fdc_generated(from: "MarketReport.expiresAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `processingTime` field in the `MarketReport` table.
+  """
+  processingTime_max: Float @fdc_generated(from: "MarketReport.processingTime", purpose: QUERY_MAX)
+}
+extend type Restaurant {
+  """
+  ✨ List `RestaurantAnalytics` objects in a one-to-many relationship (where `RestaurantAnalytics`.`restaurant` is this object).
+  """
+  restaurantAnalyticss_on_restaurant(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: RestaurantAnalytics_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [RestaurantAnalytics_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: RestaurantAnalytics_Having
+  ): [RestaurantAnalytics!]! @fdc_generated(from: "RestaurantAnalytics.restaurant", purpose: QUERY_MULTIPLE_ONE_TO_MANY)
+  """
+  ✨ List `RestaurantReview` objects in a one-to-many relationship (where `RestaurantReview`.`restaurant` is this object).
+  """
+  restaurantReviews_on_restaurant(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: RestaurantReview_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [RestaurantReview_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: RestaurantReview_Having
+  ): [RestaurantReview!]! @fdc_generated(from: "RestaurantReview.restaurant", purpose: QUERY_MULTIPLE_ONE_TO_MANY)
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "Restaurant", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `Restaurant` table.
+  """
+  _count: Int! @fdc_generated(from: "Restaurant", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `address` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  address_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.address", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `businessHours` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  businessHours_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.businessHours", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `city` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  city_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.city", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `country` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  country_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.country", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `createdAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.createdAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `cuisineType` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  cuisineType_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.cuisineType", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `description` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  description_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.description", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `email` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  email_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.email", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `foursquareId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  foursquareId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.foursquareId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `googlePlaceId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  googlePlaceId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.googlePlaceId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `imageUrls` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  imageUrls_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.imageUrls", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `isOpen` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  isOpen_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.isOpen", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `latitude` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  latitude_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.latitude", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `longitude` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  longitude_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.longitude", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `name` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  name_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.name", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `phoneNumber` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  phoneNumber_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.phoneNumber", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `priceRange` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  priceRange_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.priceRange", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `rating` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  rating_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.rating", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `reviewCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  reviewCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.reviewCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `state` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  state_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.state", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `tags` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  tags_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.tags", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `updatedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  updatedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.updatedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `verifiedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  verifiedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.verifiedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `website` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  website_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.website", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `yelpId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  yelpId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.yelpId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `Restaurant` table where the `zipCode` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  zipCode_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "Restaurant.zipCode", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `latitude` field in the `Restaurant` table.
+  """
+  latitude_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.latitude", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `longitude` field in the `Restaurant` table.
+  """
+  longitude_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.longitude", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `rating` field in the `Restaurant` table.
+  """
+  rating_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.rating", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `reviewCount` field in the `Restaurant` table.
+  """
+  reviewCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "Restaurant.reviewCount", purpose: QUERY_SUM)
+  """
+  ✨ Average the `latitude` field in the `Restaurant` table.
+  """
+  latitude_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.latitude", purpose: QUERY_AVG)
+  """
+  ✨ Average the `longitude` field in the `Restaurant` table.
+  """
+  longitude_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.longitude", purpose: QUERY_AVG)
+  """
+  ✨ Average the `rating` field in the `Restaurant` table.
+  """
+  rating_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.rating", purpose: QUERY_AVG)
+  """
+  ✨ Average the `reviewCount` field in the `Restaurant` table.
+  """
+  reviewCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "Restaurant.reviewCount", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `createdAt` field in the `Restaurant` table.
+  """
+  createdAt_min: Timestamp @fdc_generated(from: "Restaurant.createdAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `latitude` field in the `Restaurant` table.
+  """
+  latitude_min: Float @fdc_generated(from: "Restaurant.latitude", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `longitude` field in the `Restaurant` table.
+  """
+  longitude_min: Float @fdc_generated(from: "Restaurant.longitude", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `rating` field in the `Restaurant` table.
+  """
+  rating_min: Float @fdc_generated(from: "Restaurant.rating", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `reviewCount` field in the `Restaurant` table.
+  """
+  reviewCount_min: Int @fdc_generated(from: "Restaurant.reviewCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `updatedAt` field in the `Restaurant` table.
+  """
+  updatedAt_min: Timestamp @fdc_generated(from: "Restaurant.updatedAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `verifiedAt` field in the `Restaurant` table.
+  """
+  verifiedAt_min: Timestamp @fdc_generated(from: "Restaurant.verifiedAt", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `createdAt` field in the `Restaurant` table.
+  """
+  createdAt_max: Timestamp @fdc_generated(from: "Restaurant.createdAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `latitude` field in the `Restaurant` table.
+  """
+  latitude_max: Float @fdc_generated(from: "Restaurant.latitude", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `longitude` field in the `Restaurant` table.
+  """
+  longitude_max: Float @fdc_generated(from: "Restaurant.longitude", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `rating` field in the `Restaurant` table.
+  """
+  rating_max: Float @fdc_generated(from: "Restaurant.rating", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `reviewCount` field in the `Restaurant` table.
+  """
+  reviewCount_max: Int @fdc_generated(from: "Restaurant.reviewCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `updatedAt` field in the `Restaurant` table.
+  """
+  updatedAt_max: Timestamp @fdc_generated(from: "Restaurant.updatedAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `verifiedAt` field in the `Restaurant` table.
+  """
+  verifiedAt_max: Timestamp @fdc_generated(from: "Restaurant.verifiedAt", purpose: QUERY_MAX)
+}
+extend type RestaurantAnalytics {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "RestaurantAnalytics", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table.
+  """
+  _count: Int! @fdc_generated(from: "RestaurantAnalytics", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `averageRating` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  averageRating_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.averageRating", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `callCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  callCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.callCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `clickCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  clickCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.clickCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `competitorComparison` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  competitorComparison_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.competitorComparison", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `createdAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.createdAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `directionCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  directionCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.directionCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `marketShare` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  marketShare_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.marketShare", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `newReviewCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  newReviewCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.newReviewCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `periodEnd` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  periodEnd_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.periodEnd", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `periodStart` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  periodStart_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.periodStart", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `periodType` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  periodType_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.periodType", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `photoViewCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  photoViewCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.photoViewCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `ratingDistribution` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  ratingDistribution_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.ratingDistribution", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `restaurantId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  restaurantId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.restaurantId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `saveCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  saveCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.saveCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `searchClicks` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  searchClicks_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.searchClicks", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `searchImpressions` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  searchImpressions_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.searchImpressions", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `searchPosition` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  searchPosition_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.searchPosition", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `shareCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  shareCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.shareCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `updatedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  updatedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.updatedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `viewCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  viewCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.viewCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantAnalytics` table where the `websiteClickCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  websiteClickCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantAnalytics.websiteClickCount", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `averageRating` field in the `RestaurantAnalytics` table.
+  """
+  averageRating_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.averageRating", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `callCount` field in the `RestaurantAnalytics` table.
+  """
+  callCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.callCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `clickCount` field in the `RestaurantAnalytics` table.
+  """
+  clickCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.clickCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `directionCount` field in the `RestaurantAnalytics` table.
+  """
+  directionCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.directionCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `marketShare` field in the `RestaurantAnalytics` table.
+  """
+  marketShare_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.marketShare", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `newReviewCount` field in the `RestaurantAnalytics` table.
+  """
+  newReviewCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.newReviewCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `photoViewCount` field in the `RestaurantAnalytics` table.
+  """
+  photoViewCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.photoViewCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `saveCount` field in the `RestaurantAnalytics` table.
+  """
+  saveCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.saveCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `searchClicks` field in the `RestaurantAnalytics` table.
+  """
+  searchClicks_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.searchClicks", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `searchImpressions` field in the `RestaurantAnalytics` table.
+  """
+  searchImpressions_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.searchImpressions", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `searchPosition` field in the `RestaurantAnalytics` table.
+  """
+  searchPosition_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.searchPosition", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `shareCount` field in the `RestaurantAnalytics` table.
+  """
+  shareCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.shareCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `viewCount` field in the `RestaurantAnalytics` table.
+  """
+  viewCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.viewCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `websiteClickCount` field in the `RestaurantAnalytics` table.
+  """
+  websiteClickCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantAnalytics.websiteClickCount", purpose: QUERY_SUM)
+  """
+  ✨ Average the `averageRating` field in the `RestaurantAnalytics` table.
+  """
+  averageRating_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.averageRating", purpose: QUERY_AVG)
+  """
+  ✨ Average the `callCount` field in the `RestaurantAnalytics` table.
+  """
+  callCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.callCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `clickCount` field in the `RestaurantAnalytics` table.
+  """
+  clickCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.clickCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `directionCount` field in the `RestaurantAnalytics` table.
+  """
+  directionCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.directionCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `marketShare` field in the `RestaurantAnalytics` table.
+  """
+  marketShare_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.marketShare", purpose: QUERY_AVG)
+  """
+  ✨ Average the `newReviewCount` field in the `RestaurantAnalytics` table.
+  """
+  newReviewCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.newReviewCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `photoViewCount` field in the `RestaurantAnalytics` table.
+  """
+  photoViewCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.photoViewCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `saveCount` field in the `RestaurantAnalytics` table.
+  """
+  saveCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.saveCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `searchClicks` field in the `RestaurantAnalytics` table.
+  """
+  searchClicks_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.searchClicks", purpose: QUERY_AVG)
+  """
+  ✨ Average the `searchImpressions` field in the `RestaurantAnalytics` table.
+  """
+  searchImpressions_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.searchImpressions", purpose: QUERY_AVG)
+  """
+  ✨ Average the `searchPosition` field in the `RestaurantAnalytics` table.
+  """
+  searchPosition_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.searchPosition", purpose: QUERY_AVG)
+  """
+  ✨ Average the `shareCount` field in the `RestaurantAnalytics` table.
+  """
+  shareCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.shareCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `viewCount` field in the `RestaurantAnalytics` table.
+  """
+  viewCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.viewCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `websiteClickCount` field in the `RestaurantAnalytics` table.
+  """
+  websiteClickCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantAnalytics.websiteClickCount", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `averageRating` field in the `RestaurantAnalytics` table.
+  """
+  averageRating_min: Float @fdc_generated(from: "RestaurantAnalytics.averageRating", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `callCount` field in the `RestaurantAnalytics` table.
+  """
+  callCount_min: Int @fdc_generated(from: "RestaurantAnalytics.callCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `clickCount` field in the `RestaurantAnalytics` table.
+  """
+  clickCount_min: Int @fdc_generated(from: "RestaurantAnalytics.clickCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `createdAt` field in the `RestaurantAnalytics` table.
+  """
+  createdAt_min: Timestamp @fdc_generated(from: "RestaurantAnalytics.createdAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `directionCount` field in the `RestaurantAnalytics` table.
+  """
+  directionCount_min: Int @fdc_generated(from: "RestaurantAnalytics.directionCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `marketShare` field in the `RestaurantAnalytics` table.
+  """
+  marketShare_min: Float @fdc_generated(from: "RestaurantAnalytics.marketShare", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `newReviewCount` field in the `RestaurantAnalytics` table.
+  """
+  newReviewCount_min: Int @fdc_generated(from: "RestaurantAnalytics.newReviewCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `periodEnd` field in the `RestaurantAnalytics` table.
+  """
+  periodEnd_min: Date @fdc_generated(from: "RestaurantAnalytics.periodEnd", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `periodStart` field in the `RestaurantAnalytics` table.
+  """
+  periodStart_min: Date @fdc_generated(from: "RestaurantAnalytics.periodStart", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `photoViewCount` field in the `RestaurantAnalytics` table.
+  """
+  photoViewCount_min: Int @fdc_generated(from: "RestaurantAnalytics.photoViewCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `saveCount` field in the `RestaurantAnalytics` table.
+  """
+  saveCount_min: Int @fdc_generated(from: "RestaurantAnalytics.saveCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `searchClicks` field in the `RestaurantAnalytics` table.
+  """
+  searchClicks_min: Int @fdc_generated(from: "RestaurantAnalytics.searchClicks", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `searchImpressions` field in the `RestaurantAnalytics` table.
+  """
+  searchImpressions_min: Int @fdc_generated(from: "RestaurantAnalytics.searchImpressions", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `searchPosition` field in the `RestaurantAnalytics` table.
+  """
+  searchPosition_min: Float @fdc_generated(from: "RestaurantAnalytics.searchPosition", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `shareCount` field in the `RestaurantAnalytics` table.
+  """
+  shareCount_min: Int @fdc_generated(from: "RestaurantAnalytics.shareCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `updatedAt` field in the `RestaurantAnalytics` table.
+  """
+  updatedAt_min: Timestamp @fdc_generated(from: "RestaurantAnalytics.updatedAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `viewCount` field in the `RestaurantAnalytics` table.
+  """
+  viewCount_min: Int @fdc_generated(from: "RestaurantAnalytics.viewCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `websiteClickCount` field in the `RestaurantAnalytics` table.
+  """
+  websiteClickCount_min: Int @fdc_generated(from: "RestaurantAnalytics.websiteClickCount", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `averageRating` field in the `RestaurantAnalytics` table.
+  """
+  averageRating_max: Float @fdc_generated(from: "RestaurantAnalytics.averageRating", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `callCount` field in the `RestaurantAnalytics` table.
+  """
+  callCount_max: Int @fdc_generated(from: "RestaurantAnalytics.callCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `clickCount` field in the `RestaurantAnalytics` table.
+  """
+  clickCount_max: Int @fdc_generated(from: "RestaurantAnalytics.clickCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `createdAt` field in the `RestaurantAnalytics` table.
+  """
+  createdAt_max: Timestamp @fdc_generated(from: "RestaurantAnalytics.createdAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `directionCount` field in the `RestaurantAnalytics` table.
+  """
+  directionCount_max: Int @fdc_generated(from: "RestaurantAnalytics.directionCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `marketShare` field in the `RestaurantAnalytics` table.
+  """
+  marketShare_max: Float @fdc_generated(from: "RestaurantAnalytics.marketShare", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `newReviewCount` field in the `RestaurantAnalytics` table.
+  """
+  newReviewCount_max: Int @fdc_generated(from: "RestaurantAnalytics.newReviewCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `periodEnd` field in the `RestaurantAnalytics` table.
+  """
+  periodEnd_max: Date @fdc_generated(from: "RestaurantAnalytics.periodEnd", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `periodStart` field in the `RestaurantAnalytics` table.
+  """
+  periodStart_max: Date @fdc_generated(from: "RestaurantAnalytics.periodStart", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `photoViewCount` field in the `RestaurantAnalytics` table.
+  """
+  photoViewCount_max: Int @fdc_generated(from: "RestaurantAnalytics.photoViewCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `saveCount` field in the `RestaurantAnalytics` table.
+  """
+  saveCount_max: Int @fdc_generated(from: "RestaurantAnalytics.saveCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `searchClicks` field in the `RestaurantAnalytics` table.
+  """
+  searchClicks_max: Int @fdc_generated(from: "RestaurantAnalytics.searchClicks", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `searchImpressions` field in the `RestaurantAnalytics` table.
+  """
+  searchImpressions_max: Int @fdc_generated(from: "RestaurantAnalytics.searchImpressions", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `searchPosition` field in the `RestaurantAnalytics` table.
+  """
+  searchPosition_max: Float @fdc_generated(from: "RestaurantAnalytics.searchPosition", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `shareCount` field in the `RestaurantAnalytics` table.
+  """
+  shareCount_max: Int @fdc_generated(from: "RestaurantAnalytics.shareCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `updatedAt` field in the `RestaurantAnalytics` table.
+  """
+  updatedAt_max: Timestamp @fdc_generated(from: "RestaurantAnalytics.updatedAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `viewCount` field in the `RestaurantAnalytics` table.
+  """
+  viewCount_max: Int @fdc_generated(from: "RestaurantAnalytics.viewCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `websiteClickCount` field in the `RestaurantAnalytics` table.
+  """
+  websiteClickCount_max: Int @fdc_generated(from: "RestaurantAnalytics.websiteClickCount", purpose: QUERY_MAX)
+}
+extend type RestaurantReview {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "RestaurantReview", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table.
+  """
+  _count: Int! @fdc_generated(from: "RestaurantReview", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `createdAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.createdAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `helpfulCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  helpfulCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.helpfulCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `imageUrls` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  imageUrls_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.imageUrls", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `isVerified` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  isVerified_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.isVerified", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `moderatedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  moderatedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.moderatedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `moderatedBy` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  moderatedBy_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.moderatedBy", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `moderationStatus` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  moderationStatus_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.moderationStatus", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `partySize` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  partySize_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.partySize", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `rating` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  rating_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.rating", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `reportCount` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  reportCount_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.reportCount", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `restaurantId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  restaurantId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.restaurantId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `reviewText` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  reviewText_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.reviewText", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `source` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  source_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.source", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `title` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  title_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.title", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `updatedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  updatedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.updatedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `userId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  userId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.userId", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `videoUrls` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  videoUrls_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.videoUrls", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `visitDate` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  visitDate_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.visitDate", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `RestaurantReview` table where the `visitType` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  visitType_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "RestaurantReview.visitType", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `helpfulCount` field in the `RestaurantReview` table.
+  """
+  helpfulCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantReview.helpfulCount", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `partySize` field in the `RestaurantReview` table.
+  """
+  partySize_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantReview.partySize", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `rating` field in the `RestaurantReview` table.
+  """
+  rating_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantReview.rating", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `reportCount` field in the `RestaurantReview` table.
+  """
+  reportCount_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "RestaurantReview.reportCount", purpose: QUERY_SUM)
+  """
+  ✨ Average the `helpfulCount` field in the `RestaurantReview` table.
+  """
+  helpfulCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantReview.helpfulCount", purpose: QUERY_AVG)
+  """
+  ✨ Average the `partySize` field in the `RestaurantReview` table.
+  """
+  partySize_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantReview.partySize", purpose: QUERY_AVG)
+  """
+  ✨ Average the `rating` field in the `RestaurantReview` table.
+  """
+  rating_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantReview.rating", purpose: QUERY_AVG)
+  """
+  ✨ Average the `reportCount` field in the `RestaurantReview` table.
+  """
+  reportCount_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "RestaurantReview.reportCount", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `createdAt` field in the `RestaurantReview` table.
+  """
+  createdAt_min: Timestamp @fdc_generated(from: "RestaurantReview.createdAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `helpfulCount` field in the `RestaurantReview` table.
+  """
+  helpfulCount_min: Int @fdc_generated(from: "RestaurantReview.helpfulCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `moderatedAt` field in the `RestaurantReview` table.
+  """
+  moderatedAt_min: Timestamp @fdc_generated(from: "RestaurantReview.moderatedAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `partySize` field in the `RestaurantReview` table.
+  """
+  partySize_min: Int @fdc_generated(from: "RestaurantReview.partySize", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `rating` field in the `RestaurantReview` table.
+  """
+  rating_min: Int @fdc_generated(from: "RestaurantReview.rating", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `reportCount` field in the `RestaurantReview` table.
+  """
+  reportCount_min: Int @fdc_generated(from: "RestaurantReview.reportCount", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `updatedAt` field in the `RestaurantReview` table.
+  """
+  updatedAt_min: Timestamp @fdc_generated(from: "RestaurantReview.updatedAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `visitDate` field in the `RestaurantReview` table.
+  """
+  visitDate_min: Date @fdc_generated(from: "RestaurantReview.visitDate", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `createdAt` field in the `RestaurantReview` table.
+  """
+  createdAt_max: Timestamp @fdc_generated(from: "RestaurantReview.createdAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `helpfulCount` field in the `RestaurantReview` table.
+  """
+  helpfulCount_max: Int @fdc_generated(from: "RestaurantReview.helpfulCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `moderatedAt` field in the `RestaurantReview` table.
+  """
+  moderatedAt_max: Timestamp @fdc_generated(from: "RestaurantReview.moderatedAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `partySize` field in the `RestaurantReview` table.
+  """
+  partySize_max: Int @fdc_generated(from: "RestaurantReview.partySize", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `rating` field in the `RestaurantReview` table.
+  """
+  rating_max: Int @fdc_generated(from: "RestaurantReview.rating", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `reportCount` field in the `RestaurantReview` table.
+  """
+  reportCount_max: Int @fdc_generated(from: "RestaurantReview.reportCount", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `updatedAt` field in the `RestaurantReview` table.
+  """
+  updatedAt_max: Timestamp @fdc_generated(from: "RestaurantReview.updatedAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `visitDate` field in the `RestaurantReview` table.
+  """
+  visitDate_max: Date @fdc_generated(from: "RestaurantReview.visitDate", purpose: QUERY_MAX)
+}
+extend type User {
+  """
+  ✨ List `LocationAnalysis` objects in a one-to-many relationship (where `LocationAnalysis`.`user` is this object).
+  """
+  locationAnalyses_on_user(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: LocationAnalysis_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [LocationAnalysis_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: LocationAnalysis_Having
+  ): [LocationAnalysis!]! @fdc_generated(from: "LocationAnalysis.user", purpose: QUERY_MULTIPLE_ONE_TO_MANY)
+  """
+  ✨ List `MarketReport` objects in a one-to-many relationship (where `MarketReport`.`user` is this object).
+  """
+  marketReports_on_user(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: MarketReport_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [MarketReport_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: MarketReport_Having
+  ): [MarketReport!]! @fdc_generated(from: "MarketReport.user", purpose: QUERY_MULTIPLE_ONE_TO_MANY)
+  """
+  ✨ List `RestaurantReview` objects in a one-to-many relationship (where `RestaurantReview`.`user` is this object).
+  """
+  restaurantReviews_on_user(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: RestaurantReview_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [RestaurantReview_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: RestaurantReview_Having
+  ): [RestaurantReview!]! @fdc_generated(from: "RestaurantReview.user", purpose: QUERY_MULTIPLE_ONE_TO_MANY)
+  """
+  ✨ List `UserSession` objects in a one-to-many relationship (where `UserSession`.`user` is this object).
+  """
+  userSessions_on_user(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: UserSession_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [UserSession_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: UserSession_Having
+  ): [UserSession!]! @fdc_generated(from: "UserSession.user", purpose: QUERY_MULTIPLE_ONE_TO_MANY)
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "User", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `User` table.
+  """
+  _count: Int! @fdc_generated(from: "User", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `createdAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  createdAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.createdAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `email` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  email_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.email", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `firstName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  firstName_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.firstName", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `lastLoginAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  lastLoginAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.lastLoginAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `lastName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  lastName_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.lastName", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `phoneNumber` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  phoneNumber_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.phoneNumber", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `preferences` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  preferences_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.preferences", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `profileImageUrl` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  profileImageUrl_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.profileImageUrl", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `role` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  role_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.role", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `status` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  status_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.status", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `updatedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  updatedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.updatedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `User` table where the `username` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  username_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "User.username", purpose: QUERY_COUNT)
+  """
+  ✨ Minimum of the `createdAt` field in the `User` table.
+  """
+  createdAt_min: Timestamp @fdc_generated(from: "User.createdAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `lastLoginAt` field in the `User` table.
+  """
+  lastLoginAt_min: Timestamp @fdc_generated(from: "User.lastLoginAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `updatedAt` field in the `User` table.
+  """
+  updatedAt_min: Timestamp @fdc_generated(from: "User.updatedAt", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `createdAt` field in the `User` table.
+  """
+  createdAt_max: Timestamp @fdc_generated(from: "User.createdAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `lastLoginAt` field in the `User` table.
+  """
+  lastLoginAt_max: Timestamp @fdc_generated(from: "User.lastLoginAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `updatedAt` field in the `User` table.
+  """
+  updatedAt_max: Timestamp @fdc_generated(from: "User.updatedAt", purpose: QUERY_MAX)
+}
+extend type UserSession {
+  """
+  Implicit metadata field that cannot be written. It provides extra information about query results.
+  """
+  _metadata: _Metadata @fdc_generated(from: "UserSession", purpose: METADATA_FIELD)
+  """
+  ✨ Count the number of rows in the `UserSession` table.
+  """
+  _count: Int! @fdc_generated(from: "UserSession", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `browserName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  browserName_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.browserName", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `city` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  city_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.city", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `country` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  country_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.country", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `deviceType` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  deviceType_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.deviceType", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `duration` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  duration_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.duration", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `endReason` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  endReason_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.endReason", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `endedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  endedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.endedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `id` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  id_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.id", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `ipAddress` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  ipAddress_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.ipAddress", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `isActive` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  isActive_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.isActive", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `lastActivityAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  lastActivityAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.lastActivityAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `locationsAnalyzed` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  locationsAnalyzed_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.locationsAnalyzed", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `pageViews` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  pageViews_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.pageViews", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `reportsGenerated` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  reportsGenerated_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.reportsGenerated", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `searchQueries` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  searchQueries_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.searchQueries", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `sessionToken` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  sessionToken_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.sessionToken", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `startedAt` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  startedAt_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.startedAt", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `userAgent` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  userAgent_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.userAgent", purpose: QUERY_COUNT)
+  """
+  ✨ Count the number of rows in the `UserSession` table where the `userId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
+  """
+  userId_count(
+    """
+    Set to true to count the number of distinct values.
+    """
+    distinct: Boolean = false
+  ): Int! @fdc_generated(from: "UserSession.userId", purpose: QUERY_COUNT)
+  """
+  ✨ Sum the `duration` field in the `UserSession` table.
+  """
+  duration_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "UserSession.duration", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `locationsAnalyzed` field in the `UserSession` table.
+  """
+  locationsAnalyzed_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "UserSession.locationsAnalyzed", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `pageViews` field in the `UserSession` table.
+  """
+  pageViews_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "UserSession.pageViews", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `reportsGenerated` field in the `UserSession` table.
+  """
+  reportsGenerated_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "UserSession.reportsGenerated", purpose: QUERY_SUM)
+  """
+  ✨ Sum the `searchQueries` field in the `UserSession` table.
+  """
+  searchQueries_sum(
+    """
+    Set to true to sum the distinct values.
+    """
+    distinct: Boolean = false
+  ): Int @fdc_generated(from: "UserSession.searchQueries", purpose: QUERY_SUM)
+  """
+  ✨ Average the `duration` field in the `UserSession` table.
+  """
+  duration_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "UserSession.duration", purpose: QUERY_AVG)
+  """
+  ✨ Average the `locationsAnalyzed` field in the `UserSession` table.
+  """
+  locationsAnalyzed_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "UserSession.locationsAnalyzed", purpose: QUERY_AVG)
+  """
+  ✨ Average the `pageViews` field in the `UserSession` table.
+  """
+  pageViews_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "UserSession.pageViews", purpose: QUERY_AVG)
+  """
+  ✨ Average the `reportsGenerated` field in the `UserSession` table.
+  """
+  reportsGenerated_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "UserSession.reportsGenerated", purpose: QUERY_AVG)
+  """
+  ✨ Average the `searchQueries` field in the `UserSession` table.
+  """
+  searchQueries_avg(
+    """
+    Set to true to average the distinct values.
+    """
+    distinct: Boolean = false
+  ): Float @fdc_generated(from: "UserSession.searchQueries", purpose: QUERY_AVG)
+  """
+  ✨ Minimum of the `duration` field in the `UserSession` table.
+  """
+  duration_min: Int @fdc_generated(from: "UserSession.duration", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `endedAt` field in the `UserSession` table.
+  """
+  endedAt_min: Timestamp @fdc_generated(from: "UserSession.endedAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `lastActivityAt` field in the `UserSession` table.
+  """
+  lastActivityAt_min: Timestamp @fdc_generated(from: "UserSession.lastActivityAt", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `locationsAnalyzed` field in the `UserSession` table.
+  """
+  locationsAnalyzed_min: Int @fdc_generated(from: "UserSession.locationsAnalyzed", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `pageViews` field in the `UserSession` table.
+  """
+  pageViews_min: Int @fdc_generated(from: "UserSession.pageViews", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `reportsGenerated` field in the `UserSession` table.
+  """
+  reportsGenerated_min: Int @fdc_generated(from: "UserSession.reportsGenerated", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `searchQueries` field in the `UserSession` table.
+  """
+  searchQueries_min: Int @fdc_generated(from: "UserSession.searchQueries", purpose: QUERY_MIN)
+  """
+  ✨ Minimum of the `startedAt` field in the `UserSession` table.
+  """
+  startedAt_min: Timestamp @fdc_generated(from: "UserSession.startedAt", purpose: QUERY_MIN)
+  """
+  ✨ Maximum of the `duration` field in the `UserSession` table.
+  """
+  duration_max: Int @fdc_generated(from: "UserSession.duration", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `endedAt` field in the `UserSession` table.
+  """
+  endedAt_max: Timestamp @fdc_generated(from: "UserSession.endedAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `lastActivityAt` field in the `UserSession` table.
+  """
+  lastActivityAt_max: Timestamp @fdc_generated(from: "UserSession.lastActivityAt", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `locationsAnalyzed` field in the `UserSession` table.
+  """
+  locationsAnalyzed_max: Int @fdc_generated(from: "UserSession.locationsAnalyzed", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `pageViews` field in the `UserSession` table.
+  """
+  pageViews_max: Int @fdc_generated(from: "UserSession.pageViews", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `reportsGenerated` field in the `UserSession` table.
+  """
+  reportsGenerated_max: Int @fdc_generated(from: "UserSession.reportsGenerated", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `searchQueries` field in the `UserSession` table.
+  """
+  searchQueries_max: Int @fdc_generated(from: "UserSession.searchQueries", purpose: QUERY_MAX)
+  """
+  ✨ Maximum of the `startedAt` field in the `UserSession` table.
+  """
+  startedAt_max: Timestamp @fdc_generated(from: "UserSession.startedAt", purpose: QUERY_MAX)
+}

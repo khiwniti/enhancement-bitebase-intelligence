@@ -97,7 +97,7 @@ BACKEND_PID=$!
 cd ..
 
 # Wait a moment for backend to start
-sleep 3
+sleep 10
 
 # Check if backend started successfully
 if ! check_port 8000; then

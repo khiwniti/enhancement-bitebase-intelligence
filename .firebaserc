@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "bitebase-intelligence-85dkc",
+    "development": "bitebase-intelligence-85dkc",
+    "staging": "bitebase-intelligence",
+    "production": "bitebase-intelligence"
+  },
+  "targets": {
+    "bitebase-intelligence-85dkc": {
+      "hosting": {
+        "frontend": [
+          "bitebase-intelligence-85dkc"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {
+    "postgres": {
+      "localConnectionString": "postgresql://postgres:password@localhost:5432/fdcdb"
+    }
+  }
+}

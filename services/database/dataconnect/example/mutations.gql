@@ -1,0 +1,188 @@
+# BiteBase Intelligence Mutations - Restaurant Intelligence Platform
+
+# User management mutations
+mutation CreateUser($email: String!, $username: String!, $firstName: String, $lastName: String) @auth(level: USER) {
+  user_upsert(data: {
+    id_expr: "auth.uid"
+    email: $email
+    username: $username
+    firstName: $firstName
+    lastName: $lastName
+    role: "USER"
+    status: "ACTIVE"
+    createdAt_expr: "request.time"
+    updatedAt_expr: "request.time"
+  })
+}
+
+mutation UpdateUserProfile($firstName: String, $lastName: String, $phoneNumber: String, $profileImageUrl: String, $preferences: String) @auth(level: USER) {
+  user_update(
+    key: { id_expr: "auth.uid" }
+    data: {
+      firstName: $firstName
+      lastName: $lastName
+      phoneNumber: $phoneNumber
+      profileImageUrl: $profileImageUrl
+      preferences: $preferences
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+# Restaurant mutations
+mutation CreateRestaurant(
+  $name: String!
+  $description: String
+  $cuisineType: String
+  $priceRange: String
+  $address: String!
+  $city: String!
+  $state: String!
+  $zipCode: String!
+  $latitude: Float!
+  $longitude: Float!
+  $phoneNumber: String
+  $website: String
+  $email: String
+  $businessHours: String
+  $imageUrls: String
+  $tags: String
+  $googlePlaceId: String
+  $yelpId: String
+  $foursquareId: String
+) @auth(level: USER) {
+  restaurant_insert(data: {
+    name: $name
+    description: $description
+    cuisineType: $cuisineType
+    priceRange: $priceRange
+    address: $address
+    city: $city
+    state: $state
+    zipCode: $zipCode
+    latitude: $latitude
+    longitude: $longitude
+    phoneNumber: $phoneNumber
+    website: $website
+    email: $email
+    businessHours: $businessHours
+    imageUrls: $imageUrls
+    tags: $tags
+    googlePlaceId: $googlePlaceId
+    yelpId: $yelpId
+    foursquareId: $foursquareId
+  })
+}
+# Restaurant review mutations
+mutation AddRestaurantReview(
+  $restaurantId: UUID!
+  $rating: Int!
+  $title: String
+  $reviewText: String
+  $visitDate: Date
+  $visitType: String
+  $partySize: Int
+  $imageUrls: String
+) @auth(level: USER) {
+  restaurantReview_insert(data: {
+    restaurantId: $restaurantId
+    userId_expr: "auth.uid"
+    rating: $rating
+    title: $title
+    reviewText: $reviewText
+    visitDate: $visitDate
+    visitType: $visitType
+    partySize: $partySize
+    imageUrls: $imageUrls
+  })
+}
+
+mutation UpdateRestaurantReview(
+  $id: UUID!
+  $rating: Int
+  $title: String
+  $reviewText: String
+  $visitDate: Date
+  $visitType: String
+  $partySize: Int
+  $imageUrls: String
+) @auth(level: USER) {
+  restaurantReview_update(
+    key: { id: $id }
+    data: {
+      rating: $rating
+      title: $title
+      reviewText: $reviewText
+      visitDate: $visitDate
+      visitType: $visitType
+      partySize: $partySize
+      imageUrls: $imageUrls
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+mutation DeleteRestaurantReview($id: UUID!) @auth(level: USER) {
+  restaurantReview_delete(key: { id: $id })
+}
+
+# Market report mutations
+mutation CreateMarketReport(
+  $title: String!
+  $query: String!
+  $reportType: String!
+  $targetLocation: String
+  $analysisRadius: Float
+  $coordinates: String
+) @auth(level: USER) {
+  marketReport_insert(data: {
+    userId_expr: "auth.uid"
+    title: $title
+    query: $query
+    reportType: $reportType
+    targetLocation: $targetLocation
+    analysisRadius: $analysisRadius
+    coordinates: $coordinates
+    status: "PENDING"
+  })
+}
+
+mutation UpdateMarketReport(
+  $id: UUID!
+  $status: String
+  $executiveSummary: String
+  $marketAnalysis: String
+  $competitorAnalysis: String
+  $demographicAnalysis: String
+  $recommendations: String
+  $riskAssessment: String
+  $confidence: Float
+  $dataQuality: String
+  $processingTime: Float
+  $completedAt: Timestamp
+  $expiresAt: Timestamp
+  $exportUrls: String
+) @auth(level: USER) {
+  marketReport_update(
+    key: { id: $id }
+    data: {
+      status: $status
+      executiveSummary: $executiveSummary
+      marketAnalysis: $marketAnalysis
+      competitorAnalysis: $competitorAnalysis
+      demographicAnalysis: $demographicAnalysis
+      recommendations: $recommendations
+      riskAssessment: $riskAssessment
+      confidence: $confidence
+      dataQuality: $dataQuality
+      processingTime: $processingTime
+      completedAt: $completedAt
+      expiresAt: $expiresAt
+      exportUrls: $exportUrls
+    }
+  )
+}
+
+mutation DeleteMarketReport($id: UUID!) @auth(level: USER) {
+  marketReport_delete(key: { id: $id })
+}
