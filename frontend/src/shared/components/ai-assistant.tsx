@@ -85,7 +85,7 @@ export function AIAssistant({
         sender: 'ai',
         timestamp: new Date(),
         confidence: response.confidence,
-        context: response.context
+        context: response.context || ''
       }
 
       setMessages(prev => [...prev, aiMessage])

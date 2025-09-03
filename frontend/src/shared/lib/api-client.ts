@@ -2,7 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ApiResponse, ApiError } from '@/shared/types'
 
 // API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
+// Use Cloudflare Workers backend (deployed or local development)
+const API_BASE_URL = process.env.NEXT_PUBLIC_WORKERS_API_URL || 'http://localhost:8787'
 const API_TIMEOUT = 30000 // 30 seconds
 
 // Create axios instance
@@ -182,115 +183,166 @@ export const authApi = {
     api.post('/auth/verify-email', { token }),
   
   getProfile: () =>
-    api.get('/auth/profile'),
+    api.get('/auth/me'),
   
   updateProfile: (data: any) =>
-    api.patch('/auth/profile', data),
+    api.patch('/auth/me', data),
 }
 
 export const dashboardApi = {
-  getDashboards: (params?: any) =>
-    api.get('/dashboards', { params }),
+  getDashboard: () =>
+    api.get('/analytics/dashboard'),
   
-  getDashboard: (id: string) =>
-    api.get(`/dashboards/${id}`),
-  
-  createDashboard: (data: any) =>
-    api.post('/dashboards', data),
-  
-  updateDashboard: (id: string, data: any) =>
-    api.patch(`/dashboards/${id}`, data),
-  
-  deleteDashboard: (id: string) =>
-    api.delete(`/dashboards/${id}`),
-  
-  duplicateDashboard: (id: string) =>
-    api.post(`/dashboards/${id}/duplicate`),
+  getMetrics: (params?: any) =>
+    api.get('/analytics/dashboard', { params }),
 }
 
 export const analyticsApi = {
-  getMetrics: (params?: any) =>
-    api.get('/analytics/metrics', { params }),
+  getDashboard: (params?: any) =>
+    api.get('/analytics/dashboard', { params }),
   
-  getChartData: (chartId: string, params?: any) =>
-    api.get(`/analytics/charts/${chartId}`, { params }),
+  getRevenue: (params?: any) =>
+    api.get('/analytics/revenue', { params }),
   
-  executeQuery: (query: string, params?: any) =>
-    api.post('/analytics/query', { query, ...params }),
+  getLocations: (params?: any) =>
+    api.get('/analytics/locations', { params }),
   
-  getInsights: (params?: any) =>
-    api.get('/analytics/insights', { params }),
+  getCuisine: (params?: any) =>
+    api.get('/analytics/cuisine', { params }),
   
-  generateReport: (config: any) =>
-    api.post('/analytics/reports', config),
+  getPerformance: (params?: any) =>
+    api.get('/analytics/performance', { params }),
+  
+  getRealtime: () =>
+    api.get('/analytics/realtime'),
   
   exportData: (params: any) =>
-    api.post('/analytics/export', params),
+    api.get('/analytics/export', { params }),
 }
 
 export const nlQueryApi = {
   processQuery: (query: string, context?: any) =>
-    api.post('/nl-query/process', { query, context }),
+    api.post('/ai/nl-query', { query, context }),
   
   getSuggestions: (partial: string) =>
-    api.get('/nl-query/suggestions', { params: { q: partial } }),
+    api.get('/ai/suggestions', { params: { q: partial } }),
   
   getHistory: (limit?: number) =>
-    api.get('/nl-query/history', { params: { limit } }),
-  
-  saveQuery: (query: string, results: any) =>
-    api.post('/nl-query/save', { query, results }),
+    api.get('/ai/query-history', { params: { limit } }),
 }
 
 export const insightsApi = {
   getInsights: (params?: any) =>
-    api.get('/insights', { params }),
-  
-  getInsight: (id: string) =>
-    api.get(`/insights/${id}`),
-  
-  acknowledgeInsight: (id: string) =>
-    api.patch(`/insights/${id}/acknowledge`),
-  
-  dismissInsight: (id: string) =>
-    api.patch(`/insights/${id}/dismiss`),
+    api.get('/ai/insights', { params }),
   
   generateInsights: (params?: any) =>
-    api.post('/insights/generate', params),
+    api.post('/ai/insights/generate', params),
   
-  getInsightMetrics: () =>
-    api.get('/insights/metrics'),
+  getRecommendations: (params?: any) =>
+    api.get('/ai/recommendations', { params }),
+  
+  getMetrics: () =>
+    api.get('/ai/insights/metrics'),
 }
 
-export const notificationsApi = {
-  getNotifications: (params?: any) =>
-    api.get('/notifications', { params }),
+export const fourPApi = {
+  getProductIntelligence: (params?: any) =>
+    api.get('/4p/product', { params }),
   
-  markAsRead: (id: string) =>
-    api.patch(`/notifications/${id}/read`),
+  getPlaceIntelligence: (params?: any) =>
+    api.get('/4p/place', { params }),
   
-  markAllAsRead: () =>
-    api.patch('/notifications/read-all'),
+  getPriceIntelligence: (params?: any) =>
+    api.get('/4p/price', { params }),
   
-  deleteNotification: (id: string) =>
-    api.delete(`/notifications/${id}`),
+  getPromotionIntelligence: (params?: any) =>
+    api.get('/4p/promotion', { params }),
   
-  getUnreadCount: () =>
-    api.get('/notifications/unread-count'),
+  getComprehensiveAnalysis: (params?: any) =>
+    api.get('/4p/analysis', { params }),
 }
 
-export const settingsApi = {
-  getSettings: () =>
-    api.get('/settings'),
+export const managementApi = {
+  getRestaurants: (params?: any) =>
+    api.get('/management/restaurants', { params }),
   
-  updateSettings: (data: any) =>
-    api.patch('/settings', data),
+  createRestaurant: (data: any) =>
+    api.post('/management/restaurants', data),
   
-  getIntegrations: () =>
-    api.get('/settings/integrations'),
+  updateRestaurant: (id: string, data: any) =>
+    api.put(`/management/restaurants/${id}`, data),
   
-  updateIntegration: (id: string, data: any) =>
-    api.patch(`/settings/integrations/${id}`, data),
+  deleteRestaurant: (id: string) =>
+    api.delete(`/management/restaurants/${id}`),
+  
+  getCampaigns: (params?: any) =>
+    api.get('/management/campaigns', { params }),
+  
+  createCampaign: (data: any) =>
+    api.post('/management/campaigns', data),
+  
+  updateCampaign: (id: string, data: any) =>
+    api.put(`/management/campaigns/${id}`, data),
+  
+  deleteCampaign: (id: string) =>
+    api.delete(`/management/campaigns/${id}`),
+}
+
+export const integrationsApi = {
+  // POS Integrations
+  getPOSIntegrations: () =>
+    api.get('/integrations/pos'),
+  
+  createPOSIntegration: (data: any) =>
+    api.post('/integrations/pos', data),
+  
+  updatePOSIntegration: (id: string, data: any) =>
+    api.put(`/integrations/pos/${id}`, data),
+  
+  deletePOSIntegration: (id: string) =>
+    api.delete(`/integrations/pos/${id}`),
+  
+  testPOSConnection: (id: string) =>
+    api.post(`/integrations/pos/${id}/test`),
+  
+  syncPOSData: (id: string) =>
+    api.post(`/integrations/pos/${id}/sync`),
+  
+  // Connectors
+  getConnectors: (params?: any) =>
+    api.get('/integrations/connectors', { params }),
+  
+  createConnector: (data: any) =>
+    api.post('/integrations/connectors', data),
+  
+  updateConnector: (id: string, data: any) =>
+    api.put(`/integrations/connectors/${id}`, data),
+  
+  deleteConnector: (id: string) =>
+    api.delete(`/integrations/connectors/${id}`),
+  
+  testConnector: (id: string) =>
+    api.post(`/integrations/connectors/${id}/test`),
+  
+  // Webhooks
+  getWebhooks: (params?: any) =>
+    api.get('/integrations/webhooks', { params }),
+  
+  createWebhook: (data: any) =>
+    api.post('/integrations/webhooks', data),
+  
+  updateWebhook: (id: string, data: any) =>
+    api.put(`/integrations/webhooks/${id}`, data),
+  
+  deleteWebhook: (id: string) =>
+    api.delete(`/integrations/webhooks/${id}`),
+  
+  testWebhook: (id: string) =>
+    api.post(`/integrations/webhooks/${id}/test`),
+  
+  // API Proxy
+  proxyRequest: (target: string, data: any) =>
+    api.post('/integrations/proxy', { target, ...data }),
 }
 
 // Export the axios instance for direct use if needed

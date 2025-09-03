@@ -1,0 +1,40 @@
+{
+  "name": "bitebase-intelligence-workers",
+  "version": "2.0.0",
+  "description": "BiteBase Intelligence API - Cloudflare Workers Backend",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:prod": "wrangler deploy --env production",
+    "tail": "wrangler tail",
+    "types": "wrangler types",
+    "cf-typegen": "wrangler types",
+    "db:create": "wrangler d1 create bitebase-intelligence-db",
+    "db:migrate": "wrangler d1 migrations apply bitebase-intelligence-db",
+    "db:migrate:local": "wrangler d1 migrations apply bitebase-intelligence-db --local",
+    "kv:create": "npm run kv:create:cache && npm run kv:create:sessions && npm run kv:create:analytics",
+    "kv:create:cache": "wrangler kv:namespace create CACHE",
+    "kv:create:sessions": "wrangler kv:namespace create SESSIONS",
+    "kv:create:analytics": "wrangler kv:namespace create ANALYTICS"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "restaurant",
+    "analytics",
+    "api"
+  ],
+  "author": "BiteBase Intelligence Team",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.33.2"
+  },
+  "dependencies": {
+    "@tsndr/cloudflare-worker-jwt": "^3.2.0",
+    "@types/node": "^24.3.0",
+    "hono": "^4.9.6",
+    "typescript": "^5.9.2",
+    "zod": "^4.1.5"
+  }
+}

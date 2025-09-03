@@ -41,6 +41,12 @@ interface Restaurant extends EnhancedRestaurantData {
   established?: string
   type?: string
   lastUpdated?: string
+  status?: string
+  staff?: number
+  capacity?: number
+  avgOrderValue?: number
+  monthlyRevenue?: number
+  performance?: string
 }
 
 export default function RestaurantManagementPage() {
@@ -63,9 +69,9 @@ export default function RestaurantManagementPage() {
           ...restaurant,
           manager: `Manager ${Math.floor(Math.random() * 100)}`,
           email: `manager@${restaurant.name.toLowerCase().replace(/\s+/g, '')}.com`,
-          openHours: restaurant.openingHours?.[0] || '9:00 AM - 10:00 PM',
+          openHours: '9:00 AM - 10:00 PM',
           established: `${2015 + Math.floor(Math.random() * 8)}`,
-          type: restaurant.priceLevel > 2 ? 'Fine Dining' : 'Casual Dining',
+          type: (restaurant.priceLevel || 2) > 2 ? 'Fine Dining' : 'Casual Dining',
           lastUpdated: `${Math.floor(Math.random() * 60)} minutes ago`
         }))
         allRestaurants.push(...enhancedRestaurants)
@@ -96,6 +102,8 @@ export default function RestaurantManagementPage() {
       rating: 4.8,
       reviews: 1247,
       address: '123 Sukhumvit Road, Bangkok',
+      location: { lat: 13.7563, lng: 100.5018 },
+      businessStatus: 'OPERATIONAL',
       phone: '+66 2 123 4567',
       email: 'central@bangkokbistro.com',
       manager: 'Somchai Jaidee',
@@ -116,6 +124,8 @@ export default function RestaurantManagementPage() {
       rating: 4.6,
       reviews: 892,
       address: '456 Chatuchak Market, Bangkok',
+      location: { lat: 13.7997, lng: 100.5510 },
+      businessStatus: 'OPERATIONAL',
       phone: '+66 2 234 5678',
       email: 'info@streetfoodparadise.com',
       manager: 'Niran Patel',
@@ -136,6 +146,8 @@ export default function RestaurantManagementPage() {
       rating: 4.4,
       reviews: 634,
       address: '789 Siam Square, Bangkok',
+      location: { lat: 13.7459, lng: 100.5384 },
+      businessStatus: 'OPERATIONAL',
       phone: '+66 2 345 6789',
       email: 'contact@siamspice.com',
       manager: 'Apinya Wong',
@@ -156,6 +168,8 @@ export default function RestaurantManagementPage() {
       rating: 0,
       reviews: 0,
       address: '321 Silom Road, Bangkok',
+      location: { lat: 13.7240, lng: 100.5396 },
+      businessStatus: 'TEMPORARILY_CLOSED',
       phone: '+66 2 456 7890',
       email: 'info@royalthai.com',
       manager: 'Kamon Srisuk',
@@ -364,8 +378,8 @@ export default function RestaurantManagementPage() {
                           <div className="flex-1">
                             <div className="flex items-center space-x-3 mb-2">
                               <h4 className="font-semibold text-gray-900 text-lg">{restaurant.name}</h4>
-                              {getStatusBadge(restaurant.status)}
-                              {getPerformanceBadge(restaurant.performance)}
+                              {getStatusBadge(restaurant.status || 'unknown')}
+                              {getPerformanceBadge(restaurant.performance || 'good')}
                             </div>
                             <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-3">
                               <div className="flex items-center space-x-2">

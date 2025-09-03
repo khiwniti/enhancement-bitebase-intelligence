@@ -68,7 +68,7 @@ class GeminiAIService {
       return {
         text: this.humanizeResponse(text),
         confidence: this.calculateConfidence(data),
-        context: context
+        context: context || ''
       };
     } catch (error) {
       console.error('Gemini AI Error:', error);

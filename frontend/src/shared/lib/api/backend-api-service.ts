@@ -77,7 +77,7 @@ class BackendAPIService {
   private baseURL: string
 
   constructor() {
-    this.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8001'
+    this.baseURL = process.env.NEXT_PUBLIC_WORKERS_API_URL || 'http://localhost:8787'
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -118,13 +118,20 @@ class BackendAPIService {
       }
     })
 
-    return this.request<BackendRestaurantListResponse>(
-      `/api/v1/restaurants/?${searchParams.toString()}`
-    )
+    const response = await this.request<{ success: boolean; data: BackendRestaurant[]; pagination: any }>(`/v1/restaurants?${searchParams.toString()}`)
+    
+    return {
+      restaurants: response.data,
+      total: response.pagination?.total || response.data.length,
+      skip: response.pagination?.skip || 0,
+      limit: response.pagination?.limit || response.data.length,
+      has_more: response.pagination?.has_more || false
+    }
   }
 
   async getRestaurant(id: string): Promise<BackendRestaurant> {
-    return this.request<BackendRestaurant>(`/api/v1/restaurants/${id}`)
+    const response = await this.request<{ success: boolean; data: BackendRestaurant }>(`/v1/restaurants/${id}`)
+    return response.data
   }
 
   async getNearbyRestaurants(params: {
@@ -144,9 +151,17 @@ class BackendAPIService {
       }
     })
 
-    return this.request<BackendRestaurantListResponse>(
-      `/api/v1/restaurants/nearby/?${searchParams.toString()}`
+    const response = await this.request<{ success: boolean; data: BackendRestaurant[]; pagination: any }>(
+      `/v1/restaurants/search/nearby?${searchParams.toString()}`
     )
+    
+    return {
+      restaurants: response.data,
+      total: response.pagination?.total || response.data.length,
+      skip: response.pagination?.skip || 0,
+      limit: response.pagination?.limit || response.data.length,
+      has_more: response.pagination?.has_more || false
+    }
   }
 
   async getRestaurantMenu(restaurantId: string, category?: string): Promise<BackendMenuItem[]> {
@@ -155,9 +170,10 @@ class BackendAPIService {
       searchParams.append('category', category)
     }
 
-    return this.request<BackendMenuItem[]>(
-      `/api/v1/restaurants/${restaurantId}/menu?${searchParams.toString()}`
+    const response = await this.request<{ success: boolean; data: BackendMenuItem[] }>(
+      `/v1/restaurants/${restaurantId}/menu?${searchParams.toString()}`
     )
+    return response.data
   }
 
   async getRestaurantReviews(
@@ -177,29 +193,33 @@ class BackendAPIService {
       }
     })
 
-    return this.request<BackendRestaurantReview[]>(
-      `/api/v1/restaurants/${restaurantId}/reviews?${searchParams.toString()}`
+    const response = await this.request<{ success: boolean; data: BackendRestaurantReview[] }>(
+      `/v1/restaurants/${restaurantId}/reviews?${searchParams.toString()}`
     )
+    return response.data
   }
 
   async createRestaurant(restaurantData: Partial<BackendRestaurant>): Promise<BackendRestaurant> {
-    return this.request<BackendRestaurant>('/api/v1/restaurants/', {
+    const response = await this.request<{ success: boolean; data: BackendRestaurant }>('/v1/restaurants/', {
       method: 'POST',
       body: JSON.stringify(restaurantData),
     })
+    return response.data
   }
 
   async updateRestaurant(id: string, restaurantData: Partial<BackendRestaurant>): Promise<BackendRestaurant> {
-    return this.request<BackendRestaurant>(`/api/v1/restaurants/${id}`, {
+    const response = await this.request<{ success: boolean; data: BackendRestaurant }>(`/v1/restaurants/${id}`, {
       method: 'PUT',
       body: JSON.stringify(restaurantData),
     })
+    return response.data
   }
 
   async deleteRestaurant(id: string): Promise<{ message: string }> {
-    return this.request<{ message: string }>(`/api/v1/restaurants/${id}`, {
+    const response = await this.request<{ success: boolean; message: string }>(`/v1/restaurants/${id}`, {
       method: 'DELETE',
     })
+    return { message: response.message }
   }
 
   // Analytics and aggregation methods
@@ -211,10 +231,13 @@ class BackendAPIService {
     topPerformers: BackendRestaurant[]
   }> {
     try {
-      const restaurants = await this.getRestaurants({ 
+      const restaurants = await this.getRestaurants(city ? { 
         city, 
         limit: 1000,
         is_active: true 
+      } : {
+        limit: 1000,
+        is_active: true
       })
 
       const totalRestaurants = restaurants.total
@@ -295,4 +318,3 @@ class BackendAPIService {
 }
 
 export const backendAPIService = new BackendAPIService()
-export type { BackendRestaurant, BackendRestaurantListResponse, BackendMenuItem, BackendRestaurantReview }

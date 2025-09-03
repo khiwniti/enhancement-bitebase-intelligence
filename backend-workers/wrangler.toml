@@ -1,0 +1,54 @@
+name = "bitebase-intelligence"
+main = "src/index.ts"
+compatibility_date = "2024-09-03"
+compatibility_flags = ["nodejs_compat"]
+account_id = "dc95c232d76cc4df23a5ca452a4046ab"
+
+[env.production]
+[env.production.vars]
+ENVIRONMENT = "production"
+DATABASE_URL = "env:DATABASE_URL"
+JWT_SECRET = "env:JWT_SECRET"
+CORS_ORIGINS = "http://localhost:3000,https://bitebase-intelligence.vercel.app"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "bitebase-intelligence-db"
+database_id = "36cb36c2-e864-4e35-a94c-b16ebdfd017e"
+
+[[env.production.kv_namespaces]]
+binding = "CACHE"
+id = "d2b4e47ff33b493db43a96fcabf65efe"
+
+[[env.production.kv_namespaces]]
+binding = "SESSIONS"
+id = "a39e33e9936b46e38bc2037cbe442d24"
+
+[[env.production.kv_namespaces]]
+binding = "ANALYTICS"
+id = "57dbb1ec77ad43318d65d7580414306a"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "bitebase-intelligence-db"
+database_id = "36cb36c2-e864-4e35-a94c-b16ebdfd017e"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "d2b4e47ff33b493db43a96fcabf65efe"
+preview_id = "eddce499a6ca4b80a84b055f2c2ef46d"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "a39e33e9936b46e38bc2037cbe442d24"
+preview_id = "a39e33e9936b46e38bc2037cbe442d24"
+
+[[kv_namespaces]]
+binding = "ANALYTICS"
+id = "57dbb1ec77ad43318d65d7580414306a"
+preview_id = "57dbb1ec77ad43318d65d7580414306a"
+
+[vars]
+DATABASE_URL = "env:DATABASE_URL"
+JWT_SECRET = "env:JWT_SECRET"
+CORS_ORIGINS = "http://localhost:3000,https://yourdomain.com"

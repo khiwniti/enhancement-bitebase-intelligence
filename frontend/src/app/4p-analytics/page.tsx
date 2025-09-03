@@ -13,7 +13,13 @@ export default function FourPAnalyticsPage() {
     { id: 'promotion', label: 'Promotion', icon: TrendingUp, color: 'orange' }
   ];
 
-  const MetricCard = ({ title, value, change, color, icon: Icon }) => (
+  const MetricCard = ({ title, value, change, color, icon: Icon }: {
+    title: string
+    value: string | number
+    change: number
+    color: string
+    icon: any
+  }) => (
     <div className={`bg-white rounded-lg shadow-lg p-6 border-l-4 border-${color}-500`}>
       <div className="flex items-center justify-between">
         <div>

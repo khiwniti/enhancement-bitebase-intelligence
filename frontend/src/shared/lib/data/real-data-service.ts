@@ -125,7 +125,12 @@ class RealDataService {
 
           return {
             ...transformedData,
-            aiInsights,
+            aiInsights: aiInsights || {
+              strengths: ['Limited data available'],
+              weaknesses: ['Analysis pending'],
+              opportunities: ['Market analysis needed'],
+              recommendations: ['Data collection required']
+            },
             performanceMetrics,
             marketPosition
           }

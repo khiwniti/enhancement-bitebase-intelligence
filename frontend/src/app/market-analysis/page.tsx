@@ -71,7 +71,7 @@ export default function MarketAnalysisPage() {
 
     // Fetch analysis data if we have the required parameters
     if (location && cuisine) {
-      fetchAnalysisData(location, cuisine, parseInt(radius) || 1000);
+      fetchAnalysisData(location, cuisine, parseInt(radius || '1000') || 1000);
     }
   }, []);
 
@@ -112,7 +112,14 @@ export default function MarketAnalysisPage() {
     }
   };
 
-  const MetricCard = ({ title, value, unit, trend, color, icon: Icon }) => (
+  const MetricCard = ({ title, value, unit, trend, color, icon: Icon }: {
+    title: string
+    value: string | number
+    unit: string
+    trend: number
+    color: string
+    icon: any
+  }) => (
     <div className={`bg-white rounded-lg shadow-lg border-l-4 border-${color}-500 p-4 animate-fadeIn`}>
       <div className="flex items-center justify-between">
         <div>

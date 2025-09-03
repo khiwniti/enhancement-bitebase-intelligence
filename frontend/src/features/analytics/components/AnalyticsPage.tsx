@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
 import { Button } from '@/components/button'
 import { Badge } from '@/components/badge'
+import { analyticsApi } from '@/shared/lib/api-client'
 import {
   BarChart3,
   TrendingUp,
@@ -31,6 +32,7 @@ export function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState('7d')
   const [isLoading, setIsLoading] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
+  const [analyticsData, setAnalyticsData] = useState<any>(null)
 
   const timeRanges = [
     { id: '24h', label: '24 Hours' },
@@ -39,7 +41,64 @@ export function AnalyticsPage() {
     { id: '90d', label: '90 Days' }
   ]
 
-  const metrics = [
+  // Fetch analytics data from API
+  useEffect(() => {
+    fetchAnalyticsData()
+  }, [timeRange])
+
+  const fetchAnalyticsData = async () => {
+    setIsLoading(true)
+    try {
+      const data = await analyticsApi.getMetrics({ timeRange })
+      setAnalyticsData(data)
+      setLastUpdated(new Date())
+    } catch (error) {
+      console.error('Failed to fetch analytics data:', error)
+      // Fallback to mock data if API fails
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const metrics = analyticsData ? [
+    {
+      id: 'revenue',
+      title: 'Total Revenue',
+      value: analyticsData.revenue?.total || '฿0',
+      change: analyticsData.revenue?.change || '0%',
+      changeType: (analyticsData.revenue?.change?.startsWith('+') ? 'positive' : 'negative'),
+      icon: DollarSign,
+      description: 'Total revenue across all restaurants'
+    },
+    {
+      id: 'orders',
+      title: 'Total Orders',
+      value: analyticsData.orders?.total || '0',
+      change: analyticsData.orders?.change || '0%',
+      changeType: (analyticsData.orders?.change?.startsWith('+') ? 'positive' : 'negative'),
+      icon: ShoppingCart,
+      description: 'Number of orders processed'
+    },
+    {
+      id: 'customers',
+      title: 'Active Customers',
+      value: analyticsData.customers?.total || '0',
+      change: analyticsData.customers?.change || '0%',
+      changeType: (analyticsData.customers?.change?.startsWith('+') ? 'positive' : 'negative'),
+      icon: Users,
+      description: 'Unique active customers'
+    },
+    {
+      id: 'restaurants',
+      title: 'Partner Restaurants',
+      value: analyticsData.restaurants?.total || '0',
+      change: analyticsData.restaurants?.change || '0%',
+      changeType: (analyticsData.restaurants?.change?.startsWith('+') ? 'positive' : 'negative'),
+      icon: Building,
+      description: 'Active restaurant partners'
+    },
+  ] : [
+    // Fallback mock data when API data is not available
     {
       id: 'revenue',
       title: 'Total Revenue',
@@ -129,11 +188,7 @@ export function AnalyticsPage() {
   ]
 
   const refreshData = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setLastUpdated(new Date())
-    }, 1000)
+    fetchAnalyticsData()
   }
 
   return (

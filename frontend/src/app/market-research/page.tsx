@@ -46,6 +46,7 @@ export default function MarketResearchPage() {
       return () => clearTimeout(timeoutId);
     } else {
       setLocations([]);
+      return undefined;
     }
   }, [locationQuery]);
 
