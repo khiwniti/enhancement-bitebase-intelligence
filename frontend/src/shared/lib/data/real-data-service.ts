@@ -1,10 +1,46 @@
 /**
  * Real Data Service
- * Integrates Google Maps API data with AI-enhanced insights
+ * Integrates Backend API data with AI-enhanced insights
  */
 
-import { googleMapsService, type RestaurantData, type LocationData } from '../maps/google-maps-service'
+import { backendAPIService, type BackendRestaurant } from '../api/backend-api-service'
 import { geminiAI, type RestaurantAnalysis } from '../ai/gemini-service'
+
+// Legacy types for compatibility
+export interface RestaurantData {
+  id: string
+  name: string
+  address: string
+  location: { lat: number; lng: number }
+  rating: number
+  reviews: number
+  priceLevel?: number
+  cuisine: string
+  businessStatus: string
+  category?: string
+  area?: string
+  city?: string
+  country?: string
+  phone?: string
+  website?: string
+  estimatedRevenue?: number
+  employeeCount?: number
+  dataQualityScore?: number
+  distance?: number
+}
+
+export interface LocationData {
+  address: string
+  coordinates: { lat: number; lng: number }
+  populationDensity: number
+  averageIncome: number
+  footTraffic: string
+  competitors: RestaurantData[]
+  demographics: {
+    ageGroups: Record<string, number>
+    incomeDistribution: Record<string, number>
+  }
+}
 
 interface EnhancedRestaurantData extends RestaurantData {
   aiInsights?: RestaurantAnalysis
@@ -37,30 +73,58 @@ class RealDataService {
    */
   async getEnhancedRestaurants(location: string, limit: number = 20): Promise<EnhancedRestaurantData[]> {
     try {
-      // Fetch real restaurant data from Google Maps
-      const restaurants = await googleMapsService.searchRestaurants(location, 5000)
+      // Try to parse location as city name (e.g., "Bangkok")
+      let restaurants: BackendRestaurant[] = []
       
-      // Enhance with AI insights and mock performance data
+      // First try to get restaurants by city
+      const response = await backendAPIService.getRestaurants({ 
+        city: location, 
+        limit,
+        is_active: true 
+      })
+      
+      restaurants = response.restaurants
+      
+      // If no restaurants found by city, try searching nearby coordinates
+      if (restaurants.length === 0 && location.includes(',')) {
+        const coords = location.split(',').map(s => parseFloat(s.trim()))
+        if (coords.length === 2 && !isNaN(coords[0]) && !isNaN(coords[1])) {
+          const nearbyResponse = await backendAPIService.getNearbyRestaurants({
+            latitude: coords[0],
+            longitude: coords[1],
+            limit,
+            radius_km: 5
+          })
+          restaurants = nearbyResponse.restaurants
+        }
+      }
+
+      // Transform and enhance with AI insights
       const enhancedRestaurants = await Promise.all(
         restaurants.slice(0, limit).map(async (restaurant) => {
-          const performanceMetrics = this.generatePerformanceMetrics(restaurant)
-          const marketPosition = this.calculateMarketPosition(restaurant, restaurants)
+          // Transform backend data to frontend format
+          const transformedData = backendAPIService.transformRestaurantData(restaurant)
+          
+          const performanceMetrics = this.generatePerformanceMetrics(transformedData)
+          const marketPosition = this.calculateMarketPosition(transformedData, restaurants.map(r => 
+            backendAPIService.transformRestaurantData(r)
+          ))
           
           // Get AI insights for top restaurants
           let aiInsights: RestaurantAnalysis | undefined
-          if (restaurant.rating > 4.0) {
+          if (transformedData.rating > 4.0) {
             try {
               aiInsights = await geminiAI.analyzeRestaurantData({
-                ...restaurant,
+                ...transformedData,
                 ...performanceMetrics
               })
             } catch (error) {
-              console.warn('AI analysis failed for restaurant:', restaurant.name)
+              console.warn('AI analysis failed for restaurant:', transformedData.name)
             }
           }
 
           return {
-            ...restaurant,
+            ...transformedData,
             aiInsights,
             performanceMetrics,
             marketPosition
@@ -70,7 +134,7 @@ class RealDataService {
 
       return enhancedRestaurants
     } catch (error) {
-      console.error('Error getting enhanced restaurants:', error)
+      console.error('Error getting enhanced restaurants from backend:', error)
       return this.getMockEnhancedRestaurants(location)
     }
   }
@@ -80,47 +144,71 @@ class RealDataService {
    */
   async getMarketIntelligence(location: string): Promise<MarketIntelligence> {
     try {
-      const restaurants = await googleMapsService.searchRestaurants(location, 10000)
-      
-      const totalRestaurants = restaurants.length
-      const averageRating = restaurants.reduce((sum, r) => sum + r.rating, 0) / totalRestaurants
-      
-      const priceDistribution = this.calculatePriceDistribution(restaurants)
-      const cuisinePopularity = this.calculateCuisinePopularity(restaurants)
+      // Use backend API to get market analytics
+      const analytics = await backendAPIService.getMarketAnalytics(location)
       
       // Generate AI-powered market trends and opportunities
       const marketContext = {
         location,
-        totalRestaurants,
-        averageRating,
-        topCuisines: Object.keys(cuisinePopularity).slice(0, 5)
+        totalRestaurants: analytics.totalRestaurants,
+        averageRating: analytics.averageRating,
+        topCuisines: Object.keys(analytics.cuisinePopularity).slice(0, 5)
       }
 
       const trendsResponse = await geminiAI.generateResponse(
-        `Analyze the restaurant market in ${location} with ${totalRestaurants} restaurants, average rating ${averageRating.toFixed(1)}, and popular cuisines: ${marketContext.topCuisines.join(', ')}. Provide market trends and opportunities.`,
+        `Analyze the restaurant market in ${location} with ${analytics.totalRestaurants} restaurants, average rating ${analytics.averageRating.toFixed(1)}, and popular cuisines: ${marketContext.topCuisines.join(', ')}. Provide market trends and opportunities.`,
         'market_analysis'
       )
 
       return {
-        totalRestaurants,
-        averageRating,
-        priceDistribution,
-        cuisinePopularity,
+        totalRestaurants: analytics.totalRestaurants,
+        averageRating: analytics.averageRating,
+        priceDistribution: analytics.priceDistribution,
+        cuisinePopularity: analytics.cuisinePopularity,
         marketTrends: this.extractTrends(trendsResponse.text),
         opportunities: this.extractOpportunities(trendsResponse.text)
       }
     } catch (error) {
-      console.error('Error getting market intelligence:', error)
+      console.error('Error getting market intelligence from backend:', error)
       return this.getMockMarketIntelligence()
     }
   }
 
   /**
-   * Get location intelligence with AI insights
+   * Get location intelligence with AI insights (fallback to demo data)
    */
   async getLocationIntelligence(address: string): Promise<LocationData & { aiInsights: string }> {
     try {
-      const locationData = await googleMapsService.getLocationIntelligence(address)
+      // For now, use mock location data as we don't have location intelligence endpoints
+      // In the future, this could connect to location analysis services
+      const locationData: LocationData = {
+        address,
+        coordinates: { lat: 13.7563, lng: 100.5018 }, // Bangkok default
+        populationDensity: 5300,
+        averageIncome: 12000,
+        footTraffic: 'High',
+        competitors: [],
+        demographics: {
+          ageGroups: { '25-34': 0.3, '35-44': 0.25, '45-54': 0.2, 'Other': 0.25 },
+          incomeDistribution: { '$10k-$15k': 0.3, '$15k-$25k': 0.25, 'Other': 0.45 }
+        }
+      }
+      
+      // Get nearby restaurants for competitive analysis
+      try {
+        const nearbyResponse = await backendAPIService.getNearbyRestaurants({
+          latitude: locationData.coordinates.lat,
+          longitude: locationData.coordinates.lng,
+          limit: 10,
+          radius_km: 1
+        })
+        
+        locationData.competitors = nearbyResponse.restaurants.map(r => 
+          backendAPIService.transformRestaurantData(r)
+        )
+      } catch (error) {
+        console.warn('Could not fetch nearby competitors:', error)
+      }
       
       // Get AI insights about the location
       const aiInsights = await geminiAI.generateLocationIntelligence(locationData)
@@ -133,14 +221,14 @@ class RealDataService {
       console.error('Error getting location intelligence:', error)
       return {
         address,
-        coordinates: { lat: 40.7128, lng: -74.0060 },
-        populationDensity: 8500,
-        averageIncome: 65000,
+        coordinates: { lat: 13.7563, lng: 100.5018 },
+        populationDensity: 5300,
+        averageIncome: 12000,
         footTraffic: 'Medium',
         competitors: [],
         demographics: {
           ageGroups: { '25-34': 0.3, '35-44': 0.25, '45-54': 0.2, 'Other': 0.25 },
-          incomeDistribution: { '$50k-$75k': 0.3, '$75k-$100k': 0.25, 'Other': 0.45 }
+          incomeDistribution: { '$10k-$15k': 0.3, '$15k-$25k': 0.25, 'Other': 0.45 }
         },
         aiInsights: 'Location analysis temporarily unavailable. Please try again later.'
       }
