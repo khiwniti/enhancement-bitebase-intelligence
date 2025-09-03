@@ -79,10 +79,10 @@ export default function MarketAnalysisPage() {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       // Mock coordinates for demo - in a real app, you'd geocode the location
       const mockCoordinates = { lat: 40.7128, lng: -74.0060 };
-      
+
       const response = await fetch('http://localhost:8000/api/v1/market-research/analyze', {
         method: 'POST',
         headers: {
@@ -172,12 +172,12 @@ export default function MarketAnalysisPage() {
                       <div className="w-8 h-8 bg-red-500 rounded-full animate-pulse"></div>
                       <p className="text-xs text-center mt-1 text-gray-600">Target Location</p>
                     </div>
-                    
+
                     {/* Competitor Markers */}
                     <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-orange-500 rounded-full"></div>
                     <div className="absolute top-2/3 left-2/3 w-4 h-4 bg-orange-500 rounded-full"></div>
                     <div className="absolute top-1/4 right-1/4 w-4 h-4 bg-orange-500 rounded-full"></div>
-                    
+
                     {/* Buffer Circle */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                       <div className="w-64 h-64 border-2 border-blue-400 border-dashed rounded-full opacity-50"></div>
@@ -313,7 +313,7 @@ export default function MarketAnalysisPage() {
         <div className="w-80 bg-white border-l border-gray-200 overflow-y-auto">
           <div className="p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">Market Insights</h2>
-            
+
             {isLoading ? (
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-lg p-4 animate-pulse">
@@ -340,8 +340,8 @@ export default function MarketAnalysisPage() {
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-green-500 h-2 rounded-full" 
+                    <div
+                      className="bg-green-500 h-2 rounded-full"
                       style={{ width: `${analysisData.overall_market_score}%` }}
                     ></div>
                   </div>
@@ -399,7 +399,7 @@ export default function MarketAnalysisPage() {
                             <strong>{opportunity.opportunity_type}:</strong> {opportunity.description}
                           </p>
                           <p className="text-xs text-blue-600 mt-1">
-                            ROI: {(opportunity.estimated_roi * 100).toFixed(0)}% | 
+                            ROI: {(opportunity.estimated_roi * 100).toFixed(0)}% |
                             Impact: {opportunity.potential_impact}
                           </p>
                         </div>
@@ -429,15 +429,6 @@ export default function MarketAnalysisPage() {
                 <p className="text-gray-600">No analysis data available</p>
               </div>
             )}
-                  </p>
-                </div>
-                <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                  <p className="text-sm text-yellow-800">
-                    <strong>Caution:</strong> 3 Italian restaurants within 500m radius
-                  </p>
-                </div>
-              </div>
-            </div>
 
             {/* Action Buttons */}
             <div className="mt-6 space-y-3">
