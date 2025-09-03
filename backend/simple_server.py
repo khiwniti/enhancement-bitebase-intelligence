@@ -393,10 +393,14 @@ async def search_locations(
         # If no results from Geoapify, provide fallback locations
         if not locations:
             fallback_locations = [
-                {"name": "Downtown Basel", "lat": 47.5584, "lng": 7.5733, "type": "Business District"},
-                {"name": "Zurich Center", "lat": 47.3769, "lng": 8.5417, "type": "Business District"},
-                {"name": "Geneva Old Town", "lat": 46.2044, "lng": 6.1432, "type": "Tourist Area"},
-                {"name": "Bern Historic Center", "lat": 46.9481, "lng": 7.4474, "type": "Mixed Use"},
+                {"name": "Siam", "lat": 13.7463, "lng": 100.5350, "type": "Business District"},
+                {"name": "Sukhumvit", "lat": 13.7307, "lng": 100.5418, "type": "Business District"},
+                {"name": "Silom", "lat": 13.7248, "lng": 100.5340, "type": "Business District"},
+                {"name": "Chatuchak", "lat": 13.7997, "lng": 100.5537, "type": "Mixed Use"},
+                {"name": "Thonglor", "lat": 13.7308, "lng": 100.5826, "type": "Residential"},
+                {"name": "Asok", "lat": 13.7368, "lng": 100.5601, "type": "Business District"},
+                {"name": "Phrom Phong", "lat": 13.7303, "lng": 100.5693, "type": "Mixed Use"},
+                {"name": "Ari", "lat": 13.7797, "lng": 100.5345, "type": "Residential"},
             ]
             
             locations = [
@@ -407,9 +411,9 @@ async def search_locations(
             # Add market metrics to fallback locations
             for location in locations:
                 location.update({
-                    "formatted_address": f"{location['name']}, Switzerland",
-                    "city": location["name"].split()[0],
-                    "country": "Switzerland",
+                    "formatted_address": f"{location['name']}, Bangkok, Thailand",
+                    "city": "Bangkok",
+                    "country": "Thailand",
                     "market_potential": round(random.uniform(0.6, 0.95), 2),
                     "competition_level": random.choice(["Low", "Medium", "High"]),
                     "foot_traffic": random.randint(70, 95)
@@ -428,13 +432,13 @@ async def search_locations(
         return {
             "locations": [
                 {
-                    "name": "Downtown Area",
-                    "lat": 47.5584,
-                    "lng": 7.5733,
+                    "name": "Siam Square",
+                    "lat": 13.7463,
+                    "lng": 100.5350,
                     "type": "Business District",
-                    "formatted_address": "Downtown Area, Basel, Switzerland",
-                    "city": "Basel",
-                    "country": "Switzerland",
+                    "formatted_address": "Siam Square, Bangkok, Thailand",
+                    "city": "Bangkok",
+                    "country": "Thailand",
                     "market_potential": 0.85,
                     "competition_level": "Medium",
                     "foot_traffic": 88
