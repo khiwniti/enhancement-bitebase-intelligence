@@ -84,6 +84,7 @@ async def get_restaurants(
     skip: int = Query(0, ge=0, description="Number of records to skip"),
     limit: int = Query(100, ge=1, le=1000, description="Number of records to return"),
     city: Optional[str] = Query(None, description="Filter by city"),
+    area: Optional[str] = Query(None, description="Filter by area/district"),
     cuisine: Optional[str] = Query(None, description="Filter by cuisine type"),
     category: Optional[str] = Query(None, description="Filter by restaurant category"),
     brand: Optional[str] = Query(None, description="Filter by brand/chain"),
@@ -101,8 +102,11 @@ async def get_restaurants(
         if city:
             query = query.where(Restaurant.city.ilike(f"%{city}%"))
         
+        if area:
+            query = query.where(Restaurant.area.ilike(f"%{area}%"))
+        
         if cuisine:
-            query = query.where(Restaurant.cuisine_types.any(cuisine))
+            query = query.where(Restaurant.cuisine_types.like(f'%"{cuisine}"%'))
         
         if category:
             query = query.where(Restaurant.category == category)
@@ -137,30 +141,6 @@ async def get_restaurants(
         raise HTTPException(status_code=500, detail=f"Error retrieving restaurants: {str(e)}")
 
 
-@router.get("/{restaurant_id}", response_model=RestaurantResponse)
-async def get_restaurant(
-    restaurant_id: uuid.UUID,
-    db: AsyncSession = Depends(get_db)
-):
-    """
-    Get a specific restaurant by ID
-    """
-    try:
-        query = select(Restaurant).where(Restaurant.id == restaurant_id)
-        result = await db.execute(query)
-        restaurant = result.scalar_one_or_none()
-        
-        if not restaurant:
-            raise HTTPException(status_code=404, detail="Restaurant not found")
-        
-        return restaurant_to_response(restaurant)
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error retrieving restaurant: {str(e)}")
-
-
 @router.get("/nearby/", response_model=RestaurantListResponse)
 async def get_nearby_restaurants(
     latitude: float = Query(..., ge=-90, le=90, description="Latitude coordinate"),
@@ -181,7 +161,7 @@ async def get_nearby_restaurants(
         
         # Apply additional filters
         if cuisine:
-            query = query.where(Restaurant.cuisine_types.any(cuisine))
+            query = query.where(Restaurant.cuisine_types.like(f'%"{cuisine}"%'))
         
         if category:
             query = query.where(Restaurant.category == category)
@@ -223,6 +203,32 @@ async def get_nearby_restaurants(
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error finding nearby restaurants: {str(e)}")
+
+
+@router.get("/{restaurant_id}", response_model=RestaurantResponse)
+async def get_restaurant(
+    restaurant_id: uuid.UUID,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Get a specific restaurant by ID
+    """
+    try:
+        query = select(Restaurant).where(Restaurant.id == restaurant_id)
+        result = await db.execute(query)
+        restaurant = result.scalar_one_or_none()
+        
+        if not restaurant:
+            raise HTTPException(status_code=404, detail="Restaurant not found")
+        
+        return restaurant_to_response(restaurant)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error retrieving restaurant: {str(e)}")
+
+
 
 
 @router.post("/", response_model=RestaurantResponse)
