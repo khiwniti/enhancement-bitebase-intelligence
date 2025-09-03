@@ -72,6 +72,32 @@ const navigationItems: NavItem[] = [
     ]
   },
   {
+    id: 'market-research',
+    title: 'Market Research',
+    icon: Search,
+    badge: 'NEW',
+    children: [
+      {
+        id: 'market-research-wizard',
+        title: 'Research Wizard',
+        href: '/market-research',
+        icon: Target
+      },
+      {
+        id: 'market-analysis',
+        title: 'Market Analysis',
+        href: '/market-analysis',
+        icon: BarChart3
+      },
+      {
+        id: '4p-analytics',
+        title: '4P Analytics',
+        href: '/4p-analytics',
+        icon: TrendingUp
+      }
+    ]
+  },
+  {
     id: 'location',
     title: 'Location Intelligence',
     icon: MapPin,
@@ -149,7 +175,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const pathname = usePathname()
-  const [expandedItems, setExpandedItems] = useState<string[]>(['analytics', 'ai'])
+  const [expandedItems, setExpandedItems] = useState<string[]>(['analytics', 'ai', 'market-research'])
 
   const toggleExpanded = (itemId: string) => {
     setExpandedItems(prev => 
