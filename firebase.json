@@ -6,37 +6,13 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "frameworksBackend": {
-      "region": "us-central1"
-    },
     "rewrites": [
-      {
-        "source": "/api/**",
-        "function": "api"
-      },
       {
         "source": "**",
         "destination": "/index.html"
       }
     ],
     "headers": [
-      {
-        "source": "/api/**",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST, PUT, DELETE, OPTIONS"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "Content-Type, Authorization"
-          }
-        ]
-      },
       {
         "source": "**/*.@(js|css)",
         "headers": [
@@ -48,13 +24,6 @@
       }
     ]
   },
-  "functions": [
-    {
-      "source": "apps/functions",
-      "codebase": "default",
-      "runtime": "nodejs20"
-    }
-  ],
   "dataconnect": {
     "source": "services/database/dataconnect"
   },
@@ -62,10 +31,6 @@
     "auth": {
       "host": "127.0.0.1",
       "port": 9099
-    },
-    "functions": {
-      "host": "127.0.0.1",
-      "port": 5001
     },
     "firestore": {
       "host": "127.0.0.1",

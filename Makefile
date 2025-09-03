@@ -55,10 +55,10 @@ install-functions:
 
 install-web:
 	@echo "$(BLUE)Installing web app dependencies...$(NC)"
-	@chmod +x apps/web/install.sh 2>/dev/null || true
-	@chmod +x apps/web/run.sh 2>/dev/null || true
-	@echo "$(YELLOW)Installing in apps/web...$(NC)"
-	@cd apps/web && yarn install
+	@chmod +x frontend/install.sh 2>/dev/null || true
+	@chmod +x frontend/run.sh 2>/dev/null || true
+	@echo "$(YELLOW)Installing in frontend...$(NC)"
+	@cd frontend && yarn install
 
 install: install-firebase install-functions install-web
 	@echo "$(GREEN)✓ All dependencies installed successfully!$(NC)"
@@ -70,7 +70,7 @@ run-functions:
 
 run-web:
 	@echo "$(BLUE)Starting web app server...$(NC)"
-	cd apps/web && yarn dev
+	cd frontend && yarn dev
 
 # Development target - improved version
 run-dev:
@@ -85,7 +85,7 @@ run-dev:
 	@trap 'echo "$(BLUE)Shutting down services...$(NC)"; pkill -f "firebase emulators" 2>/dev/null || true; pkill -f "next dev" 2>/dev/null || true; echo "$(GREEN)✓ Services stopped$(NC)"; exit 0' INT; \
 	firebase emulators:start --config firebase.json & \
 	sleep 3 && \
-	(cd apps/web && yarn dev) & \
+	(cd frontend && yarn dev) & \
 	wait
 
 run-all:
@@ -100,7 +100,7 @@ run-all:
 	@trap 'echo "$(BLUE)Shutting down services...$(NC)"; pkill -f "firebase emulators" 2>/dev/null || true; pkill -f "next dev" 2>/dev/null || true; echo "$(GREEN)✓ Services stopped$(NC)"; exit 0' INT; \
 	firebase emulators:start --config firebase.json & \
 	sleep 3 && \
-	(cd apps/web && yarn dev) & \
+	(cd frontend && yarn dev) & \
 	wait
 
 
@@ -163,6 +163,6 @@ status:
 
 clean:
 	@echo "$(BLUE)Cleaning build artifacts...$(NC)"
-	@cd apps/web && rm -rf .next node_modules/.cache 2>/dev/null || true
+	@cd frontend && rm -rf .next node_modules/.cache 2>/dev/null || true
 	@cd apps/functions && rm -rf lib node_modules/.cache 2>/dev/null || true
 	@echo "$(GREEN)✓ Clean completed$(NC)"

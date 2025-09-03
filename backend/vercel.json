@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app/main.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.11"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app/main.py"
+    }
+  ],
+  "env": {
+    "PYTHONPATH": ".",
+    "MODULE_NAME": "app.main",
+    "VARIABLE_NAME": "app"
+  },
+  "functions": {
+    "app/main.py": {
+      "includeFiles": [
+        "app/**",
+        "requirements.txt"
+      ]
+    }
+  }
+}

@@ -55,9 +55,8 @@ npm run dev
 ### **Monorepo Structure**
 ```
 bitebase-intelligence/
-├── 📁 apps/                    # Applications
-│   ├── 📁 web/                 # Next.js frontend
-│   └── 📁 functions/           # Firebase Functions
+├── 📁 frontend/                # Next.js frontend application
+├── 📁 backend/                 # Python FastAPI backend
 ├── 📁 packages/                # Shared packages
 │   ├── 📁 shared-types/        # Common TypeScript definitions
 │   ├── 📁 shared-utils/        # Common utilities
@@ -71,7 +70,7 @@ bitebase-intelligence/
 
 ### **Frontend Architecture (Feature-Based)**
 ```
-apps/web/src/
+frontend/src/
 ├── 📁 features/                # Feature-based organization
 │   ├── 📁 analytics/           # Analytics dashboard
 │   ├── 📁 dashboard/           # Main dashboard
@@ -86,12 +85,12 @@ apps/web/src/
 └── 📁 app/                     # Next.js App Router pages
 ```
 
-### **Backend Architecture (Firebase Functions)**
-- **Firebase Functions**: Node.js serverless functions
-- **Firebase Firestore**: NoSQL database for real-time data
-- **Firebase Data Connect**: PostgreSQL with GraphQL API
-- **Firebase Authentication**: User management and security
-- **Firebase Hosting**: Static hosting with CDN
+### **Backend Architecture (Python FastAPI)**
+- **FastAPI**: High-performance Python API server
+- **PostgreSQL**: Relational database for structured data
+- **Redis**: Caching layer for improved performance
+- **JWT Authentication**: Secure user authentication
+- **Pydantic**: Data validation and serialization
 
 ---
 

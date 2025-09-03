@@ -4,37 +4,28 @@
   "description": "AI-powered restaurant intelligence and location analytics platform",
   "private": true,
   "workspaces": [
-    "apps/*",
+    "frontend",
+    "backend",
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspace web dev",
-    "dev:web": "yarn workspace web dev",
-    "dev:functions": "yarn workspace functions serve",
-    "dev:firebase": "firebase emulators:start",
-    "build": "yarn workspaces run build",
+    "dev": "yarn workspace web dev:fast",
+    "dev:web": "yarn workspace web dev:fast",
+    "dev:backend": "cd backend && python run_backend.py",
+    "dev:both": "concurrently \"yarn dev:backend\" \"yarn dev:web\"",
+    "build": "yarn workspace web build",
     "build:web": "yarn workspace web build",
-    "build:functions": "yarn workspace functions build",
-    "test": "yarn workspaces run test",
+    "test": "yarn workspace web test",
     "test:web": "yarn workspace web test",
-    "lint": "yarn workspaces run lint",
-    "lint:fix": "yarn workspaces run lint:fix",
-    "type-check": "yarn workspaces run type-check",
-    "clean": "yarn workspaces run clean && rm -rf node_modules",
+    "lint": "yarn workspace web lint",
+    "lint:fix": "yarn workspace web lint:fix",
+    "type-check": "yarn workspace web type-check",
+    "clean": "yarn workspace web clean && rm -rf node_modules",
     "install:all": "yarn install",
-    "firebase:setup": "./tools/scripts/setup-firebase.sh",
-    "firebase:deploy": "firebase deploy",
-    "firebase:deploy:dev": "firebase use dev && firebase deploy",
-    "firebase:deploy:staging": "firebase use staging && firebase deploy",
-    "firebase:deploy:prod": "firebase use prod && firebase deploy",
-    "firebase:functions": "firebase deploy --only functions",
-    "firebase:hosting": "firebase deploy --only hosting",
-    "firebase:dataconnect": "firebase deploy --only dataconnect",
-    "dataconnect:generate": "firebase dataconnect:sdk:generate",
     "start": "yarn workspace web start",
-    "status": "ps aux | grep -E '(next|firebase|node)' | grep -v grep || echo 'No services running'",
-    "stop": "pkill -f 'next\\|firebase\\|node' || true",
-    "clear-ports": "lsof -ti:3000,5000,5001,4001,8081,5010,9099,9199,9399,4402,4502 | xargs kill -9 2>/dev/null || true"
+    "status": "ps aux | grep -E '(next|python.*run_backend|node)' | grep -v grep || echo 'No services running'",
+    "stop": "pkill -f 'next\\|run_backend\\|node' || true",
+    "clear-ports": "lsof -ti:3000,5000,8000 | xargs kill -9 2>/dev/null || true"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -49,8 +40,7 @@
     "yarn": ">=1.22.0"
   },
   "packageManager": "yarn@1.22.22",
-  "dependencies": {
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/your-username/enhancement-bitebase-intelligence.git"
