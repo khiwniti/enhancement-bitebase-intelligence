@@ -1,0 +1,53 @@
+{
+  "navigation": {
+    "dashboard": "แดชบอร์ด",
+    "analytics": "การวิเคราะห์",
+    "restaurants": "ร้านอาหาร",
+    "ai_assistant": "ผู้ช่วย AI",
+    "reports": "รายงาน",
+    "settings": "การตั้งค่า",
+    "logout": "ออกจากระบบ"
+  },
+  "actions": {
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "add": "เพิ่ม",
+    "create": "สร้าง",
+    "update": "อัปเดต",
+    "search": "ค้นหา",
+    "filter": "กรอง",
+    "export": "ส่งออก",
+    "import": "นำเข้า",
+    "refresh": "รีเฟรช",
+    "loading": "กำลังโหลด...",
+    "submit": "ส่ง",
+    "confirm": "ยืนยัน",
+    "close": "ปิด"
+  },
+  "status": {
+    "active": "ใช้งานอยู่",
+    "inactive": "ไม่ได้ใช้งาน",
+    "pending": "รอดำเนินการ",
+    "completed": "เสร็จสิ้น",
+    "success": "สำเร็จ",
+    "error": "เกิดข้อผิดพลาด",
+    "warning": "คำเตือน",
+    "info": "ข้อมูล"
+  },
+  "time": {
+    "today": "วันนี้",
+    "yesterday": "เมื่อวาน",
+    "this_week": "สัปดาห์นี้",
+    "last_week": "สัปดาห์ที่แล้ว",
+    "this_month": "เดือนนี้",
+    "last_month": "เดือนที่แล้ว",
+    "this_year": "ปีนี้"
+  },
+  "language": {
+    "select": "เลือกภาษา",
+    "thai": "ไทย",
+    "english": "English"
+  }
+}

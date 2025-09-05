@@ -1,0 +1,44 @@
+{
+  "title": "Asistente IA",
+  "chat": "Chat",
+  "recommendations": "Recomendaciones",
+  "insights": "Perspectivas",
+  "assistant": {
+    "welcome": "¡Hola! Soy tu asistente de IA. ¿En qué puedo ayudarte hoy?",
+    "thinking": "Pensando...",
+    "error": "Lo siento, hubo un error procesando tu solicitud.",
+    "no_response": "No pude encontrar una respuesta a esa pregunta.",
+    "placeholder": "Escribe tu pregunta aquí...",
+    "send": "Enviar",
+    "clear": "Limpiar Chat"
+  },
+  "suggestions": {
+    "title": "Sugerencias",
+    "revenue_optimization": "¿Cómo puedo optimizar mis ingresos?",
+    "cost_reduction": "¿Qué costos puedo reducir?",
+    "customer_retention": "¿Cómo puedo mejorar la retención de clientes?",
+    "menu_analysis": "Analiza el rendimiento de mi menú",
+    "staff_optimization": "¿Cómo puedo optimizar mi personal?"
+  },
+  "analysis": {
+    "generating": "Generando análisis...",
+    "complete": "Análisis completado",
+    "trends": "Tendencias",
+    "patterns": "Patrones",
+    "anomalies": "Anomalías",
+    "predictions": "Predicciones",
+    "recommendations": "Recomendaciones"
+  },
+  "models": {
+    "gpt4": "GPT-4",
+    "claude": "Claude",
+    "gemini": "Gemini",
+    "custom": "Modelo Personalizado"
+  },
+  "settings": {
+    "model": "Modelo",
+    "temperature": "Temperatura",
+    "max_tokens": "Tokens Máximos",
+    "response_format": "Formato de Respuesta"
+  }
+}

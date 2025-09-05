@@ -88,10 +88,10 @@ class RealDataService {
       // If no restaurants found by city, try searching nearby coordinates
       if (restaurants.length === 0 && location.includes(',')) {
         const coords = location.split(',').map(s => parseFloat(s.trim()))
-        if (coords.length === 2 && !isNaN(coords[0]) && !isNaN(coords[1])) {
+        if (coords.length === 2 && !isNaN(coords[0]!) && !isNaN(coords[1]!)) {
           const nearbyResponse = await backendAPIService.getNearbyRestaurants({
-            latitude: coords[0],
-            longitude: coords[1],
+            latitude: coords[0]!,
+            longitude: coords[1]!,
             limit,
             radius_km: 5
           })
@@ -126,10 +126,10 @@ class RealDataService {
           return {
             ...transformedData,
             aiInsights: aiInsights || {
-              strengths: ['Limited data available'],
-              weaknesses: ['Analysis pending'],
-              opportunities: ['Market analysis needed'],
-              recommendations: ['Data collection required']
+              insights: ['Limited data available'],
+              trends: ['Analysis pending'],
+              recommendations: ['Data collection required'],
+              summary: 'Market analysis needed'
             },
             performanceMetrics,
             marketPosition

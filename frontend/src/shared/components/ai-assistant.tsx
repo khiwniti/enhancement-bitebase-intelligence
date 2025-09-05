@@ -6,6 +6,7 @@ import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { Badge } from '@/components/badge'
 import { geminiAI, type GeminiResponse } from '@/shared/lib/ai/gemini-service'
+import { useTranslation } from '@/lib/useTranslation'
 
 interface Message {
   id: string
@@ -24,18 +25,24 @@ interface AIAssistantProps {
 
 export function AIAssistant({ 
   context = 'general', 
-  placeholder = 'Ask me anything about your restaurant business...',
-  suggestions = [
-    "Analyze my restaurant performance",
-    "What are the latest food trends?",
-    "How can I improve customer satisfaction?",
-    "Show me competitor analysis"
-  ]
+  placeholder,
+  suggestions
 }: AIAssistantProps) {
+  const { t, locale } = useTranslation()
+  
+  // Use translations with fallbacks
+  const defaultPlaceholder = placeholder || t('ai.placeholder', 'Ask me anything about your restaurant business...')
+  const defaultSuggestions = suggestions || [
+    t('ai.suggestion1', 'Analyze my restaurant performance'),
+    t('ai.suggestion2', 'What are the latest food trends?'),
+    t('ai.suggestion3', 'How can I improve customer satisfaction?'),
+    t('ai.suggestion4', 'Show me competitor analysis')
+  ]
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "Hello! I'm your intelligent business assistant. I can help you analyze restaurant data, provide market insights, and answer questions about your business. How can I assist you today?",
+      text: t('ai.greeting', "Hello! I'm your intelligent business assistant. I can help you analyze restaurant data, provide market insights, and answer questions about your business. How can I assist you today?"),
       sender: 'ai',
       timestamp: new Date(),
       confidence: 1.0,
@@ -104,7 +111,7 @@ export function AIAssistant({
       setIsTyping(false)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I apologize, but I'm having trouble processing your request right now. Please try again in a moment.",
+        text: t('ai.error', "I apologize, but I'm having trouble processing your request right now. Please try again in a moment."),
         sender: 'ai',
         timestamp: new Date(),
         confidence: 0.1,
@@ -143,7 +150,7 @@ export function AIAssistant({
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          AI Business Assistant
+          {t('ai.title', 'AI Business Assistant')}
           <Badge variant="outline" className="ml-auto">
             {context}
           </Badge>
@@ -201,7 +208,7 @@ export function AIAssistant({
           <div className="space-y-2">
             <p className="text-sm text-gray-600">Try asking:</p>
             <div className="flex flex-wrap gap-2">
-              {suggestions.map((suggestion, index) => (
+              {suggestions?.map((suggestion, index) => (
                 <Button
                   key={index}
                   variant="outline"

@@ -24,10 +24,12 @@ import {
   DollarSign
 } from 'lucide-react'
 import { DashboardLayout } from '@/components/dashboard-layout'
+import LeafletMap, { type Location } from '@/shared/components/map/LeafletMap'
 
 export default function LocationCenterPage() {
   const [selectedLocation, setSelectedLocation] = useState('all')
   const [viewMode, setViewMode] = useState('grid')
+
 
   const locations = [
     {
@@ -41,7 +43,9 @@ export default function LocationCenterPage() {
       customers: '2.3K/month',
       rating: 4.8,
       openHours: '10:00 - 22:00',
-      lastUpdated: '2 minutes ago'
+      lastUpdated: '2 minutes ago',
+      location: { lat: 13.7563, lng: 100.5018 },
+      cuisine: 'Thai'
     },
     {
       id: '2',
@@ -54,7 +58,9 @@ export default function LocationCenterPage() {
       customers: '1.8K/month',
       rating: 4.6,
       openHours: '08:00 - 20:00',
-      lastUpdated: '5 minutes ago'
+      lastUpdated: '5 minutes ago',
+      location: { lat: 13.7472, lng: 100.5398 },
+      cuisine: 'Mixed'
     },
     {
       id: '3',
@@ -67,7 +73,9 @@ export default function LocationCenterPage() {
       customers: '950/month',
       rating: 4.3,
       openHours: '06:00 - 18:00',
-      lastUpdated: '1 hour ago'
+      lastUpdated: '1 hour ago',
+      location: { lat: 13.8028, lng: 100.5539 },
+      cuisine: 'Street Food'
     },
     {
       id: '4',
@@ -80,7 +88,9 @@ export default function LocationCenterPage() {
       customers: '1.5K/month',
       rating: 0,
       openHours: 'TBD',
-      lastUpdated: 'Planning phase'
+      lastUpdated: 'Planning phase',
+      location: { lat: 13.7307, lng: 100.5418 },
+      cuisine: 'International'
     }
   ]
 
@@ -415,6 +425,120 @@ export default function LocationCenterPage() {
               </Card>
             </motion.div>
           </div>
+
+          {/* Map View */}
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800">All Locations</h2>
+            <div className="flex items-center space-x-1 bg-gray-200 p-1 rounded-lg">
+              <Button
+                variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('grid')}
+              >
+                Grid
+              </Button>
+              <Button
+                variant={viewMode === 'map' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('map')}
+              >
+                Map
+              </Button>
+            </div>
+          </div>
+
+          {viewMode === 'map' && (
+            <motion.div
+              className="mt-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card>
+                <CardContent className="p-0">
+                  <LeafletMap
+                    center={{ lat: 13.7563, lng: 100.5018 }}
+                    zoom={11}
+                    height="600px"
+                    restaurants={locations}
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
+          {viewMode === 'grid' && (
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              {locations.map((location, index) => (
+                <motion.div
+                  key={location.id}
+                  className="p-4 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 * index }}
+                  whileHover={{ scale: 1.01 }}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <h4 className="font-semibold text-gray-900">{location.name}</h4>
+                        {getStatusBadge(location.status)}
+                        {getPerformanceBadge(location.performance)}
+                      </div>
+                      <p className="text-sm text-gray-600 mb-1">{location.address}</p>
+                      <p className="text-xs text-gray-500">Type: {location.type}</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button variant="outline" size="sm">
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div>
+                      <span className="text-gray-500">Revenue:</span>
+                      <p className="font-medium text-green-600">{location.revenue}</p>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Customers:</span>
+                      <p className="font-medium">{location.customers}</p>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Rating:</span>
+                      <div className="flex items-center space-x-1">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        <p className="font-medium">{location.rating || 'N/A'}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Hours:</span>
+                      <p className="font-medium">{location.openHours}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-200">
+                    <div className="flex items-center space-x-2 text-xs text-gray-500">
+                      <Clock className="h-3 w-3" />
+                      <span>Updated {location.lastUpdated}</span>
+                    </div>
+                    <Button variant="outline" size="sm" className="text-xs">
+                      <Navigation className="h-3 w-3 mr-1" />
+                      View on Map
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </div>
     </DashboardLayout>

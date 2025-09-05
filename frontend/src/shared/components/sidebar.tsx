@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/button'
 import { Badge } from '@/components/badge'
+import { useTranslation } from '@/lib/useTranslation'
 import {
   BarChart3,
   Brain,
@@ -176,6 +177,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const pathname = usePathname()
   const [expandedItems, setExpandedItems] = useState<string[]>(['analytics', 'ai', 'market-research'])
+  const { t } = useTranslation()
 
   const toggleExpanded = (itemId: string) => {
     setExpandedItems(prev => 
@@ -210,11 +212,11 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
             >
               <div className="flex items-center space-x-3">
                 <item.icon className={`h-5 w-5 ${isItemActive ? 'text-orange-600' : 'text-gray-400'}`} />
-                <span>{item.title}</span>
+                <span>{t(`navigation.${item.id}`, item.title)}</span>
               </div>
               {item.badge && (
                 <Badge variant="secondary" className="text-xs">
-                  {item.badge}
+                  {t(`common.${item.badge?.toLowerCase()}`, item.badge)}
                 </Badge>
               )}
             </motion.div>
@@ -232,10 +234,10 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
           >
             <div className="flex items-center space-x-3">
               <item.icon className={`h-5 w-5 ${isParentItemActive ? 'text-orange-600' : 'text-gray-400'}`} />
-              <span>{item.title}</span>
+              <span>{t(`navigation.${item.id}`, item.title)}</span>
               {item.badge && (
                 <Badge variant="secondary" className="text-xs">
-                  {item.badge}
+                  {t(`common.${item.badge?.toLowerCase()}`, item.badge)}
                 </Badge>
               )}
             </div>

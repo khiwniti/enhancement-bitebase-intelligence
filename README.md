@@ -4,12 +4,11 @@
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.4.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Firebase](https://img.shields.io/badge/Firebase-Functions-orange?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
 ## 🎯 **Project Overview**
 
-BiteBase Intelligence 2.0 is a comprehensive restaurant analytics platform built with modern architecture principles. This monorepo contains a feature-based frontend, Firebase Functions backend, and shared packages for maximum maintainability and scalability.
+BiteBase Intelligence 2.0 is a comprehensive restaurant analytics platform built with modern architecture principles. This monorepo contains a feature-based frontend, Python backend, and shared packages for maximum maintainability and scalability.
 
 ### **🌟 Key Enhancements**
 
@@ -26,7 +25,6 @@ BiteBase Intelligence 2.0 is a comprehensive restaurant analytics platform built
 ### **Prerequisites**
 - Node.js 18+
 - npm 9+
-- Firebase CLI
 - Git
 
 ### **Installation**
@@ -45,8 +43,7 @@ npm run dev
 
 ### **Access the Platform**
 - **Web App**: http://localhost:5000
-- **Firebase Functions**: http://localhost:5001
-- **Firebase Console**: http://localhost:4001
+- **Python Backend**: http://localhost:8000
 
 ---
 

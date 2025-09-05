@@ -1,0 +1,57 @@
+{
+  "title": "Restaurantes",
+  "management": "Gestión",
+  "overview": "Vista General",
+  "menu": {
+    "title": "Menú",
+    "items": "Artículos",
+    "categories": "Categorías",
+    "add_item": "Agregar Artículo",
+    "edit_item": "Editar Artículo",
+    "delete_item": "Eliminar Artículo",
+    "item_name": "Nombre del Artículo",
+    "description": "Descripción",
+    "price": "Precio",
+    "category": "Categoría",
+    "availability": "Disponibilidad",
+    "ingredients": "Ingredientes",
+    "allergens": "Alérgenos",
+    "nutrition": "Información Nutricional"
+  },
+  "orders": {
+    "title": "Pedidos",
+    "new_order": "Nuevo Pedido",
+    "order_history": "Historial de Pedidos",
+    "order_id": "ID del Pedido",
+    "customer": "Cliente",
+    "items": "Artículos",
+    "total": "Total",
+    "status": "Estado",
+    "order_time": "Hora del Pedido",
+    "delivery_time": "Tiempo de Entrega"
+  },
+  "inventory": {
+    "title": "Inventario",
+    "stock_levels": "Niveles de Stock",
+    "low_stock": "Stock Bajo",
+    "out_of_stock": "Sin Stock",
+    "reorder_point": "Punto de Reorden",
+    "supplier": "Proveedor",
+    "last_updated": "Última Actualización"
+  },
+  "staff": {
+    "title": "Personal",
+    "employees": "Empleados",
+    "schedules": "Horarios",
+    "roles": "Roles",
+    "performance": "Rendimiento"
+  },
+  "locations": {
+    "title": "Ubicaciones",
+    "branches": "Sucursales",
+    "address": "Dirección",
+    "hours": "Horarios",
+    "contact": "Contacto",
+    "manager": "Gerente"
+  }
+}

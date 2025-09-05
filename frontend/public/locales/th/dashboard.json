@@ -1,0 +1,26 @@
+{
+  "title": "แดชบอร์ด",
+  "welcome": "ยินดีต้อนรับสู่ BiteBase Intelligence",
+  "overview": "ภาพรวมธุรกิจ",
+  "metrics": {
+    "total_restaurants": "จำนวนร้านอาหารทั้งหมด",
+    "monthly_revenue": "รายได้รายเดือน",
+    "customer_satisfaction": "ความพึงพอใจลูกค้า",
+    "growth_rate": "อัตราการเติบโต"
+  },
+  "charts": {
+    "revenue_trend": "แนวโน้มรายได้",
+    "customer_analytics": "การวิเคราะห์ลูกค้า",
+    "performance_metrics": "ตัวชี้วัดประสิทธิภาพ",
+    "market_insights": "ข้อมูลเชิงลึกตลาด"
+  },
+  "quick_actions": {
+    "title": "การดำเนินการด่วน",
+    "add_restaurant": "เพิ่มร้านอาหาร",
+    "generate_report": "สร้างรายงาน",
+    "ai_insights": "ข้อมูลเชิงลึก AI",
+    "market_analysis": "การวิเคราะห์ตลาด"
+  },
+  "recent_activity": "กิจกรรมล่าสุด",
+  "notifications": "การแจ้งเตือน"
+}

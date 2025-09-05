@@ -29,10 +29,11 @@ import Link from 'next/link'
 import { realDataService, type EnhancedRestaurantData } from '@/shared/lib/data/real-data-service'
 import { googleMapsService, type LocationData } from '@/shared/lib/maps/google-maps-service'
 import { geminiAI } from '@/shared/lib/ai/gemini-service'
+import { InteractiveMap } from '@/shared/components/interactive-map'
 
 export default function LocationIntelligencePage() {
   const [selectedLocation, setSelectedLocation] = useState('bangkok-central')
-  const [mapView, setMapView] = useState('heatmap')
+  const [mapView, setMapView] = useState<'heatmap' | 'satellite'>('heatmap')
 
   const locationMetrics = [
     {
@@ -258,50 +259,11 @@ export default function LocationIntelligencePage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-96 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-blue-400/20"></div>
-                    <div className="text-center z-10">
-                      <MapPin className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                      <p className="text-gray-700 font-medium">Interactive Location Map</p>
-                      <p className="text-sm text-gray-500 mt-2">
-                        Bangkok Central Business District
-                      </p>
-                      <div className="flex items-center justify-center space-x-4 mt-4">
-                        <Badge className="bg-green-100 text-green-700">
-                          <Activity className="h-3 w-3 mr-1" />
-                          Live Data
-                        </Badge>
-                        <Badge className="bg-blue-100 text-blue-700">
-                          <Zap className="h-3 w-3 mr-1" />
-                          AI Analysis
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Heatmap Legend */}
-                  <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                    <h4 className="font-medium text-gray-900 mb-3">Market Intensity Heatmap</h4>
-                    <div className="space-y-2">
-                      {heatmapData.map((area, index) => (
-                        <div key={area.area} className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div 
-                              className="w-4 h-4 rounded"
-                              style={{ 
-                                backgroundColor: `rgba(34, 197, 94, ${area.intensity / 100})` 
-                              }}
-                            ></div>
-                            <span className="text-sm font-medium">{area.area}</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="text-sm text-gray-600">{area.intensity}%</span>
-                            <span className="text-sm font-medium text-green-600">{area.revenue}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <InteractiveMap 
+                    location={selectedLocation}
+                    mapView={mapView}
+                    onLocationChange={(location) => setSelectedLocation(location)}
+                  />
                 </CardContent>
               </Card>
             </motion.div>

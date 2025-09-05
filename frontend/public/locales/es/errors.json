@@ -1,0 +1,49 @@
+{
+  "general": {
+    "unknown_error": "Ha ocurrido un error desconocido",
+    "network_error": "Error de conexión de red",
+    "timeout": "La solicitud ha excedido el tiempo límite",
+    "server_error": "Error interno del servidor",
+    "not_found": "Recurso no encontrado",
+    "unauthorized": "No autorizado",
+    "forbidden": "Acceso prohibido",
+    "bad_request": "Solicitud inválida"
+  },
+  "validation": {
+    "required_field": "Este campo es requerido",
+    "invalid_email": "Formato de correo electrónico inválido",
+    "invalid_phone": "Formato de teléfono inválido",
+    "invalid_url": "Formato de URL inválido",
+    "min_length": "Debe tener al menos {{min}} caracteres",
+    "max_length": "No debe exceder {{max}} caracteres",
+    "invalid_number": "Debe ser un número válido",
+    "invalid_date": "Formato de fecha inválido"
+  },
+  "auth": {
+    "login_failed": "Error al iniciar sesión",
+    "invalid_credentials": "Credenciales inválidas",
+    "account_locked": "Cuenta bloqueada",
+    "session_expired": "Sesión expirada",
+    "email_not_verified": "Correo electrónico no verificado",
+    "password_reset_failed": "Error al restablecer contraseña"
+  },
+  "data": {
+    "load_failed": "Error al cargar datos",
+    "save_failed": "Error al guardar datos",
+    "delete_failed": "Error al eliminar datos",
+    "update_failed": "Error al actualizar datos",
+    "sync_failed": "Error de sincronización"
+  },
+  "file": {
+    "upload_failed": "Error al subir archivo",
+    "invalid_format": "Formato de archivo inválido",
+    "file_too_large": "El archivo es demasiado grande",
+    "download_failed": "Error al descargar archivo"
+  },
+  "payment": {
+    "payment_failed": "Error en el pago",
+    "card_declined": "Tarjeta rechazada",
+    "insufficient_funds": "Fondos insuficientes",
+    "invalid_card": "Tarjeta inválida"
+  }
+}

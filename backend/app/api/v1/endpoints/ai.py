@@ -11,8 +11,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.dependencies import get_current_user, get_optional_user, CurrentUser
 from app.core.database import get_db
+from app.services.nl_query.thai_language_processor import ThaiLanguageProcessor
 
 router = APIRouter()
+
+# Initialize Thai language processor
+thai_processor = ThaiLanguageProcessor()
 
 # Request Models
 class MarketAnalysisRequest(BaseModel):
@@ -27,6 +31,7 @@ class ChatRequest(BaseModel):
     context: Optional[Dict[str, Any]] = Field(None, description="Conversation context")
     restaurantId: Optional[str] = Field(None, description="Restaurant context")
     conversationId: Optional[str] = Field(None, description="Conversation ID for persistence")
+    language: Optional[str] = Field("auto", description="Preferred language for response (auto, th, en)")
 
 class PredictionRequest(BaseModel):
     type: str = Field(..., description="Prediction type (revenue_forecast, demand_prediction, etc.)")
@@ -180,49 +185,94 @@ async def ai_chat(
     Supports context persistence and restaurant-specific queries
     """
     try:
-        # In production, this would:
-        # 1. Process user message for intent and entities
-        # 2. Retrieve relevant context and data
-        # 3. Generate response using Claude/GPT
-        # 4. Store conversation history
-        # 5. Provide actionable insights
+        # Step 1: Detect language
+        detected_language = request.language
+        if detected_language == "auto":
+            detected_language = thai_processor.detect_language(request.message)
         
-        # Mock AI response (replace with actual AI service)
-        ai_response = {
-            'conversationId': request.conversationId or f"conv_{datetime.now().timestamp()}",
-            'response': {
-                'text': "Based on your restaurant's performance data, I can see that your lunch revenue has increased by 23% this month. This appears to be driven by your new seasonal menu items. Would you like me to analyze which specific dishes are performing best?",
-                'intent': 'analytics_inquiry',
-                'confidence': 0.92,
-                'suggestions': [
-                    "Analyze top-performing menu items",
-                    "Compare lunch vs dinner performance",
-                    "Review customer feedback trends"
-                ]
-            },
-            'context': {
-                'restaurantId': request.restaurantId,
-                'topic': 'revenue_analysis',
-                'dataPoints': ['lunch_revenue', 'menu_performance'],
-                'timeframe': 'current_month'
-            },
-            'insights': [
-                {
-                    'type': 'trend',
-                    'description': 'Lunch revenue trending upward',
-                    'value': '+23%',
-                    'period': '30d'
-                }
-            ],
-            'actions': [
-                {
-                    'action': 'menu_analysis',
-                    'description': 'Analyze individual menu item performance',
-                    'priority': 'high'
-                }
-            ],
-            'timestamp': datetime.now(timezone.utc).isoformat()
-        }
+        # Step 2: Process Thai queries using Thai language processor
+        thai_context = None
+        if detected_language == "thai":
+            thai_context = thai_processor.process_thai_query(request.message)
+        
+        # Step 3: Generate response based on detected language
+        if detected_language == "thai" and thai_context:
+            # Generate Thai response using mock data
+            ai_response = {
+                'conversationId': request.conversationId or f"conv_{datetime.now().timestamp()}",
+                'response': {
+                    'text': "จากข้อมูลประสิทธิภาพของร้านอาหารคุณ ผมเห็นว่ายอดขายช่วงอาหารกลางวันเพิ่มขึ้น 23% ในเดือนนี้ ซึ่งดูเหมือนจะเกิดจากเมนูใหม่ตามฤดูกาลที่เพิ่มเข้ามา คุณต้องการให้ผมวิเคราะห์ว่าเมนูไหนมีผลการตอบรับที่ดีที่สุดไหมครับ?",
+                    'intent': thai_context.intent if thai_context else 'analytics_inquiry',
+                    'confidence': thai_context.confidence if thai_context else 0.92,
+                    'politeness_level': thai_context.politeness_level if thai_context else 'formal',
+                    'suggestions': [
+                        "วิเคราะห์รายการอาหารที่มียอดขายสูงสุด",
+                        "เปรียบเทียบยอดขายอาหารกลางวันกับอาหารเย็น",
+                        "ตรวจสอบแนวโน้มคำติชมจากลูกค้า"
+                    ]
+                },
+                'context': {
+                    'restaurantId': request.restaurantId,
+                    'topic': 'revenue_analysis',
+                    'dataPoints': ['lunch_revenue', 'menu_performance'],
+                    'timeframe': 'current_month',
+                    'language': 'thai'
+                },
+                'insights': [
+                    {
+                        'type': 'trend',
+                        'description': 'ยอดขายอาหารกลางวันมีแนวโน้มเพิ่มขึ้น',
+                        'value': '+23%',
+                        'period': '30 วัน'
+                    }
+                ],
+                'actions': [
+                    {
+                        'action': 'menu_analysis',
+                        'description': 'วิเคราะห์ประสิทธิภาพของแต่ละรายการอาหาร',
+                        'priority': 'สูง'
+                    }
+                ],
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
+        else:
+            # Generate English response (existing logic)
+            ai_response = {
+                'conversationId': request.conversationId or f"conv_{datetime.now().timestamp()}",
+                'response': {
+                    'text': "Based on your restaurant's performance data, I can see that your lunch revenue has increased by 23% this month. This appears to be driven by your new seasonal menu items. Would you like me to analyze which specific dishes are performing best?",
+                    'intent': 'analytics_inquiry',
+                    'confidence': 0.92,
+                    'suggestions': [
+                        "Analyze top-performing menu items",
+                        "Compare lunch vs dinner performance",
+                        "Review customer feedback trends"
+                    ]
+                },
+                'context': {
+                    'restaurantId': request.restaurantId,
+                    'topic': 'revenue_analysis',
+                    'dataPoints': ['lunch_revenue', 'menu_performance'],
+                    'timeframe': 'current_month',
+                    'language': 'english'
+                },
+                'insights': [
+                    {
+                        'type': 'trend',
+                        'description': 'Lunch revenue trending upward',
+                        'value': '+23%',
+                        'period': '30d'
+                    }
+                ],
+                'actions': [
+                    {
+                        'action': 'menu_analysis',
+                        'description': 'Analyze individual menu item performance',
+                        'priority': 'high'
+                    }
+                ],
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
         
         return create_response(
             success=True,

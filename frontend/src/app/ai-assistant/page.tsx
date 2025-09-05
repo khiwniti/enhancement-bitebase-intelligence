@@ -262,16 +262,16 @@ export default function AIAssistantPage() {
           </div>
 
           {/* Status Indicators */}
-          <div className="flex items-center space-x-4">
-            <Badge className="bg-green-100 text-green-700">
+          <div className="flex items-center space-x-2 flex-wrap gap-2">
+            <Badge className="bg-green-100 text-green-700 flex-shrink-0">
               <CheckCircle className="h-3 w-3 mr-1" />
               Online
             </Badge>
-            <Badge className="bg-blue-100 text-blue-700">
-              <Bot className="h-3 w-3 mr-1" />
-              AI Model: Google Gemini Pro
+            <Badge className="bg-blue-100 text-blue-700 break-all">
+              <Bot className="h-3 w-3 mr-1 flex-shrink-0" />
+              <span className="truncate">AI Model: Google Gemini Pro</span>
             </Badge>
-            <Badge className="bg-purple-100 text-purple-700">
+            <Badge className="bg-purple-100 text-purple-700 flex-shrink-0">
               <Sparkles className="h-3 w-3 mr-1" />
               Context-Aware
             </Badge>
@@ -281,13 +281,13 @@ export default function AIAssistantPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Chat Interface */}
           <div className="lg:col-span-3">
-            <Card className="h-[600px] flex flex-col bg-white/90 backdrop-blur-sm border border-gray-200">
-              <CardHeader className="pb-4 border-b border-gray-200">
+            <Card className="h-[600px] flex flex-col bg-white/90 backdrop-blur-sm border border-gray-200 overflow-hidden">
+              <CardHeader className="pb-4 border-b border-gray-200 flex-shrink-0">
                 <CardTitle className="flex items-center space-x-2">
-                  <Bot className="h-5 w-5 text-indigo-500" />
-                  <span>Chat with AI Assistant</span>
+                  <Bot className="h-5 w-5 text-indigo-500 flex-shrink-0" />
+                  <span className="break-words min-w-0">Chat with AI Assistant</span>
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="break-words">
                   Ask questions about your business data and get intelligent insights
                 </CardDescription>
               </CardHeader>
@@ -322,7 +322,7 @@ export default function AIAssistantPage() {
                                 ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
                                 : 'bg-gray-100 text-gray-900'
                             }`}>
-                              <p className="text-sm">{message.content}</p>
+                              <p className="text-sm break-words whitespace-pre-wrap overflow-wrap-anywhere">{message.content}</p>
                               <div className="text-xs opacity-70 mt-2">
                                 {message.timestamp.toLocaleTimeString()}
                               </div>
@@ -334,16 +334,16 @@ export default function AIAssistantPage() {
                             <div className="mt-3 space-y-2">
                               {message.insights.map((insight, index) => (
                                 <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm">
-                                  <div className="flex items-center space-x-2">
-                                    {insight.type === 'metric' && <BarChart3 className="h-4 w-4 text-green-500" />}
-                                    {insight.type === 'trend' && <TrendingUp className="h-4 w-4 text-blue-500" />}
-                                    {insight.type === 'recommendation' && <Lightbulb className="h-4 w-4 text-orange-500" />}
-                                    <span className="font-medium text-sm">{insight.title}</span>
+                                  <div className="flex items-center space-x-2 flex-wrap">
+                                    {insight.type === 'metric' && <BarChart3 className="h-4 w-4 text-green-500 flex-shrink-0" />}
+                                    {insight.type === 'trend' && <TrendingUp className="h-4 w-4 text-blue-500 flex-shrink-0" />}
+                                    {insight.type === 'recommendation' && <Lightbulb className="h-4 w-4 text-orange-500 flex-shrink-0" />}
+                                    <span className="font-medium text-sm break-words flex-grow min-w-0">{insight.title}</span>
                                     {insight.value && (
-                                      <Badge variant="secondary" className="text-xs">{insight.value}</Badge>
+                                      <Badge variant="secondary" className="text-xs flex-shrink-0 break-all">{insight.value}</Badge>
                                     )}
                                   </div>
-                                  <p className="text-xs text-gray-600 mt-1">{insight.description}</p>
+                                  <p className="text-xs text-gray-600 mt-1 break-words whitespace-pre-wrap overflow-wrap-anywhere">{insight.description}</p>
                                 </div>
                               ))}
                             </div>
@@ -357,10 +357,10 @@ export default function AIAssistantPage() {
                                   key={index}
                                   variant="outline"
                                   size="sm"
-                                  className="text-xs"
+                                  className="text-xs break-words text-center"
                                   onClick={() => handleSendMessage(suggestion)}
                                 >
-                                  {suggestion}
+                                  <span className="truncate">{suggestion}</span>
                                 </Button>
                               ))}
                             </div>
@@ -405,7 +405,7 @@ export default function AIAssistantPage() {
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                       placeholder="Ask me anything about your restaurant business..."
-                      className="pr-12"
+                      className="pr-12 break-words resize-none overflow-hidden"
                     />
                     <Button
                       size="sm"
@@ -447,15 +447,15 @@ export default function AIAssistantPage() {
                   <Button
                     key={action.id}
                     variant="outline"
-                    className="w-full justify-start text-left h-auto p-3"
+                    className="w-full justify-start text-left h-auto p-3 overflow-hidden"
                     onClick={() => handleSendMessage(action.prompt)}
                   >
-                    <div className={`w-8 h-8 bg-gradient-to-r ${action.color} rounded-lg flex items-center justify-center mr-3`}>
+                    <div className={`w-8 h-8 bg-gradient-to-r ${action.color} rounded-lg flex items-center justify-center mr-3 flex-shrink-0`}>
                       <action.icon className="h-4 w-4 text-white" />
                     </div>
-                    <div>
-                      <div className="font-medium text-sm">{action.title}</div>
-                      <div className="text-xs text-gray-500">{action.description}</div>
+                    <div className="flex-grow min-w-0">
+                      <div className="font-medium text-sm break-words overflow-wrap-anywhere">{action.title}</div>
+                      <div className="text-xs text-gray-500 break-words overflow-wrap-anywhere">{action.description}</div>
                     </div>
                   </Button>
                 ))}
@@ -473,24 +473,24 @@ export default function AIAssistantPage() {
               <CardContent className="space-y-3">
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Real-time data analysis</span>
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                    <span className="break-words">Real-time data analysis</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Predictive insights</span>
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                    <span className="break-words">Predictive insights</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Natural language queries</span>
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                    <span className="break-words">Natural language queries</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Actionable recommendations</span>
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                    <span className="break-words">Actionable recommendations</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Clock className="h-4 w-4 text-orange-500" />
-                    <span>Voice commands (coming soon)</span>
+                    <Clock className="h-4 w-4 text-orange-500 flex-shrink-0" />
+                    <span className="break-words">Voice commands (coming soon)</span>
                   </div>
                 </div>
               </CardContent>

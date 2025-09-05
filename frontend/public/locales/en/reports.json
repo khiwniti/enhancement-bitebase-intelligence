@@ -1,0 +1,27 @@
+{
+  "title": "Reports & Analytics",
+  "overview": "Comprehensive Business Reports",
+  "types": {
+    "sales": "Sales Reports",
+    "financial": "Financial Reports",
+    "operational": "Operational Reports",
+    "customer": "Customer Reports"
+  },
+  "periods": {
+    "daily": "Daily Reports",
+    "weekly": "Weekly Reports",  
+    "monthly": "Monthly Reports",
+    "quarterly": "Quarterly Reports",
+    "annual": "Annual Reports"
+  },
+  "export": {
+    "pdf": "Export as PDF",
+    "excel": "Export as Excel",
+    "csv": "Export as CSV"
+  },
+  "schedule": {
+    "title": "Schedule Reports",
+    "frequency": "Report Frequency",
+    "recipients": "Email Recipients"
+  }
+}

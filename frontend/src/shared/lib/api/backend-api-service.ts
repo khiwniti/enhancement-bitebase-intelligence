@@ -294,15 +294,15 @@ class BackendAPIService {
       cuisine: backendRestaurant.cuisine_types[0] || 'Restaurant',
       businessStatus: backendRestaurant.is_active ? 'OPERATIONAL' : 'CLOSED',
       category: backendRestaurant.category,
-      area: backendRestaurant.location.area,
+      area: backendRestaurant.location.area || '',
       city: backendRestaurant.location.city,
       country: backendRestaurant.location.country,
-      phone: backendRestaurant.phone,
-      website: backendRestaurant.website,
-      estimatedRevenue: backendRestaurant.estimated_revenue,
-      employeeCount: backendRestaurant.employee_count,
-      dataQualityScore: backendRestaurant.data_quality_score,
-      distance: backendRestaurant.distance_km
+      phone: backendRestaurant.phone || '',
+      website: backendRestaurant.website || '',
+      estimatedRevenue: backendRestaurant.estimated_revenue || 0,
+      employeeCount: backendRestaurant.employee_count || 0,
+      dataQualityScore: backendRestaurant.data_quality_score || 0,
+      distance: backendRestaurant.distance_km || 0
     }
   }
 
