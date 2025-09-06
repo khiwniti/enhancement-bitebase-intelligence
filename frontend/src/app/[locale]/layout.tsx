@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 import '../globals.css'
-import { locales, Locale, localeDirections } from '@/lib/i18n-config'
-import { getDictionary } from '@/lib/get-dictionary'
+import { locales, Locale, localeDirections } from '@/shared/lib/i18n-config'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,8 +18,7 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
   const { locale } = await params
-  const dict = await getDictionary(locale)
-  
+
   return {
     title: {
       default: 'BiteBase Intelligence',
@@ -87,13 +87,14 @@ export default async function LocaleLayout({
 }) {
   // Await the params
   const { locale } = await params
-  
+
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) {
     notFound()
   }
 
   const direction = localeDirections[locale]
+  const messages = await getMessages({ locale })
 
   return (
     <html lang={locale} dir={direction} className={inter.variable} suppressHydrationWarning>
@@ -108,9 +109,11 @@ export default async function LocaleLayout({
         className="font-sans antialiased bg-white min-h-screen"
         suppressHydrationWarning
       >
-        <div className="relative min-h-screen">
-          {children}
-        </div>
+        <NextIntlClientProvider messages={messages}>
+          <div className="relative min-h-screen">
+            {children}
+          </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

@@ -1,0 +1,161 @@
+{
+  "hero": {
+    "badge": "Inteligencia de Restaurantes con IA",
+    "title": {
+      "part1": "Revoluciona tu Restaurante con",
+      "part2": "Inteligencia"
+    },
+    "subtitle": {
+      "part1": "Aprovecha el poder de la",
+      "ai": "IA",
+      "part2": "para optimizar operaciones, aumentar ganancias y deleitar clientes."
+    },
+    "stats": {
+      "text": "Únete a",
+      "number": "5,000+",
+      "customers": "restaurantes que ya están transformando su negocio con BiteBase Intelligence."
+    },
+    "cta": {
+      "primary": "Iniciar Prueba Gratis",
+      "secondary": "Ver Demo"
+    },
+    "trust": {
+      "security": {
+        "label": "Seguridad Empresarial",
+        "description": "Cifrado de nivel bancario"
+      },
+      "global": {
+        "label": "Escala Global",
+        "description": "50+ países"
+      },
+      "analytics": {
+        "label": "Análisis en Tiempo Real",
+        "description": "Información instantánea"
+      }
+    }
+  },
+  "stats": {
+    "restaurants": {
+      "number": "10,000+",
+      "label": "Restaurantes"
+    },
+    "accuracy": {
+      "number": "99.5%",
+      "label": "Precisión"
+    },
+    "growth": {
+      "number": "+250%",
+      "label": "Crecimiento"
+    },
+    "satisfaction": {
+      "number": "4.9/5",
+      "label": "Satisfacción"
+    }
+  },
+  "features": {
+    "title": "Características Poderosas",
+    "subtitle": "Kit completo para análisis integral de datos empresariales",
+    "analytics": {
+      "title": "Análisis en Tiempo Real",
+      "desc": "Rastrea y analiza datos empresariales en tiempo real con paneles hermosos y fáciles de usar"
+    },
+    "location": {
+      "title": "Inteligencia de Ubicación",
+      "desc": "Evalúa el potencial del área y encuentra las mejores ubicaciones para tu negocio de restaurante"
+    },
+    "ai": {
+      "title": "Inteligencia Artificial",
+      "desc": "Usa tecnología IA para predecir tendencias y proporcionar recomendaciones empresariales"
+    },
+    "growth": {
+      "title": "Crecimiento",
+      "desc": "Herramientas y estrategias para ayudar a expandir tu negocio de manera sostenible"
+    },
+    "automation": {
+      "title": "Automatización",
+      "desc": "Automatiza procesos repetitivos y ahorra tiempo para enfocarte en estrategia"
+    },
+    "security": {
+      "title": "Seguridad",
+      "desc": "Protección de datos de nivel empresarial con certificación ISO 27001"
+    }
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "subtitle": "Historias reales de restaurantes exitosos usando BiteBase Intelligence",
+    "items": [
+      {
+        "name": "María González",
+        "position": "CEO, Sabores Mexicanos",
+        "content": "BiteBase Intelligence transformó completamente nuestra operación. Los análisis predictivos nos ayudaron a reducir el desperdicio en un 40%.",
+        "rating": 5,
+        "image": "/avatars/maria.jpg"
+      },
+      {
+        "name": "Carlos Rodríguez",
+        "position": "Propietario, La Parrilla Dorada",
+        "content": "La inteligencia de ubicación nos ayudó a encontrar la ubicación perfecta para nuestro segundo restaurante. Las ventas superaron las proyecciones en un 150%.",
+        "rating": 5,
+        "image": "/avatars/carlos.jpg"
+      },
+      {
+        "name": "Ana Martínez",
+        "position": "Gerente, Cocina Moderna",
+        "content": "Los análisis en tiempo real nos permiten ajustar nuestro menú sobre la marcha. Nuestras ventas aumentaron un 35% en solo 3 meses.",
+        "rating": 5,
+        "image": "/avatars/ana.jpg"
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Planes Diseñados Para Tu Crecimiento",
+    "subtitle": "Elige el plan perfecto para tu restaurante",
+    "basic": {
+      "name": "Básico",
+      "price": "$29",
+      "period": "/mes",
+      "description": "Perfecto para restaurantes pequeños que comienzan",
+      "features": [
+        "Panel de análisis básico",
+        "Hasta 100 órdenes/mes",
+        "Soporte por email",
+        "1 ubicación"
+      ]
+    },
+    "professional": {
+      "name": "Profesional",
+      "price": "$99",
+      "period": "/mes",
+      "description": "Ideal para restaurantes en crecimiento",
+      "features": [
+        "Panel de análisis avanzado",
+        "Órdenes ilimitadas",
+        "Soporte prioritario",
+        "Hasta 5 ubicaciones",
+        "Análisis predictivo",
+        "Integraciones API"
+      ],
+      "popular": true
+    },
+    "enterprise": {
+      "name": "Empresarial",
+      "price": "Personalizado",
+      "period": "",
+      "description": "Para cadenas de restaurantes y grandes operaciones",
+      "features": [
+        "Todas las características Pro",
+        "Ubicaciones ilimitadas",
+        "Gerente de cuenta dedicado",
+        "Soporte 24/7",
+        "Análisis personalizado",
+        "Entrenamiento en sitio"
+      ]
+    }
+  },
+  "cta": {
+    "title": "¿Listo Para Transformar Tu Restaurante?",
+    "subtitle": "Únete a miles de restaurantes que ya están usando BiteBase Intelligence para crecer",
+    "button": "Comenzar Ahora",
+    "note": "Configuración gratis • Sin tarjeta de crédito requerida"
+  }
+}

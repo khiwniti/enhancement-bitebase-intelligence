@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     
     # CORS Configuration
     ALLOWED_HOSTS: List[str] = ["*"]
-    CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:5000", "http://localhost:50513", "https://9000-firebase-bitebase-int-1756691349489.cluster-isls3qj2gbd5qs4jkjqvhahfv6.cloudworkstations.dev"]
+    CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:5000", "http://localhost:50513"]
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: List[str] = ["*"]
     CORS_ALLOW_HEADERS: List[str] = ["*"]

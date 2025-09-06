@@ -1,0 +1,22 @@
+{
+  "title": "Business Insights",
+  "overview": "AI-Powered Business Intelligence",
+  "metrics": {
+    "revenue": "Revenue Insights",
+    "growth": "Growth Analytics",
+    "trends": "Market Trends",
+    "predictions": "AI Predictions"
+  },
+  "categories": {
+    "sales": "Sales Performance",
+    "customers": "Customer Behavior",
+    "operations": "Operational Efficiency",
+    "marketing": "Marketing ROI"
+  },
+  "recommendations": {
+    "title": "Smart Recommendations",
+    "subtitle": "AI-driven insights for your business",
+    "actions": "Suggested Actions",
+    "impact": "Expected Impact"
+  }
+}

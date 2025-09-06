@@ -1,0 +1,41 @@
+{
+  "main": {
+    "dashboard": "Dashboard",
+    "analytics": "Analytics", 
+    "restaurants": "Restaurants",
+    "ai_assistant": "AI Assistant",
+    "reports": "Reports",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "public": {
+    "features": "Features",
+    "pricing": "Pricing", 
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home"
+  },
+  "analytics": {
+    "4p_analytics": "4P Analytics",
+    "analytics_center": "Analytics Center",
+    "analytics_workbench": "Analytics Workbench"
+  },
+  "location": {
+    "location_center": "Location Center", 
+    "location_intelligence": "Location Intelligence"
+  },
+  "market": {
+    "market_analysis": "Market Analysis",
+    "market_research": "Market Research"
+  },
+  "ai": {
+    "ai_center": "AI Center",
+    "research_agent": "Research Agent",
+    "growth_studio": "Growth Studio"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "forgot_password": "Forgot Password"
+  }
+}

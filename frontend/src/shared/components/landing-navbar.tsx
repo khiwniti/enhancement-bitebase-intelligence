@@ -4,16 +4,20 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, Brain } from 'lucide-react'
 import { Button } from '@/components/button'
-
-const navigation = [
-  { name: 'Features', href: '#features' },
-  { name: 'Pricing', href: '#pricing' },
-  { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
-]
+import { LanguageSwitcher } from '@/components/language-switcher'
+import { useTranslations } from 'next-intl'
 
 export function LandingNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const t = useTranslations('navigation')
+  const tCommon = useTranslations('common')
+
+  const navigation = [
+    { name: t('features') || 'Features', href: '#features' },
+    { name: t('pricing') || 'Pricing', href: '#pricing' },
+    { name: t('about') || 'About', href: '#about' },
+    { name: t('contact') || 'Contact', href: '#contact' },
+  ]
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -28,7 +32,7 @@ export function LandingNavbar() {
             </span>
           </Link>
         </div>
-        
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -39,7 +43,7 @@ export function LandingNavbar() {
             <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        
+
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
             <Link
@@ -51,21 +55,22 @@ export function LandingNavbar() {
             </Link>
           ))}
         </div>
-        
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
+
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
+          <LanguageSwitcher variant="compact" />
           <Button asChild variant="ghost">
             <Link href="/auth/login">
-              Sign in
+              {tCommon('actions.signIn') || 'Sign in'}
             </Link>
           </Button>
           <Button asChild>
             <Link href="/auth/signup">
-              Get started
+              {tCommon('actions.getStarted') || 'Get started'}
             </Link>
           </Button>
         </div>
       </nav>
-      
+
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden">
@@ -104,14 +109,15 @@ export function LandingNavbar() {
                   ))}
                 </div>
                 <div className="py-6 space-y-4">
+                  <LanguageSwitcher className="w-full mb-4" />
                   <Button asChild variant="ghost" className="w-full">
                     <Link href="/auth/login">
-                      Sign in
+                      {tCommon('actions.signIn') || 'Sign in'}
                     </Link>
                   </Button>
                   <Button asChild className="w-full">
                     <Link href="/auth/signup">
-                      Get started
+                      {tCommon('actions.getStarted') || 'Get started'}
                     </Link>
                   </Button>
                 </div>

@@ -1,0 +1,61 @@
+{
+  "navigation": {
+    "dashboard": "หน้าหลัก",
+    "analytics": "ข้อมูลเชิงลึก",
+    "restaurants": "ร้านอาหาร",
+    "ai_assistant": "ผู้ช่วยอัจฉริยะ",
+    "reports": "รายงาน",
+    "settings": "ตั้งค่า",
+    "logout": "ออกจากระบบ",
+    "features": "ฟีเจอร์",
+    "pricing": "ราคา",
+    "about": "เกี่ยวกับเรา",
+    "contact": "ติดต่อ"
+  },
+  "actions": {
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "add": "เพิ่ม",
+    "create": "สร้างใหม่",
+    "update": "อัปเดต",
+    "search": "ค้นหา",
+    "filter": "กรอง",
+    "export": "ดาวน์โหลด",
+    "import": "อัปโหลด",
+    "refresh": "รีเฟรช",
+    "loading": "กำลังโหลด...",
+    "submit": "ส่งข้อมูล",
+    "confirm": "ยืนยัน",
+    "close": "ปิด",
+    "sign_in": "เข้าสู่ระบบ",
+    "get_started": "เริ่มต้นใช้งาน",
+    "learnMore": "เรียนรู้เพิ่มเติม"
+  },
+  "status": {
+    "active": "ใช้งานอยู่",
+    "inactive": "ไม่ได้ใช้งาน",
+    "pending": "รอดำเนินการ",
+    "completed": "เสร็จสิ้นแล้ว",
+    "success": "สำเร็จ",
+    "error": "เกิดข้อผิดพลาด",
+    "warning": "คำเตือน",
+    "info": "ข้อมูล"
+  },
+  "time": {
+    "today": "วันนี้",
+    "yesterday": "เมื่อวาน",
+    "this_week": "สัปดาห์นี้",
+    "last_week": "สัปดาห์ที่แล้ว",
+    "this_month": "เดือนนี้",
+    "last_month": "เดือนที่แล้ว",
+    "this_year": "ปีนี้"
+  },
+  "language": {
+    "select": "เลือกภาษา",
+    "auto_detect": "ตรวจจับอัตโนมัติ",
+    "thai": "ไทย",
+    "english": "English"
+  }
+}

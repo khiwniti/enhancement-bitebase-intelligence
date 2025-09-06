@@ -1,3 +1,7 @@
+const createNextIntlPlugin = require('next-intl/plugin')
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable experimental features for faster development
@@ -82,6 +86,16 @@ const nextConfig = {
             value: 'Content-Type, Authorization, X-Requested-With'
           }
         ]
+      },
+      // SEO headers for different locales
+      {
+        source: '/:locale(th|es|fr|de|it|pt|zh|ja|ko|ar)/:path*',
+        headers: [
+          {
+            key: 'Content-Language',
+            value: ':locale'
+          }
+        ]
       }
     ]
   },
@@ -95,4 +109,4 @@ const nextConfig = {
   poweredByHeader: false
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)

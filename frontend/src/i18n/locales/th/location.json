@@ -1,0 +1,22 @@
+{
+  "title": "ข้อมูลสาขา",
+  "overview": "ภาพรวมประสิทธิภาพแต่ละสาขา",
+  "metrics": {
+    "totalLocations": "สาขาทั้งหมด",
+    "activeLocations": "สาขาที่เปิดดำเนินการ",
+    "topPerforming": "สาขาผลงานดี",
+    "needsAttention": "สาขาที่ควรดูแล"
+  },
+  "details": {
+    "revenue": "รายได้",
+    "customers": "จำนวนลูกค้า",
+    "orders": "จำนวนออเดอร์",
+    "satisfaction": "คะแนนความพึงพอใจ"
+  },
+  "filters": {
+    "all": "แสดงทุกสาขา",
+    "city": "แยกตามเมือง",
+    "region": "แยกตามภูมิภาค",
+    "type": "แยกตามประเภท"
+  }
+}

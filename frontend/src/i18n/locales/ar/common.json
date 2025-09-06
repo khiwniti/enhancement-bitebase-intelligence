@@ -1,0 +1,69 @@
+{
+  "navigation": {
+    "dashboard": "لوحة التحكم",
+    "analytics": "التحليلات",
+    "restaurants": "المطاعم",
+    "ai_assistant": "المساعد الذكي",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "features": "الميزات",
+    "pricing": "التسعير",
+    "about": "حول",
+    "contact": "اتصل بنا"
+  },
+  "actions": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تحرير",
+    "add": "إضافة",
+    "create": "إنشاء",
+    "update": "تحديث",
+    "search": "بحث",
+    "filter": "فلتر",
+    "export": "تصدير",
+    "import": "استيراد",
+    "refresh": "تحديث",
+    "loading": "جاري التحميل...",
+    "submit": "إرسال",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "sign_in": "تسجيل الدخول",
+    "get_started": "ابدأ الآن",
+    "learnMore": "اعرف أكثر"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "pending": "في الانتظار",
+    "completed": "مكتمل",
+    "success": "نجح",
+    "error": "خطأ",
+    "warning": "تحذير",
+    "info": "معلومات"
+  },
+  "time": {
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "this_week": "هذا الأسبوع",
+    "last_week": "الأسبوع الماضي",
+    "this_month": "هذا الشهر",
+    "last_month": "الشهر الماضي",
+    "this_year": "هذا العام"
+  },
+  "language": {
+    "select": "اختر اللغة",
+    "auto_detect": "اكتشاف تلقائي",
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "german": "Deutsch",
+    "italian": "Italiano",
+    "portuguese": "Português",
+    "chinese": "中文",
+    "japanese": "日本語",
+    "korean": "한국어",
+    "arabic": "العربية"
+  }
+}
