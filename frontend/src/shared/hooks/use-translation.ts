@@ -118,13 +118,17 @@ export function useTranslation(
 
     for (let i = 0; i < keys.length - 1; i++) {
       const k = keys[i]
+      if (!k) continue // Skip undefined keys
       if (!current[k] || typeof current[k] !== 'object') {
         current[k] = {}
       }
       current = current[k]
     }
 
-    current[keys[keys.length - 1]] = value
+    const lastKey = keys[keys.length - 1]
+    if (lastKey) {
+      current[lastKey] = value
+    }
   }
 
   const formatTranslation = (value: string, replacements?: Record<string, string | number>) => {

@@ -3,10 +3,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/button'
 import { Badge } from '@/components/badge'
-import { useTranslation } from '@/lib/useTranslation'
 import {
   BarChart3,
   Brain,
@@ -176,8 +176,46 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   const pathname = usePathname()
+  const locale = useLocale()
   const [expandedItems, setExpandedItems] = useState<string[]>(['analytics', 'ai', 'market-research'])
-  const { t } = useTranslation()
+  const tCommon = useTranslations('common')
+  const tNav = useTranslations('navigation')
+
+  // Function to get the correct translation key based on item ID
+  const getTranslationKey = (itemId: string): string => {
+    // Map sidebar item IDs to the correct navigation JSON structure
+    const keyMap: Record<string, string> = {
+      'dashboard': 'main.dashboard',
+      'analytics': 'main.analytics',
+      '4p-analytics': 'analytics.4p_analytics',
+      'analytics-center': 'analytics.analytics_center', 
+      'analytics-workbench': 'analytics.analytics_workbench',
+      'location': 'location.location_center', // Add mapping for location
+      'location-center': 'location.location_center',
+      'location-intelligence': 'location.location_intelligence',
+      'market-analysis': 'market.market_analysis',
+      'market-research': 'market.market_research',
+      'market-research-wizard': 'market.market_research', // Add mapping for wizard
+      'restaurant-management': 'main.restaurants',
+      'growth-studio': 'ai.growth_studio',
+      'research-agent': 'ai.research_agent',
+      'ai-assistant': 'main.ai_assistant',
+      'ai-center': 'ai.ai_center',
+      'ai': 'main.ai_assistant', // Add mapping for 'ai' item
+      'reports': 'main.reports',
+      'settings': 'main.settings'
+    }
+    return keyMap[itemId] || `main.${itemId}`
+  }
+
+  const getItemLabel = (item: NavItem): string => {
+    try {
+      const key = getTranslationKey(item.id)
+      return tNav(key as any) || item.title
+    } catch {
+      return item.title
+    }
+  }
 
   const toggleExpanded = (itemId: string) => {
     setExpandedItems(prev => 
@@ -187,7 +225,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
     )
   }
 
-  const isActive = (href: string) => pathname === href
+  const isActive = (href: string) => pathname === `/${locale}${href}`
   const isParentActive = (children: NavItem[]) => 
     children.some(child => child.href && isActive(child.href))
 
@@ -200,7 +238,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
     return (
       <div key={item.id} className="mb-1">
         {item.href ? (
-          <Link href={item.href}>
+          <Link href={`/${locale}${item.href}`}>
             <motion.div
               className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isItemActive
@@ -212,11 +250,11 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
             >
               <div className="flex items-center space-x-3">
                 <item.icon className={`h-5 w-5 ${isItemActive ? 'text-orange-600' : 'text-gray-400'}`} />
-                <span>{t(`navigation.${item.id}`, item.title)}</span>
+                <span>{getItemLabel(item)}</span>
               </div>
               {item.badge && (
                 <Badge variant="secondary" className="text-xs">
-                  {t(`common.${item.badge?.toLowerCase()}`, item.badge)}
+                  {tCommon(`status.${item.badge?.toLowerCase()}` as any) || item.badge}
                 </Badge>
               )}
             </motion.div>
@@ -234,10 +272,10 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
           >
             <div className="flex items-center space-x-3">
               <item.icon className={`h-5 w-5 ${isParentItemActive ? 'text-orange-600' : 'text-gray-400'}`} />
-              <span>{t(`navigation.${item.id}`, item.title)}</span>
+              <span>{getItemLabel(item)}</span>
               {item.badge && (
                 <Badge variant="secondary" className="text-xs">
-                  {t(`common.${item.badge?.toLowerCase()}`, item.badge)}
+                  {tCommon(`status.${item.badge?.toLowerCase()}` as any) || item.badge}
                 </Badge>
               )}
             </div>

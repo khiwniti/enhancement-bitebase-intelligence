@@ -1,14 +1,14 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
-import { SUPPORTED_LOCALES, DEFAULT_LOCALE } from './i18n/config';
+import { locales, defaultLocale } from './shared/lib/i18n-config';
 
 // Enhanced middleware with pathname forwarding for route-based loading
 const intlMiddleware = createMiddleware({
   // Use centralized locale configuration
-  locales: [...SUPPORTED_LOCALES],
+  locales: [...locales],
   
   // Use centralized default locale
-  defaultLocale: DEFAULT_LOCALE,
+  defaultLocale: defaultLocale,
   
   // Enable locale detection from headers
   localeDetection: true,
@@ -42,7 +42,7 @@ export const config = {
   matcher: [
     // Include root and localized paths
     '/',
-    '/(th|es|fr|de|it|pt|zh|ja|ko|ar)/:path*',
+    '/(en|th|es|fr|de|it|pt|zh|ja|ko|ar)/:path*',
     // Exclude API routes
     '/((?!api|_next|_vercel|.*\\..*).*)'
   ]

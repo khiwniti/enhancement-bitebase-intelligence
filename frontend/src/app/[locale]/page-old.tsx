@@ -159,9 +159,9 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const { t } = useTranslation(locale, 'landing');
+export default function HomePage({ params }: { params: { locale: string } }) {
+  const { locale } = params;
+  const { t } = useTranslation('landing');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

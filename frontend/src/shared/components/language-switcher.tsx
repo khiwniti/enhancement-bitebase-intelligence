@@ -8,7 +8,7 @@ import {
   localeNames, 
   localeDirections, 
   Locale 
-} from '@/src/i18n/config'
+} from '@/shared/lib/i18n-config'
 import { useTranslations } from 'next-intl'
 import { 
   Globe, 

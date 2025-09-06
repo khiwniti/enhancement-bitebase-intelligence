@@ -80,8 +80,8 @@ export default function LanguageSwitcher() {
         aria-haspopup="true"
       >
         <GlobeAltIcon className="w-4 h-4 mr-2" />
-        <span className="mr-2">{currentLanguage.flag}</span>
-        <span className="hidden sm:inline">{currentLanguage.nativeName}</span>
+        <span className="mr-2">{currentLanguage?.flag}</span>
+        <span className="hidden sm:inline">{currentLanguage?.nativeName}</span>
         <ChevronDownIcon 
           className={`w-4 h-4 ml-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} 
         />

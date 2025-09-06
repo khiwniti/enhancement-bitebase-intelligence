@@ -31,7 +31,9 @@
     "close": "Close",
     "sign_in": "Sign in",
     "get_started": "Get started",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "welcome_back": "Welcome Back",
+    "back_to_home": "Back to Home"
   },
   "status": {
     "active": "Active",
@@ -41,7 +43,10 @@
     "success": "Success",
     "error": "Error",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "ai": "AI",
+    "new": "New",
+    "beta": "Beta"
   },
   "time": {
     "today": "Today",

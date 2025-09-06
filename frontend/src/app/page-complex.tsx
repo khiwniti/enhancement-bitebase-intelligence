@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Button } from '@/src/components/button'
-import { LandingNavbar } from '@/src/components/landing-navbar'
-import { Footer } from '@/src/components/footer'
+import { Button } from '@/components/button'
+import { LandingNavbar } from '@/components/landing-navbar'
+import { Footer } from '@/components/footer'
 import { LanguageProvider, useTranslation } from '@/shared/hooks/use-global-translation'
 import {
   Sparkles,

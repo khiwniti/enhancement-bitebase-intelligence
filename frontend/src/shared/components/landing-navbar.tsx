@@ -13,10 +13,10 @@ export function LandingNavbar() {
   const tCommon = useTranslations('common')
 
   const navigation = [
-    { name: t('features') || 'Features', href: '#features' },
-    { name: t('pricing') || 'Pricing', href: '#pricing' },
-    { name: t('about') || 'About', href: '#about' },
-    { name: t('contact') || 'Contact', href: '#contact' },
+    { name: t('public.features') || 'Features', href: '#features' },
+    { name: t('public.pricing') || 'Pricing', href: '#pricing' },
+    { name: t('public.about') || 'About', href: '#about' },
+    { name: t('public.contact') || 'Contact', href: '#contact' },
   ]
 
   return (
@@ -60,12 +60,12 @@ export function LandingNavbar() {
           <LanguageSwitcher variant="compact" />
           <Button asChild variant="ghost">
             <Link href="/auth/login">
-              {tCommon('actions.signIn') || 'Sign in'}
+              {tCommon('actions.sign_in') || 'Sign in'}
             </Link>
           </Button>
           <Button asChild>
             <Link href="/auth/signup">
-              {tCommon('actions.getStarted') || 'Get started'}
+              {tCommon('actions.get_started') || 'Get started'}
             </Link>
           </Button>
         </div>
@@ -112,12 +112,12 @@ export function LandingNavbar() {
                   <LanguageSwitcher className="w-full mb-4" />
                   <Button asChild variant="ghost" className="w-full">
                     <Link href="/auth/login">
-                      {tCommon('actions.signIn') || 'Sign in'}
+                      {tCommon('actions.sign_in') || 'Sign in'}
                     </Link>
                   </Button>
                   <Button asChild className="w-full">
                     <Link href="/auth/signup">
-                      {tCommon('actions.getStarted') || 'Get started'}
+                      {tCommon('actions.get_started') || 'Get started'}
                     </Link>
                   </Button>
                 </div>

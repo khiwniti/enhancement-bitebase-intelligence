@@ -156,7 +156,10 @@ export class TranslationValidator {
 
       // Track by namespace
       results.forEach(result => {
-        byNamespace[result.namespace][locale] = result.completeness;
+        if (!byNamespace[result.namespace]) {
+          byNamespace[result.namespace] = {};
+        }
+        byNamespace[result.namespace]![locale] = result.completeness;
       });
     });
 

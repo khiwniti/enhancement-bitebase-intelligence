@@ -105,7 +105,7 @@ export class TranslationFallbackHandler {
           message: `Falling back from ${primaryLocale} to ${secondaryLocale} for ${namespace}`,
           locale: primaryLocale,
           namespace,
-          key,
+          key: key || 'unknown',
           timestamp: Date.now()
         });
 
@@ -130,7 +130,7 @@ export class TranslationFallbackHandler {
           message: `Falling back from ${primaryLocale} to English for ${namespace}`,
           locale: primaryLocale,
           namespace,
-          key,
+          key: key || 'unknown',
           timestamp: Date.now()
         });
 
@@ -150,7 +150,7 @@ export class TranslationFallbackHandler {
       message: `Complete failure loading ${namespace} for ${primaryLocale}`,
       locale: primaryLocale,
       namespace,
-      key,
+      key: key || 'unknown',
       timestamp: Date.now()
     };
 
@@ -276,7 +276,7 @@ export function withTranslationErrorBoundary<T>(
       type: TranslationErrorType.NETWORK_ERROR,
       message: error.message || 'Unknown translation loading error',
       locale: context.locale,
-      namespace: context.namespace,
+      namespace: context.namespace || 'common',
       timestamp: Date.now()
     });
 

@@ -122,7 +122,7 @@ export class AITranslationEnhancer {
 - Den angemessenen Ton für Geschäftsanwendungen verwenden`
     }
 
-    return prompts[locale] || prompts.en
+    return (prompts as Record<string, string>)[locale] || prompts.en
   }
 
   private buildPrompt(text: string, locale: Locale, context: any): string {

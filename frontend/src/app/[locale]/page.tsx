@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Button } from '@/components/button'
 import { LandingNavbar } from '@/components/landing-navbar'
 import { Footer } from '@/components/footer'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import {
   Sparkles,
   Rocket,
@@ -190,8 +190,9 @@ const CursorFollower = () => {
 }
 
 // Main component with translations
-export default function HomePage({ params }: { params: { locale: string } }) {
+export default function HomePage() {
   const t = useTranslations('landing')
+  const locale = useLocale()
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 300], [0, -50])
   const y2 = useTransform(scrollY, [0, 300], [0, -100])
@@ -404,7 +405,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
                 size="lg"
                 className="relative bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-12 py-6 text-xl font-bold rounded-full shadow-2xl border-0"
               >
-                <Link href={`/${params.locale}/auth/signup`}>
+                <Link href={`/${locale}/auth/signup`}>
                   <motion.div
                     animate={{ rotate: [0, 360] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -442,7 +443,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
                 size="lg"
                 className="relative border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white hover:border-gray-800 px-12 py-6 text-xl font-bold rounded-full backdrop-blur-xl"
               >
-                <Link href={`/${params.locale}/auth/login`}>
+                <Link href={`/${locale}/auth/login`}>
                   <motion.div
                     whileHover={{ scale: 1.2 }}
                     className="mr-4"
@@ -953,7 +954,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
                   {/* Enhanced CTA */}
                   <div className="relative z-10">
                     <Link
-                      href={`/${params.locale}/analytics`}
+                      href={`/${locale}/analytics`}
                       className="inline-flex items-center text-orange-500 font-bold hover:text-orange-600 text-lg group/link"
                     >
                       Learn more
@@ -1183,7 +1184,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
                   size="lg"
                   className="relative bg-white text-orange-600 hover:bg-gray-100 px-16 py-8 text-2xl font-black rounded-full shadow-2xl border-0 group-hover:shadow-3xl transition-all duration-300"
                 >
-                  <Link href={`/${params.locale}/auth/signup`}>
+                  <Link href={`/${locale}/auth/signup`}>
                     <motion.div
                       animate={{ rotate: [0, 360] }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -1218,7 +1219,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
                   size="lg"
                   className="relative border-3 border-white text-white hover:bg-white hover:text-orange-600 hover:border-white px-16 py-8 text-2xl font-black rounded-full backdrop-blur-xl group-hover:shadow-2xl transition-all duration-300"
                 >
-                  <Link href={`/${params.locale}/auth/login`}>
+                  <Link href={`/${locale}/auth/login`}>
                     <motion.div
                       whileHover={{ scale: 1.2 }}
                       className="mr-4"

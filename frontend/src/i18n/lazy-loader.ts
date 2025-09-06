@@ -193,7 +193,8 @@ export class TranslationLazyLoader {
       const localeCache = this.cache[locale];
       if (localeCache) {
         Object.keys(localeCache).forEach(namespace => {
-          if (!this.isCacheValid(localeCache[namespace])) {
+          const entry = localeCache[namespace];
+          if (entry && !this.isCacheValid(entry)) {
             delete localeCache[namespace];
           }
         });

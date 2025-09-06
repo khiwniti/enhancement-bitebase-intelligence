@@ -22,7 +22,7 @@ export async function getTranslation(locale: Locale, namespace: string): Promise
   }
 
   try {
-    const translation = await import(`../../../public/locales/${locale}/${namespace}.json`)
+    const translation = await import(`../../i18n/locales/${locale}/${namespace}.json`)
     translations[locale][namespace] = translation.default
     return translation.default
   } catch (error) {

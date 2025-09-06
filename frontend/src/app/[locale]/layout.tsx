@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import { headers } from 'next/headers'
 import '../globals.css'
 import { locales, Locale, localeDirections } from '@/shared/lib/i18n-config'
 
@@ -85,16 +86,49 @@ export default async function LocaleLayout({
   children: React.ReactNode
   params: Promise<{ locale: Locale }>
 }) {
-  // Await the params
-  const { locale } = await params
-
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) {
-    notFound()
+  // Extract locale with robust error handling
+  let locale: string = 'en'
+  
+  try {
+    const headersList = await headers()
+    const pathname = headersList.get('x-pathname') || headersList.get('x-url') || ''
+    
+    // Extract locale from pathname (e.g., /en/analytics -> en)
+    const localeMatch = pathname.match(/^\/([a-z]{2})(?:\/|$)/)
+    if (localeMatch && localeMatch[1] && locales.includes(localeMatch[1] as Locale)) {
+      locale = localeMatch[1]
+    } else {
+      // Fallback: try to resolve params
+      try {
+        const resolvedParams = await params
+        if (resolvedParams?.locale && locales.includes(resolvedParams.locale)) {
+          locale = resolvedParams.locale
+        }
+      } catch (paramsError) {
+        console.warn('Params resolution failed, using default locale:', paramsError)
+      }
+    }
+  } catch (error) {
+    console.warn('Header extraction failed, using default locale:', error)
   }
+  
+  // Ensure we have a valid locale string
+  if (!locale || typeof locale !== 'string' || !locales.includes(locale as Locale)) {
+    locale = 'en'
+  }
+  
+  console.log('Layout debug - extracted locale:', locale, 'type:', typeof locale)
 
-  const direction = localeDirections[locale]
+  // Validate that the incoming `locale` parameter is valid (temporarily disabled for debugging)
+  // if (!locales.includes(locale as Locale)) {
+  //   notFound()
+  // }
+
+  const direction = localeDirections[locale as keyof typeof localeDirections] || 'ltr'
+  
+  console.log('Before getMessages - locale:', locale, 'typeof:', typeof locale, 'value:', JSON.stringify(locale))
   const messages = await getMessages({ locale })
+  console.log('After getMessages - messages loaded, locale still:', locale)
 
   return (
     <html lang={locale} dir={direction} className={inter.variable} suppressHydrationWarning>
@@ -109,7 +143,10 @@ export default async function LocaleLayout({
         className="font-sans antialiased bg-white min-h-screen"
         suppressHydrationWarning
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider 
+          messages={messages} 
+          locale={locale}
+        >
           <div className="relative min-h-screen">
             {children}
           </div>
