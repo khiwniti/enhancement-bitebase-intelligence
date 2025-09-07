@@ -8,7 +8,8 @@ import bcrypt
 from jose import jwt
 from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from passlib.context import CryptContext
 
 # JWT Configuration
@@ -19,6 +20,9 @@ REFRESH_TOKEN_EXPIRES_IN = timedelta(days=30)
 
 # Password hashing context
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# HTTP Bearer security scheme
+security = HTTPBearer()
 
 class AuthUtils:
     """Authentication utilities class for JWT and password management"""
@@ -171,3 +175,44 @@ def create_auth_error_response(message: str, status_code: int = 401) -> HTTPExce
         status_code=status_code,
         detail=create_auth_response(False, message)
     )
+
+# FastAPI dependency for authentication
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict[str, Any]:
+    """
+    FastAPI dependency to get current authenticated user
+    
+    Args:
+        credentials: HTTP Authorization credentials
+        
+    Returns:
+        User data from token payload
+        
+    Raises:
+        HTTPException: If token is invalid or expired
+    """
+    token = credentials.credentials
+    payload = AuthUtils.verify_token(token)
+    
+    if payload is None:
+        raise create_auth_error_response(AuthError.INVALID_TOKEN)
+    
+    return payload
+
+# Optional dependency for authentication (allows unauthenticated access)
+async def get_current_user_optional(credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)) -> Optional[Dict[str, Any]]:
+    """
+    FastAPI optional dependency to get current authenticated user
+    Allows unauthenticated access (returns None if no valid token)
+    
+    Args:
+        credentials: HTTP Authorization credentials (optional)
+        
+    Returns:
+        User data from token payload or None if unauthenticated
+    """
+    if not credentials:
+        return None
+        
+    token = credentials.credentials
+    payload = AuthUtils.verify_token(token)
+    return payload
