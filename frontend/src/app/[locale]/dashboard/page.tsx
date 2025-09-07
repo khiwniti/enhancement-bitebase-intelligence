@@ -1,36 +1,13 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { DashboardLayout } from '@/components/dashboard-layout'
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
-  DollarSign, 
-  ShoppingCart,
-  MapPin,
-  Brain,
-  Bell,
-  Settings,
-  Search,
-  Filter,
-  Download,
-  RefreshCw,
-  Calendar,
-  Clock,
-  Star,
-  ArrowUp,
-  ArrowDown,
-  Activity,
-  Building,
-  Target,
-  ChefHat
-} from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/card'
+import AnalyticsDashboard from '@/components/dashboard/analytics-dashboard'
 import { Button } from '@/components/button'
 import { Badge } from '@/components/badge'
 import { Input } from '@/components/input'
+import { DollarSign, Users, ShoppingCart, TrendingUp } from 'lucide-react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 // Mock data for dashboard
