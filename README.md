@@ -1,296 +1,296 @@
-# 🚀 BiteBase Intelligence 2.0 - AI-Powered Restaurant Analytics Platform
+# 🚀 BiteBase Intelligence 2.0
 
-> **Modern Monorepo Architecture with Feature-Based Organization**
+> **AI-Powered Restaurant Analytics & Location Intelligence Platform**
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.4.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776ab?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-## 🎯 **Project Overview**
+## 🎯 **Overview**
 
-BiteBase Intelligence 2.0 is a comprehensive restaurant analytics platform built with modern architecture principles. This monorepo contains a feature-based frontend, Python backend, and shared packages for maximum maintainability and scalability.
+BiteBase Intelligence 2.0 is a comprehensive restaurant analytics platform that leverages artificial intelligence to provide actionable insights for restaurant owners, investors, and industry professionals. Built with modern architecture principles and featuring a robust monorepo structure, it delivers real-time analytics, location intelligence, and multilingual support.
 
-### **🌟 Key Enhancements**
+### **🌟 Key Features**
 
-- **🤖 AI Market Report Agent**: Natural language queries generate comprehensive market reports
-- **🗺️ Interactive Map Analytics**: Click-to-analyze mapping with real-time insights
-- **📊 Unified Dashboard**: Modular, customizable interface with live data streaming
-- **🎨 Professional Dark Theme**: Modern UI with green accents and smooth animations
-- **📱 Mobile-First Design**: Responsive across all devices with touch optimization
+- **🤖 AI Market Report Agent**: Generate comprehensive market reports using natural language queries
+- **🗺️ Interactive Location Analytics**: Click-to-analyze mapping with real-time business insights  
+- **📊 Unified Analytics Dashboard**: Customizable interface with live data streaming and KPI tracking
+- **🌐 Multilingual Support**: Full internationalization (i18n) with 10+ languages supported
+- **📱 Mobile-First Design**: Responsive across all devices with touch-optimized interactions
+- **⚡ Real-Time Data**: WebSocket-powered live updates and notifications
+- **🔒 Enterprise Security**: Role-based access control with comprehensive audit logging
 
----
+### **💼 Business Intelligence Features**
+
+- **Restaurant Performance Analytics**: Revenue trends, customer analytics, operational metrics
+- **Location Intelligence**: Market analysis, competitor insights, demographic data
+- **Growth Studio**: Expansion planning, ROI analysis, market opportunity identification
+- **AI-Powered Insights**: Automated report generation, predictive analytics, recommendation engine
+
+## 📁 **Project Structure**
+
+```
+bitebase-intelligence/
+├── 📁 frontend/                 # Next.js 15 frontend application
+│   ├── 📁 src/
+│   │   ├── 📁 app/             # App Router pages & layouts
+│   │   ├── 📁 components/      # Reusable UI components
+│   │   ├── 📁 features/        # Feature-based modules
+│   │   ├── 📁 i18n/           # Internationalization
+│   │   ├── 📁 shared/         # Shared utilities & components
+│   │   └── 📁 services/       # API services & integrations
+│   └── 📁 public/             # Static assets & branding
+├── 📁 backend/                  # FastAPI backend services
+│   ├── 📁 app/
+│   │   ├── 📁 api/            # REST API endpoints
+│   │   ├── 📁 core/           # Core business logic
+│   │   ├── 📁 models/         # Database models
+│   │   ├── 📁 schemas/        # Pydantic schemas
+│   │   └── 📁 services/       # Business services
+│   └── 📁 tests/              # Backend test suites
+├── 📁 backend-workers/          # Background task workers
+├── 📁 docs/                     # Documentation
+│   ├── 📁 api/                # API documentation
+│   ├── 📁 deployment/         # Deployment guides
+│   ├── 📁 development/        # Development guides
+│   └── 📁 security/           # Security documentation
+├── 📁 tools/                    # Development utilities & scripts
+└── 📄 docker-compose.yaml     # Multi-service orchestration
+```
 
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
-- Node.js 18+
-- npm 9+
-- Git
+
+- **Node.js** >= 18.0.0
+- **Python** >= 3.11
+- **Yarn** >= 1.22.0
+- **Docker** (optional, for containerized development)
 
 ### **Installation**
 
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/khiwniti/enhancement-bitebase-intelligence.git
+   cd enhancement-bitebase-intelligence
+   ```
+
+2. **Install dependencies**
+   ```bash
+   yarn install:all
+   ```
+
+3. **Environment setup**
+   ```bash
+   # Frontend environment
+   cp frontend/.env.example frontend/.env.local
+   
+   # Backend environment  
+   cp backend/.env.example backend/.env
+   ```
+
+4. **Initialize database**
+   ```bash
+   cd backend && python init_database.py
+   ```
+
+### **Development**
+
+Choose your preferred development mode:
+
+**🔥 Full Stack Development**
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/enhancement-bitebase-intelligence.git
-cd enhancement-bitebase-intelligence
-
-# Install all dependencies (uses workspaces)
-npm run install:all
-
-# Start development environment
-npm run dev
+yarn dev:all          # Frontend + Backend + Workers
 ```
 
-### **Access the Platform**
-- **Web App**: http://localhost:5000
-- **Python Backend**: http://localhost:8000
-
----
-
-## 🏗️ **Architecture**
-
-### **Monorepo Structure**
-```
-bitebase-intelligence/
-├── 📁 frontend/                # Next.js frontend application
-├── 📁 backend/                 # Python FastAPI backend
-├── 📁 packages/                # Shared packages
-│   ├── 📁 shared-types/        # Common TypeScript definitions
-│   ├── 📁 shared-utils/        # Common utilities
-│   └── 📁 ui-components/       # Shared UI components
-├── 📁 services/                # External services
-│   └── 📁 database/            # Database schemas & migrations
-├── 📁 tools/                   # Development tools & scripts
-├── 📁 docs/                    # Documentation
-└── 📁 legacy/                  # Legacy code (deprecated)
-```
-
-### **Frontend Architecture (Feature-Based)**
-```
-frontend/src/
-├── 📁 features/                # Feature-based organization
-│   ├── 📁 analytics/           # Analytics dashboard
-│   ├── 📁 dashboard/           # Main dashboard
-│   ├── 📁 location-intelligence/ # Location analysis
-│   ├── 📁 restaurant-management/ # Restaurant tools
-│   └── 📁 ai-assistant/        # AI chat interface
-├── 📁 shared/                  # Shared components & utilities
-│   ├── 📁 components/          # Reusable UI components
-│   ├── 📁 hooks/               # Custom hooks
-│   ├── 📁 lib/                 # Utilities & configurations
-│   └── 📁 types/               # TypeScript definitions
-└── 📁 app/                     # Next.js App Router pages
-```
-
-### **Backend Architecture (Python FastAPI)**
-- **FastAPI**: High-performance Python API server
-- **PostgreSQL**: Relational database for structured data
-- **Redis**: Caching layer for improved performance
-- **JWT Authentication**: Secure user authentication
-- **Pydantic**: Data validation and serialization
-
----
-
-## 🎯 **Core Features**
-
-### **1. AI Market Report Agent 🤖**
-```typescript
-// Natural language queries
-"Find the best pizza locations in Manhattan"
-"Analyze coffee shop opportunities in Brooklyn"
-"Compare restaurant markets in different neighborhoods"
-```
-
-**Features:**
-- Natural language processing for market queries
-- AI-generated comprehensive reports with confidence scoring
-- Executive summaries and actionable recommendations
-- Risk assessment with mitigation strategies
-- Export to PDF, Excel, and JSON formats
-
-### **2. Interactive Map Analytics 🗺️**
-**Click-to-Analyze Functionality:**
-- Click anywhere on the map for instant location analysis
-- Multiple map modes: Explore, Analyze, Compare
-- Dynamic data layers: Restaurants, Demographics, Competition
-- Real-time analysis popups with key metrics
-- Visual analysis radius with customizable parameters
-
-### **3. Unified Interactive Dashboard 📊**
-**Modular Widget System:**
-- AI Market Report Agent widget
-- Interactive Map Analytics widget
-- Market Research Controls widget
-- Performance Metrics widget
-- Real-time data streaming (30-second updates)
-- Customizable layouts: Grid, Tabs, Sidebar
-
----
-
-## 🎨 **Design System**
-
-### **Dark Theme Excellence**
-- **Primary Colors**: Dark navy (#020617) with bright green accents (#22c55e)
-- **Typography**: Inter font family with responsive scaling
-- **Effects**: Glass morphism, gradient text, glow effects
-- **Animations**: Smooth transitions and loading states
-- **Accessibility**: WCAG 2.1 AA compliant
-
-### **Component Library**
-```
-src/components/
-├── interactive/           # New interactive features
-│   ├── MarketReportAgent.tsx
-│   ├── EnhancedInteractiveMap.tsx
-│   └── UnifiedDashboard.tsx
-├── location/             # Location-based components
-├── ui/                   # Base UI components
-└── charts/               # Data visualization
-```
-
----
-
-## 📊 **Performance Metrics**
-
-### **Achieved Benchmarks**
-- ⚡ **Load Time**: <2s (95th percentile)
-- 🚀 **Interactive Response**: <200ms for map clicks
-- 📱 **Mobile Performance**: <3s on 3G networks
-- 🎯 **Lighthouse Score**: >90 (Performance, Accessibility, SEO)
-- 💾 **Bundle Size**: <300KB initial load
-
-### **User Experience**
-- **Interactive Features**: 100% of planned features implemented
-- **AI Query Success**: >90% natural language query accuracy
-- **Real-time Updates**: <100ms WebSocket latency
-- **Mobile Responsiveness**: 100% feature parity across devices
-
----
-
-## 🔧 **Development**
-
-### **Project Structure**
-```
-enhancement-bitebase-intelligence/
-├── frontend/                 # Next.js 15 application
-│   ├── src/
-│   │   ├── app/             # App Router pages
-│   │   ├── components/      # React components
-│   │   ├── lib/             # Utilities and API client
-│   │   └── types/           # TypeScript definitions
-│   ├── public/              # Static assets
-│   └── package.json
-├── backend/                  # FastAPI backend (existing)
-├── docs/                     # Documentation
-├── ENHANCEMENT_PLAN.md       # Detailed implementation plan
-├── IMPLEMENTATION_SUMMARY.md # Complete feature summary
-└── README.md
-```
-
-### **Available Scripts**
+**⚡ Quick Frontend-Only**
 ```bash
-# Frontend development
-npm run dev          # Start development server
-npm run build        # Production build
-npm run start        # Start production server
-npm run lint         # ESLint checking
-npm run type-check   # TypeScript validation
-
-# Backend development
-cd backend
-python -m uvicorn main:app --reload  # Start FastAPI server
+yarn dev               # Frontend + Backend only
 ```
 
----
-
-## 🌐 **API Integration**
-
-### **Production Endpoints**
-```typescript
-const API_BASE_URL = 'https://api.bitebase.app'
-
-// Location Analysis
-POST /api/locations/analyze
-GET  /api/restaurants/nearby
-GET  /api/restaurants/search
-
-// Market Intelligence
-POST /api/market/report
-GET  /api/analytics/demographics
-GET  /api/analytics/competition
-```
-
-### **Real-time Features**
-- WebSocket connections for live data updates
-- Optimistic UI updates with error recovery
-- Background data synchronization
-- Intelligent caching with React Query
-
----
-
-## 🚀 **Deployment**
-
-### **Production Deployment**
+**🎯 Individual Services**
 ```bash
-# Build for production
-npm run build
-
-# Deploy to Vercel (recommended)
-vercel deploy
-
-# Or deploy to any Node.js hosting
-npm run start
+yarn dev:web           # Frontend only
+yarn dev:backend       # Backend only  
+yarn dev:workers       # Workers only
 ```
 
-### **Environment Variables**
+**🐳 Docker Development**
 ```bash
-# .env.local
-NEXT_PUBLIC_API_URL=https://api.bitebase.app
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key
-NODE_ENV=production
+docker-compose up --build
 ```
 
----
+### **Available Services**
 
-## 🎯 **Key Achievements**
+| Service | URL | Description |
+|---------|-----|-------------|
+| **Frontend** | http://localhost:3000 | Main web application |
+| **Backend API** | http://localhost:8000 | REST API & Documentation |
+| **Workers** | http://localhost:8001 | Background task services |
+| **API Docs** | http://localhost:8000/docs | Interactive API documentation |
 
-### **Interactive Intelligence**
-✅ **Transformed Static → Interactive**: Every element is now explorable and actionable  
-✅ **AI-Powered Insights**: Natural language queries generate comprehensive reports  
-✅ **Real-time Analytics**: Live data updates and instant location analysis  
-✅ **Professional UX**: Dark theme with smooth animations and feedback  
+## 🛠️ **Technology Stack**
 
-### **Technical Excellence**
-✅ **Modern Stack**: Next.js 15, TypeScript, Tailwind CSS v4  
-✅ **Performance Optimized**: Sub-2s load times with smooth interactions  
-✅ **Mobile First**: Responsive design with touch optimization  
-✅ **Production Ready**: Connected to live API with comprehensive error handling  
+### **Frontend**
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript 5.0
+- **Styling**: Tailwind CSS 4.0
+- **State Management**: React Hooks + Context API
+- **UI Components**: Custom component library with Radix UI primitives
+- **Maps**: Leaflet with custom overlays
+- **Charts**: Recharts + Custom visualization components
+- **Internationalization**: next-intl with 10+ languages
 
-### **Business Impact**
-✅ **Enhanced User Experience**: 3x more engaging than static dashboards  
-✅ **Faster Decision Making**: Instant analysis vs. manual report generation  
-✅ **Competitive Advantage**: AI-powered insights unavailable elsewhere  
-✅ **Scalable Architecture**: Ready for thousands of concurrent users  
+### **Backend**
+- **Framework**: FastAPI with async/await
+- **Language**: Python 3.11+
+- **Database**: SQLite (development) / PostgreSQL (production)
+- **ORM**: SQLAlchemy 2.0
+- **Authentication**: JWT-based with refresh tokens
+- **API Documentation**: OpenAPI 3.0 with Swagger UI
+- **Background Tasks**: Celery with Redis
+- **WebSockets**: FastAPI WebSocket support
 
----
+### **Infrastructure**
+- **Containerization**: Docker & Docker Compose
+- **Process Management**: PM2 for production
+- **Reverse Proxy**: Nginx (production)
+- **Monitoring**: Custom health checks + logging
+- **Deployment**: Cloudflare Workers (optional)
+
+## 🌐 **Internationalization**
+
+BiteBase Intelligence supports 10+ languages with full RTL support:
+
+- **English** (en) - Default
+- **Spanish** (es) - Español  
+- **French** (fr) - Français
+- **German** (de) - Deutsch
+- **Italian** (it) - Italiano
+- **Portuguese** (pt) - Português
+- **Japanese** (ja) - 日本語
+- **Korean** (ko) - 한국어
+- **Chinese** (zh) - 中文
+- **Thai** (th) - ไทย
+- **Arabic** (ar) - العربية
+
+## 📊 **API Documentation**
+
+The API is fully documented using OpenAPI 3.0. Access interactive documentation at:
+
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+
+### **Key API Endpoints**
+
+```
+GET    /api/v1/restaurants/          # List restaurants with filtering
+POST   /api/v1/restaurants/          # Create new restaurant
+GET    /api/v1/restaurants/{id}/     # Get restaurant details
+PUT    /api/v1/restaurants/{id}/     # Update restaurant
+DELETE /api/v1/restaurants/{id}/     # Delete restaurant
+
+GET    /api/v1/analytics/dashboard/  # Dashboard analytics
+GET    /api/v1/analytics/reports/    # Generate reports
+POST   /api/v1/ai/query/             # Natural language queries
+GET    /api/v1/locations/search/     # Location intelligence
+```
+
+## 🧪 **Testing**
+
+### **Frontend Testing**
+```bash
+yarn test:web          # Run frontend tests
+yarn lint              # ESLint check
+yarn type-check        # TypeScript validation
+```
+
+### **Backend Testing**
+```bash
+yarn test:backend      # Run backend tests with pytest
+cd backend && python -m pytest --cov=app tests/
+```
+
+## 📦 **Deployment**
+
+### **Production Build**
+```bash
+yarn build             # Build frontend for production
+```
+
+### **Docker Production**
+```bash
+docker-compose -f docker-compose.prod.yml up --build
+```
+
+### **Manual Deployment**
+See [docs/deployment/](docs/deployment/) for detailed deployment guides:
+- [Cloudflare Workers](docs/deployment/cloudflare.md)
+- [Traditional VPS](docs/deployment/vps.md)
+- [Docker Deployment](docs/deployment/docker.md)
+
+## 🔐 **Security**
+
+BiteBase Intelligence implements enterprise-grade security features:
+
+- **Authentication**: JWT with refresh token rotation
+- **Authorization**: Role-based access control (RBAC)
+- **Data Protection**: AES-256 encryption for sensitive data
+- **API Security**: Rate limiting, CORS, and request validation
+- **Audit Logging**: Comprehensive activity tracking
+- **Input Validation**: Strict schema validation on all endpoints
+
+See [docs/security/](docs/security/) for detailed security documentation.
 
 ## 🤝 **Contributing**
 
+We welcome contributions! Please see our [Contributing Guide](docs/development/contributing.md) for details.
+
 ### **Development Workflow**
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Add tests and ensure they pass
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
-### **Code Standards**
-- TypeScript strict mode
-- ESLint + Prettier formatting
-- Conventional commit messages
-- Component documentation
-- Test coverage >90%
+## 📋 **Scripts Reference**
 
----
+| Command | Description |
+|---------|-------------|
+| `yarn dev` | Start development servers (frontend + backend) |
+| `yarn dev:all` | Start all services including workers |
+| `yarn build` | Build production frontend |
+| `yarn test` | Run all tests |
+| `yarn lint` | Run code linting |
+| `yarn clean` | Clean all build artifacts and dependencies |
+| `yarn status` | Check running services status |
+| `yarn stop` | Stop all running services |
+
+## 📈 **Performance**
+
+- **Frontend**: Lighthouse Score 95+ (Performance, Accessibility, SEO)
+- **Backend**: <100ms average response time for API endpoints
+- **Database**: Optimized queries with proper indexing
+- **Caching**: Redis-based caching for frequently accessed data
+- **CDN**: Static assets served via CDN with edge caching
+
+## 🛣️ **Roadmap**
+
+- [ ] **Q4 2024**: Mobile app development (React Native)
+- [ ] **Q1 2025**: Advanced ML models for predictive analytics  
+- [ ] **Q2 2025**: Integration with major POS systems
+- [ ] **Q3 2025**: Franchise management features
+- [ ] **Q4 2025**: API marketplace for third-party integrations
+
+## 📞 **Support**
+
+- **Documentation**: [docs/](docs/)
+- **Issues**: [GitHub Issues](https://github.com/khiwniti/enhancement-bitebase-intelligence/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/khiwniti/enhancement-bitebase-intelligence/discussions)
 
 ## 📄 **License**
 
@@ -298,28 +298,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 **Acknowledgments**
+<p align="center">
+  <strong>Built with ❤️ by the BiteBase Team</strong><br>
+  <em>Empowering restaurants with intelligent analytics</em>
+</p>
 
-- **BiteBase Team**: For the foundational platform and API
-- **Next.js Team**: For the incredible React framework
-- **Tailwind CSS**: For the utility-first CSS framework
-- **Radix UI**: For accessible component primitives
-- **Leaflet**: For the interactive mapping capabilities
+<p align="center">
+  <img src="./frontend/public/logo.png" alt="BiteBase Intelligence" width="120" height="120">
+</p>
 
----
-
-## 📞 **Support**
-
-- **Documentation**: [View Docs](./docs/)
-- **Issues**: [GitHub Issues](https://github.com/your-username/enhancement-bitebase-intelligence/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/enhancement-bitebase-intelligence/discussions)
-
----
-
-<div align="center">
-
-**🚀 BiteBase Intelligence 2.0 - Revolutionizing Restaurant Location Intelligence**
-
-*Built with ❤️ using Next.js, TypeScript, and AI*
-
-</div>

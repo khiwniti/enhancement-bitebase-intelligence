@@ -45,7 +45,7 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/enhancement-bitebase-intelligence.git"
+    "url": "https://github.com/khiwniti/enhancement-bitebase-intelligence.git"
   },
   "keywords": [
     "restaurant",
@@ -54,7 +54,10 @@
     "intelligence",
     "location",
     "fastapi",
-    "nextjs"
+    "nextjs",
+    "dashboard",
+    "typescript",
+    "i18n"
   ],
   "author": "BiteBase Team",
   "license": "MIT"
