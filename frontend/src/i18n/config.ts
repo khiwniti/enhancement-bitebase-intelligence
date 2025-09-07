@@ -1,6 +1,6 @@
 // Central i18n configuration
 export const SUPPORTED_LOCALES = [
-  'en', 'th', 'es', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko', 'ar'
+  'en', 'th'
 ] as const;
 
 export const DEFAULT_LOCALE = 'en';
@@ -23,9 +23,9 @@ export const ALL_NAMESPACES = [
   'landing-old'
 ] as const;
 
-// RTL language configuration
-export const RTL_LANGUAGES = ['ar'] as const;
-export const LTR_LANGUAGES = ['en', 'th', 'es', 'fr', 'de', 'it', 'pt', 'zh', 'ja', 'ko'] as const;
+// RTL language configuration (empty since we removed Arabic)
+export const RTL_LANGUAGES = [] as const;
+export const LTR_LANGUAGES = ['en', 'th'] as const;
 
 // Route-based namespace mapping for lazy loading
 export const ROUTE_NAMESPACE_MAP = {
