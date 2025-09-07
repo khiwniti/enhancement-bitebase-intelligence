@@ -1,0 +1,41 @@
+{
+  "main": {
+    "dashboard": "لوحة التحكم",
+    "analytics": "التحليلات", 
+    "restaurants": "المطاعم",
+    "ai_assistant": "المساعد الذكي",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "public": {
+    "features": "الميزات",
+    "pricing": "التسعير", 
+    "about": "حول",
+    "contact": "اتصل بنا",
+    "home": "الرئيسية"
+  },
+  "analytics": {
+    "4p_analytics": "تحليلات 4P",
+    "analytics_center": "مركز التحليلات",
+    "analytics_workbench": "ورشة التحليلات"
+  },
+  "location": {
+    "location_center": "مركز المواقع", 
+    "location_intelligence": "ذكاء المواقع"
+  },
+  "market": {
+    "market_analysis": "تحليل السوق",
+    "market_research": "بحوث السوق"
+  },
+  "ai": {
+    "ai_center": "مركز الذكاء الاصطناعي",
+    "research_agent": "وكيل البحث",
+    "growth_studio": "استوديو النمو"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "forgot_password": "نسيان كلمة المرور"
+  }
+}

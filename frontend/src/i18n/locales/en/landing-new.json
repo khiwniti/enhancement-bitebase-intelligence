@@ -1,0 +1,76 @@
+{
+  "hero": {
+    "title": "Transform Your Restaurant Business with AI-Powered Intelligence",
+    "subtitle": "Make data-driven decisions, optimize operations, and boost profitability with our comprehensive restaurant analytics platform",
+    "cta": {
+      "primary": "Start Free Trial",
+      "secondary": "Book Demo"
+    }
+  },
+  "features": {
+    "title": "Everything You Need to Succeed",
+    "subtitle": "Powerful features designed specifically for restaurant owners and operators",
+    "items": {
+      "analytics": {
+        "title": "Advanced Analytics",
+        "description": "Deep insights into sales, customer behavior, and operational efficiency"
+      },
+      "ai_assistant": {
+        "title": "AI Assistant",
+        "description": "Get instant answers and recommendations powered by artificial intelligence"
+      },
+      "location_intelligence": {
+        "title": "Location Intelligence",
+        "description": "Understand your market position and identify growth opportunities"
+      },
+      "real_time": {
+        "title": "Real-time Monitoring",
+        "description": "Track performance metrics and KPIs as they happen"
+      }
+    }
+  },
+  "benefits": {
+    "title": "Why Choose BiteBase Intelligence?",
+    "items": {
+      "increase_revenue": {
+        "title": "Increase Revenue",
+        "description": "Our clients see an average 15% increase in revenue within 3 months"
+      },
+      "reduce_costs": {
+        "title": "Reduce Costs",
+        "description": "Optimize inventory, staffing, and operations to cut unnecessary expenses"
+      },
+      "save_time": {
+        "title": "Save Time",
+        "description": "Automate reporting and get insights instantly, not after hours of analysis"
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Trusted by Restaurant Owners Worldwide",
+    "items": {
+      "restaurant_a": {
+        "quote": "BiteBase Intelligence transformed how we understand our business. Revenue is up 20% and we're making smarter decisions every day.",
+        "author": "Sarah Chen",
+        "role": "Restaurant Owner"
+      },
+      "restaurant_b": {
+        "quote": "The AI insights are incredible. We identified our most profitable menu items and optimized our offerings accordingly.",
+        "author": "Marco Rodriguez", 
+        "role": "Chef & Owner"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your restaurant's needs",
+    "cta": "Start Your Free Trial"
+  },
+  "footer": {
+    "cta": {
+      "title": "Ready to Transform Your Restaurant?",
+      "subtitle": "Join thousands of restaurants already using BiteBase Intelligence",
+      "button": "Get Started Today"
+    }
+  }
+}

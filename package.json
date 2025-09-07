@@ -9,30 +9,32 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspace web dev:fast",
+    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:web\"",
     "dev:web": "yarn workspace web dev:fast",
     "dev:backend": "cd backend && python run_backend.py",
     "dev:both": "concurrently \"yarn dev:backend\" \"yarn dev:web\"",
+    "dev:workers": "cd backend-workers && python -m uvicorn main:app --reload --port 8001",
+    "dev:all": "concurrently \"yarn dev:backend\" \"yarn dev:workers\" \"yarn dev:web\"",
     "build": "yarn workspace web build",
     "build:web": "yarn workspace web build",
     "test": "yarn workspace web test",
     "test:web": "yarn workspace web test",
+    "test:backend": "cd backend && python -m pytest",
     "lint": "yarn workspace web lint",
     "lint:fix": "yarn workspace web lint:fix",
     "type-check": "yarn workspace web type-check",
     "clean": "yarn workspace web clean && rm -rf node_modules",
-    "install:all": "yarn install",
+    "install:all": "yarn install && cd backend && pip install -r requirements.txt && cd ../backend-workers && pip install -r requirements.txt",
     "start": "yarn workspace web start",
-    "status": "ps aux | grep -E '(next|python.*run_backend|node)' | grep -v grep || echo 'No services running'",
-    "stop": "pkill -f 'next\\|run_backend\\|node' || true",
-    "clear-ports": "lsof -ti:3000,5000,8000 | xargs kill -9 2>/dev/null || true"
+    "status": "ps aux | grep -E '(next|python.*run_backend|python.*uvicorn|node)' | grep -v grep || echo 'No services running'",
+    "stop": "pkill -f 'next\\|run_backend\\|uvicorn\\|node' || true",
+    "clear-ports": "lsof -ti:3000,5000,8000,8001 | xargs kill -9 2>/dev/null || true"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0",
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",
-    "firebase-tools": "^13.0.0",
     "concurrently": "^8.2.2"
   },
   "engines": {
@@ -51,7 +53,7 @@
     "ai",
     "intelligence",
     "location",
-    "firebase",
+    "fastapi",
     "nextjs"
   ],
   "author": "BiteBase Team",

@@ -216,7 +216,7 @@ class GeminiAIService {
     ];
 
     return {
-      text: fallbacks[Math.floor(Math.random() * fallbacks.length)],
+      text: fallbacks[Math.floor(Math.random() * fallbacks.length)] || "I'm here to help with your restaurant analysis.",
       confidence: 0.3,
       context: 'fallback'
     };

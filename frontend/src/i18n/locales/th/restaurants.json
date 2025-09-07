@@ -1,0 +1,37 @@
+{
+  "title": "จัดการร้านอาหาร",
+  "list_title": "ร้านอาหารของคุณ",
+  "add_restaurant": "เพิ่มร้านอาหารใหม่",
+  "edit_restaurant": "แก้ไขข้อมูลร้านอาหาร",
+  "restaurant_details": "รายละเอียดร้านอาหาร",
+  "fields": {
+    "name": "ชื่อร้านอาหาร",
+    "description": "คำอธิบาย",
+    "cuisine_type": "ประเภทอาหาร",
+    "location": "ที่ตั้ง",
+    "address": "ที่อยู่",
+    "city": "เมือง",
+    "state": "จังหวัด",
+    "country": "ประเทศ",
+    "postal_code": "รหัสไปรษณีย์",
+    "phone": "หมายเลขโทรศัพท์",
+    "email": "อีเมล",
+    "website": "เว็บไซต์",
+    "opening_hours": "เวลาเปิด-ปิด",
+    "capacity": "จำนวนที่นั่ง",
+    "price_range": "ช่วงราคา"
+  },
+  "status": {
+    "open": "เปิด",
+    "closed": "ปิด",
+    "busy": "คนเยอะ",
+    "moderate": "คนปานกลาง"
+  },
+  "actions": {
+    "view_details": "ดูรายละเอียด",
+    "edit": "แก้ไขร้านอาหาร",
+    "delete": "ลบร้านอาหาร",
+    "duplicate": "คัดลอก",
+    "view_analytics": "ดูการวิเคราะห์"
+  }
+}

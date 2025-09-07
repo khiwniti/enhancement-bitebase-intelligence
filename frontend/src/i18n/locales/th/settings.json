@@ -1,0 +1,49 @@
+{
+  "page_title": "การตั้งค่า",
+  "profile": {
+    "title": "โปรไฟล์",
+    "full_name": "ชื่อ-นามสกุล",
+    "email": "อีเมล", 
+    "phone": "หมายเลขโทรศัพท์",
+    "company": "บริษัท",
+    "bio": "ข้อมูลส่วนตัว",
+    "avatar": "รูปโปรไฟล์"
+  },
+  "notifications": {
+    "title": "การแจ้งเตือน",
+    "email_notifications": "การแจ้งเตือนทางอีเมล",
+    "push_notifications": "การแจ้งเตือนแบบพุช",
+    "sms_notifications": "การแจ้งเตือนทาง SMS"
+  },
+  "security": {
+    "title": "ความปลอดภัย",
+    "change_password": "เปลี่ยนรหัสผ่าน",
+    "two_factor": "การยืนยันตัวตนแบบสองขั้นตอน",
+    "login_history": "ประวัติการเข้าสู่ระบบ"
+  },
+  "billing": {
+    "title": "การเรียกเก็บเงิน",
+    "current_plan": "แผนปัจจุบัน",
+    "payment_method": "วิธีการชำระเงิน",
+    "billing_history": "ประวัติการเรียกเก็บเงิน"
+  },
+  "preferences": {
+    "title": "การตั้งค่าที่ต้องการ",
+    "language": "ภาษา",
+    "timezone": "เขตเวลา",
+    "currency": "สกุลเงิน",
+    "date_format": "รูปแบบวันที่"
+  },
+  "integrations": {
+    "title": "การผสานรวม",
+    "connected_services": "บริการที่เชื่อมต่อ",
+    "api_keys": "คีย์ API",
+    "webhooks": "Webhooks"
+  },
+  "actions": {
+    "save": "บันทึกการเปลี่ยนแปลง",
+    "cancel": "ยกเลิก",
+    "reset": "รีเซ็ต",
+    "delete": "ลบบัญชี"
+  }
+}

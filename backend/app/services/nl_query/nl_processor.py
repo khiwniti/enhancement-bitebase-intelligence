@@ -24,6 +24,7 @@ from .entity_extractor import RestaurantEntityExtractor
 from .context_manager import RestaurantContextManager
 from .sql_generator import RestaurantSQLGenerator
 from .confidence_scorer import ConfidenceScorer
+from .thai_language_processor import ThaiLanguageProcessor, ThaiQueryContext
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +43,7 @@ class NLProcessor:
         self.sql_generator = RestaurantSQLGenerator(db)
         self.confidence_scorer = ConfidenceScorer()
         self.visualization_engine = VisualizationEngine(db)
+        self.thai_processor = ThaiLanguageProcessor()
         
         # Performance tracking
         self.processing_stats = {
@@ -66,12 +68,25 @@ class NLProcessor:
                 self.processing_stats['cache_hits'] += 1
                 return await self._build_response_from_cache(cache_result, query_id, start_time)
             
-            # Step 2: Load user context
+            # Step 2: Detect language and process Thai queries
+            language = self.thai_processor.detect_language(request.query)
+            thai_context = None
+            
+            if language == "thai":
+                thai_context = self.thai_processor.process_thai_query(request.query)
+                logger.info(f"Thai query detected: {request.query[:50]}...")
+            
+            # Step 3: Load user context
             context = await self.context_manager.get_user_context(
                 user_id, request.dashboard_id, request.user_context
             )
             
-            # Step 3: Parallel processing for performance
+            # Add Thai context to user context if detected
+            if thai_context:
+                context['thai_context'] = thai_context
+                context['language'] = 'thai'
+            
+            # Step 4: Parallel processing for performance
             intent_task = asyncio.create_task(
                 self.intent_classifier.classify_intent(request.query, context)
             )
@@ -82,7 +97,14 @@ class NLProcessor:
             # Wait for parallel tasks
             intent, entities = await asyncio.gather(intent_task, entities_task)
             
-            # Step 4: Create processed query
+            # If Thai query, use Thai-specific intent and entities
+            if thai_context:
+                intent = thai_context.intent
+                # Merge Thai entities with extracted entities
+                for entity in thai_context.entities:
+                    entities[entity] = thai_context.entities[entity]
+            
+            # Step 5: Create processed query
             processed_query = ProcessedQuery(
                 original_query=request.query,
                 normalized_query=self._normalize_query(request.query),
@@ -91,32 +113,37 @@ class NLProcessor:
                 context=context
             )
             
-            # Step 5: Generate SQL
+            # Step 6: Generate SQL
             sql_result = await self.sql_generator.generate_sql(processed_query)
             
-            # Step 6: Calculate confidence score
+            # Step 7: Calculate confidence score
             confidence = await self.confidence_scorer.calculate_confidence(
                 processed_query, sql_result, context
             )
             
-            # Step 7: Execute query if confidence is sufficient or auto_execute is True
+            # Step 8: Execute query if confidence is sufficient or auto_execute is True
             result = None
             if confidence.overall_confidence >= 0.7 or request.auto_execute:
                 result = await self._execute_query(sql_result['sql'], processed_query)
             
-            # Step 8: Generate chart suggestions
+            # Step 9: Generate chart suggestions
             chart_suggestions = []
             if result:
                 chart_suggestions = await self._generate_chart_suggestions(result, processed_query)
             
-            # Step 9: Cache successful results
+            # Step 10: Cache successful results
             if confidence.overall_confidence >= 0.8:
                 await self._cache_result(request.query, processed_query, sql_result, chart_suggestions)
             
-            # Step 10: Log query for analytics
+            # Step 11: Log query for analytics
             await self._log_query(query_id, user_id, request, processed_query, sql_result, confidence, result)
             
-            # Step 11: Build response
+            # Step 12: Generate Thai response if Thai query
+            thai_response = None
+            if thai_context and result:
+                thai_response = self.thai_processor.generate_thai_response(thai_context, result.data)
+            
+            # Step 13: Build response
             processing_time = int((datetime.utcnow() - start_time).total_seconds() * 1000)
             
             response = NLQueryResponse(
@@ -130,6 +157,10 @@ class NLProcessor:
                 processing_time_ms=processing_time,
                 success=len(sql_result.get('errors', [])) == 0
             )
+            
+            # Add Thai response if available
+            if thai_response:
+                response.thai_response = thai_response
             
             # Update stats
             self.processing_stats['total_queries'] += 1
@@ -166,6 +197,31 @@ class NLProcessor:
                 processing_time_ms=processing_time,
                 success=False
             )
+    
+    async def _build_response_from_cache(self, cache_result: Dict[str, Any], query_id: str, start_time: datetime) -> NLQueryResponse:
+        """Build response from cached results"""
+        processing_time = int((datetime.utcnow() - start_time).total_seconds() * 1000)
+        
+        processed_query = ProcessedQuery(**cache_result['processed_query'])
+        
+        return NLQueryResponse(
+            query_id=uuid.UUID(query_id),
+            processed_query=processed_query,
+            generated_sql=cache_result['generated_sql'],
+            confidence=ConfidenceScore(
+                overall_confidence=0.9,  # High confidence for cached results
+                intent_confidence=0.9,
+                entity_confidence=0.9,
+                sql_confidence=0.9,
+                data_availability=0.9,
+                historical_success=0.9
+            ),
+            result=None,  # Could cache result data too if needed
+            suggestions=[],
+            errors=[],
+            processing_time_ms=processing_time,
+            success=True
+        )
     
     async def _check_cache(self, query: str, dashboard_id: Optional[str]) -> Optional[Dict[str, Any]]:
         """Check if query result is cached"""

@@ -449,5 +449,159 @@ async def search_locations(
             "generated_at": datetime.now()
         }
 
+# Chat Request Model
+class ChatRequest(BaseModel):
+    query: str = Field(..., description="User's query/message")
+    language: str = Field(default="en", description="Language preference: 'th' for Thai, 'en' for English")
+
+class ChatResponse(BaseModel):
+    response: str
+    intent: Optional[str] = None
+    entities: Optional[Dict[str, Any]] = None
+    language: str
+    confidence: float
+    generated_at: datetime
+
+# Thai Language Processor
+class ThaiLanguageProcessor:
+    def __init__(self):
+        # Thai restaurant data for realistic responses
+        self.restaurants = [
+            {"name": "ร้านส้มตำนางหนิง", "cuisine": "อาหารอีสาน", "rating": 4.5, "specialty": "ส้มตำ ลาบ ไก่ย่าง"},
+            {"name": "ครัวคุณยาย", "cuisine": "อาหารไทยโบราณ", "rating": 4.7, "specialty": "แกงเผด แกงส่วน น้ำพริกหนุ่ม"},
+            {"name": "โจ๊กพระราม", "cuisine": "อาหารเช้า", "rating": 4.2, "specialty": "โจ๊ก ปาท่องโก๋ กาแฟ"},
+            {"name": "บิสโทร เดอ กรุงเทพ", "cuisine": "ฟิวชั่น", "rating": 4.6, "specialty": "ผัดไทยฝรั่งเศส แกงเขียวหวานครีม"},
+            {"name": "ตลาดนัดรถไฟ", "cuisine": "อาหารริมทาง", "rating": 4.3, "specialty": "ของทานเล่น อาหารตามสั่ง"}
+        ]
+        
+        self.market_insights = [
+            "ตลาดอาหารไทยใน กรุงเทพฯ มีความหลากหลายสูง",
+            "อาหารอีสานได้รับความนิยมเพิ่มขึ้นอย่างต่อเนื่อง",
+            "ร้านอาหารฟิวชั่นมีแนวโน้มเติบโตในพื้นที่ ศูนย์กลางธุรกิจ",
+            "อาหารริมทางยังคงเป็นตัวเลือกหลักของคนไทย"
+        ]
+
+    def process_query(self, query: str) -> Dict[str, Any]:
+        """Process Thai language query and return structured response"""
+        
+        # Intent detection patterns
+        intent_patterns = {
+            "greeting": ["สวัสดี", "หวัดดี", "ดีครับ", "ดีค่ะ"],
+            "restaurant_info": ["ร้านอาหار", "ร้าน", "อาหาร", "กิน", "ทาน"],
+            "market_research": ["วิเคราะห์ตลาด", "ตลาด", "การแข่งขัน", "คู่แข่ง"],
+            "location": ["ที่ตั้ง", "สถานที่", "พื้นที่", "ทำเล"],
+            "menu_recommendation": ["เมนู", "แนะนำ", "อร่อย", "เด็ด"]
+        }
+        
+        # Detect intent
+        detected_intent = "general"
+        for intent, patterns in intent_patterns.items():
+            if any(pattern in query for pattern in patterns):
+                detected_intent = intent
+                break
+        
+        # Entity extraction
+        entities = {}
+        
+        # Location entities
+        bangkok_areas = ["สยาม", "สุขุมวิท", "สีลม", "ชาตุชัก", "ทองหล่อ", "อโศก", "พร้อมพงษ์", "อารีย์"]
+        for area in bangkok_areas:
+            if area in query:
+                entities["location"] = area
+        
+        # Cuisine entities  
+        cuisines = ["อีสาน", "ไทย", "จีน", "ญี่ปุ่น", "อิตาเลียน", "ฝรั่งเศส", "อเมริกัน"]
+        for cuisine in cuisines:
+            if cuisine in query:
+                entities["cuisine"] = cuisine
+        
+        return {
+            "intent": detected_intent,
+            "entities": entities,
+            "query": query
+        }
+
+    def generate_response(self, processed_query: Dict[str, Any]) -> str:
+        """Generate natural Thai response based on processed query"""
+        
+        intent = processed_query["intent"]
+        entities = processed_query["entities"]
+        query = processed_query["query"]
+        
+        if intent == "greeting":
+            return "สวัสดีครับ! ยินดีต้อนรับสู่ BiteBase Intelligence ระบบวิเคราะห์ธุรกิจร้านอาหารครับ มีอะไรให้ช่วยเหลือไหมครับ?"
+        
+        elif intent == "restaurant_info":
+            # Select a random restaurant to showcase
+            restaurant = random.choice(self.restaurants)
+            return f"ผมแนะนำ {restaurant['name']} ครับ เป็นร้าน{restaurant['cuisine']} ที่มีเรตติ้ง {restaurant['rating']}/5 ดาว เมนูเด็ดคือ {restaurant['specialty']} สนใจข้อมูลเพิ่มเติมหรือการวิเคราะห์ตลาดไหมครับ?"
+        
+        elif intent == "market_research":
+            insight = random.choice(self.market_insights)
+            location = entities.get("location", "กรุงเทพฯ")
+            return f"จากการวิเคราะห์ตลาดในพื้นที่ {location} ครับ {insight} หากต้องการรายงานวิเคราะห์โดยละเอียด สามารถระบุประเภทอาหารและงบประมาณเพื่อให้ผมวิเคราะห์เจาะลึกให้ได้ครับ"
+        
+        elif intent == "location":
+            location = entities.get("location", "บริเวณที่สนใจ")
+            return f"สำหรับพื้นที่ {location} ครับ เป็นทำเลที่มีศักยภาพสูงสำหรับธุรกิจร้านอาหาร มีการเข้าถึงที่สะดวก และกลุ่มลูกค้าที่หลากหลาย ต้องการข้อมูลการแข่งขันและการวิเคราะห์โอกาสทางการตลาดไหมครับ?"
+        
+        elif intent == "menu_recommendation":
+            cuisine = entities.get("cuisine", "อาหารไทย")
+            return f"สำหรับ{cuisine}ครับ ผมแนะนำให้พิจารณาเมนูที่ตอบโจทย์กลุ่มเป้าหมาย เช่น เมนูคลีน เมนูฟิวชั่น หรือเมนูพื้นบ้านต้นตำรับ ขึ้นอยู่กับตำแหน่งและกลุ่มลูกค้าครับ ต้องการวิเคราะห์เจาะลึกไหมครับ?"
+        
+        else:
+            return f"เกี่ยวกับ '{query}' ครับ ผมเป็นระบบวิเคราะห์ธุรกิจร้านอาหารที่สามารถช่วยวิเคราะห์ตลาด แนะนำทำเล ประเมินการแข่งขัน และให้คำแนะนำเชิงกลยุทธ์ได้ครับ หากมีคำถามเฉพาะเจาะจง กรุณาถามได้เลยครับ"
+
+# Initialize Thai language processor
+thai_processor = ThaiLanguageProcessor()
+
+@app.post("/api/v1/chat", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    """Enhanced bilingual chat endpoint with Thai language support"""
+    
+    if request.language == "th":
+        # Process Thai language
+        processed = thai_processor.process_query(request.query)
+        response_text = thai_processor.generate_response(processed)
+        
+        return ChatResponse(
+            response=response_text,
+            intent=processed["intent"],
+            entities=processed["entities"],
+            language="th",
+            confidence=0.85,
+            generated_at=datetime.now()
+        )
+    
+    else:
+        # English processing
+        intent = "general"
+        entities = {}
+        
+        # Simple English intent detection
+        if any(word in request.query.lower() for word in ["hello", "hi", "hey"]):
+            intent = "greeting"
+            response_text = "Hello! Welcome to BiteBase Intelligence. How can I help you with restaurant business insights today?"
+        elif any(word in request.query.lower() for word in ["restaurant", "food", "menu"]):
+            intent = "restaurant_info"  
+            response_text = "I can help you analyze restaurant markets, competitors, and opportunities. What specific information would you like to know?"
+        elif any(word in request.query.lower() for word in ["market", "competition", "analysis"]):
+            intent = "market_research"
+            response_text = "I can provide comprehensive market research including competitor analysis, location insights, and growth opportunities. What area are you interested in analyzing?"
+        elif any(word in request.query.lower() for word in ["location", "area", "place"]):
+            intent = "location"
+            response_text = "Location analysis is crucial for restaurant success. I can help evaluate foot traffic, competition density, and market potential for any area. Which location interests you?"
+        else:
+            response_text = f"Regarding '{request.query}', I'm a restaurant business intelligence system that can help with market analysis, location evaluation, competitor research, and strategic recommendations. How can I assist you specifically?"
+        
+        return ChatResponse(
+            response=response_text,
+            intent=intent,
+            entities=entities,
+            language="en", 
+            confidence=0.80,
+            generated_at=datetime.now()
+        )
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=5001)

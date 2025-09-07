@@ -17,6 +17,7 @@ class NLQueryRequest(BaseModel):
     user_context: Optional[Dict[str, Any]] = Field(None, description="Additional user context")
     include_suggestions: bool = Field(True, description="Include query suggestions")
     auto_execute: bool = Field(False, description="Auto-execute if confidence is high")
+    language: Optional[str] = Field("auto", description="Preferred response language (auto, th, en)")
 
 
 class EntityExtraction(BaseModel):

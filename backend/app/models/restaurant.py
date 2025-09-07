@@ -75,12 +75,17 @@ class Restaurant(Base):
     
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String(255), nullable=False, index=True)
+    name_th = Column(String(255), nullable=True, index=True)  # Thai restaurant name
     brand = Column(String(255), nullable=True, index=True)
+    brand_th = Column(String(255), nullable=True, index=True)  # Thai brand name
     
     # Location data
     address = Column(Text, nullable=False)
+    address_th = Column(Text, nullable=True)  # Thai address
     city = Column(String(100), nullable=False, index=True)
+    city_th = Column(String(100), nullable=True, index=True)  # Thai city name
     area = Column(String(100), nullable=True, index=True)
+    area_th = Column(String(100), nullable=True, index=True)  # Thai area name
     country = Column(String(100), nullable=False, index=True)
     postal_code = Column(String(20), nullable=True)
     
@@ -174,8 +179,11 @@ class MenuItem(Base):
     restaurant_id = Column(String(36), ForeignKey("restaurants.id"), nullable=False)
     
     name = Column(String(255), nullable=False, index=True)
+    name_th = Column(String(255), nullable=True, index=True)  # Thai menu item name
     description = Column(Text, nullable=True)
+    description_th = Column(Text, nullable=True)  # Thai description
     category = Column(String(100), nullable=False, index=True)
+    category_th = Column(String(100), nullable=True, index=True)  # Thai category name
     
     # Pricing
     price = Column(Float, nullable=False)
@@ -224,6 +232,7 @@ class RestaurantReview(Base):
     # Review data
     rating = Column(Float, nullable=False)  # 1-5 scale
     review_text = Column(Text, nullable=True)
+    review_text_th = Column(Text, nullable=True)  # Thai review text
     reviewer_name = Column(String(255), nullable=True)
     
     # Source information

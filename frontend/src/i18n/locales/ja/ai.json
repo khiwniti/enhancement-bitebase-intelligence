@@ -1,0 +1,28 @@
+{
+  "title": "AI Assistant",
+  "chat": {
+    "placeholder": "Ask me anything about your restaurant business...",
+    "send": "Send",
+    "thinking": "AI is thinking...",
+    "error": "Sorry, I encountered an error. Please try again."
+  },
+  "features": {
+    "business_insights": "Business Insights",
+    "market_analysis": "Market Analysis",
+    "recommendations": "Recommendations",
+    "predictions": "Predictions",
+    "optimization": "Optimization Tips"
+  },
+  "suggestions": {
+    "revenue_optimization": "How can I optimize my restaurant's revenue?",
+    "customer_satisfaction": "What can I do to improve customer satisfaction?",
+    "cost_reduction": "How can I reduce operational costs?",
+    "menu_analysis": "Analyze my menu performance",
+    "competitor_analysis": "What are my competitors doing differently?"
+  },
+  "actions": {
+    "clear_chat": "Clear Chat",
+    "save_conversation": "Save Conversation",
+    "export_insights": "Export Insights"
+  }
+}

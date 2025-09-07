@@ -201,6 +201,9 @@ export const analyticsApi = {
   getDashboard: (params?: any) =>
     api.get('/analytics/dashboard', { params }),
   
+  getMetrics: (params?: any) =>
+    api.get('/analytics/metrics', { params }),
+  
   getRevenue: (params?: any) =>
     api.get('/analytics/revenue', { params }),
   

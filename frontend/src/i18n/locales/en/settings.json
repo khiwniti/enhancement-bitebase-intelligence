@@ -1,0 +1,49 @@
+{
+  "page_title": "Settings",
+  "profile": {
+    "title": "Profile",
+    "full_name": "Full Name",
+    "email": "Email Address", 
+    "phone": "Phone Number",
+    "company": "Company",
+    "bio": "Bio",
+    "avatar": "Profile Picture"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "email_notifications": "Email Notifications",
+    "push_notifications": "Push Notifications",
+    "sms_notifications": "SMS Notifications"
+  },
+  "security": {
+    "title": "Security",
+    "change_password": "Change Password",
+    "two_factor": "Two-Factor Authentication",
+    "login_history": "Login History"
+  },
+  "billing": {
+    "title": "Billing",
+    "current_plan": "Current Plan",
+    "payment_method": "Payment Method",
+    "billing_history": "Billing History"
+  },
+  "preferences": {
+    "title": "Preferences",
+    "language": "Language",
+    "timezone": "Timezone",
+    "currency": "Currency",
+    "date_format": "Date Format"
+  },
+  "integrations": {
+    "title": "Integrations",
+    "connected_services": "Connected Services",
+    "api_keys": "API Keys",
+    "webhooks": "Webhooks"
+  },
+  "actions": {
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "delete": "Delete Account"
+  }
+}

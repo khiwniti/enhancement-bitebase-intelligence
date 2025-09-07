@@ -1,0 +1,26 @@
+{
+  "title": "หน้าหลัก",
+  "welcome": "ยินดีต้อนรับเข้าสู่ BiteBase Intelligence",
+  "overview": "ภาพรวมธุรกิจของคุณ",
+  "metrics": {
+    "total_restaurants": "ร้านอาหารทั้งหมด",
+    "monthly_revenue": "รายได้ประจำเดือน",
+    "customer_satisfaction": "ความพึงพอใจของลูกค้า",
+    "growth_rate": "อัตราการเติบโต"
+  },
+  "charts": {
+    "revenue_trend": "กราฟแนวโน้มรายได้",
+    "customer_analytics": "วิเคราะห์พฤติกรรมลูกค้า",
+    "performance_metrics": "ตัวชี้วัดประสิทธิภาพ",
+    "market_insights": "ข้อมูลเชิงลึกของตลาด"
+  },
+  "quick_actions": {
+    "title": "เมนูด่วน",
+    "add_restaurant": "เพิ่มร้านอาหารใหม่",
+    "generate_report": "สร้างรายงาน",
+    "ai_insights": "ข้อมูลเชิงลึกจาก AI",
+    "market_analysis": "วิเคราะห์ตลาด"
+  },
+  "recent_activity": "กิจกรรมล่าสุด",
+  "notifications": "แจ้งเตือน"
+}
