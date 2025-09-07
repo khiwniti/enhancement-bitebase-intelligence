@@ -82,16 +82,7 @@ frontend/src/i18n/
 ├── 📁 components/             # Internationalization UI components
 └── 📁 locales/                # Translation files by language
     ├── 📁 en/                 # English translations
-    ├── 📁 th/                 # Thai translations  
-    ├── 📁 zh/                 # Chinese translations
-    ├── 📁 ja/                 # Japanese translations
-    ├── 📁 ko/                 # Korean translations
-    ├── 📁 fr/                 # French translations
-    ├── 📁 de/                 # German translations
-    ├── 📁 es/                 # Spanish translations
-    ├── 📁 it/                 # Italian translations
-    ├── 📁 pt/                 # Portuguese translations
-    └── 📁 ar/                 # Arabic translations
+    └── 📁 th/                 # Thai translations
 ```
 
 ### Shared Libraries
@@ -304,7 +295,7 @@ tools/
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript for type safety
 - **Styling**: Tailwind CSS for utility-first styling
-- **Internationalization**: Custom i18n implementation with 11 languages
+- **Internationalization**: Custom i18n implementation with 2 languages
 - **State Management**: React hooks and context
 - **UI Components**: Custom component library
 
@@ -358,7 +349,7 @@ tools/
 
 - This structure follows modern full-stack development best practices
 - The monorepo approach allows for shared configurations and dependencies
-- Internationalization is built-in with support for 11 languages
+- Internationalization is built-in with support for 2 languages (English and Thai)
 - Edge computing provides global performance optimization
 - Comprehensive documentation ensures maintainability
 

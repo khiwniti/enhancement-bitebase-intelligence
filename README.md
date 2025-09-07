@@ -162,19 +162,10 @@ docker-compose up --build
 
 ## 🌐 **Internationalization**
 
-BiteBase Intelligence supports 10+ languages with full RTL support:
+BiteBase Intelligence supports 2 languages:
 
 - **English** (en) - Default
-- **Spanish** (es) - Español  
-- **French** (fr) - Français
-- **German** (de) - Deutsch
-- **Italian** (it) - Italiano
-- **Portuguese** (pt) - Português
-- **Japanese** (ja) - 日本語
-- **Korean** (ko) - 한국어
-- **Chinese** (zh) - 中文
 - **Thai** (th) - ไทย
-- **Arabic** (ar) - العربية
 
 ## 📊 **API Documentation**
 

@@ -14,16 +14,7 @@ interface LanguageSwitcherProps {
 // Language display names and flags
 const LANGUAGE_CONFIG = {
   en: { name: 'English', flag: '🇺🇸', nativeName: 'English' },
-  th: { name: 'Thai', flag: '🇹🇭', nativeName: 'ไทย' },
-  es: { name: 'Spanish', flag: '🇪🇸', nativeName: 'Español' },
-  fr: { name: 'French', flag: '🇫🇷', nativeName: 'Français' },
-  de: { name: 'German', flag: '🇩🇪', nativeName: 'Deutsch' },
-  it: { name: 'Italian', flag: '🇮🇹', nativeName: 'Italiano' },
-  pt: { name: 'Portuguese', flag: '🇵🇹', nativeName: 'Português' },
-  zh: { name: 'Chinese', flag: '🇨🇳', nativeName: '中文' },
-  ja: { name: 'Japanese', flag: '🇯🇵', nativeName: '日本語' },
-  ko: { name: 'Korean', flag: '🇰🇷', nativeName: '한국어' },
-  ar: { name: 'Arabic', flag: '🇸🇦', nativeName: 'العربية' }
+  th: { name: 'Thai', flag: '🇹🇭', nativeName: 'ไทย' }
 } as const;
 
 export function LanguageSwitcher({ 

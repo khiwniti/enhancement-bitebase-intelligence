@@ -87,9 +87,9 @@ const nextConfig = {
           }
         ]
       },
-      // SEO headers for different locales
+      // SEO headers for Thai locale
       {
-        source: '/:locale(th|es|fr|de|it|pt|zh|ja|ko|ar)/:path*',
+        source: '/:locale(th)/:path*',
         headers: [
           {
             key: 'Content-Language',
