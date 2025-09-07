@@ -5,7 +5,7 @@ Main API router combining all endpoints
 
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import restaurants, restaurant_management, campaign_management, pos_integration, locations, menu, analytics, search, enhanced_dashboards, nl_query, insights, connectors, collaboration, performance, security, ai, payments, admin, notifications, reports, location_intelligence, api_proxy, product_intelligence, place_intelligence, price_intelligence, promotion_intelligence, realtime_analytics, advanced_ai, multi_location, market_research
+from app.api.v1.endpoints import restaurants, restaurant_management, campaign_management, pos_integration, locations, menu, analytics, search, enhanced_dashboards, nl_query, insights, connectors, collaboration, performance, security, ai, payments, admin, notifications, reports, location_intelligence, api_proxy, product_intelligence, place_intelligence, price_intelligence, promotion_intelligence, realtime_analytics, advanced_ai, multi_location, market_research, operations, mobile, onboarding, migration
 from app.api.auth import router as auth_router
 
 api_router = APIRouter()
@@ -54,3 +54,15 @@ api_router.include_router(multi_location.router, prefix="/multi-location", tags=
 
 # Market Research API
 api_router.include_router(market_research.router, prefix="/market-research", tags=["market-research"])
+
+# Operations Management API
+api_router.include_router(operations.router, prefix="/operations", tags=["operations"])
+
+# Mobile-Optimized API
+api_router.include_router(mobile.router, prefix="/mobile", tags=["mobile"])
+
+# Restaurant Onboarding API
+api_router.include_router(onboarding.router, prefix="/onboarding", tags=["onboarding"])
+
+# Restaurant Migration API
+api_router.include_router(migration.router, prefix="/migration", tags=["migration"])
